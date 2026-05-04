@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Glossário tech do devguia.dev com termos de tecnologia explicados de forma direta e prática.">
+  <meta property="og:title" content="Glossário | devguia.dev">
+  <meta property="og:description" content="Entenda API, deploy, front-end, back-end, SQL, UX e outros termos sem enrolação.">
+  <meta property="og:url" content="https://nathaliagf.github.io/devguia/glossario/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <link rel="canonical" href="https://nathaliagf.github.io/devguia/glossario/">
+  <title>Glossário | devguia.dev</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --bg2: #161b27;
+      --border: #2a3347;
+      --blue: #60a5fa;
+      --blue-bg: #0d1a2e;
+      --blue-dim: #1e3a5f;
+      --text: #e8edf5;
+      --text2: #a1aec4;
+      --text3: #6f7d95;
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: system-ui, -apple-system, sans-serif;
+      background: linear-gradient(180deg, var(--bg) 0%, #111827 100%);
+      color: var(--text);
+      line-height: 1.7;
+    }
+    .wrap {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 64px;
+    }
+    .chip {
+      display: inline-flex;
+      border: 1px solid var(--blue-dim);
+      background: var(--blue-bg);
+      color: var(--blue);
+      border-radius: 999px;
+      padding: 6px 12px;
+      font-size: 12px;
+      font-weight: 700;
+    }
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.25rem);
+      line-height: 1.1;
+      margin: 18px 0 14px;
+    }
+    .lead {
+      color: var(--text2);
+      max-width: 64ch;
+      margin-bottom: 22px;
+    }
+    .actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-height: 44px;
+      padding: 10px 18px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      text-decoration: none;
+      color: var(--text);
+      background: var(--bg2);
+      font-weight: 700;
+    }
+    .grid {
+      display: grid;
+      gap: 16px;
+    }
+    .card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .term {
+      font-size: 1.1rem;
+      font-weight: 700;
+      margin: 0 0 8px;
+    }
+    .desc {
+      margin: 0;
+      color: var(--text2);
+    }
+  </style>
+</head>
+<body>
+  <main class="wrap">
+    <span class="chip">Glossário indexável</span>
+    <h1>Termos de tecnologia explicados em português claro</h1>
+    <p class="lead">Esta versão estática ajuda buscadores a entenderem o conteúdo do glossário. A versão principal do site oferece busca, filtros por categoria e navegação cruzada com FAQ e roadmap.</p>
+    <div class="actions">
+      <a class="btn" href="../#glossario">Abrir glossário interativo</a>
+      <a class="btn" href="../">Voltar para a home</a>
+    </div>
+    <div class="grid">
+      <article class="card">
+        <div class="term">API</div>
+        <p class="desc">Um contrato de comunicação entre sistemas. Em vez de o front-end acessar banco diretamente, ele chama uma API que valida regras, monta resposta e protege dados.</p>
+      </article>
+      <article class="card">
+        <div class="term">Front-end</div>
+        <p class="desc">A camada que o usuário vê e com a qual interage. Inclui interface, acessibilidade, estados de carregamento, performance percebida e integração com APIs.</p>
+      </article>
+      <article class="card">
+        <div class="term">Back-end</div>
+        <p class="desc">A parte do sistema que executa regras, autentica usuários, conversa com banco de dados e expõe endpoints para outras camadas.</p>
+      </article>
+      <article class="card">
+        <div class="term">Deploy</div>
+        <p class="desc">O processo de colocar uma aplicação em produção. Não é só subir arquivo; envolve build, ambiente, variáveis, monitoramento e rollback quando algo quebra.</p>
+      </article>
+      <article class="card">
+        <div class="term">SQL</div>
+        <p class="desc">Linguagem usada para consultar e transformar dados em bancos relacionais. Saber o básico evita dependência cega de ORM e ajuda muito em análise e backend.</p>
+      </article>
+    </div>
+  </main>
+</body>
+</html>

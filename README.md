@@ -28,6 +28,16 @@ Sem backend, a navegação entre telas atualiza o fragmento da URL para facilita
 
 O resultado do diagnóstico continua em `#result=…` (payload codificado).
 
+## Páginas estáticas indexáveis
+
+Além da SPA principal, o projeto expõe páginas estáticas para buscadores em:
+
+- `https://nathaliagf.github.io/devguia/faq/`
+- `https://nathaliagf.github.io/devguia/glossario/`
+- `https://nathaliagf.github.io/devguia/mitos/`
+
+Elas existem para SEO e descoberta orgânica. A experiência interativa completa continua centralizada no `index.html`.
+
 ## Como usar localmente
 
 Baixe ou clone o repositório e abra `index.html` direto no navegador:
@@ -81,14 +91,14 @@ Feito com HTML5, CSS3 e JavaScript puro. Zero frameworks, zero dependências.
 
 ## GoatCounter (opcional)
 
-O projeto suporta contador anônimo de diagnósticos via GoatCounter.
+O projeto suporta tracking anônimo de eventos via GoatCounter.
 
-No `index.html`, substitua os placeholders:
+No `index.html`, substitua apenas:
 
 - `SEU-CODIGO` (subdomínio do GoatCounter)
-- `SEU-TOKEN-API` (token de leitura da API para o badge diário)
 
 Importante:
 
-- Não commite token real em repositório público.
-- Se não quiser configurar, mantenha os placeholders; o badge da home é ocultado automaticamente.
+- Não exponha token de leitura da API no frontend. O contador público diário foi removido por segurança.
+- Se você quiser exibir métricas agregadas na interface, faça isso por função serverless/edge ou backend intermediário.
+- Se não quiser configurar o GoatCounter, mantenha o placeholder `SEU-CODIGO`; o tracking não será disparado.

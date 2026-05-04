@@ -16,6 +16,7 @@
   <meta name="twitter:image" content="https://nathaliagf.github.io/devguia/og.svg">
   <link rel="canonical" href="https://nathaliagf.github.io/devguia/">
   <title>devguia.dev — Guia vocacional para TI</title>
+  <script type="application/ld+json" id="structured-data"></script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f1117'/><text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%23a78bfa'>%3E_</text></svg>">
   <style>
     :root {
@@ -87,6 +88,9 @@
     .nav-tabs::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
     .nav-tab {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
       padding: 6px 14px;
       border-radius: 8px;
       border: 1px solid transparent;
@@ -97,6 +101,8 @@
       cursor: pointer;
       transition: all 0.15s;
       font-family: inherit;
+      text-decoration: none;
+      white-space: nowrap;
     }
 
     .nav-tab:hover { background: var(--bg3); color: var(--text); }
@@ -105,6 +111,12 @@
       background: var(--purple-bg);
       border-color: var(--purple-dim);
       color: var(--purple);
+    }
+
+    .nav-tab:focus-visible,
+    .nav-logo:focus-visible {
+      outline: 2px solid var(--purple);
+      outline-offset: 2px;
     }
 
     .nav-hamburger {
@@ -1155,6 +1167,91 @@
     .resume-card-title { font-size: 15px; font-weight: 600; margin-bottom: .5rem; }
     .resume-card-copy { font-size: 13px; color: var(--text2); margin-bottom: 1.25rem; }
 
+    .faq-suggest-box {
+      margin-top: 2rem;
+      padding-top: 1.5rem;
+      border-top: 1px solid var(--border);
+      text-align: center;
+    }
+
+    .faq-suggest-intro {
+      font-size: 13px;
+      color: var(--text3);
+      margin-bottom: .75rem;
+    }
+
+    .suggest-form {
+      margin: 1rem auto 0;
+      max-width: 680px;
+      text-align: left;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 18px;
+    }
+
+    .suggest-form[hidden] { display: none; }
+
+    .suggest-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .suggest-field {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+
+    .suggest-field label {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text2);
+    }
+
+    .suggest-field input,
+    .suggest-field select,
+    .suggest-field textarea {
+      width: 100%;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px 14px;
+      color: var(--text);
+      font-size: 14px;
+      font-family: inherit;
+      outline: none;
+    }
+
+    .suggest-field textarea {
+      min-height: 120px;
+      resize: vertical;
+    }
+
+    .suggest-field input:focus,
+    .suggest-field select:focus,
+    .suggest-field textarea:focus {
+      border-color: var(--purple-dim);
+    }
+
+    .suggest-meta {
+      font-size: 12px;
+      color: var(--text3);
+      margin-top: 6px;
+    }
+
+    .suggest-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: flex-end;
+      margin-top: 4px;
+    }
+
     .btn-inline {
       background: none;
       border: none;
@@ -1214,6 +1311,8 @@
       .hero-btns { flex-direction: column; align-items: center; }
 
       .recursos-body { grid-template-columns: 1fr; }
+
+      .suggest-grid { grid-template-columns: 1fr; }
 
       body { font-size: 13px; }
     }
@@ -1387,15 +1486,15 @@
 
 <!-- NAV -->
 <nav>
-  <span class="nav-logo" onclick="navigate('home')" role="link" tabindex="0" onkeydown="if(event.key==='Enter')navigate('home')">devguia.dev</span>
+  <a class="nav-logo" href="#" data-screen="home" onclick="navigateLink(event, 'home')">devguia.dev</a>
   <button id="easy-read-toggle" class="btn btn-ghost" onclick="toggleEasyRead()" style="font-size:11px;padding:4px 10px;min-height:auto;" title="Modo leitura fácil">Aa</button>
-  <div class="nav-tabs" role="tablist">
-    <button class="nav-tab active" onclick="navigate('home')" role="tab" aria-selected="true" data-screen="home">Início</button>
-    <button class="nav-tab" onclick="navigate('quiz')" role="tab" aria-selected="false" data-screen="quiz">Diagnóstico</button>
-    <button class="nav-tab" onclick="navigate('roadmap')" role="tab" aria-selected="false" data-screen="roadmap">Roadmap</button>
-    <button class="nav-tab" onclick="navigate('faq')" role="tab" aria-selected="false" data-screen="faq">FAQ</button>
-    <button class="nav-tab" onclick="navigate('glossario')" role="tab" aria-selected="false" data-screen="glossario">Glossário</button>
-    <button class="nav-tab" onclick="navigate('mitos')" role="tab" aria-selected="false" data-screen="mitos">Mitos</button>
+  <div class="nav-tabs" aria-label="Seções principais">
+    <a class="nav-tab active" href="#" aria-current="page" data-screen="home" onclick="navigateLink(event, 'home')">Início</a>
+    <a class="nav-tab" href="#quiz" data-screen="quiz" onclick="navigateLink(event, 'quiz')">Diagnóstico</a>
+    <a class="nav-tab" href="#roadmap" data-screen="roadmap" onclick="navigateLink(event, 'roadmap')">Roadmap</a>
+    <a class="nav-tab" href="#faq" data-screen="faq" onclick="navigateLink(event, 'faq')">FAQ</a>
+    <a class="nav-tab" href="#glossario" data-screen="glossario" onclick="navigateLink(event, 'glossario')">Glossário</a>
+    <a class="nav-tab" href="#mitos" data-screen="mitos" onclick="navigateLink(event, 'mitos')">Mitos</a>
   </div>
   <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -1403,12 +1502,12 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu" role="navigation">
-  <button class="nav-tab" onclick="navigate('home');toggleMobileMenu()" data-screen="home">Início</button>
-  <button class="nav-tab" onclick="navigate('quiz');toggleMobileMenu()" data-screen="quiz">Diagnóstico</button>
-  <button class="nav-tab" onclick="navigate('roadmap');toggleMobileMenu()" data-screen="roadmap">Roadmap</button>
-  <button class="nav-tab" onclick="navigate('faq');toggleMobileMenu()" data-screen="faq">FAQ</button>
-  <button class="nav-tab" onclick="navigate('glossario');toggleMobileMenu()" data-screen="glossario">Glossário</button>
-  <button class="nav-tab" onclick="navigate('mitos');toggleMobileMenu()" data-screen="mitos">Mitos</button>
+  <a class="nav-tab" href="#" data-screen="home" onclick="navigateLink(event, 'home')">Início</a>
+  <a class="nav-tab" href="#quiz" data-screen="quiz" onclick="navigateLink(event, 'quiz')">Diagnóstico</a>
+  <a class="nav-tab" href="#roadmap" data-screen="roadmap" onclick="navigateLink(event, 'roadmap')">Roadmap</a>
+  <a class="nav-tab" href="#faq" data-screen="faq" onclick="navigateLink(event, 'faq')">FAQ</a>
+  <a class="nav-tab" href="#glossario" data-screen="glossario" onclick="navigateLink(event, 'glossario')">Glossário</a>
+  <a class="nav-tab" href="#mitos" data-screen="mitos" onclick="navigateLink(event, 'mitos')">Mitos</a>
 </div>
 
 <main id="main-content" tabindex="-1">
@@ -1461,7 +1560,7 @@
     <div style="text-align:center;">
       <div class="counter-badge" id="counter-badge">
         <span class="counter-dot"></span>
-        <span id="counter-text">Carregando...</span>
+        <span id="counter-text">Analytics anônimos ativos. Contador público diário removido por privacidade.</span>
       </div>
     </div>
 
@@ -1554,13 +1653,49 @@
       <div class="faq-list" id="faqList">
         <!-- rendered by JS -->
       </div>
-      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center;">
-        <div style="font-size: 13px; color: var(--text3); margin-bottom: .75rem;">
+      <div class="faq-suggest-box">
+        <div class="faq-suggest-intro">
           Não encontrou o que procurava?
         </div>
-        <button class="btn btn-ghost" onclick="sugerirPergunta()">
+        <button class="btn btn-ghost" type="button" onclick="toggleSugestaoForm()">
           Sugerir uma pergunta
         </button>
+        <form class="suggest-form" id="suggestForm" hidden onsubmit="enviarSugestaoPergunta(event)">
+          <div class="suggest-grid">
+            <div class="suggest-field">
+              <label for="suggestCategory">Categoria</label>
+              <select id="suggestCategory" name="categoria">
+                <option value="fundamentos">Fundamentos</option>
+                <option value="ferramentas">Ferramentas</option>
+                <option value="linguagens">Linguagens</option>
+                <option value="carreira">Carreira</option>
+                <option value="educação">Educação</option>
+                <option value="mercado">Mercado</option>
+              </select>
+            </div>
+            <div class="suggest-field">
+              <label for="suggestContext">Contexto atual</label>
+              <input id="suggestContext" name="contexto" type="text" readonly>
+            </div>
+          </div>
+          <div class="suggest-field">
+            <label for="suggestQuestion">Pergunta sugerida</label>
+            <input id="suggestQuestion" name="pergunta" type="text" maxlength="180" placeholder="Ex.: Como saber se devo focar em front-end ou back-end?" required>
+          </div>
+          <div class="suggest-field">
+            <label for="suggestWhy">Por que essa pergunta importa?</label>
+            <textarea id="suggestWhy" name="porque" placeholder="Explique a dúvida, o momento em que ela aparece e por que seria útil responder isso no site." required></textarea>
+          </div>
+          <div class="suggest-field">
+            <label for="suggestAnswer">Resposta sugerida (opcional)</label>
+            <textarea id="suggestAnswer" name="resposta" placeholder="Se você já tiver uma ideia de resposta, escreva aqui."></textarea>
+          </div>
+          <div class="suggest-meta">O envio abre uma issue preenchida no GitHub com a categoria pré-selecionada e o contexto da tela atual.</div>
+          <div class="suggest-actions">
+            <button class="btn btn-ghost" type="button" onclick="toggleSugestaoForm(false)">Cancelar</button>
+            <button class="btn btn-primary" type="submit">Abrir issue preenchida</button>
+          </div>
+        </form>
       </div>
     </div>
   </section>
@@ -2144,7 +2279,8 @@ const FAQS = [
 const SCREEN_ORDER = ['home', 'quiz', 'result', 'roadmap', 'faq', 'glossario', 'mitos'];
 const GITHUB_REPO = 'nathaliagf/devguia';
 const GOATCOUNTER_CODE = 'SEU-CODIGO';
-const GOATCOUNTER_TOKEN = 'SEU-TOKEN-API';
+const QUIZ_PROGRESS_KEY = 'quiz_progress_v2';
+const EASY_READ_KEY = 'easy_read';
 const CAT_TOOLTIPS = {
   fundamentos: 'Conceitos base que todo dev precisa dominar',
   ferramentas: 'Ferramentas do dia a dia de desenvolvimento',
@@ -2323,6 +2459,11 @@ const MITOS = [
 // ============================================================
 function navigate(screen) { go(screen, 'fade'); }
 
+function navigateLink(event, screen) {
+  event.preventDefault();
+  go(screen, 'fade');
+}
+
 function syncHashForNav(destino, options = {}) {
   if (destino === 'result') return;
   const base = location.pathname + location.search;
@@ -2365,8 +2506,10 @@ function go(destino, forceDirection = null, options = {}) {
   next.classList.add('active', animClass);
   state.currentScreen = destino;
   document.querySelectorAll('.nav-tab[data-screen]').forEach(t => {
-    t.classList.toggle('active', t.dataset.screen === destino);
-    t.setAttribute('aria-selected', t.dataset.screen === destino ? 'true' : 'false');
+    const isActive = t.dataset.screen === destino;
+    t.classList.toggle('active', isActive);
+    if (isActive) t.setAttribute('aria-current', 'page');
+    else t.removeAttribute('aria-current');
   });
   if (destino === 'quiz') renderQuizEntry();
   if (destino === 'roadmap') renderRoadmap();
@@ -2464,11 +2607,17 @@ function toggleMobileMenu() {
   btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
 }
 
+function getTodayLocalIso() {
+  const now = new Date();
+  const offsetMs = now.getTimezoneOffset() * 60000;
+  return new Date(now.getTime() - offsetMs).toISOString().slice(0, 10);
+}
+
 // ============================================================
 // QUIZ
 // ============================================================
 function salvarProgresso() {
-  sessionStorage.setItem('quiz_progress', JSON.stringify({
+  localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify({
     currentQuestion: state.currentQuestion,
     answers: state.answers,
     timestamp: Date.now(),
@@ -2477,11 +2626,11 @@ function salvarProgresso() {
 
 function restaurarProgresso() {
   try {
-    const salvo = sessionStorage.getItem('quiz_progress');
+    const salvo = localStorage.getItem(QUIZ_PROGRESS_KEY);
     if (!salvo) return false;
     const data = JSON.parse(salvo);
-    if (Date.now() - data.timestamp > 7200000) {
-      sessionStorage.removeItem('quiz_progress');
+    if (Date.now() - data.timestamp > 2592000000) {
+      localStorage.removeItem(QUIZ_PROGRESS_KEY);
       return false;
     }
     return data;
@@ -2490,7 +2639,7 @@ function restaurarProgresso() {
   }
 }
 
-function limparProgresso() { sessionStorage.removeItem('quiz_progress'); }
+function limparProgresso() { localStorage.removeItem(QUIZ_PROGRESS_KEY); }
 
 function recomputeScoresFromAnswers() {
   state.scores = {};
@@ -2513,7 +2662,7 @@ function renderQuizEntry() {
   quizCard.innerHTML = `
     <div class="resume-card">
       <div class="resume-card-title">Você tem um diagnóstico em andamento</div>
-      <div class="resume-card-copy">Você estava na pergunta ${Math.min((saved.currentQuestion || 0) + 1, QUESTIONS.length)} de ${QUESTIONS.length}. Quer continuar de onde parou?</div>
+      <div class="resume-card-copy">Você estava na pergunta ${Math.min((saved.currentQuestion || 0) + 1, QUESTIONS.length)} de ${QUESTIONS.length}. O progresso fica salvo neste navegador por até 30 dias. Quer retomar de onde parou?</div>
       <div style="display:flex;gap:8px;">
         <button class="btn btn-primary" onclick="continuarQuiz()">Continuar</button>
         <button class="btn btn-ghost" onclick="recomecarQuiz()">Começar do zero</button>
@@ -3063,22 +3212,58 @@ function openFaqItem(faqId, options = {}) {
   }, 50);
 }
 
-function sugerirPergunta() {
-  const titulo = encodeURIComponent('Sugestão de pergunta para o FAQ');
+function getFaqSuggestionContext() {
+  const categoria = state.faqFilter?.cat && state.faqFilter.cat !== 'all' ? state.faqFilter.cat : 'não filtrada';
+  const busca = state.faqFilter?.search ? `"${state.faqFilter.search}"` : 'sem busca ativa';
+  const itemAberto = state.openFaqId ? FAQS.find(f => f.id === state.openFaqId)?.q || state.openFaqId : 'nenhum item aberto';
+  return `FAQ | categoria: ${categoria} | busca: ${busca} | item aberto: ${itemAberto}`;
+}
+
+function syncSugestaoContext() {
+  const categoryEl = document.getElementById('suggestCategory');
+  const contextEl = document.getElementById('suggestContext');
+  if (categoryEl && state.faqFilter?.cat && state.faqFilter.cat !== 'all') {
+    categoryEl.value = state.faqFilter.cat;
+  }
+  if (contextEl) contextEl.value = getFaqSuggestionContext();
+}
+
+function toggleSugestaoForm(forceState) {
+  const form = document.getElementById('suggestForm');
+  if (!form) return;
+  const nextHidden = typeof forceState === 'boolean' ? !forceState : !form.hidden;
+  form.hidden = nextHidden;
+  if (!nextHidden) {
+    syncSugestaoContext();
+    document.getElementById('suggestQuestion')?.focus();
+  }
+}
+
+function enviarSugestaoPergunta(event) {
+  event.preventDefault();
+  const categoria = document.getElementById('suggestCategory')?.value || 'carreira';
+  const contexto = document.getElementById('suggestContext')?.value || getFaqSuggestionContext();
+  const pergunta = document.getElementById('suggestQuestion')?.value.trim();
+  const porque = document.getElementById('suggestWhy')?.value.trim();
+  const resposta = document.getElementById('suggestAnswer')?.value.trim();
+  if (!pergunta || !porque) return;
+  const titulo = encodeURIComponent(`Sugestão de pergunta para o FAQ: ${pergunta}`);
   const corpo = encodeURIComponent(`## Pergunta sugerida
 
-**Pergunta:** (escreva aqui a pergunta que você quer ver respondida)
+**Pergunta:** ${pergunta}
+
+**Categoria:** ${categoria}
+
+**Contexto da navegação:** ${contexto}
 
 **Por que essa pergunta é importante?**
-(explique por que outras pessoas provavelmente têm essa dúvida)
+${porque}
 
 **Você tem uma resposta sugerida?**
-(opcional — pode deixar em branco)
-
-**Categoria:** (fundamentos / ferramentas / linguagens / carreira / educação / mercado)
+${resposta || '(sem resposta sugerida)'}
 
 ---
-*Aberto via botão "Sugerir pergunta" no devguia.dev*`);
+*Aberto via formulário "Sugerir uma pergunta" no devguia.dev*`);
   const url = `https://github.com/${GITHUB_REPO}/issues/new?title=${titulo}&body=${corpo}&labels=sugestao-faq`;
   window.open(url, '_blank', 'noopener,noreferrer');
 }
@@ -3104,7 +3289,7 @@ function filterGlossario() {
       const alvo = GLOSSARIO.find(x => x.id === r || x.termo.toLowerCase() === r.toLowerCase() || x.termo.toLowerCase().includes(r.toLowerCase()));
       return alvo ? `<button class="glossario-pill" onclick="abrirGlossario('${alvo.id}')">${alvo.termo}</button>` : '';
     }).join('');
-    return `<div class="glossario-item${isOpen ? ' open' : ''}" id="gi-${g.id}"><button type="button" class="glossario-head" onclick="toggleGlossario('${g.id}')"><span class="glossario-term">${g.termo}</span><span class="glossario-curta">${g.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver definição completa ▾</span></button><div class="glossario-body"><div class="glossario-content"><div class="glossario-meta"><span class="faq-cat-badge" style="border:1px solid ${CAT_COLORS[g.categoria] || 'var(--border)'};background:var(--bg3)">${g.categoria}</span>${g.fonetico ? `<span class="glossario-fonetico">${g.fonetico}</span>` : ''}</div><p class="glossario-longa">${g.longa}</p><div class="glossario-exemplo"><strong style="color:var(--text);display:block;margin-bottom:6px">Exemplo</strong>${g.exemplo}</div><div class="glossario-pill-wrap">${rel}</div></div></div></div>`;
+    return `<div class="glossario-item${isOpen ? ' open' : ''}" id="gi-${g.id}"><button type="button" class="glossario-head" onclick="toggleGlossario('${g.id}')" aria-expanded="${isOpen ? 'true' : 'false'}" aria-controls="glossario-body-${g.id}" id="glossario-head-${g.id}"><span class="glossario-term">${g.termo}</span><span class="glossario-curta">${g.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver definição completa ▾</span></button><div class="glossario-body" id="glossario-body-${g.id}" role="region" aria-labelledby="glossario-head-${g.id}"><div class="glossario-content"><div class="glossario-meta"><span class="faq-cat-badge" style="border:1px solid ${CAT_COLORS[g.categoria] || 'var(--border)'};background:var(--bg3)">${g.categoria}</span>${g.fonetico ? `<span class="glossario-fonetico">${g.fonetico}</span>` : ''}</div><p class="glossario-longa">${g.longa}</p><div class="glossario-exemplo"><strong style="color:var(--text);display:block;margin-bottom:6px">Exemplo</strong>${g.exemplo}</div><div class="glossario-pill-wrap">${rel}</div></div></div></div>`;
   }).join('');
 }
 
@@ -3166,22 +3351,44 @@ function renderMitos() {
   list.innerHTML = items.map(m => {
     const [badgeClass, badgeText] = mitoBadge(m.veredicto);
     const open = state.openMitoId === m.id;
-    return `<div class="mito-card${open ? ' open' : ''}" id="mito-${m.id}"><button type="button" class="mito-head" onclick="toggleMito('${m.id}')"><span class="${badgeClass}">${badgeText}</span><span class="mito-affirmation">"${m.afirmacao}"</span><span class="mito-curta">${m.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver explicação completa ▾</span></button><div class="mito-body"><div class="mito-content"><p>${m.explicacao}</p>${formatMitoFonte(m.fonte)}</div></div></div>`;
+    return `<div class="mito-card${open ? ' open' : ''}" id="mito-${m.id}"><button type="button" class="mito-head" onclick="toggleMito('${m.id}')" aria-expanded="${open ? 'true' : 'false'}" aria-controls="mito-body-${m.id}" id="mito-head-${m.id}"><span class="${badgeClass}">${badgeText}</span><span class="mito-affirmation">"${m.afirmacao}"</span><span class="mito-curta">${m.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver explicação completa ▾</span></button><div class="mito-body" id="mito-body-${m.id}" role="region" aria-labelledby="mito-head-${m.id}"><div class="mito-content"><p>${m.explicacao}</p>${formatMitoFonte(m.fonte)}</div></div></div>`;
   }).join('');
 }
 
-async function fetchContador() {
-  try {
-    if (GOATCOUNTER_CODE === 'SEU-CODIGO' || GOATCOUNTER_TOKEN === 'SEU-TOKEN-API') throw new Error('missing');
-    const hoje = new Date().toISOString().split('T')[0];
-    const resp = await fetch(`https://${GOATCOUNTER_CODE}.goatcounter.com/api/v0/stats/hits?start=${hoje}&end=${hoje}&filter=diagnostico-completo`, { headers: { Authorization: `Bearer ${GOATCOUNTER_TOKEN}` } });
-    if (!resp.ok) throw new Error();
-    const data = await resp.json();
-    const total = data.hits?.reduce((a, b) => a + (b.count || 0), 0) || 0;
-    document.getElementById('counter-text').textContent = total > 0 ? `${total} pessoa${total > 1 ? 's' : ''} fez o diagnóstico hoje` : 'Seja o primeiro a fazer o diagnóstico hoje';
-  } catch {
-    document.getElementById('counter-badge').style.display = 'none';
-  }
+function renderStructuredData() {
+  const jsonLdEl = document.getElementById('structured-data');
+  if (!jsonLdEl) return;
+  const faqEntities = FAQS.map(item => ({
+    '@type': 'Question',
+    name: item.q,
+    acceptedAnswer: {
+      '@type': 'Answer',
+      text: item.answer.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
+    },
+  }));
+  const payload = [
+    {
+      '@context': 'https://schema.org',
+      '@type': 'WebSite',
+      name: 'devguia.dev',
+      url: 'https://nathaliagf.github.io/devguia/',
+      inLanguage: 'pt-BR',
+      description: 'Guia vocacional para TI com diagnóstico, roadmap, FAQ, glossário e mitos.',
+    },
+    {
+      '@context': 'https://schema.org',
+      '@type': 'FAQPage',
+      mainEntity: faqEntities,
+    },
+  ];
+  jsonLdEl.textContent = JSON.stringify(payload);
+}
+
+function atualizarBadgeAnalytics() {
+  const textEl = document.getElementById('counter-text');
+  if (!textEl) return;
+  const hoje = getTodayLocalIso();
+  textEl.textContent = `Analytics anônimos ativos. O contador público diário foi removido em ${hoje} para não expor credenciais no frontend.`;
 }
 
 function toggleEasyRead() {
@@ -3190,7 +3397,7 @@ function toggleEasyRead() {
   btn.textContent = isActive ? 'Aa ✓' : 'Aa';
   btn.style.borderColor = isActive ? 'var(--purple)' : 'var(--border2)';
   btn.style.color = isActive ? 'var(--purple)' : 'var(--text2)';
-  sessionStorage.setItem('easy_read', isActive ? '1' : '0');
+  sessionStorage.setItem(EASY_READ_KEY, isActive ? '1' : '0');
 }
 
 // ============================================================
@@ -3200,7 +3407,7 @@ renderRoadmap();
 
 window.addEventListener('beforeunload', (e) => {
   if (state.currentScreen !== 'quiz') return;
-  if (!sessionStorage.getItem('quiz_progress')) return;
+  if (!localStorage.getItem(QUIZ_PROGRESS_KEY)) return;
   e.preventDefault();
   e.returnValue = '';
 });
@@ -3220,7 +3427,9 @@ window.addEventListener('hashchange', () => {
 });
 
 window.addEventListener('load', () => {
-  if (sessionStorage.getItem('easy_read') === '1') {
+  renderStructuredData();
+  atualizarBadgeAnalytics();
+  if (sessionStorage.getItem(EASY_READ_KEY) === '1') {
     document.body.classList.add('easy-read');
     const btn = document.getElementById('easy-read-toggle');
     if (btn) {
@@ -3237,7 +3446,7 @@ window.addEventListener('load', () => {
   } else if (raw) {
     applyHashRoute();
   }
-  fetchContador();
+  syncSugestaoContext();
 });
 </script>
 <script>
@@ -3247,6 +3456,6 @@ window.addEventListener('load', () => {
     no_onload: true,
   };
 </script>
-<script async src="//gc.zgo.at/count.js"></script>
+<script async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
