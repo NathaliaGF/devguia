@@ -7,6 +7,7 @@
   <meta property="og:title" content="devguia.dev — Guia vocacional para TI">
   <meta property="og:description" content="Descubra se TI combina com você, em qual área se encaixaria e por onde começar.">
   <title>devguia.dev — Guia vocacional para TI</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f1117'/><text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%23a78bfa'>%3E_</text></svg>">
   <style>
     :root {
       --bg:        #0f1117;
@@ -794,6 +795,263 @@
       font-size: 14px;
     }
 
+    .faq-badge {
+      position: relative;
+      cursor: default;
+    }
+
+    .faq-badge::after {
+      content: attr(data-tooltip);
+      position: absolute;
+      bottom: calc(100% + 6px);
+      right: 0;
+      background: var(--bg4);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-size: 11px;
+      white-space: nowrap;
+      padding: 5px 10px;
+      border-radius: 6px;
+      pointer-events: none;
+      opacity: 0;
+      transform: translateY(4px);
+      transition: opacity 0.15s, transform 0.15s;
+      z-index: 10;
+    }
+
+    .faq-badge:hover::after,
+    .faq-badge:focus-visible::after {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .glossario-link {
+      background: none;
+      border: none;
+      border-bottom: 1px dashed var(--purple-dim);
+      color: var(--purple);
+      cursor: pointer;
+      font-size: inherit;
+      padding: 0;
+    }
+
+    .glossario-link:hover { border-bottom-style: solid; }
+
+    .quick-actions {
+      margin-top: 16px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .share-controls {
+      margin-top: 16px;
+      padding-top: 12px;
+      border-top: 1px solid var(--border);
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .recursos-section {
+      margin: 24px 0;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: var(--bg2);
+      overflow: hidden;
+    }
+
+    .recursos-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .recursos-title { font-size: 14px; font-weight: 700; }
+
+    .recursos-tabs {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .recursos-tab {
+      background: transparent;
+      border: 1px solid transparent;
+      color: var(--text3);
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .recursos-tab.active {
+      background: var(--bg3);
+      color: var(--text);
+      border-bottom: 2px solid var(--purple);
+    }
+
+    .recursos-body {
+      padding: 14px 16px 16px;
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 10px;
+    }
+
+    .recurso-card {
+      display: block;
+      text-decoration: none;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+      color: var(--text);
+      transition: border-color 0.15s;
+    }
+
+    .recurso-card:hover { border-color: var(--purple-dim); }
+    .recurso-nome { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
+    .recurso-autor { font-size: 12px; color: var(--text3); margin-bottom: 6px; }
+    .recurso-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
+
+    .counter-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 1.5rem;
+      padding: 6px 14px;
+      background: var(--teal-bg);
+      border: 1px solid var(--teal-dim);
+      border-radius: 20px;
+      font-size: 12px;
+      color: var(--teal);
+    }
+
+    .counter-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: var(--teal);
+      display: inline-block;
+      animation: pulse 2s infinite;
+    }
+
+    .glossary-list, .mitos-list { display: flex; flex-direction: column; gap: 8px; }
+
+    .mito-card, .glossario-item {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+
+    .mito-head, .glossario-head {
+      width: 100%;
+      border: none;
+      background: none;
+      color: var(--text);
+      text-align: left;
+      cursor: pointer;
+      padding: 16px 20px;
+      font-family: inherit;
+    }
+
+    .mito-curta { font-size: 13px; color: var(--text2); margin-top: 6px; }
+    .mito-body, .glossario-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.25s ease;
+    }
+
+    .mito-card.open .mito-body,
+    .glossario-item.open .glossario-body { max-height: 700px; }
+
+    .mito-content, .glossario-content {
+      padding: 0 20px 16px;
+      border-top: 1px solid var(--border);
+    }
+
+    .mito-fonte { color: var(--text3); font-size: 12px; margin-top: 10px; }
+
+    .badge-mito, .badge-verdade, .badge-depende, .badge-parcial {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid;
+      margin-bottom: 10px;
+    }
+    .badge-mito { background: var(--coral-bg); border-color: var(--coral-dim); color: var(--coral); }
+    .badge-verdade { background: var(--teal-bg); border-color: var(--teal-dim); color: var(--teal); }
+    .badge-depende { background: var(--amber-bg); border-color: var(--amber-dim); color: var(--amber); }
+    .badge-parcial { background: var(--blue-bg); border-color: var(--blue-dim); color: var(--blue); }
+
+    .glossario-meta {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      flex-wrap: wrap;
+      margin-bottom: 10px;
+    }
+    .glossario-fonetico { color: var(--text3); font-size: 12px; }
+    .glossario-pill-wrap {
+      margin-top: 10px;
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+    }
+    .glossario-pill {
+      background: var(--bg4);
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .glossario-exemplo {
+      background: var(--bg3);
+      border-left: 2px solid var(--purple-dim);
+      border-radius: 0 8px 8px 0;
+      padding: 10px 12px;
+      font-size: 13px;
+      color: var(--text2);
+      margin-top: 10px;
+    }
+
+    .resume-card {
+      max-width: 480px;
+      margin: 2rem auto;
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.5rem;
+    }
+
+    .resume-card-title { font-size: 15px; font-weight: 600; margin-bottom: .5rem; }
+    .resume-card-copy { font-size: 13px; color: var(--text2); margin-bottom: 1.25rem; }
+
+    .btn-inline {
+      background: none;
+      border: none;
+      color: inherit;
+      text-decoration: underline;
+      cursor: pointer;
+      font: inherit;
+      padding: 0;
+    }
+
     /* ================================
        SECTION HEADERS
        ================================ */
@@ -840,6 +1098,8 @@
 
       .hero-btns { flex-direction: column; align-items: center; }
 
+      .recursos-body { grid-template-columns: 1fr; }
+
       body { font-size: 13px; }
     }
 
@@ -847,6 +1107,45 @@
       .phase-header { padding: 16px; }
       .phase-content { padding: 0 16px 16px; }
     }
+
+    @keyframes pulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.4; }
+    }
+
+    @keyframes slideInRight {
+      from { transform: translateX(40px); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes slideInLeft {
+      from { transform: translateX(-40px); opacity: 0; }
+      to   { transform: translateX(0); opacity: 1; }
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to   { opacity: 1; }
+    }
+
+    .screen.enter-right { animation: slideInRight 0.22s ease; }
+    .screen.enter-left { animation: slideInLeft 0.22s ease; }
+    .screen.enter-fade { animation: fadeIn 0.18s ease; }
+
+    body.easy-read {
+      font-size: 16px;
+      line-height: 1.9;
+      letter-spacing: 0.02em;
+    }
+
+    body.easy-read .quiz-option { padding: 14px 18px; margin-bottom: 2px; }
+    body.easy-read .faq-q-text,
+    body.easy-read .phase-skill h4,
+    body.easy-read .quiz-q-text { font-size: 16px; line-height: 1.6; }
+    body.easy-read .faq-answer p,
+    body.easy-read .result-desc,
+    body.easy-read .phase-skill-why { font-size: 15px; line-height: 1.9; }
+    body.easy-read nav { padding: 1rem 1.5rem; }
   </style>
 </head>
 <body>
@@ -854,11 +1153,14 @@
 <!-- NAV -->
 <nav>
   <span class="nav-logo" onclick="navigate('home')" role="link" tabindex="0" onkeydown="if(event.key==='Enter')navigate('home')">devguia.dev</span>
+  <button id="easy-read-toggle" class="btn btn-ghost" onclick="toggleEasyRead()" style="font-size:11px;padding:4px 10px;min-height:auto;" title="Modo leitura fácil">Aa</button>
   <div class="nav-tabs" role="tablist">
     <button class="nav-tab active" onclick="navigate('home')" role="tab" aria-selected="true" data-screen="home">Início</button>
     <button class="nav-tab" onclick="navigate('quiz')" role="tab" aria-selected="false" data-screen="quiz">Diagnóstico</button>
     <button class="nav-tab" onclick="navigate('roadmap')" role="tab" aria-selected="false" data-screen="roadmap">Roadmap</button>
     <button class="nav-tab" onclick="navigate('faq')" role="tab" aria-selected="false" data-screen="faq">FAQ</button>
+    <button class="nav-tab" onclick="navigate('glossario')" role="tab" aria-selected="false" data-screen="glossario">Glossário</button>
+    <button class="nav-tab" onclick="navigate('mitos')" role="tab" aria-selected="false" data-screen="mitos">Mitos</button>
   </div>
   <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -870,6 +1172,8 @@
   <button class="nav-tab" onclick="navigate('quiz');toggleMobileMenu()" data-screen="quiz">Diagnóstico</button>
   <button class="nav-tab" onclick="navigate('roadmap');toggleMobileMenu()" data-screen="roadmap">Roadmap</button>
   <button class="nav-tab" onclick="navigate('faq');toggleMobileMenu()" data-screen="faq">FAQ</button>
+  <button class="nav-tab" onclick="navigate('glossario');toggleMobileMenu()" data-screen="glossario">Glossário</button>
+  <button class="nav-tab" onclick="navigate('mitos');toggleMobileMenu()" data-screen="mitos">Mitos</button>
 </div>
 
 <main>
@@ -917,6 +1221,12 @@
       <div>7 perfis vocacionais</div>
       <div>·</div>
       <div>100% gratuito</div>
+    </div>
+    <div style="text-align:center;">
+      <div class="counter-badge" id="counter-badge">
+        <span class="counter-dot"></span>
+        <span id="counter-text">Carregando...</span>
+      </div>
     </div>
 
   </section>
@@ -1007,6 +1317,60 @@
       <div class="faq-list" id="faqList">
         <!-- rendered by JS -->
       </div>
+      <div style="margin-top: 2rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center;">
+        <div style="font-size: 13px; color: var(--text3); margin-bottom: .75rem;">
+          Não encontrou o que procurava?
+        </div>
+        <button class="btn btn-ghost" onclick="sugerirPergunta()">
+          Sugerir uma pergunta
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-glossario" aria-label="Glossário tech">
+    <div class="container">
+      <div class="section-header">
+        <h2>Glossário</h2>
+        <p>Termos de tecnologia explicados de forma direta, com exemplos do mundo real.</p>
+      </div>
+      <div class="faq-search-wrap">
+        <input
+          type="search"
+          class="faq-search"
+          id="glossarySearch"
+          placeholder="Buscar termo..."
+          oninput="filterGlossario()"
+          aria-label="Buscar termos do glossário"
+        >
+      </div>
+      <div class="faq-filters" role="group" aria-label="Filtrar glossário por categoria">
+        <button class="faq-filter active" onclick="setGlossarioCat('all')" data-gcat="all">Todos</button>
+        <button class="faq-filter" onclick="setGlossarioCat('geral')" data-gcat="geral">Geral</button>
+        <button class="faq-filter" onclick="setGlossarioCat('front-end')" data-gcat="front-end">Front-end</button>
+        <button class="faq-filter" onclick="setGlossarioCat('back-end')" data-gcat="back-end">Back-end</button>
+        <button class="faq-filter" onclick="setGlossarioCat('infra')" data-gcat="infra">Infra</button>
+        <button class="faq-filter" onclick="setGlossarioCat('fundamentos')" data-gcat="fundamentos">Fundamentos</button>
+        <button class="faq-filter" onclick="setGlossarioCat('design')" data-gcat="design">Design</button>
+      </div>
+      <div class="glossary-list" id="glossarioList"></div>
+    </div>
+  </section>
+
+  <section class="screen" id="screen-mitos" aria-label="Mitos e verdades">
+    <div class="container">
+      <div class="section-header">
+        <h2>Mitos e Verdades</h2>
+        <p>Afirmações populares sobre TI, com veredicto honesto e explicação direta.</p>
+      </div>
+      <div class="faq-filters" role="group" aria-label="Filtrar mitos">
+        <button class="faq-filter active" onclick="setMitosFilter('all')" data-mito="all">Todos</button>
+        <button class="faq-filter" onclick="setMitosFilter('mito')" data-mito="mito">Mito</button>
+        <button class="faq-filter" onclick="setMitosFilter('verdade')" data-mito="verdade">Verdade</button>
+        <button class="faq-filter" onclick="setMitosFilter('depende')" data-mito="depende">Depende</button>
+        <button class="faq-filter" onclick="setMitosFilter('parcial')" data-mito="parcial">Parcial</button>
+      </div>
+      <div class="mitos-list" id="mitosList"></div>
     </div>
   </section>
 
@@ -1025,6 +1389,13 @@ const state = {
   faqFilter: { cat: 'all', search: '' },
   openFaqId: null,
   openPhaseId: null,
+  glossarioFilter: { cat: 'all', search: '' },
+  openGlossarioId: null,
+  mitosFilter: 'all',
+  openMitoId: null,
+  recursosTab: 'livros',
+  currentShareUrl: '',
+  areaScores: [],
 };
 
 // ============================================================
@@ -1213,6 +1584,7 @@ const PROFILES = {
     key: 'dev_nato',
     icon: '💻',
     name: 'Dev Nato',
+    sub: 'Seu perfil vocacional',
     color: 'var(--purple)',
     desc: `Você tem os traços que definem bons desenvolvedores: pensamento lógico-analítico, tolerância à frustração, curiosidade genuína e capacidade de concentração. TI não é só viável para você — é onde vai se destacar. O risco para seu perfil não é fracassar: é se desperdiçar em áreas rasas demais para o seu potencial.`,
     attention: [
@@ -1229,6 +1601,7 @@ const PROFILES = {
     key: 'analitico',
     icon: '📊',
     name: 'Analítico de Dados',
+    sub: 'Seu perfil vocacional',
     color: 'var(--blue)',
     desc: `Você tem raciocínio analítico acima da média e gosta de entender padrões. Isso te coloca naturalmente na trilha de dados — análise, ciência de dados, BI ou engenharia de dados. Programação é necessária, mas não precisa ser o foco principal. Seu diferencial está em traduzir dados em decisões, não em escrever sistemas complexos do zero.`,
     attention: [
@@ -1245,6 +1618,7 @@ const PROFILES = {
     key: 'ux_design',
     icon: '🎨',
     name: 'Designer de Produto',
+    sub: 'Seu perfil vocacional',
     color: 'var(--pink)',
     desc: `Você pensa primeiro na experiência da pessoa usando o produto — isso é raro e valioso. Não precisa necessariamente programar (mas ajuda saber o básico de HTML/CSS). Seu lugar natural é UX Design, Product Design ou pesquisa com usuários. É uma área menos saturada que dev e com boa demanda para quem combina sensibilidade com raciocínio analítico.`,
     attention: [
@@ -1261,6 +1635,7 @@ const PROFILES = {
     key: 'educador',
     icon: '🎓',
     name: 'Educador Tech',
+    sub: 'Seu perfil vocacional',
     color: 'var(--teal)',
     desc: `Você tem perfil de quem gosta de transmitir conhecimento — e isso é escasso e valioso em TI. O mercado de educação tecnológica é enorme e mal servido de bons professores. Ser educador tech não significa abrir mão de ser técnico: os melhores continuam praticando. Sua vocação de ensinar pode ser um diferencial extraordinário.`,
     attention: [
@@ -1277,6 +1652,7 @@ const PROFILES = {
     key: 'infra_cloud',
     icon: '⚙️',
     name: 'Engenheiro de Infra',
+    sub: 'Seu perfil vocacional',
     color: 'var(--amber)',
     desc: `Você pensa em sistemas, confiabilidade e escala — não apenas em escrever código. Isso é o perfil de DevOps, SRE e engenharia de plataforma. Essas áreas pagam muito bem e têm escassez real de profissionais qualificados. Você gosta que as coisas funcionem de verdade, não apenas que pareçam funcionar.`,
     attention: [
@@ -1293,6 +1669,7 @@ const PROFILES = {
     key: 'transicao',
     icon: '🔄',
     name: 'Em Transição de Carreira',
+    sub: 'Seu perfil vocacional',
     color: 'var(--coral)',
     desc: `Você tem algo que iniciantes não têm: experiência de mercado, maturidade e contexto de negócio. Isso é um trunfo real — especialmente em dados, produto, UX, QA e gestão. O erro mais comum de quem faz transição é querer entrar como dev júnior quando poderia usar sua experiência para entrar em posições mais sênior em áreas adjacentes.`,
     attention: [
@@ -1309,6 +1686,7 @@ const PROFILES = {
     key: 'repensar',
     icon: '🤔',
     name: 'Vale Repensar',
+    sub: 'Seu perfil vocacional',
     color: 'var(--text3)',
     desc: `Alguns dos seus padrões sugerem que TI pode não ser o caminho mais natural para você agora — não porque seja incapaz, mas porque os traços mais presentes (resistência à abstração, baixa tolerância à frustração, dificuldade de aprender de forma independente) são exatamente os que mais pesam negativamente na área. Isso não é sentença: é honestidade que pode te poupar anos de frustração.`,
     attention: [
@@ -1488,33 +1866,209 @@ const FAQS = [
   },
 ];
 
+const SCREEN_ORDER = ['home', 'quiz', 'result', 'roadmap', 'faq', 'glossario', 'mitos'];
+const GITHUB_REPO = 'nathaliagf/devguia';
+const GOATCOUNTER_CODE = 'SEU-CODIGO';
+const GOATCOUNTER_TOKEN = 'SEU-TOKEN-API';
+const CAT_TOOLTIPS = {
+  fundamentos: 'Conceitos base que todo dev precisa dominar',
+  ferramentas: 'Ferramentas do dia a dia de desenvolvimento',
+  linguagens: 'Dúvidas sobre linguagens de programação',
+  carreira: 'Como crescer e se posicionar no mercado',
+  educação: 'Faculdade, cursos e formas de aprender',
+  mercado: 'Vagas, salários e realidade do setor',
+};
+const CAT_COLORS = {
+  geral: 'var(--purple)',
+  'front-end': 'var(--pink)',
+  'back-end': 'var(--blue)',
+  infra: 'var(--amber)',
+  fundamentos: 'var(--teal)',
+  design: 'var(--coral)',
+};
+const AREAS_INFO = {
+  front: { name: 'Front-end', desc: 'Interfaces e experiência visual do usuário' },
+  back: { name: 'Back-end', desc: 'Lógica de sistemas, APIs e dados' },
+  dados: { name: 'Dados', desc: 'Análise, métricas e insights' },
+  ux: { name: 'UX/Design', desc: 'Produto centrado na experiência de uso' },
+  infra: { name: 'Infra/Cloud', desc: 'Confiabilidade, deploy e escala' },
+  qa: { name: 'QA', desc: 'Qualidade e testes de software' },
+  ensino: { name: 'Educação Tech', desc: 'Ensino e mentoria em tecnologia' },
+};
+const RECURSOS = {
+  dev_nato: {
+    livros: [
+      { nome: 'The Pragmatic Programmer', autor: 'Hunt & Thomas', desc: 'O livro de carreira mais recomendado por devs sérios. Atemporal.' },
+      { nome: 'Clean Code', autor: 'Robert C. Martin', desc: 'Como escrever código que outras pessoas conseguem ler e manter.' },
+      { nome: 'Structure and Interpretation of Computer Programs', autor: 'Abelson & Sussman', desc: 'Gratuito online. Base de pensamento computacional.' },
+    ],
+    sites: [
+      { nome: 'roadmap.sh', url: 'https://roadmap.sh', desc: 'Guias visuais de trilhas para especialidades.' },
+      { nome: 'CS50 (Harvard)', url: 'https://cs50.harvard.edu', desc: 'Curso introdutório de ciência da computação gratuito.' },
+      { nome: 'MDN Web Docs', url: 'https://developer.mozilla.org', desc: 'Documentação de referência para web.' },
+    ],
+    comunidades: [
+      { nome: 'Dev.to', url: 'https://dev.to', desc: 'Comunidade de devs para ler e publicar artigos técnicos.' },
+      { nome: 'Lobste.rs', url: 'https://lobste.rs', desc: 'Links técnicos de alta qualidade.' },
+    ],
+  },
+  analitico: {
+    livros: [
+      { nome: 'Storytelling with Data', autor: 'Cole Nussbaumer', desc: 'Visualizações que comunicam decisões.' },
+      { nome: 'Python for Data Analysis', autor: 'Wes McKinney', desc: 'Pandas explicado por seu criador.' },
+      { nome: 'Naked Statistics', autor: 'Charles Wheelan', desc: 'Estatística aplicada sem complicação.' },
+    ],
+    sites: [
+      { nome: 'Kaggle', url: 'https://kaggle.com', desc: 'Datasets e competições para praticar análise.' },
+      { nome: 'Mode Analytics Blog', url: 'https://mode.com/blog', desc: 'Artigos práticos de SQL e análise.' },
+      { nome: 'StatQuest', url: 'https://youtube.com/@statquest', desc: 'Canal didático de estatística e ML.' },
+    ],
+    comunidades: [
+      { nome: 'r/dataengineering', url: 'https://reddit.com/r/dataengineering', desc: 'Comunidade técnica de engenharia de dados.' },
+      { nome: 'dbt Community', url: 'https://community.getdbt.com', desc: 'Fórum da ferramenta dbt.' },
+    ],
+  },
+  ux_design: {
+    livros: [
+      { nome: 'The Design of Everyday Things', autor: 'Don Norman', desc: 'Livro fundacional de design centrado no usuário.' },
+      { nome: "Don't Make Me Think", autor: 'Steve Krug', desc: 'Guia direto de usabilidade web.' },
+      { nome: 'Continuous Discovery Habits', autor: 'Teresa Torres', desc: 'Pesquisa contínua em produto.' },
+    ],
+    sites: [
+      { nome: 'Nielsen Norman Group', url: 'https://nngroup.com', desc: 'Referência em pesquisa de UX.' },
+      { nome: 'Figma Community', url: 'https://figma.com/community', desc: 'Templates e componentes para estudar design.' },
+      { nome: 'Laws of UX', url: 'https://lawsofux.com', desc: 'Leis psicológicas aplicadas a interfaces.' },
+    ],
+    comunidades: [
+      { nome: 'UX Collective', url: 'https://uxdesign.cc', desc: 'Publicação com conteúdo de UX e produto.' },
+      { nome: 'Designer Hangout', url: 'https://www.designerhangout.co', desc: 'Comunidade global de UX.' },
+    ],
+  },
+  educador: {
+    livros: [
+      { nome: 'Make It Stick', autor: 'Brown, Roediger & McDaniel', desc: 'Ciência do aprendizado eficaz.' },
+      { nome: 'Teaching Tech Together', autor: 'Greg Wilson', desc: 'Guia definitivo para ensinar tecnologia.' },
+      { nome: 'The Courage to Teach', autor: 'Parker Palmer', desc: 'Sobre identidade no ato de ensinar.' },
+    ],
+    sites: [
+      { nome: 'Teaching Tech Together', url: 'https://teachtogether.tech', desc: 'Livro e recursos gratuitos de didática tech.' },
+      { nome: 'Carpentries', url: 'https://carpentries.org', desc: 'Metodologia aberta para ensino de programação.' },
+    ],
+    comunidades: [
+      { nome: 'CodeNewbie', url: 'https://codenewbie.org', desc: 'Comunidade para iniciantes em programação.' },
+      { nome: 'Dev.to', url: 'https://dev.to', desc: 'Espaço para ensinar escrevendo conteúdo.' },
+    ],
+  },
+  infra_cloud: {
+    livros: [
+      { nome: 'The Phoenix Project', autor: 'Kim, Behr & Spafford', desc: 'Conceitos de DevOps em narrativa.' },
+      { nome: 'Site Reliability Engineering', autor: 'Google', desc: 'Como operar sistemas em produção.' },
+      { nome: 'Linux Command Line', autor: 'William Shotts', desc: 'Guia completo de linha de comando Linux.' },
+    ],
+    sites: [
+      { nome: 'Linux Journey', url: 'https://linuxjourney.com', desc: 'Linux interativo gratuito.' },
+      { nome: 'Cloud Native Landscape', url: 'https://landscape.cncf.io', desc: 'Mapa do ecossistema cloud native.' },
+      { nome: 'AWS Skill Builder', url: 'https://skillbuilder.aws', desc: 'Cursos oficiais gratuitos da AWS.' },
+    ],
+    comunidades: [
+      { nome: 'DevOps Subreddit', url: 'https://reddit.com/r/devops', desc: 'Discussões de infraestrutura e DevOps.' },
+      { nome: 'Hacker News', url: 'https://news.ycombinator.com', desc: 'Notícias técnicas de sistemas e infra.' },
+    ],
+  },
+  transicao: {
+    livros: [
+      { nome: 'So Good They Cannot Ignore You', autor: 'Cal Newport', desc: 'Carreira por competência, não por paixão.' },
+      { nome: 'The First 90 Days', autor: 'Michael Watkins', desc: 'Como entrar em um novo papel com impacto.' },
+      { nome: 'Designing Your Life', autor: 'Burnett & Evans', desc: 'Metodologia para redesenhar carreira.' },
+    ],
+    sites: [
+      { nome: 'Levels.fyi', url: 'https://levels.fyi', desc: 'Faixas salariais reais em tech.' },
+      { nome: 'Glassdoor', url: 'https://glassdoor.com', desc: 'Avaliações e salários por empresa.' },
+    ],
+    comunidades: [
+      { nome: 'cscareerquestions', url: 'https://reddit.com/r/cscareerquestions', desc: 'Relatos reais de transição para tech.' },
+      { nome: 'Women in Tech Slack', url: 'https://witchat.github.io', desc: 'Rede de apoio para mulheres em tech.' },
+    ],
+  },
+  repensar: {
+    livros: [
+      { nome: 'Thinking, Fast and Slow', autor: 'Daniel Kahneman', desc: 'Como tomamos decisões e vieses.' },
+      { nome: 'Range', autor: 'David Epstein', desc: 'Por que generalistas também triunfam.' },
+    ],
+    sites: [
+      { nome: '80,000 Hours', url: 'https://80000hours.org', desc: 'Escolha de carreira com impacto real.' },
+      { nome: 'CanalTech Carreiras', url: 'https://canaltech.com.br/carreira', desc: 'Contexto brasileiro de mercado tech.' },
+    ],
+    comunidades: [
+      { nome: 'r/brdev', url: 'https://reddit.com/r/brdev', desc: 'Comunidade brasileira com relatos de carreira.' },
+    ],
+  },
+};
+
+const GLOSSARIO = [
+  { id:'api', termo:'API', fonetico:'éi-pi-áj', categoria:'back-end', curta:'Uma ponte entre dois programas que permite que eles conversem.', longa:'API significa Application Programming Interface. É um contrato que define como dois sistemas trocam informações.', exemplo:'Você está no iFood. Ao pagar, o app chama a API do banco e recebe aprovação.', relacionados:['backend','deploy','servidor'] },
+  { id:'backend', termo:'Back-end', fonetico:'béki-end', categoria:'geral', curta:'A parte do sistema que roda no servidor, invisível para o usuário.', longa:'Back-end é tudo que acontece por baixo dos panos: servidor, banco de dados e regras de negócio.', exemplo:'Login do Instagram valida credenciais no back-end antes de liberar acesso.', relacionados:['frontend','api','banco-de-dados','servidor'] },
+  { id:'frontend', termo:'Front-end', fonetico:'frónti-end', categoria:'geral', curta:'A parte visual do sistema — tudo que o usuário vê e clica.', longa:'Front-end é a interface com a qual o usuário interage.', exemplo:'Feed, botão de curtir e caixa de texto são front-end.', relacionados:['backend','html','css','javascript'] },
+  { id:'deploy', termo:'Deploy', fonetico:'di-plói', categoria:'geral', curta:'Publicar uma nova versão para uso real.', longa:'Deploy é colocar no servidor o código que estava local.', exemplo:'Após corrigir bug, você publica e todos passam a ver a correção.', relacionados:['servidor','ci-cd','versionamento'] },
+  { id:'servidor', termo:'Servidor', fonetico:'ser-vi-dór', categoria:'infra', curta:'Computador ligado 24h para responder pedidos.', longa:'Servidor é máquina física ou virtual que recebe requisições e responde com dados.', exemplo:'Ao abrir um site, o navegador pede arquivos para um servidor.', relacionados:['backend','deploy','cloud','infra'] },
+  { id:'banco-de-dados', termo:'Banco de dados', fonetico:'', categoria:'back-end', curta:'Onde o sistema guarda informações de forma organizada.', longa:'Banco de dados armazena, organiza e recupera dados com eficiência.', exemplo:'Conta do Spotify e playlists ficam em banco de dados.', relacionados:['backend','sql','api'] },
+  { id:'framework', termo:'Framework', fonetico:'fréimi-uórki', categoria:'geral', curta:'Conjunto de ferramentas e convenções para acelerar desenvolvimento.', longa:'Framework define estrutura da aplicação e guia sua arquitetura.', exemplo:'Com Next.js, rotas e estrutura base já vêm prontas.', relacionados:['frontend','backend','biblioteca'] },
+  { id:'biblioteca', termo:'Biblioteca (lib)', fonetico:'', categoria:'geral', curta:'Código pronto para resolver problema específico.', longa:'Biblioteca é importada quando você precisa de uma função específica.', exemplo:'date-fns evita recriar lógica complexa de datas.', relacionados:['framework','dependencia','npm'] },
+  { id:'versionamento', termo:'Controle de versão (Git)', fonetico:'', categoria:'geral', curta:'Histórico de mudanças do código ao longo do tempo.', longa:'Controle de versão permite comparar, restaurar e colaborar com segurança.', exemplo:'Git ajuda a voltar alteração que quebrou sistema.', relacionados:['github','deploy','colaboracao'] },
+  { id:'open-source', termo:'Open source', fonetico:'ópen-sórs', categoria:'geral', curta:'Software de código público que permite contribuição.', longa:'Open source disponibiliza o código para estudar, usar e modificar.', exemplo:'Linux, Python e React são open source.', relacionados:['github','licenca','comunidade'] },
+  { id:'cloud', termo:'Cloud (nuvem)', fonetico:'cláudi', categoria:'infra', curta:'Uso de servidores e recursos pela internet sob demanda.', longa:'Cloud aluga infraestrutura de AWS, GCP ou Azure com pagamento por uso.', exemplo:'Seu app cresce rápido e você escala em minutos na cloud.', relacionados:['servidor','deploy','devops','infra'] },
+  { id:'devops', termo:'DevOps', fonetico:'dévi-ops', categoria:'infra', curta:'Práticas que unem desenvolvimento e operações.', longa:'DevOps integra criação, deploy e operação com automação e colaboração.', exemplo:'Equipe publica e monitora junto, sem muro entre dev e ops.', relacionados:['deploy','cloud','ci-cd','infra'] },
+  { id:'ci-cd', termo:'CI/CD', fonetico:'si-áj / si-di', categoria:'infra', curta:'Automação de testes e publicação a cada mudança.', longa:'CI integra e testa; CD entrega/deploy contínuo automaticamente.', exemplo:'Commit no GitHub roda testes e publica se tudo passar.', relacionados:['deploy','devops','versionamento'] },
+  { id:'html', termo:'HTML', fonetico:'éitch-ti-émi-éli', categoria:'front-end', curta:'Linguagem de estrutura do conteúdo web.', longa:'HTML define títulos, parágrafos, links, formulários e semântica.', exemplo:'Cada elemento visível da página nasce de uma tag HTML.', relacionados:['css','javascript','frontend'] },
+  { id:'css', termo:'CSS', fonetico:'si-és-és', categoria:'front-end', curta:'Linguagem de aparência visual da web.', longa:'CSS controla layout, tipografia, cores, animações e responsividade.', exemplo:'Fundo escuro e botões roxos deste site são CSS.', relacionados:['html','javascript','frontend'] },
+  { id:'javascript', termo:'JavaScript', fonetico:'djéva-escrípt', categoria:'front-end', curta:'Linguagem que adiciona comportamento e interatividade.', longa:'JavaScript controla eventos, estado, integração com APIs e updates dinâmicos.', exemplo:'O quiz deste site funciona por JavaScript.', relacionados:['html','css','frontend','nodejs'] },
+  { id:'sql', termo:'SQL', fonetico:'és-quiú-éli', categoria:'back-end', curta:'Linguagem para consultar e manipular dados relacionais.', longa:'SQL busca, insere e relaciona dados em bancos de dados.', exemplo:'SELECT COUNT(*) para contar usuários de hoje.', relacionados:['banco-de-dados','backend','dados'] },
+  { id:'algoritmo', termo:'Algoritmo', fonetico:'al-go-rít-mo', categoria:'fundamentos', curta:'Sequência finita de passos para resolver problema.', longa:'Algoritmos definem entrada, processo e saída previsível.', exemplo:'Encontrar maior valor de lista comparando item por item.', relacionados:['logica','estrutura-de-dados','complexidade'] },
+  { id:'debug', termo:'Debug (depuração)', fonetico:'di-bágui', categoria:'geral', curta:'Processo de encontrar e corrigir erros.', longa:'Debug é investigar comportamento inesperado e isolar causa raiz.', exemplo:'Valor NaN após soma pode ser string em vez de número.', relacionados:['algoritmo','logica','terminal'] },
+  { id:'ux', termo:'UX (User Experience)', fonetico:'iú-éks', categoria:'design', curta:'Experiência completa de uso de um produto.', longa:'UX envolve pesquisa, usabilidade, prototipação e melhoria contínua.', exemplo:'Google Maps intuitivo é resultado de forte trabalho de UX.', relacionados:['frontend','design','pesquisa','produto'] },
+];
+
+const MITOS = [
+  { id:'m1', afirmacao:'Programador ganha 30k por mês logo de cara', veredicto:'mito', curta:'A maioria dos iniciantes ganha entre R$1.500 e R$4.000 nos primeiros anos.', explicacao:'Salários muito altos existem, mas no topo da carreira e contexto internacional.', fonte:'State of JS, Stack Overflow Developer Survey e Glassdoor Brasil.' },
+  { id:'m2', afirmacao:'Qualquer um aprende a programar em 3 meses', veredicto:'mito', curta:'Aprende o básico. Mercado real leva de 1 a 3 anos.', explicacao:'Sintaxe inicial não equivale a competência profissional para resolver problemas novos.', fonte:null },
+  { id:'m3', afirmacao:'Não precisa de matemática para programar', veredicto:'mito', curta:'Você usa matemática o tempo todo, mesmo sem perceber.', explicacao:'Lógica, conjuntos, análise de complexidade e estatística aparecem no cotidiano.', fonte:null },
+  { id:'m4', afirmacao:'Faculdade de TI é perda de tempo', veredicto:'depende', curta:'Faculdade boa ajuda muito; ruim pode ser perda de tempo.', explicacao:'Qualidade da instituição define o retorno prático da formação.', fonte:null },
+  { id:'m5', afirmacao:'IA vai substituir programadores em breve', veredicto:'parcial', curta:'Substitui tarefas mecânicas, não o pensamento técnico complexo.', explicacao:'Quem entende diagnóstico, arquitetura e contexto de negócio continua essencial.', fonte:null },
+  { id:'m6', afirmacao:'É preciso ter computador caro para aprender a programar', veredicto:'mito', curta:'Notebook básico já atende bem o início por anos.', explicacao:'Web, Python e banco de dados rodam com hardware modesto.', fonte:null },
+  { id:'m7', afirmacao:'Inglês fluente é obrigatório para trabalhar em TI', veredicto:'depende', curta:'Leitura técnica sim; conversação depende da empresa.', explicacao:'Mercado internacional exige fluência, mercado local pode não exigir.', fonte:null },
+  { id:'m8', afirmacao:'Front-end é mais fácil que back-end', veredicto:'mito', curta:'São difíceis de formas diferentes.', explicacao:'Front lida com UX/acessibilidade/performance visual; back com dados/segurança/escala.', fonte:null },
+  { id:'m9', afirmacao:'Certificações valem mais que experiência prática', veredicto:'mito', curta:'Certificação ajuda no RH; prática define contratação técnica.', explicacao:'Projetos reais e código autoral pesam mais para equipes técnicas.', fonte:null },
+  { id:'m10', afirmacao:'Programar é trabalho solitário', veredicto:'mito', curta:'Desenvolvimento profissional é altamente colaborativo.', explicacao:'Code review, alinhamentos e comunicação ocupam grande parte do dia.', fonte:null },
+  { id:'m11', afirmacao:'Você precisa saber tudo antes de aplicar para vagas', veredicto:'mito', curta:'Requisitos de vaga são desejos; não checklist absoluto.', explicacao:'Candidatos com base sólida e boa evolução entram sem 100% dos itens.', fonte:null },
+  { id:'m12', afirmacao:'Trabalho remoto em TI é fácil de conseguir logo no início', veredicto:'parcial', curta:'Existe, mas exige autonomia acima da média para iniciantes.', explicacao:'Mercado remoto é competitivo e normalmente pede maturidade técnica.', fonte:null },
+];
+
 // ============================================================
 // NAVIGATION
 // ============================================================
-function navigate(screen) {
-  const prev = document.getElementById('screen-' + state.currentScreen);
-  if (prev) { prev.classList.remove('active'); }
+function navigate(screen) { go(screen, 'fade'); }
+function go(destino, forceDirection = null) {
+  const atual = state.currentScreen;
+  const idxAtual = SCREEN_ORDER.indexOf(atual);
+  const idxDest = SCREEN_ORDER.indexOf(destino);
+  let animClass = 'enter-fade';
+  if (forceDirection === 'forward' || (forceDirection === null && idxDest > idxAtual)) animClass = 'enter-right';
+  if (forceDirection === 'back' || (forceDirection === null && idxDest < idxAtual)) animClass = 'enter-left';
 
-  state.currentScreen = screen;
-
-  const next = document.getElementById('screen-' + screen);
-  if (next) {
-    next.style.opacity = '0';
-    next.classList.add('active');
-    requestAnimationFrame(() => {
-      requestAnimationFrame(() => { next.style.opacity = '1'; });
-    });
-  }
-
+  document.querySelectorAll('.screen').forEach(el => el.classList.remove('active', 'enter-right', 'enter-left', 'enter-fade'));
+  const next = document.getElementById('screen-' + destino);
+  if (!next) return;
+  next.classList.add('active', animClass);
+  state.currentScreen = destino;
   document.querySelectorAll('.nav-tab[data-screen]').forEach(t => {
-    t.classList.toggle('active', t.dataset.screen === screen);
-    t.setAttribute('aria-selected', t.dataset.screen === screen ? 'true' : 'false');
+    t.classList.toggle('active', t.dataset.screen === destino);
+    t.setAttribute('aria-selected', t.dataset.screen === destino ? 'true' : 'false');
   });
-
-  if (screen === 'quiz') initQuiz();
-  if (screen === 'roadmap') renderRoadmap();
-  if (screen === 'faq') renderFaq();
-
+  if (destino === 'quiz') renderQuizEntry();
+  if (destino === 'roadmap') renderRoadmap();
+  if (destino === 'faq') renderFaq();
+  if (destino === 'glossario') renderGlossario();
+  if (destino === 'mitos') renderMitos();
   window.scrollTo(0, 0);
 }
 
@@ -1528,11 +2082,84 @@ function toggleMobileMenu() {
 // ============================================================
 // QUIZ
 // ============================================================
+function salvarProgresso() {
+  sessionStorage.setItem('quiz_progress', JSON.stringify({
+    currentQuestion: state.currentQuestion,
+    answers: state.answers,
+    timestamp: Date.now(),
+  }));
+}
+
+function restaurarProgresso() {
+  try {
+    const salvo = sessionStorage.getItem('quiz_progress');
+    if (!salvo) return false;
+    const data = JSON.parse(salvo);
+    if (Date.now() - data.timestamp > 7200000) {
+      sessionStorage.removeItem('quiz_progress');
+      return false;
+    }
+    return data;
+  } catch {
+    return false;
+  }
+}
+
+function limparProgresso() { sessionStorage.removeItem('quiz_progress'); }
+
+function recomputeScoresFromAnswers() {
+  state.scores = {};
+  Object.entries(state.answers).forEach(([qid, idx]) => {
+    const q = QUESTIONS.find(item => item.id === qid);
+    if (!q || q.options[idx] === undefined) return;
+    Object.entries(q.options[idx].scores).forEach(([k, v]) => {
+      state.scores[k] = (state.scores[k] || 0) + v;
+    });
+  });
+}
+
+function renderQuizEntry() {
+  const saved = restaurarProgresso();
+  if (!saved) return initQuiz();
+  const quizCard = document.getElementById('quizCard');
+  document.getElementById('btnBack').style.visibility = 'hidden';
+  document.getElementById('btnNext').style.visibility = 'hidden';
+  document.getElementById('quizCounter').textContent = '';
+  quizCard.innerHTML = `
+    <div class="resume-card">
+      <div class="resume-card-title">Você tem um diagnóstico em andamento</div>
+      <div class="resume-card-copy">Você estava na pergunta ${Math.min((saved.currentQuestion || 0) + 1, QUESTIONS.length)} de ${QUESTIONS.length}. Quer continuar de onde parou?</div>
+      <div style="display:flex;gap:8px;">
+        <button class="btn btn-primary" onclick="continuarQuiz()">Continuar</button>
+        <button class="btn btn-ghost" onclick="recomecarQuiz()">Começar do zero</button>
+      </div>
+    </div>
+  `;
+}
+
+function continuarQuiz() {
+  const saved = restaurarProgresso();
+  if (!saved) return initQuiz();
+  state.currentQuestion = Math.max(0, Math.min(saved.currentQuestion || 0, QUESTIONS.length - 1));
+  state.answers = saved.answers || {};
+  recomputeScoresFromAnswers();
+  document.getElementById('btnBack').style.visibility = 'visible';
+  document.getElementById('btnNext').style.visibility = 'visible';
+  renderQuestion();
+}
+
+function recomecarQuiz() {
+  limparProgresso();
+  initQuiz();
+}
+
 function initQuiz() {
   state.currentQuestion = 0;
   state.answers = {};
   state.scores = {};
   state.profileKey = null;
+  document.getElementById('btnBack').style.visibility = 'visible';
+  document.getElementById('btnNext').style.visibility = 'visible';
   renderQuestion();
 }
 
@@ -1577,6 +2204,7 @@ function renderQuestion() {
 function selectOption(idx) {
   const q = QUESTIONS[state.currentQuestion];
   state.answers[q.id] = idx;
+  salvarProgresso();
   document.getElementById('btnNext').disabled = false;
   document.querySelectorAll('.quiz-option').forEach((el, i) => {
     el.classList.toggle('selected', i === idx);
@@ -1594,16 +2222,16 @@ function quizNext() {
 
   if (state.currentQuestion < QUESTIONS.length - 1) {
     state.currentQuestion++;
+    salvarProgresso();
     renderQuestion();
   } else {
     state.profileKey = calcularPerfil(state.scores);
-    navigate('result');
-    renderResult();
+    showResult(state.scores, state.profileKey);
   }
 }
 
 function quizBack() {
-  if (state.currentQuestion === 0) return;
+  if (state.currentQuestion === 0) return go('home', 'back');
   const prevQ = QUESTIONS[state.currentQuestion];
   const prevOpt = prevQ.options[state.answers[prevQ.id]];
   if (prevOpt) {
@@ -1614,6 +2242,7 @@ function quizBack() {
   }
   delete state.answers[prevQ.id];
   state.currentQuestion--;
+  salvarProgresso();
   renderQuestion();
 }
 
@@ -1637,67 +2266,113 @@ function calcularPerfil(scores) {
 // ============================================================
 // RESULT
 // ============================================================
-function renderResult() {
-  const profile = PROFILES[state.profileKey];
-  const s = state.scores;
-  const get = k => s[k] || 0;
+function encodeResult(scores, profileKey) {
+  const payload = JSON.stringify({ s: scores, p: profileKey, v: 1 });
+  return btoa(unescape(encodeURIComponent(payload)));
+}
 
-  // Compatibility bars (0-100)
-  const maxLogica = 14;
-  const maxCriativo = 10;
-  const maxSocial = 12;
-  const maxPratico = 10;
+function decodeResult(hash) {
+  try {
+    const encoded = hash.replace('#result=', '');
+    const decoded = decodeURIComponent(escape(atob(encoded)));
+    return JSON.parse(decoded);
+  } catch {
+    return null;
+  }
+}
+
+function getAreaScores(scores) {
+  const get = k => scores[k] || 0;
+  return [
+    ['front', get('front') + get('criativo') + get('ux')],
+    ['back', get('back') + get('logica') + get('analitico')],
+    ['dados', get('dados') + get('analitico') + get('logica')],
+    ['ux', get('ux') + get('criativo') + get('social')],
+    ['infra', get('infra') + get('back') + get('logica')],
+    ['qa', get('qa') + get('analitico') + get('pratico')],
+    ['ensino', get('ensino') + get('social') + get('vocacao')],
+  ].sort((a, b) => b[1] - a[1]).slice(0, 4);
+}
+
+function gerarTextoResultado(profileKey, areasSorted, shareUrl) {
+  const prof = PROFILES[profileKey];
+  const emojisFit = ['🥇', '🥈', '🥉', ''];
+  const areasTexto = areasSorted.map(([k], i) => `${emojisFit[i] || '-'} ${AREAS_INFO[k].name} — ${AREAS_INFO[k].desc}`).join('\n- ');
+  const passosTexto = prof.steps.map(s => `- ${s}`).join('\n');
+  return `# Meu resultado no devguia.dev\n\n**Perfil:** ${prof.name} ${prof.icon}\n**${prof.sub}**\n\n${prof.desc}\n\n## Compatibilidade por área\n- ${areasTexto}\n\n## Próximos passos recomendados\n${passosTexto}\n\n---\nFaça o seu diagnóstico gratuito: ${shareUrl}`;
+}
+
+function copyText(text) {
+  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
+  return new Promise((resolve, reject) => {
+    try {
+      const ta = document.createElement('textarea');
+      ta.value = text;
+      document.body.appendChild(ta);
+      ta.select();
+      document.execCommand('copy');
+      document.body.removeChild(ta);
+      resolve();
+    } catch (e) { reject(e); }
+  });
+}
+
+function trackDiagnostico(profileKey) {
+  if (sessionStorage.getItem('diagnostico_tracked')) return;
+  if (window.goatcounter && window.goatcounter.count) {
+    window.goatcounter.count({
+      path: 'diagnostico-completo',
+      title: 'Diagnóstico completo — perfil: ' + profileKey,
+      event: true,
+    });
+    sessionStorage.setItem('diagnostico_tracked', '1');
+  }
+}
+
+function renderRecursos(profile, activeTab = 'livros') {
+  const data = RECURSOS[profile.key] || { livros: [], sites: [], comunidades: [] };
+  const tabs = [{ key: 'livros', label: '📚 Livros' }, { key: 'sites', label: '🌐 Sites' }, { key: 'comunidades', label: '👥 Comunidades' }];
+  const tabsHtml = tabs.map(t => `<button class="recursos-tab${activeTab === t.key ? ' active' : ''}" onclick="setRecursosTab('${t.key}')">${t.label}</button>`).join('');
+  const cards = (data[activeTab] || []).map(item => {
+    if (item.url) return `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="recurso-card"><div class="recurso-nome">${item.nome}</div>${item.autor ? `<div class="recurso-autor">${item.autor}</div>` : ''}<div class="recurso-desc">${item.desc}</div></a>`;
+    return `<div class="recurso-card"><div class="recurso-nome">${item.nome}</div>${item.autor ? `<div class="recurso-autor">${item.autor}</div>` : ''}<div class="recurso-desc">${item.desc}</div></div>`;
+  }).join('');
+  return `<div class="recursos-section"><div class="recursos-header"><span class="recursos-title">Recursos para o seu perfil</span><div class="recursos-tabs">${tabsHtml}</div></div><div class="recursos-body">${cards}</div></div>`;
+}
+
+function showResult(scores, profileKey, options = {}) {
+  limparProgresso();
+  go('result', options.fromShare ? 'fade' : 'forward');
+  state.scores = scores;
+  state.profileKey = profileKey;
+  state.recursosTab = state.recursosTab || 'livros';
+  const profile = PROFILES[profileKey];
+  const get = k => scores[k] || 0;
+  const encoded = encodeResult(scores, profileKey);
+  const shareUrl = window.location.origin + window.location.pathname + '#result=' + encoded;
+  history.replaceState(null, '', '#result=' + encoded);
+  state.currentShareUrl = shareUrl;
+  state.areaScores = getAreaScores(scores);
+  const perfilAnterior = options.fromShare ? null : sessionStorage.getItem('ultimo_perfil');
+  if (!options.fromShare) sessionStorage.setItem('ultimo_perfil', profileKey);
+  const isRefazendo = !!perfilAnterior;
+  const mesmoPeril = perfilAnterior === profileKey;
+  trackDiagnostico(profileKey);
+
   const bars = [
-    { label: 'Raciocínio lógico',      val: Math.min(100, Math.round(((get('logica') + get('analitico')) / maxLogica) * 100)), color: 'var(--blue)' },
-    { label: 'Criatividade visual',     val: Math.min(100, Math.round(((get('criativo') + get('ux')) / maxCriativo) * 100)),    color: 'var(--pink)' },
-    { label: 'Perfil social / ensino',  val: Math.min(100, Math.round(((get('social') + get('ensino')) / maxSocial) * 100)),    color: 'var(--teal)' },
-    { label: 'Orientação prática',      val: Math.min(100, Math.round(((get('pratico') + get('autodidata')) / maxPratico) * 100)), color: 'var(--amber)' },
+    { label: 'Raciocínio lógico', val: Math.min(100, Math.round(((get('logica') + get('analitico')) / 14) * 100)), color: 'var(--blue)' },
+    { label: 'Criatividade visual', val: Math.min(100, Math.round(((get('criativo') + get('ux')) / 10) * 100)), color: 'var(--pink)' },
+    { label: 'Perfil social / ensino', val: Math.min(100, Math.round(((get('social') + get('ensino')) / 12) * 100)), color: 'var(--teal)' },
+    { label: 'Orientação prática', val: Math.min(100, Math.round(((get('pratico') + get('autodidata')) / 10) * 100)), color: 'var(--amber)' },
   ];
-
-  // Area fit scores
-  const areaDims = [
-    { name: 'Front-end',   techs: 'HTML/CSS, JS, React, Vue',       dims: ['front','criativo','ux'] },
-    { name: 'Back-end',    techs: 'Python, Node, Java, Go',         dims: ['back','logica','analitico'] },
-    { name: 'Dados',       techs: 'SQL, Python, BI, Machine Learning', dims: ['dados','analitico','logica'] },
-    { name: 'UX/Design',   techs: 'Figma, pesquisa, prototipagem',  dims: ['ux','criativo','social'] },
-    { name: 'Infra/Cloud', techs: 'Linux, Docker, Kubernetes, Cloud',dims: ['infra','back','logica'] },
-    { name: 'QA',          techs: 'Testes, automação, Cypress',     dims: ['qa','analitico','pratico'] },
-    { name: 'Dados/ML',    techs: 'Pandas, sklearn, estatística',   dims: ['dados','logica','analitico'] },
-    { name: 'Educação Tech',techs: 'Ensino, didática, conteúdo',    dims: ['ensino','social','vocacao'] },
-  ];
-
-  const areaScores = areaDims.map(a => ({
-    ...a,
-    score: a.dims.reduce((acc, d) => acc + get(d), 0)
-  })).sort((a,b) => b.score - a.score).slice(0, 4);
-
-  const maxScore = areaScores[0].score || 1;
-
-  const barsHtml = bars.map((b, i) => `
-    <div class="compat-bar-item">
-      <div class="compat-bar-label">
-        <span>${b.label}</span>
-        <span>${b.val}%</span>
-      </div>
-      <div class="compat-bar-track">
-        <div class="compat-bar-fill" id="bar${i}" style="background:${b.color}" data-val="${b.val}"></div>
-      </div>
-    </div>
-  `).join('');
-
-  const fitLabels = ['Melhor fit','Bom fit','Fit razoável','Fit razoável'];
-  const fitClasses = ['fit-best','fit-good','fit-ok','fit-ok'];
-
-  const areasHtml = areaScores.map((a, i) => `
-    <div class="area-card${i === 0 ? ' top' : ''}">
-      <h4>${a.name}</h4>
-      <p>${a.techs}</p>
-      <span class="fit-badge ${fitClasses[i]}">${fitLabels[i]}</span>
-    </div>
-  `).join('');
-
+  const fitLabels = ['Melhor fit', 'Bom fit', 'Fit razoável', 'Fit razoável'];
+  const fitClasses = ['fit-best', 'fit-good', 'fit-ok', 'fit-ok'];
+  const barsHtml = bars.map((b, i) => `<div class="compat-bar-item"><div class="compat-bar-label"><span>${b.label}</span><span>${b.val}%</span></div><div class="compat-bar-track"><div class="compat-bar-fill" id="bar${i}" style="background:${b.color}" data-val="${b.val}"></div></div></div>`).join('');
+  const areasHtml = state.areaScores.map(([k], i) => `<div class="area-card${i === 0 ? ' top' : ''}"><h4>${AREAS_INFO[k].name}</h4><p>${AREAS_INFO[k].desc}</p><span class="fit-badge ${fitClasses[i]}">${fitLabels[i]}</span></div>`).join('');
   const attentionHtml = profile.attention.map(a => `<li>${a}</li>`).join('');
-  const stepsHtml = profile.steps.map(s => `<li>${s}</li>`).join('');
+  const stepsHtml = profile.steps.map(st => `<li>${st}</li>`).join('');
+  const shareBanner = options.fromShare ? `<div style="margin-top:8px;background:var(--amber-bg);border:1px solid var(--amber-dim);border-radius:8px;padding:8px 12px;color:var(--amber);font-size:12px;">👁 Você está vendo o resultado de outra pessoa — <button class="btn-inline" style="color:var(--amber)" onclick="go('quiz', 'forward')">fazer o seu</button></div>` : '';
+  const revisitMsg = isRefazendo ? (mesmoPeril ? `<div style="background: var(--teal-bg); border: 1px solid var(--teal-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--teal); margin-top:8px;">Você respondeu diferente desta vez — mas chegou ao mesmo resultado. Isso é um bom sinal de consistência.</div>` : `<div style="background: var(--amber-bg); border: 1px solid var(--amber-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--amber); margin-top:8px;">Perfil diferente desta vez! Antes você era <strong style="color: var(--amber)">${PROFILES[perfilAnterior]?.name || 'outro perfil'}</strong>. Isso pode indicar que você está pensando diferente — ou que respondeu com mais honestidade.</div>`) : '';
 
   document.getElementById('resultContent').innerHTML = `
     <div class="card" style="margin-bottom:16px">
@@ -1705,46 +2380,58 @@ function renderResult() {
         <div class="result-icon" aria-hidden="true">${profile.icon}</div>
         <div>
           <div class="result-title" style="color:${profile.color}">${profile.name}</div>
-          <div class="result-subtitle">Seu perfil vocacional</div>
+          <div class="result-subtitle">${profile.sub}</div>
+          ${shareBanner}
+          ${revisitMsg}
         </div>
       </div>
       <div class="result-desc">${profile.desc}</div>
-
       <h3 style="font-size:14px;margin-bottom:16px;color:var(--text2)">Compatibilidade por dimensão</h3>
       <div class="compat-bars">${barsHtml}</div>
-
       <h3 style="font-size:14px;margin-bottom:12px;color:var(--text2)">Áreas de maior fit</h3>
       <div class="areas-grid">${areasHtml}</div>
     </div>
-
-    <div class="result-attention">
-      <h3>⚠ Pontos de atenção</h3>
-      <ul>${attentionHtml}</ul>
-    </div>
-
-    <div class="result-steps">
-      <h3>✓ Próximos passos</h3>
-      <ul>${stepsHtml}</ul>
-    </div>
-
+    <div class="result-attention"><h3>⚠ Pontos de atenção</h3><ul>${attentionHtml}</ul></div>
+    <div class="result-steps"><h3>✓ Próximos passos</h3><ul>${stepsHtml}</ul></div>
+    ${renderRecursos(profile, state.recursosTab)}
     <div class="result-ctas">
-      <button class="btn btn-primary" onclick="navigate('roadmap')">Ver Roadmap</button>
-      <button class="btn btn-ghost" onclick="navigate('faq')">Ver FAQ</button>
-      <button class="btn btn-ghost" onclick="navigate('quiz')">Refazer o diagnóstico</button>
+      <button class="btn btn-primary" onclick="go('roadmap', 'forward')">Ver Roadmap</button>
+      <button class="btn btn-ghost" id="copyLinkBtn" onclick="copiarLink()">⛓ Copiar link</button>
+      <button class="btn btn-ghost" id="copyResultBtn" onclick="copiarResultado()">📋 Copiar resultado</button>
+      <button class="btn btn-ghost" onclick="go('quiz', 'back')">Refazer o diagnóstico</button>
     </div>
   `;
-
-  // Animate bars after paint
   requestAnimationFrame(() => {
     requestAnimationFrame(() => {
       bars.forEach((b, i) => {
         const el = document.getElementById('bar' + i);
-        if (el) {
-          el.style.transition = `width 0.8s ease ${i * 100}ms`;
-          el.style.width = b.val + '%';
-        }
+        if (el) { el.style.transition = `width 0.8s ease ${i * 100}ms`; el.style.width = b.val + '%'; }
       });
     });
+  });
+}
+
+function setRecursosTab(tab) {
+  state.recursosTab = tab;
+  showResult(state.scores, state.profileKey, { fromShare: window.location.hash.startsWith('#result=') });
+}
+
+function copiarLink() {
+  const btn = document.getElementById('copyLinkBtn');
+  copyText(state.currentShareUrl).then(() => {
+    const prev = btn.textContent;
+    btn.textContent = 'Link copiado!';
+    setTimeout(() => { btn.textContent = prev; }, 2000);
+  });
+}
+
+function copiarResultado() {
+  const btn = document.getElementById('copyResultBtn');
+  const texto = gerarTextoResultado(state.profileKey, state.areaScores, state.currentShareUrl);
+  copyText(texto).then(() => {
+    const prev = btn.textContent;
+    btn.textContent = 'Copiado!';
+    setTimeout(() => { btn.textContent = prev; }, 2000);
   });
 }
 
@@ -1802,6 +2489,35 @@ function renderFaq() {
   filterFaq();
 }
 
+function linkGlossario(texto) {
+  const termos = {
+    API: 'api',
+    'back-end': 'backend',
+    'front-end': 'frontend',
+    deploy: 'deploy',
+    servidor: 'servidor',
+    'banco de dados': 'banco-de-dados',
+    framework: 'framework',
+    'open source': 'open-source',
+    cloud: 'cloud',
+    DevOps: 'devops',
+    'CI/CD': 'ci-cd',
+    HTML: 'html',
+    CSS: 'css',
+    JavaScript: 'javascript',
+    SQL: 'sql',
+    algoritmo: 'algoritmo',
+    debug: 'debug',
+    UX: 'ux',
+  };
+  let resultado = texto;
+  Object.entries(termos).forEach(([termo, id]) => {
+    const regex = new RegExp(`\\b${termo}\\b`, 'g');
+    resultado = resultado.replace(regex, `<button class="glossario-link" onclick="abrirGlossario('${id}')" title="Ver no glossário">${termo}</button>`);
+  });
+  return resultado;
+}
+
 function filterFaq() {
   const search = (document.getElementById('faqSearch')?.value || '').toLowerCase();
   const cat = state.faqFilter.cat;
@@ -1831,12 +2547,12 @@ function filterFaq() {
       >
         <span class="faq-q-text">${f.q}</span>
         <span class="faq-q-right">
-          <span class="faq-cat-badge">${f.cat}</span>
+          <span class="faq-cat-badge faq-badge" data-tooltip="${CAT_TOOLTIPS[f.cat] || ''}">${f.cat}</span>
           <span class="faq-chevron" aria-hidden="true">▾</span>
         </span>
       </button>
       <div class="faq-body" id="faqbody-${f.id}" role="region">
-        <div class="faq-answer">${f.answer}</div>
+        <div class="faq-answer">${linkGlossario(f.answer)}</div>
       </div>
     </div>
   `).join('');
@@ -1844,7 +2560,7 @@ function filterFaq() {
 
 function setFaqCat(cat) {
   state.faqFilter.cat = cat;
-  document.querySelectorAll('.faq-filter').forEach(b => {
+  document.querySelectorAll('[data-cat]').forEach(b => {
     b.classList.toggle('active', b.dataset.cat === cat);
   });
   filterFaq();
@@ -1871,14 +2587,14 @@ function toggleFaq(id) {
 }
 
 function openFaqItem(faqId) {
-  navigate('faq');
+  go('faq', 'forward');
   state.faqFilter.cat = 'all';
   state.faqFilter.search = '';
 
   setTimeout(() => {
     renderFaq();
 
-    document.querySelectorAll('.faq-filter').forEach(b => {
+    document.querySelectorAll('[data-cat]').forEach(b => {
       b.classList.toggle('active', b.dataset.cat === 'all');
     });
 
@@ -1897,10 +2613,145 @@ function openFaqItem(faqId) {
   }, 50);
 }
 
+function sugerirPergunta() {
+  const titulo = encodeURIComponent('Sugestão de pergunta para o FAQ');
+  const corpo = encodeURIComponent(`## Pergunta sugerida
+
+**Pergunta:** (escreva aqui a pergunta que você quer ver respondida)
+
+**Por que essa pergunta é importante?**
+(explique por que outras pessoas provavelmente têm essa dúvida)
+
+**Você tem uma resposta sugerida?**
+(opcional — pode deixar em branco)
+
+**Categoria:** (fundamentos / ferramentas / linguagens / carreira / educação / mercado)
+
+---
+*Aberto via botão "Sugerir pergunta" no devguia.dev*`);
+  const url = `https://github.com/${GITHUB_REPO}/issues/new?title=${titulo}&body=${corpo}&labels=sugestao-faq`;
+  window.open(url, '_blank', 'noopener,noreferrer');
+}
+
+function setGlossarioCat(cat) {
+  state.glossarioFilter = state.glossarioFilter || { cat: 'all', search: '' };
+  state.glossarioFilter.cat = cat;
+  document.querySelectorAll('[data-gcat]').forEach(b => b.classList.toggle('active', b.dataset.gcat === cat));
+  filterGlossario();
+}
+
+function filterGlossario() {
+  state.glossarioFilter = state.glossarioFilter || { cat: 'all', search: '' };
+  const search = (document.getElementById('glossarySearch')?.value || '').toLowerCase();
+  state.glossarioFilter.search = search;
+  const cat = state.glossarioFilter.cat;
+  const list = document.getElementById('glossarioList');
+  if (!list) return;
+  const items = GLOSSARIO.filter(g => (cat === 'all' || g.categoria === cat) && (!search || `${g.termo} ${g.curta} ${g.longa} ${g.categoria}`.toLowerCase().includes(search)));
+  list.innerHTML = items.map(g => {
+    const isOpen = state.openGlossarioId === g.id;
+    const rel = (g.relacionados || []).map(r => {
+      const alvo = GLOSSARIO.find(x => x.id === r || x.termo.toLowerCase() === r.toLowerCase() || x.termo.toLowerCase().includes(r.toLowerCase()));
+      return alvo ? `<button class="glossario-pill" onclick="abrirGlossario('${alvo.id}')">${alvo.termo}</button>` : '';
+    }).join('');
+    return `<div class="glossario-item${isOpen ? ' open' : ''}" id="gi-${g.id}"><button class="glossario-head" onclick="toggleGlossario('${g.id}')"><div style="font-size:14px;font-weight:700;">${g.termo}</div><div class="mito-curta">${g.curta}</div></button><div class="glossario-body"><div class="glossario-content"><div class="glossario-meta"><span class="faq-cat-badge" style="border-color:${CAT_COLORS[g.categoria] || 'var(--border)'}">${g.categoria}</span>${g.fonetico ? `<span class="glossario-fonetico">${g.fonetico}</span>` : ''}</div><p style="font-size:13px;color:var(--text2);line-height:1.7">${g.longa}</p><div class="glossario-exemplo">${g.exemplo}</div><div class="glossario-pill-wrap">${rel}</div></div></div></div>`;
+  }).join('');
+}
+
+function renderGlossario() { filterGlossario(); }
+function toggleGlossario(id) { state.openGlossarioId = state.openGlossarioId === id ? null : id; renderGlossario(); }
+function abrirGlossario(id) {
+  go('glossario', 'forward');
+  setTimeout(() => {
+    state.openGlossarioId = id;
+    renderGlossario();
+    document.getElementById('gi-' + id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+  }, 80);
+}
+
+function mitoBadge(veredicto) {
+  if (veredicto === 'mito') return ['badge-mito', 'Mito'];
+  if (veredicto === 'verdade') return ['badge-verdade', 'Verdade'];
+  if (veredicto === 'depende') return ['badge-depende', 'Depende'];
+  return ['badge-parcial', 'Parcialmente verdade'];
+}
+function setMitosFilter(filter) {
+  state.mitosFilter = filter;
+  document.querySelectorAll('[data-mito]').forEach(b => b.classList.toggle('active', b.dataset.mito === filter));
+  renderMitos();
+}
+function toggleMito(id) { state.openMitoId = state.openMitoId === id ? null : id; renderMitos(); }
+function compartilharMito(id) {
+  const item = MITOS.find(m => m.id === id);
+  if (!item) return;
+  copyText(`"${item.afirmacao}" — ${item.veredicto}: ${item.curta}. Veja a explicação completa: ${window.location.origin + window.location.pathname}#mitos`);
+}
+function renderMitos() {
+  const list = document.getElementById('mitosList');
+  if (!list) return;
+  const filter = state.mitosFilter || 'all';
+  const items = MITOS.filter(m => filter === 'all' || m.veredicto === filter);
+  list.innerHTML = items.map(m => {
+    const [badgeClass, badgeText] = mitoBadge(m.veredicto);
+    const open = state.openMitoId === m.id;
+    return `<div class="mito-card${open ? ' open' : ''}"><button class="mito-head" onclick="toggleMito('${m.id}')"><span class="${badgeClass}">${badgeText}</span><div style="font-size:16px;font-weight:700;line-height:1.5;">"${m.afirmacao}"</div><div class="mito-curta">${m.curta}</div><div style="margin-top:10px;font-size:12px;color:var(--purple)">▼ Ver explicação completa</div></button><div class="mito-body"><div class="mito-content"><p style="font-size:13px;color:var(--text2);line-height:1.7;padding-top:12px;">${m.explicacao}</p>${m.fonte ? `<div class="mito-fonte">Fonte: ${m.fonte}</div>` : ''}<button class="btn btn-ghost" style="margin-top:10px;" onclick="compartilharMito('${m.id}')">Compartilhar</button></div></div></div>`;
+  }).join('');
+}
+
+async function fetchContador() {
+  try {
+    if (GOATCOUNTER_CODE === 'SEU-CODIGO' || GOATCOUNTER_TOKEN === 'SEU-TOKEN-API') throw new Error('missing');
+    const hoje = new Date().toISOString().split('T')[0];
+    const resp = await fetch(`https://${GOATCOUNTER_CODE}.goatcounter.com/api/v0/stats/hits?start=${hoje}&end=${hoje}&filter=diagnostico-completo`, { headers: { Authorization: `Bearer ${GOATCOUNTER_TOKEN}` } });
+    if (!resp.ok) throw new Error();
+    const data = await resp.json();
+    const total = data.hits?.reduce((a, b) => a + (b.count || 0), 0) || 0;
+    document.getElementById('counter-text').textContent = total > 0 ? `${total} pessoa${total > 1 ? 's' : ''} fez o diagnóstico hoje` : 'Seja o primeiro a fazer o diagnóstico hoje';
+  } catch {
+    document.getElementById('counter-badge').style.display = 'none';
+  }
+}
+
+function toggleEasyRead() {
+  const isActive = document.body.classList.toggle('easy-read');
+  const btn = document.getElementById('easy-read-toggle');
+  btn.textContent = isActive ? 'Aa ✓' : 'Aa';
+  btn.style.borderColor = isActive ? 'var(--purple)' : 'var(--border2)';
+  btn.style.color = isActive ? 'var(--purple)' : 'var(--text2)';
+  sessionStorage.setItem('easy_read', isActive ? '1' : '0');
+}
+
 // ============================================================
 // INIT
 // ============================================================
 renderRoadmap();
+window.addEventListener('load', () => {
+  if (sessionStorage.getItem('easy_read') === '1') {
+    document.body.classList.add('easy-read');
+    const btn = document.getElementById('easy-read-toggle');
+    if (btn) {
+      btn.textContent = 'Aa ✓';
+      btn.style.borderColor = 'var(--purple)';
+      btn.style.color = 'var(--purple)';
+    }
+  }
+  fetchContador();
+  const hash = window.location.hash;
+  if (hash.startsWith('#result=')) {
+    const data = decodeResult(hash);
+    if (data && data.p && data.s) showResult(data.s, data.p, { fromShare: true });
+  } else if (hash === '#mitos') {
+    go('mitos', 'fade');
+  }
+});
 </script>
+<script>
+  // Substitua 'SEU-CODIGO' pelo código do seu site no GoatCounter
+  window.goatcounter = {
+    endpoint: 'https://SEU-CODIGO.goatcounter.com/count',
+    no_onload: true,
+  };
+</script>
+<script async src="//gc.zgo.at/count.js"></script>
 </body>
 </html>

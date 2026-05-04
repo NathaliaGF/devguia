@@ -57,3 +57,17 @@ Toda a aplicação vive em um único arquivo `index.html` autocontido. O CSS est
 ## Créditos
 
 Feito com HTML5, CSS3 e JavaScript puro. Zero frameworks, zero dependências.
+
+## GoatCounter (opcional)
+
+O projeto suporta contador anônimo de diagnósticos via GoatCounter.
+
+No `index.html`, substitua os placeholders:
+
+- `SEU-CODIGO` (subdomínio do GoatCounter)
+- `SEU-TOKEN-API` (token de leitura da API para o badge diário)
+
+Importante:
+
+- Não commite token real em repositório público.
+- Se não quiser configurar, mantenha os placeholders; o badge da home é ocultado automaticamente.
