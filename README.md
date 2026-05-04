@@ -56,7 +56,7 @@ Não precisa de servidor, npm, build ou qualquer dependência. Funciona offline.
 
 Veja [CONTRIBUTING.md](CONTRIBUTING.md) para as instruções completas.
 
-A forma mais comum de contribuição é adicionar perguntas ao FAQ. As perguntas ficam no array `FAQS` dentro do `index.html`. Cada item segue esta estrutura:
+A forma mais comum de contribuição é adicionar perguntas ao FAQ. As perguntas ficam em `js/data/faq.js`. Cada item segue esta estrutura:
 
 ```javascript
 {
@@ -73,17 +73,41 @@ A forma mais comum de contribuição é adicionar perguntas ao FAQ. As perguntas
 
 ## Estrutura do projeto
 
-```
+```text
 devguia/
-├── index.html       ← aplicação inteira (HTML + CSS + JS inline)
-├── og.svg           ← imagem para Open Graph (algumas redes preferem PNG/JPG)
+├── index.html            ← HTML e CSS da SPA
+├── js/
+│   ├── app.js            ← lógica da aplicação
+│   └── data/
+│       ├── questions.js  ← blocos e perguntas do diagnóstico
+│       ├── profiles.js   ← perfis vocacionais
+│       ├── roadmap.js    ← fases e hints do roadmap
+│       ├── faq.js        ← FAQ
+│       └── catalog.js    ← glossário, mitos, recursos e conteúdo editorial
+├── scripts/
+│   ├── generate-static-pages.js
+│   └── validate-data.js
+├── faq/
+├── glossario/
+├── mitos/
+├── og.svg
 ├── robots.txt
 ├── sitemap.xml
 ├── README.md
 └── CONTRIBUTING.md
 ```
 
-Toda a aplicação vive em um único arquivo `index.html` autocontido. O CSS está em `<style>` no `<head>` e o JavaScript no final do `<body>`. Não há build step, transpiler ou dependência externa.
+O HTML e o CSS continuam simples e diretos no `index.html`, mas os dados e a lógica agora foram separados para reduzir risco de regressão e facilitar manutenção. Não há build step, transpiler ou dependência externa para a aplicação em si.
+
+## Scripts úteis
+
+```bash
+node scripts/validate-data.js
+node scripts/generate-static-pages.js
+```
+
+- `validate-data.js` valida IDs duplicados e referências internas entre FAQ, roadmap, glossário e perguntas.
+- `generate-static-pages.js` recria `faq/`, `glossario/` e `mitos/` a partir da mesma base de dados usada pela SPA.
 
 ## Créditos
 

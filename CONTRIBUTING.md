@@ -16,8 +16,8 @@ Para testar edições, salve o arquivo e recarregue a aba do navegador.
 
 ## Como adicionar uma pergunta ao FAQ
 
-1. Abra `index.html`
-2. Encontre o array `FAQS` (busque por `const FAQS = [`)
+1. Abra `js/data/faq.js`
+2. Encontre o array `FAQS`
 3. Adicione um novo objeto seguindo o template abaixo
 4. Abra o PR com título: `FAQ: [título da pergunta]`
 
@@ -51,7 +51,7 @@ Para testar edições, salve o arquivo e recarregue a aba do navegador.
 
 ## Como adicionar um perfil vocacional
 
-Os perfis ficam no objeto `PROFILES` no `index.html`. Template:
+Os perfis ficam no objeto `PROFILES` em `js/data/profiles.js`. Template:
 
 ```javascript
 meu_perfil: {
@@ -72,7 +72,7 @@ meu_perfil: {
 },
 ```
 
-Para que o perfil seja retornado, adicione uma condição no início da função `calcularPerfil()` seguindo a lógica existente. As dimensões disponíveis para scoring estão documentadas nos dados de `QUESTIONS`.
+Para que o perfil seja retornado, adicione uma condição no início da função `calcularPerfil()` em `js/app.js` seguindo a lógica existente. As dimensões disponíveis para scoring estão documentadas nos dados de `QUESTIONS` em `js/data/questions.js`.
 
 ---
 
@@ -94,4 +94,6 @@ Para que o perfil seja retornado, adicione uma condição no início da função
 
 - Título: `FAQ: [pergunta]` ou `Perfil: [nome]` ou `Fix: [descrição]`
 - Teste abrindo `index.html` localmente antes de submeter
+- Rode `node scripts/validate-data.js` se você alterou arquivos em `js/data/`
+- Rode `node scripts/generate-static-pages.js` se você alterou FAQ, glossário ou mitos
 - PRs com erros de JavaScript que quebrem o quiz ou a navegação serão fechados sem revisão

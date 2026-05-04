@@ -64,12 +64,14 @@
     }
 
     .nav-logo {
+      background: none;
+      border: none;
       font-size: 16px;
       font-weight: 700;
       color: var(--purple);
-      text-decoration: none;
       cursor: pointer;
       flex-shrink: 0;
+      font-family: inherit;
     }
 
     .nav-tabs {
@@ -325,6 +327,109 @@
     }
 
     .home-stats span { color: var(--text2); font-weight: 600; }
+
+    .home-deep-dive {
+      max-width: 960px;
+      margin: 32px auto 0;
+      padding: 0 24px 48px;
+    }
+
+    .home-section-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 12px;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      color: var(--text3);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .home-deep-dive h2 {
+      font-size: clamp(22px, 4vw, 32px);
+      line-height: 1.2;
+      margin-bottom: 10px;
+    }
+
+    .home-deep-dive-intro {
+      max-width: 68ch;
+      color: var(--text2);
+      margin-bottom: 20px;
+      font-size: 14px;
+    }
+
+    .area-compare-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+    }
+
+    .area-compare-card {
+      background: linear-gradient(160deg, rgba(22, 27, 39, 0.98), rgba(30, 37, 53, 0.92));
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+
+    .area-compare-badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      border: 1px solid currentColor;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      margin-bottom: 12px;
+    }
+
+    .area-compare-card h3 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+
+    .area-compare-card p {
+      font-size: 13px;
+      line-height: 1.7;
+      color: var(--text2);
+      margin-bottom: 10px;
+    }
+
+    .area-compare-card p:last-child { margin-bottom: 0; }
+
+    .area-compare-card strong { color: var(--text); }
+
+    .honesty-panel {
+      margin-top: 22px;
+      border-radius: 14px;
+      border: 1px solid var(--amber-dim);
+      background: linear-gradient(145deg, var(--amber-bg) 0%, rgba(15, 17, 23, 0.92) 100%);
+      padding: 22px 24px;
+    }
+
+    .honesty-panel h3 {
+      font-size: 18px;
+      color: var(--amber);
+      margin-bottom: 10px;
+    }
+
+    .honesty-panel p {
+      color: var(--text2);
+      font-size: 14px;
+      margin-bottom: 14px;
+    }
+
+    .honesty-panel ul {
+      padding-left: 18px;
+      color: var(--text2);
+      font-size: 13px;
+    }
+
+    .honesty-panel li + li { margin-top: 8px; }
 
     /* ================================
        QUIZ SECTION
@@ -638,6 +743,43 @@
       border-top: 1px solid var(--border);
     }
 
+    .phase-skill-row {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+    }
+
+    .phase-check {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      margin-top: 1px;
+      cursor: pointer;
+      position: relative;
+    }
+
+    .phase-check input {
+      position: absolute;
+      inset: 0;
+      opacity: 0;
+      cursor: pointer;
+    }
+
+    .phase-checkmark {
+      width: 22px;
+      height: 22px;
+      border-radius: 7px;
+      border: 1px solid var(--border2);
+      background: var(--bg3);
+      color: var(--teal);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 13px;
+      font-weight: 700;
+      flex-shrink: 0;
+    }
+
     .phase-skill h4 {
       font-size: 14px;
       font-weight: 700;
@@ -654,6 +796,68 @@
       font-size: 12px;
       color: var(--text3);
       font-style: italic;
+    }
+
+    .phase-resource-wrap {
+      margin-top: 14px;
+      padding-top: 14px;
+      border-top: 1px solid var(--border);
+    }
+
+    .phase-resource-head {
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text2);
+      margin-bottom: 10px;
+    }
+
+    .phase-resource-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .phase-resource-card {
+      display: block;
+      text-decoration: none;
+      color: var(--text);
+      background: var(--bg3);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 12px;
+    }
+
+    .phase-resource-card strong {
+      display: block;
+      font-size: 13px;
+      margin-bottom: 5px;
+    }
+
+    .phase-resource-card p {
+      font-size: 12px;
+      color: var(--text2);
+      line-height: 1.6;
+      margin: 0;
+    }
+
+    .phase-resource-badge {
+      display: inline-flex;
+      margin-bottom: 8px;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border2);
+      color: var(--text3);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+
+    .phase-resource-empty {
+      grid-column: 1 / -1;
+      font-size: 12px;
+      color: var(--text3);
+      padding: 10px 0 2px;
     }
 
     .btn-faq-link {
@@ -787,6 +991,25 @@
       color: var(--text2);
       border: 1px solid var(--border);
       white-space: nowrap;
+    }
+
+    .faq-tag-wrap {
+      display: inline-flex;
+      gap: 6px;
+      flex-wrap: wrap;
+    }
+
+    .faq-tag {
+      display: inline-flex;
+      align-items: center;
+      padding: 4px 8px;
+      border-radius: 999px;
+      background: var(--bg4);
+      border: 1px solid var(--border);
+      color: var(--text3);
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: lowercase;
     }
 
     .faq-chevron {
@@ -941,6 +1164,32 @@
       flex-wrap: wrap;
     }
 
+    .recursos-controls {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+
+    .budget-toggle {
+      background: transparent;
+      border: 1px solid var(--border2);
+      color: var(--text2);
+      font-size: 12px;
+      padding: 7px 12px;
+      border-radius: 999px;
+      cursor: pointer;
+      font-family: inherit;
+      min-height: 36px;
+    }
+
+    .budget-toggle.active {
+      color: var(--teal);
+      border-color: var(--teal-dim);
+      background: var(--teal-bg);
+    }
+
     .recursos-tab {
       background: transparent;
       border: 1px solid transparent;
@@ -977,6 +1226,18 @@
     }
 
     .recurso-card:hover { border-color: var(--purple-dim); }
+    .recurso-flag {
+      display: inline-flex;
+      padding: 3px 8px;
+      border-radius: 999px;
+      border: 1px solid var(--border2);
+      color: var(--text3);
+      font-size: 10px;
+      font-weight: 700;
+      margin-bottom: 8px;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
     .recurso-nome { font-size: 13px; font-weight: 700; margin-bottom: 4px; }
     .recurso-autor { font-size: 12px; color: var(--text3); margin-bottom: 6px; }
     .recurso-desc { font-size: 12px; color: var(--text2); line-height: 1.6; }
@@ -1294,6 +1555,12 @@
         padding: 0 16px 32px;
       }
 
+      .home-deep-dive {
+        padding: 0 16px 32px;
+      }
+
+      .area-compare-grid { grid-template-columns: 1fr; }
+
       .hero { padding: 32px 16px 24px; }
 
       .container { padding: 24px 16px; }
@@ -1311,6 +1578,7 @@
       .hero-btns { flex-direction: column; align-items: center; }
 
       .recursos-body { grid-template-columns: 1fr; }
+      .phase-resource-grid { grid-template-columns: 1fr; }
 
       .suggest-grid { grid-template-columns: 1fr; }
 
@@ -1486,15 +1754,15 @@
 
 <!-- NAV -->
 <nav>
-  <a class="nav-logo" href="#" data-screen="home" onclick="navigateLink(event, 'home')">devguia.dev</a>
+  <button class="nav-logo" type="button" data-screen="home" onclick="navigate('home')">devguia.dev</button>
   <button id="easy-read-toggle" class="btn btn-ghost" onclick="toggleEasyRead()" style="font-size:11px;padding:4px 10px;min-height:auto;" title="Modo leitura fácil">Aa</button>
   <div class="nav-tabs" aria-label="Seções principais">
-    <a class="nav-tab active" href="#" aria-current="page" data-screen="home" onclick="navigateLink(event, 'home')">Início</a>
-    <a class="nav-tab" href="#quiz" data-screen="quiz" onclick="navigateLink(event, 'quiz')">Diagnóstico</a>
-    <a class="nav-tab" href="#roadmap" data-screen="roadmap" onclick="navigateLink(event, 'roadmap')">Roadmap</a>
-    <a class="nav-tab" href="#faq" data-screen="faq" onclick="navigateLink(event, 'faq')">FAQ</a>
-    <a class="nav-tab" href="#glossario" data-screen="glossario" onclick="navigateLink(event, 'glossario')">Glossário</a>
-    <a class="nav-tab" href="#mitos" data-screen="mitos" onclick="navigateLink(event, 'mitos')">Mitos</a>
+    <button class="nav-tab active" type="button" aria-current="page" data-screen="home" onclick="navigate('home')">Início</button>
+    <button class="nav-tab" type="button" data-screen="quiz" onclick="navigate('quiz')">Diagnóstico</button>
+    <button class="nav-tab" type="button" data-screen="roadmap" onclick="navigate('roadmap')">Roadmap</button>
+    <button class="nav-tab" type="button" data-screen="faq" onclick="navigate('faq')">FAQ</button>
+    <button class="nav-tab" type="button" data-screen="glossario" onclick="navigate('glossario')">Glossário</button>
+    <button class="nav-tab" type="button" data-screen="mitos" onclick="navigate('mitos')">Mitos</button>
   </div>
   <button class="nav-hamburger" onclick="toggleMobileMenu()" aria-label="Menu" aria-expanded="false">
     <span></span><span></span><span></span>
@@ -1502,12 +1770,12 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu" role="navigation">
-  <a class="nav-tab" href="#" data-screen="home" onclick="navigateLink(event, 'home')">Início</a>
-  <a class="nav-tab" href="#quiz" data-screen="quiz" onclick="navigateLink(event, 'quiz')">Diagnóstico</a>
-  <a class="nav-tab" href="#roadmap" data-screen="roadmap" onclick="navigateLink(event, 'roadmap')">Roadmap</a>
-  <a class="nav-tab" href="#faq" data-screen="faq" onclick="navigateLink(event, 'faq')">FAQ</a>
-  <a class="nav-tab" href="#glossario" data-screen="glossario" onclick="navigateLink(event, 'glossario')">Glossário</a>
-  <a class="nav-tab" href="#mitos" data-screen="mitos" onclick="navigateLink(event, 'mitos')">Mitos</a>
+  <button class="nav-tab" type="button" data-screen="home" onclick="navigate('home')">Início</button>
+  <button class="nav-tab" type="button" data-screen="quiz" onclick="navigate('quiz')">Diagnóstico</button>
+  <button class="nav-tab" type="button" data-screen="roadmap" onclick="navigate('roadmap')">Roadmap</button>
+  <button class="nav-tab" type="button" data-screen="faq" onclick="navigate('faq')">FAQ</button>
+  <button class="nav-tab" type="button" data-screen="glossario" onclick="navigate('glossario')">Glossário</button>
+  <button class="nav-tab" type="button" data-screen="mitos" onclick="navigate('mitos')">Mitos</button>
 </div>
 
 <main id="main-content" tabindex="-1">
@@ -1564,6 +1832,19 @@
       </div>
     </div>
 
+    <div class="home-deep-dive">
+      <span class="home-section-kicker">Comparação direta</span>
+      <h2>Front-end, back-end, dados ou infra?</h2>
+      <p class="home-deep-dive-intro">Essas áreas parecem parecidas para quem está começando, mas o tipo de problema e a rotina mudam bastante. Antes de escolher por hype, compare o trabalho real.</p>
+      <div class="area-compare-grid" id="areaCompareGrid"></div>
+
+      <div class="honesty-panel" id="honestyPanel">
+        <h3>Isso não é para você se...</h3>
+        <p>O objetivo aqui não é te expulsar de TI. É evitar que você entre por ilusão, invista meses ou dinheiro e descubra tarde demais que odeia a rotina.</p>
+        <ul id="honestyList"></ul>
+      </div>
+    </div>
+
   </section>
 
   <!-- ============================
@@ -1613,6 +1894,7 @@
         <h2>Roadmap</h2>
         <p>Um caminho realista em 4 fases — com o porquê de cada habilidade, não só o quê.</p>
       </div>
+      <button type="button" class="budget-toggle" id="freeOnlyToggleRoadmap" onclick="toggleFreeOnly()" style="margin-bottom:16px;">Só gratuitos</button>
       <div class="roadmap-phases" id="roadmapPhases">
         <!-- rendered by JS -->
       </div>
@@ -1750,1705 +2032,12 @@
 
 <button type="button" class="back-to-top" id="backToTop" onclick="scrollToMainTop()" aria-label="Voltar ao topo">↑</button>
 
-<script>
-// ============================================================
-// STATE
-// ============================================================
-const state = {
-  currentScreen: 'home',
-  currentQuestion: 0,
-  answers: {},
-  scores: {},
-  profileKey: null,
-  faqFilter: { cat: 'all', search: '' },
-  openFaqId: null,
-  openPhaseId: null,
-  glossarioFilter: { cat: 'all', search: '' },
-  openGlossarioId: null,
-  mitosFilter: 'all',
-  openMitoId: null,
-  recursosTab: 'livros',
-  currentShareUrl: '',
-  areaScores: [],
-};
-
-// ============================================================
-// QUESTIONS DATA
-// ============================================================
-const BLOCKS = {
-  'Sobre você':           { chip: 'chip-purple' },
-  'Perfil técnico':       { chip: 'chip-teal' },
-  'Preferências de área': { chip: 'chip-blue' },
-  'Sua situação atual':   { chip: 'chip-amber' },
-};
-
-const QUESTIONS = [
-  {
-    id: 'prazer', block: 'Sobre você',
-    text: 'Quando você precisa resolver um problema complicado, como você normalmente age?',
-    hint: 'Seja honesto — não existe resposta certa.',
-    options: [
-      { text: 'Gosto de analisar o problema com calma, quebrar em partes e ir testando soluções', scores: {logica:3,analitico:3} },
-      { text: 'Prefiro pedir ajuda a alguém que já passou por isso — não quero reinventar a roda', scores: {social:2,pratico:1} },
-      { text: 'Começo a experimentar aleatoriamente até algo funcionar', scores: {pratico:2,criativo:1} },
-      { text: 'Fico travado e procrastino até ser obrigado a resolver', scores: {bloqueio:3} },
-    ]
-  },
-  {
-    id: 'estudo', block: 'Sobre você',
-    text: 'Como você aprende melhor?',
-    hint: 'Pense em como você aprendeu algo de verdade na vida.',
-    options: [
-      { text: 'Lendo documentação, artigos, livros — gosto de entender a teoria antes de praticar', scores: {autodidata:3,logica:1} },
-      { text: 'Fazendo: aprendo construindo coisas, mesmo sem entender tudo', scores: {pratico:3,criativo:1} },
-      { text: 'Com pessoas: cursos, aulas, alguém me explicando', scores: {social:3} },
-      { text: 'Tenho muita dificuldade de aprender qualquer coisa nova por conta própria', scores: {bloqueio:3,social:1} },
-    ]
-  },
-  {
-    id: 'frustracao', block: 'Sobre você',
-    text: 'Um código que você escreveu para de funcionar sem motivo aparente. Como você reage?',
-    hint: 'Esse tipo de situação é o dia a dia de qualquer desenvolvedor.',
-    options: [
-      { text: 'Fico frustrado no começo mas viro um detetive — preciso entender o porquê', scores: {logica:3,analitico:2} },
-      { text: 'Procuro no Google e Stack Overflow até achar a solução', scores: {pratico:3,autodidata:1} },
-      { text: 'Me estresso muito e tenho vontade de largar tudo', scores: {bloqueio:2,estresse:2} },
-      { text: 'Peço ajuda imediatamente para alguém mais experiente', scores: {social:2,bloqueio:1} },
-    ]
-  },
-  {
-    id: 'atencao', block: 'Sobre você',
-    text: 'Você consegue se concentrar por períodos longos em um problema técnico?',
-    hint: 'Programar exige blocos de concentração de 1–3 horas com frequência.',
-    options: [
-      { text: "Sim, entro em 'estado de fluxo' e horas passam sem eu perceber", scores: {foco:3,logica:1} },
-      { text: 'Consigo, mas preciso de pausas frequentes e tenho dias melhores que outros', scores: {foco:1,pratico:1} },
-      { text: 'Tenho muita dificuldade com isso — me distraio facilmente', scores: {bloqueio:2,estresse:1} },
-      { text: 'Depende muito do assunto — em coisas que gosto, sim; no resto, não', scores: {criativo:1,foco:1} },
-    ]
-  },
-  {
-    id: 'mat', block: 'Perfil técnico',
-    text: 'Como você se relaciona com matemática e lógica?',
-    hint: 'Não estamos falando de cálculo avançado — mas de raciocínio lógico e abstração.',
-    options: [
-      { text: 'Gosto muito — resolver problemas lógicos é estimulante para mim', scores: {logica:3,analitico:2} },
-      { text: 'Não tenho horror, consigo me virar, mas não é meu ponto forte', scores: {logica:1} },
-      { text: 'Nunca gostei de matemática e sempre tive dificuldade', scores: {bloqueio:2,estresse:1} },
-      { text: 'Nunca precisei disso na vida e não sei avaliar', scores: {} },
-    ]
-  },
-  {
-    id: 'detalhe', block: 'Perfil técnico',
-    text: 'Você é do tipo que nota pequenos detalhes e inconsistências?',
-    hint: 'Uma vírgula no lugar errado pode derrubar um sistema inteiro.',
-    options: [
-      { text: 'Sim — tenho um lado perfeccionista que não deixa coisas erradas passarem', scores: {analitico:3,logica:1} },
-      { text: 'Às vezes — depende da situação e de como estou', scores: {analitico:1} },
-      { text: 'Não muito — prefiro o panorama geral ao invés de detalhes', scores: {gestao:1,criativo:1} },
-      { text: 'Nunca fui assim — erros de detalhe sempre me passaram batido', scores: {bloqueio:1} },
-    ]
-  },
-  {
-    id: 'abstrato', block: 'Perfil técnico',
-    text: 'Você consegue pensar em sistemas abstratos — coisas que não dá para tocar ou ver diretamente?',
-    hint: 'Como imaginar o fluxo de dados entre servidores, ou como uma função transforma dados.',
-    options: [
-      { text: 'Sim — consigo visualizar sistemas complexos na cabeça com facilidade', scores: {logica:3,analitico:2} },
-      { text: 'Com algum esforço, mas consigo quando me dedico', scores: {logica:1,analitico:1} },
-      { text: 'Tenho dificuldade com coisas abstratas — preciso ver para entender', scores: {pratico:2,bloqueio:1} },
-      { text: 'Nunca testei isso de forma séria', scores: {pratico:1} },
-    ]
-  },
-  {
-    id: 'area_pref', block: 'Preferências de área',
-    text: 'O que mais te atrai dentro de tecnologia?',
-    hint: 'Pode ser algo que você já conhece ou apenas intuição.',
-    options: [
-      { text: 'Criar interfaces — sites, apps, telas bonitas e bem pensadas', scores: {front:3,criativo:2,ux:2} },
-      { text: "A 'máquina por baixo' — servidores, dados, sistemas que fazem tudo rodar", scores: {back:3,infra:2,logica:1} },
-      { text: 'Entender padrões em dados, fazer análises e tirar conclusões', scores: {dados:3,analitico:2,logica:1} },
-      { text: 'Garantir que sistemas não quebrem e que pessoas usem bem', scores: {qa:2,ux:2,gestao:1} },
-    ]
-  },
-  {
-    id: 'visual', block: 'Preferências de área',
-    text: 'Quando você usa um produto digital com problema de usabilidade, o que você faz?',
-    hint: 'Pense em como você reage a um app com interface ruim.',
-    options: [
-      { text: 'Fico incomodado e já penso em como melhoraria o design', scores: {ux:3,front:2,criativo:2} },
-      { text: 'Anoto o problema mas não me incomodo tanto — o que importa é funcionar', scores: {back:2,logica:1} },
-      { text: 'Me pergunto por que tecnicamente aquilo falhou', scores: {qa:2,back:2,logica:1} },
-      { text: 'Não costumo notar muito, uso e sigo em frente', scores: {} },
-    ]
-  },
-  {
-    id: 'dados_int', block: 'Preferências de área',
-    text: 'Se você pudesse escolher um projeto para trabalhar, qual seria mais interessante?',
-    hint: 'Ignore limitações técnicas — pense apenas no que te animaria.',
-    options: [
-      { text: 'Construir um aplicativo do zero que resolve um problema real', scores: {front:2,back:2,pratico:2,criativo:1} },
-      { text: 'Analisar dados de uma empresa e descobrir padrões escondidos', scores: {dados:3,analitico:3,logica:1} },
-      { text: 'Criar uma infraestrutura que aguenta milhões de acessos sem cair', scores: {infra:3,back:2,logica:2} },
-      { text: 'Testar exaustivamente um sistema para encontrar todos os pontos fracos', scores: {qa:3,analitico:2,logica:1} },
-    ]
-  },
-  {
-    id: 'social_trab', block: 'Preferências de área',
-    text: 'Qual modelo de trabalho faz mais sentido para você?',
-    hint: '',
-    options: [
-      { text: 'Trabalhar sozinho na maior parte do tempo — foco total, sem interrupções', scores: {back:1,infra:1,dados:1,autodidata:1} },
-      { text: 'Em equipe técnica — pair programming, code review, colaboração constante', scores: {front:1,back:1,social:2} },
-      { text: 'Conversando muito com pessoas não-técnicas — clientes, designers, gestores', scores: {ux:2,gestao:2,social:2} },
-      { text: 'Ensinando e compartilhando conhecimento com outros', scores: {ensino:3,social:2} },
-    ]
-  },
-  {
-    id: 'situacao', block: 'Sua situação atual',
-    text: 'Como você descreveria sua situação atual em relação a TI?',
-    hint: '',
-    options: [
-      { text: 'Sou iniciante total — nunca escrevi uma linha de código na vida', scores: {iniciante:3} },
-      { text: 'Estou estudando há algum tempo mas ainda não trabalho na área', scores: {estudando:3} },
-      { text: 'Trabalho em outra área e quero mudar para TI', scores: {transicao:3} },
-      { text: 'Já trabalho com tecnologia e quero me especializar ou mudar de ramo dentro de TI', scores: {especializar:3} },
-    ]
-  },
-  {
-    id: 'motivacao', block: 'Sua situação atual',
-    text: 'O que te motivou a considerar ou estar em TI?',
-    hint: 'Honestidade total aqui faz diferença no diagnóstico.',
-    options: [
-      { text: 'Sempre fui apaixonado por tecnologia — não é sobre dinheiro', scores: {vocacao:3,foco:1} },
-      { text: 'Vi que paga bem e tem vagas — foi uma decisão prática', scores: {pratico:2,bloqueio:1} },
-      { text: 'Alguém me indicou ou vi influencer falando que era fácil', scores: {bloqueio:2,estresse:1} },
-      { text: 'Quero criar coisas — software é um meio de materializar ideias', scores: {criativo:3,vocacao:2} },
-    ]
-  },
-  {
-    id: 'ensino_int', block: 'Sua situação atual',
-    text: 'Você tem vontade de compartilhar o que sabe com outras pessoas?',
-    hint: 'Alguns perfis se encaixam melhor em educação do que em desenvolvimento.',
-    options: [
-      { text: 'Sim — sinto prazer em explicar coisas e ver outras pessoas entendendo', scores: {ensino:3,social:2} },
-      { text: 'Às vezes, mas prefiro focar em construir do que ensinar', scores: {pratico:1,criativo:1} },
-      { text: 'Não — prefiro aprender e criar sem me preocupar em ensinar', scores: {autodidata:1} },
-      { text: 'Nunca pensei nisso de forma séria', scores: {} },
-    ]
-  },
-  {
-    id: 'lp', block: 'Sua situação atual',
-    text: 'O que melhor descreve sua relação atual com programação prática?',
-    hint: '',
-    options: [
-      { text: 'Nunca programei — zero experiência', scores: {iniciante:2} },
-      { text: 'Já fiz tutoriais e cursinho, mas nunca construí nada próprio', scores: {estudando:2,bloqueio:1} },
-      { text: 'Já tenho projetos, mesmo que pequenos e imperfeitos', scores: {pratico:2,autodidata:1} },
-      { text: 'Programo profissionalmente ou com consistência há algum tempo', scores: {especializar:2,pratico:2} },
-    ]
-  },
-];
-
-// ============================================================
-// PROFILES DATA
-// ============================================================
-const PROFILES = {
-  dev_nato: {
-    key: 'dev_nato',
-    icon: '💻',
-    name: 'Dev Nato',
-    sub: 'Seu perfil vocacional',
-    color: 'var(--purple)',
-    desc: `Você tem os traços que definem bons desenvolvedores: pensamento lógico-analítico, tolerância à frustração, curiosidade genuína e capacidade de concentração. TI não é só viável para você — é onde vai se destacar. O risco para seu perfil não é fracassar: é se desperdiçar em áreas rasas demais para o seu potencial.`,
-    attention: [
-      'Cuidado com o perfeccionismo: código bom entregue é melhor que código perfeito no seu HD.',
-      'Não negligencie comunicação — devs que não se expressam travam na carreira mais cedo do que imaginam.',
-    ],
-    steps: [
-      'Escolha uma linguagem e vá fundo nela antes de diversificar.',
-      'Construa projetos com problemas reais — não apenas tutoriais de YouTube.',
-      'Entenda fundamentos: como a memória funciona, o que acontece quando você roda código.',
-    ],
-  },
-  analitico: {
-    key: 'analitico',
-    icon: '📊',
-    name: 'Analítico de Dados',
-    sub: 'Seu perfil vocacional',
-    color: 'var(--blue)',
-    desc: `Você tem raciocínio analítico acima da média e gosta de entender padrões. Isso te coloca naturalmente na trilha de dados — análise, ciência de dados, BI ou engenharia de dados. Programação é necessária, mas não precisa ser o foco principal. Seu diferencial está em traduzir dados em decisões, não em escrever sistemas complexos do zero.`,
-    attention: [
-      'Dados sem contexto de negócio são inúteis. Aprenda a trabalhar com pessoas não-técnicas.',
-      'Não pule para Machine Learning antes de dominar SQL e estatística básica.',
-    ],
-    steps: [
-      'Comece com SQL e Excel/Sheets avançado.',
-      'Python para análise: Pandas, Matplotlib, visualização.',
-      'Estatística aplicada — não decorada.',
-    ],
-  },
-  ux_design: {
-    key: 'ux_design',
-    icon: '🎨',
-    name: 'Designer de Produto',
-    sub: 'Seu perfil vocacional',
-    color: 'var(--pink)',
-    desc: `Você pensa primeiro na experiência da pessoa usando o produto — isso é raro e valioso. Não precisa necessariamente programar (mas ajuda saber o básico de HTML/CSS). Seu lugar natural é UX Design, Product Design ou pesquisa com usuários. É uma área menos saturada que dev e com boa demanda para quem combina sensibilidade com raciocínio analítico.`,
-    attention: [
-      'UX não é só deixar bonito — envolve pesquisa, testes e dados de comportamento real.',
-      'Saber HTML/CSS básico te torna muito mais eficaz colaborando com desenvolvedores.',
-    ],
-    steps: [
-      'Fundamentos de UX: heurísticas de Nielsen, pesquisa com usuário, prototipagem.',
-      'Aprenda Figma — é o padrão atual do mercado.',
-      'Portfólio com estudos de caso reais, não só telas bonitas.',
-    ],
-  },
-  educador: {
-    key: 'educador',
-    icon: '🎓',
-    name: 'Educador Tech',
-    sub: 'Seu perfil vocacional',
-    color: 'var(--teal)',
-    desc: `Você tem perfil de quem gosta de transmitir conhecimento — e isso é escasso e valioso em TI. O mercado de educação tecnológica é enorme e mal servido de bons professores. Ser educador tech não significa abrir mão de ser técnico: os melhores continuam praticando. Sua vocação de ensinar pode ser um diferencial extraordinário.`,
-    attention: [
-      'Educadores que não praticam perdem a credibilidade rapidamente. Continue construindo.',
-      'Não confunda gostar de explicar com saber ensinar — são habilidades diferentes que precisam ser desenvolvidas.',
-    ],
-    steps: [
-      'Solidifique uma área técnica antes de ensinar.',
-      'Crie conteúdo sobre o que está aprendendo — isso reforça seu próprio aprendizado.',
-      'Estude didática e como pessoas aprendem programação (andragogia técnica).',
-    ],
-  },
-  infra_cloud: {
-    key: 'infra_cloud',
-    icon: '⚙️',
-    name: 'Engenheiro de Infra',
-    sub: 'Seu perfil vocacional',
-    color: 'var(--amber)',
-    desc: `Você pensa em sistemas, confiabilidade e escala — não apenas em escrever código. Isso é o perfil de DevOps, SRE e engenharia de plataforma. Essas áreas pagam muito bem e têm escassez real de profissionais qualificados. Você gosta que as coisas funcionem de verdade, não apenas que pareçam funcionar.`,
-    attention: [
-      'Infra moderna exige programação. Não é só configurar servidores — scripting é essencial.',
-      'A curva de aprendizado é íngreme e cheia de conceitos abstratos. Paciência não é opcional.',
-    ],
-    steps: [
-      'Linux de verdade — não só os comandos básicos.',
-      'Docker, depois Kubernetes.',
-      'Cloud: escolha AWS, GCP ou Azure e se aprofunde antes de diversificar.',
-    ],
-  },
-  transicao: {
-    key: 'transicao',
-    icon: '🔄',
-    name: 'Em Transição de Carreira',
-    sub: 'Seu perfil vocacional',
-    color: 'var(--coral)',
-    desc: `Você tem algo que iniciantes não têm: experiência de mercado, maturidade e contexto de negócio. Isso é um trunfo real — especialmente em dados, produto, UX, QA e gestão. O erro mais comum de quem faz transição é querer entrar como dev júnior quando poderia usar sua experiência para entrar em posições mais sênior em áreas adjacentes.`,
-    attention: [
-      'Não subestime o que você já sabe. Sua experiência tem valor real em tech.',
-      'Transição séria leva 12 a 24 meses de dedicação real. Quem promete menos está vendendo ilusão.',
-    ],
-    steps: [
-      'Identifique a intersecção entre sua área anterior e TI.',
-      'Construa projetos que usem suas duas bagagens ao mesmo tempo.',
-      'Considere PM, Data Analyst, QA ou UX antes de ir direto para dev.',
-    ],
-  },
-  repensar: {
-    key: 'repensar',
-    icon: '🤔',
-    name: 'Vale Repensar',
-    sub: 'Seu perfil vocacional',
-    color: 'var(--text3)',
-    desc: `Alguns dos seus padrões sugerem que TI pode não ser o caminho mais natural para você agora — não porque seja incapaz, mas porque os traços mais presentes (resistência à abstração, baixa tolerância à frustração, dificuldade de aprender de forma independente) são exatamente os que mais pesam negativamente na área. Isso não é sentença: é honestidade que pode te poupar anos de frustração.`,
-    attention: [
-      'Entrar em TI por dinheiro sem curiosidade genuína costuma gerar abandono em 6 a 12 meses.',
-      'Isso não é uma porta fechada — é um convite para investigar melhor antes de investir tempo e dinheiro.',
-    ],
-    steps: [
-      'Antes de decidir, faça um projeto de 30 dias com programação real, sem tutorial.',
-      'Se após isso ainda não sentiu curiosidade, explore áreas que usam tecnologia sem programar.',
-      'Considere gestão de projetos, operações, suporte técnico como ponto de entrada mais honesto.',
-    ],
-  },
-};
-
-// ============================================================
-// ROADMAP DATA
-// ============================================================
-const PHASES = [
-  {
-    id: 'fase1',
-    title: 'Fase 1 — Fundamentos que não têm atalho',
-    color: 'var(--purple)',
-    duration: '3–6 meses',
-    skills: [
-      { name: 'Lógica de programação e algoritmos', why: 'A base de tudo. Sem isso, frameworks e linguagens não fazem sentido.', faqId: 'f-logica' },
-      { name: 'Terminal e linha de comando', why: 'Todo ambiente profissional exige isso. Não é opcional.', faqId: 'f-terminal' },
-      { name: 'Git e controle de versão', why: 'Você vai perder código se não usar. É o mínimo profissional.', faqId: 'f-git' },
-      { name: 'Inglês técnico (leitura)', why: '90% da documentação boa está em inglês. Sem isso você depende de traduções erradas.', faqId: null },
-      { name: 'Matemática de programador', why: 'Não é cálculo. É raciocínio abstrato, booleana e entender por que algoritmos funcionam.', faqId: 'f-mat' },
-    ]
-  },
-  {
-    id: 'fase2',
-    title: 'Fase 2 — Primeira linguagem de verdade',
-    color: 'var(--teal)',
-    duration: '4–8 meses',
-    skills: [
-      { name: 'Python ou JavaScript — escolha um', why: 'Profundidade em uma linguagem vale mais do que rascunho em cinco.', faqId: 'f-lang' },
-      { name: 'Estruturas de dados básicas', why: 'Arrays, dicionários, listas. Você vai usar isso todo dia.', faqId: null },
-      { name: 'Depuração e leitura de erros', why: 'Saber ler um erro é metade da solução. Devs que sabem depurar são muito mais produtivos.', faqId: null },
-      { name: 'Construir projetos próprios pequenos', why: 'Tutoriais ensinam a copiar. Projetos próprios ensinam a pensar.', faqId: 'f-proj' },
-    ]
-  },
-  {
-    id: 'fase3',
-    title: 'Fase 3 — Construindo coisas reais',
-    color: 'var(--amber)',
-    duration: '6–12 meses',
-    skills: [
-      { name: 'Área de especialização', why: 'Generalista demais é difícil de contratar. Escolha uma direção.', faqId: 'f-areas' },
-      { name: 'SQL e banco de dados relacional', why: 'Quase todo sistema usa banco. É transversal a todas as áreas.', faqId: null },
-      { name: 'Portfólio com 3+ projetos reais', why: 'Certificado não contrata ninguém. Projeto funcionando, sim.', faqId: 'f-port' },
-      { name: 'Contribuição em open source', why: 'Mostra que você sabe trabalhar com código de outras pessoas — habilidade subestimada.', faqId: 'f-oss' },
-    ]
-  },
-  {
-    id: 'fase4',
-    title: 'Fase 4 — Preparação para o mercado',
-    color: 'var(--blue)',
-    duration: 'Contínuo',
-    skills: [
-      { name: 'Comunicação técnica e escrita', why: 'Devs que comunicam bem avançam mais rápido que os que só codificam bem.', faqId: 'f-soft' },
-      { name: 'Entrevistas técnicas', why: 'Saber programar e saber ser entrevistado são habilidades completamente diferentes.', faqId: null },
-      { name: 'CLT x PJ, salários, negociação', why: 'Você vai perder dinheiro se não entender os números do seu próprio contrato.', faqId: 'f-clt' },
-      { name: 'Networking real', why: 'A maioria das vagas boas não é anunciada. Pessoas contratam pessoas.', faqId: 'f-net' },
-    ]
-  },
-];
-
-const PROFILE_ROADMAP_PHASE = {
-  dev_nato: 'fase1',
-  analitico: 'fase3',
-  ux_design: 'fase2',
-  educador: 'fase1',
-  infra_cloud: 'fase2',
-  transicao: 'fase1',
-  repensar: 'fase1',
-};
-
-const PROFILE_ROADMAP_HINT = {
-  dev_nato: 'Seu perfil combina com estudo profundo: use a Fase 1 como trilha semanal (lógica, terminal, Git) antes de acelerar em framework ou linguagem.',
-  analitico: 'Dados e SQL aparecem com força na Fase 3 — abra essa fase no roadmap e volte à Fase 1 só para tapar lacunas de base.',
-  ux_design: 'A Fase 2 (primeira linguagem + projetos pequenos) é o melhor encaixe para quem pensa em produto e interface; complemente com HTML/CSS do glossário.',
-  educador: 'Antes de ensinar em público, consolide uma base técnica na Fase 1 — alunos percebem quando o professor não pratica o que explica.',
-  infra_cloud: 'Linux, automação e primeira linguagem concentram-se na Fase 2; use a Fase 1 para o que ainda não for hábito (terminal, Git, lógica).',
-  transicao: 'A Fase 1 organiza o básico que sustenta a transição; na Fase 3 você transforma experiência prévia + TI em portfólio narrável.',
-  repensar: 'Trate a Fase 1 como experimento honesto de 30 dias: se lógica e frustração técnica não gerarem curiosidade, revise o plano antes de gastar muito.',
-};
-
-// ============================================================
-// FAQ DATA
-// ============================================================
-const FAQS = [
-  {
-    id: 'f-logica', cat: 'fundamentos',
-    q: 'Precisa ser bom em matemática para programar?',
-    answer: `<p>Sim — mas não do jeito que a escola ensinou. Programação não exige cálculo diferencial, mas exige raciocínio lógico, pensamento abstrato e a capacidade de modelar problemas em estruturas. Quem diz que "nunca precisou de matemática para programar" geralmente está usando matemática o tempo todo sem perceber — o que falta é consciência do que está fazendo, e isso limita o crescimento.</p>
-    <p>No dia a dia isso aparece quando você precisa cobrir todos os casos de um formulário, entender por que um loop ficou lento ou depurar uma query SQL: são situações em que você manipula conjuntos, ordens e condições — habilidades que a escola chama de matemática, mas o mercado chama de “pensamento de engenheiro”.</p>
-    <div class="dica"><strong>Dica:</strong> Foco real: álgebra booleana, lógica proposicional e entender como algoritmos crescem em complexidade. Khan Academy tem os fundamentos certos e de graça.</div>
-    <div class="atencao"><strong>Atenção:</strong> Se você tem dificuldade séria com raciocínio lógico, isso vai aparecer cedo. Não adie — encare o problema agora antes de investir anos.</div>`,
-  },
-  {
-    id: 'f-terminal', cat: 'ferramentas',
-    q: 'Por que preciso aprender linha de comando se existe interface gráfica?',
-    answer: `<p>Porque ambientes profissionais rodam em servidores Linux sem interface gráfica. Porque deploy, CI/CD, Docker e scripts de automação passam pelo terminal. Porque depender só de interfaces te faz dependente de ferramentas específicas. O terminal parece difícil por duas semanas e depois vira extensão natural do raciocínio.</p>
-    <p>Interfaces gráficas ajudam no começo, mas quando algo quebra em produção às 2h da manhã, quem sabe linha de comando consegue ler logs, reiniciar serviços e aplicar correção sem depender de botão que não existe no servidor — é por isso que empresas tratam terminal como habilidade básica, não opcional.</p>
-    <div class="dica"><strong>Dica:</strong> Comece com o essencial: navegar por diretórios, criar e mover arquivos, redirecionar saídas, pipes. Depois Git pelo terminal. Depois scripts shell simples.</div>`,
-  },
-  {
-    id: 'f-git', cat: 'ferramentas',
-    q: 'Git é realmente necessário ou é frescura?',
-    answer: `<p>Necessário. Ponto. Git é o mínimo absoluto de qualquer trabalho profissional em software. Sem controle de versão você vai perder código, não vai conseguir colaborar e não vai entender como projetos reais são organizados. Não existe "aprender mais tarde" — aprenda Git junto com sua primeira linguagem.</p>
-    <p>Em times reais, revisão de código, integração contínua e deploy partem de branches e histórico confiável; enviar ZIP por e-mail ou “código na pasta Documentos” simplesmente não entra em empresas sérias. Git também é a linguagem comum entre freelancers, open source e vagas remotas.</p>
-    <div class="dica"><strong>Dica:</strong> Os 7 comandos que cobrem 90% do uso: init, add, commit, push, pull, branch, merge. O resto surge naturalmente com a prática.</div>`,
-  },
-  {
-    id: 'f-mat', cat: 'fundamentos',
-    q: 'Qual matemática devo estudar para programação?',
-    answer: `<p>Para a maioria das trilhas: lógica proposicional e booleana (essencial para condicionais e queries), teoria de conjuntos básica (arrays, interseções, diferenças) e complexidade algorítmica básica — entender por que um loop dentro de outro é mais lento. Para dados: estatística descritiva e probabilidade básica. Para front avançado ou jogos: geometria e álgebra linear.</p>
-    <p>Você não precisa virar expert em cálculo para o primeiro emprego, mas precisa perder o medo de símbolos e gráficos: relatórios de produto, métricas de performance e testes A/B são linguagem de negócio falada em números, e quem entende isso conversa melhor com produto e liderança.</p>
-    <div class="dica"><strong>Dica:</strong> Não estude matemática abstrata sem contexto. Estude com um projeto em mente — a abstração faz sentido quando você precisar dela de verdade.</div>`,
-  },
-  {
-    id: 'f-lang', cat: 'linguagens',
-    q: 'Qual a primeira linguagem para iniciantes?',
-    answer: `<p>Para a maioria: Python se você quer dados, automação, back-end ou ainda não sabe. JavaScript se quer ver resultados visuais rápido na web. C se quer entender computação de verdade e não tem pressa para o mercado. Nenhuma das três é errada — o erro é ficar trocando antes de dominar uma.</p>
-    <p>O mercado brasileiro contrata forte quem domina ecossistema web (JavaScript/TypeScript) ou dados com Python; linguagens de nicho podem pagar bem, mas reduzem o número de vagas acessíveis no início. Escolha uma, construa 2–3 projetos que você consiga explicar em entrevista, e só então pense em segunda linguagem.</p>
-    <div class="dica"><strong>Dica:</strong> O critério mais importante não é "qual tem mais vaga" — é qual vai te manter motivado por 12 meses. Vagas existem para Python e JavaScript com abundância.</div>
-    <div class="atencao"><strong>Atenção:</strong> Evite PHP como primeira linguagem, Java sem base sólida, e Rust ou C++ como entrada — a curva vai te desanimar antes de você aprender o essencial.</div>`,
-  },
-  {
-    id: 'f-proj', cat: 'carreira',
-    q: 'Como sei se estou aprendendo ou só copiando código?',
-    answer: `<p>Teste simples: feche tudo e tente construir o mesmo projeto do zero sem consultar nada. Se você travar em 10 minutos, você estava copiando, não aprendendo. Outro sinal: se não consegue explicar em voz alta por que cada linha faz o que faz, ainda não aprendeu. Copiar é uma fase válida, mas precisa virar compreensão antes de avançar.</p>
-    <p>Outro teste honesto é tentar mudar uma regra de negócio pequena: se a alteração te obriga a reescrever tudo porque você não entende a estrutura, o tutorial te deu um “efeito teatro”, não conhecimento. Por isso portfólios com variações próprias pesam mais que lista infinita de cursos.</p>
-    <div class="dica"><strong>Dica:</strong> Após qualquer tutorial, crie uma variação com uma diferença sua — uma funcionalidade diferente, dados diferentes, uma melhoria que você pensou. Esse é o momento real de aprendizado.</div>`,
-  },
-  {
-    id: 'f-port', cat: 'carreira',
-    q: 'Portfólio importa mais que certificado?',
-    answer: `<p>Sim, especialmente para o primeiro emprego. Certificado prova que você fez um curso. Portfólio prova que você sabe construir algo. Para cargos técnicos, empresas sérias querem ver código funcionando. Um projeto bem documentado no GitHub — com README claro, problema definido e código organizado — vale mais que dez certificados.</p>
-    <p>Em processos seletivos, o recrutador técnico costuma abrir o repositório antes de olhar o currículo: ele quer ver commits coerentes, testes ou ao menos organização de pastas, e uma explicação do que você faria diferente com mais tempo. Certificado sem artefato auditável raramente passa dessa etapa.</p>
-    <div class="dica"><strong>Dica:</strong> Três projetos que você entende completamente e consegue explicar valem mais que dez projetos copiados de tutorial.</div>
-    <div class="atencao"><strong>Atenção:</strong> Não coloque "TODO list" e "calculadora" como projetos principais. Crie algo que resolve um problema real — mesmo pequeno e simples.</div>`,
-  },
-  {
-    id: 'f-oss', cat: 'carreira',
-    q: 'Como contribuir em open source sem experiência?',
-    answer: `<p>Comece pelo mínimo: corrija um erro de digitação na documentação. Melhore um README. Reporte um bug com detalhes precisos e passos para reproduzir. Isso é contribuição real e te expõe ao fluxo de trabalho de projetos sérios. A maioria fica esperando ter "nível suficiente" — não existe nível mínimo para documentação.</p>
-    <p>Depois disso, você pode subir para pequenos patches: ajustar mensagem de erro, adicionar teste que faltava ou melhorar acessibilidade de um componente. Cada merge aceito vira prova pública de que você lê código de terceiros, responde feedback e entrega no padrão do projeto — exatamente o que times pedem em júnior.</p>
-    <div class="dica"><strong>Dica:</strong> Procure issues marcadas com "good first issue" ou "beginner friendly" no GitHub. Projetos de ferramentas que você já usa são o melhor ponto de partida.</div>`,
-  },
-  {
-    id: 'f-areas', cat: 'carreira',
-    q: 'Como escolher entre front-end, back-end, dados ou infra?',
-    answer: `<p>Não escolha pela demanda do mercado — escolha pelo que te faz querer continuar estudando às 23h. Front-end: você se importa com a experiência visual do usuário. Back-end: você pensa em sistemas, dados e eficiência. Dados: você quer extrair significado de números. Infra: você quer que tudo funcione de forma confiável e escalável.</p>
-    <p>Um experimento de duas semanas por área costuma ser suficiente: front com uma tela responsiva simples, back com API + banco, dados com um dashboard a partir de CSV público, infra com deploy automatizado em um PaaS gratuito. O objetivo não é virar especialista em tudo — é sentir qual tipo de problema você tolera repetir por anos.</p>
-    <div class="dica"><strong>Dica:</strong> Faça um projeto pequeno em cada área antes de decidir. As diferenças salariais entre especialidades são menores do que influencers sugerem e variam muito mais por empresa do que por área.</div>`,
-  },
-  {
-    id: 'f-ia', cat: 'ferramentas',
-    q: 'Devo usar IA (ChatGPT, Copilot) para aprender?',
-    answer: `<p>Não para aprender — sim para produzir, depois que você já sabe. A diferença é crítica: se você usa IA para gerar código que não entende, está acumulando dívida técnica mental. Quando o código quebrar (e vai), você não vai saber depurar. IA mente de forma convincente e confiante. Sem base para avaliar o que ela gerou, você aprende errado e não percebe.</p>
-    <p>Em equipes, o uso saudável costuma ser: gerar boilerplate, sugerir nomes, resumir documentação ou escrever testes depois que você já definiu o comportamento esperado. O uso perigoso é pedir “faz tudo” sem ler linha por linha — é aí que entram vulnerabilidades, bugs silenciosos e código que ninguém consegue manter.</p>
-    <div class="dica"><strong>Dica:</strong> Regra prática: use IA para acelerar coisas que você já sabe fazer. Para aprender algo novo, faça sem IA até entender — depois use para otimizar e agilizar.</div>
-    <div class="atencao"><strong>Atenção:</strong> IA gera código que funciona para casos simples e quebra nos casos extremos. Isso é invisível para quem está aprendendo e cria uma falsa sensação de domínio.</div>`,
-  },
-  {
-    id: 'f-facul', cat: 'educação',
-    q: 'Faculdade vale a pena ou é perda de tempo?',
-    answer: `<p>Depende do curso e do seu perfil. Faculdade boa — difícil de entrar, professores ativos no mercado, colegas qualificados — oferece algo que nenhum curso online entrega: ambiente de pressão, colaboração e exposição a problemas complexos. Faculdade ruim entrega diploma e pouco mais. EAD de nome desconhecido, na maioria dos casos, não agrega.</p>
-    <p>Sem faculdade, você precisa substituir o que ela dá de estrutura: prazos externos (bootcamps sérios, comunidades, mentoria), projetos públicos e leitura constante de código alheio. Os dois caminhos funcionam, mas o autodidata que não se organiza perde para quem tem rotina clara — independentemente do papel na parede.</p>
-    <div class="dica"><strong>Dica:</strong> Se vai fazer: pesquise a grade curricular, visite o campus, converse com alunos do 3º e 4º ano. O que fazem depois de formados diz tudo sobre a qualidade do curso.</div>
-    <div class="atencao"><strong>Atenção:</strong> Se não vai fazer faculdade, você precisa ser disciplinado o suficiente para estruturar seu próprio aprendizado. A maioria das pessoas superestima essa disciplina.</div>`,
-  },
-  {
-    id: 'f-clt', cat: 'mercado',
-    q: 'CLT ou PJ — qual escolher?',
-    answer: `<p>Faça as contas do seu caso específico. Como referência: PJ geralmente precisa ganhar 40–60% a mais que CLT para equivaler, somando FGTS, 13º, férias, benefícios e os impostos que você paga como PJ. CLT tem mais proteção em demissão. PJ tem mais flexibilidade e pode ser interessante se você planeja ter múltiplos clientes. Não existe resposta universal.</p>
-    <p>No Brasil, muita gente aceita PJ “para começar” sem plano de saúde, reserva ou contador — e descobre na primeira folha de pagamento que o líquido não fecha. Antes de assinar, peça simulação por escrito, confira se há cláusula de exclusividade disfarçada e entenda o que acontece se o contrato terminar em 30 dias.</p>
-    <div class="dica"><strong>Dica:</strong> Use calculadoras online com seus números reais antes de aceitar qualquer proposta. Nunca compare bruto de PJ com bruto de CLT — é uma armadilha comum.</div>`,
-  },
-  {
-    id: 'f-soft', cat: 'carreira',
-    q: 'Soft skills importam realmente em TI?',
-    answer: `<p>Sim — mais do que a maioria dos iniciantes imagina, especialmente a partir do nível pleno. A diferença entre um dev que avança e um que fica estagnado raramente é técnica. É capacidade de comunicar decisões técnicas para não-técnicos, dar e receber feedback, estimar prazos com honestidade e trabalhar em equipe sem criar atritos desnecessários.</p>
-    <p>Promoção para senior costuma envolver liderar incidentes, negociar escopo com produto e mediar divergência entre pares — tudo isso é conversa bem feita, não só código bonito. Por isso empresas valorizam quem documenta, ensina e reduz ruído em reuniões, mesmo quando não tem o título de “líder”.</p>
-    <div class="dica"><strong>Dica:</strong> Comece pela escrita: aprenda a escrever Pull Requests bem descritos, emails técnicos claros e documentação que outras pessoas entendem. É a soft skill mais diretamente treinável.</div>`,
-  },
-  {
-    id: 'f-net', cat: 'mercado',
-    q: 'Como conseguir o primeiro emprego sem experiência?',
-    answer: `<p>Portfólio com projetos reais vale mais que certificados. Contribuição em open source vale mais que diploma. Networking ativo vale mais que envio de currículo em massa. A sequência que funciona: construa algo real e documentado, coloque no GitHub, escreva sobre o que aprendeu, participe de comunidades de devs, peça para alguém revisar seu portfólio. A maioria das primeiras vagas vem de conexão, não de processo frio.</p>
-    <p>Combine volume com qualidade: mandar 200 currículos genéricos raramente supera 20 conversas com pessoas que já trabalham na área, pedindo feedback específico sobre seu GitHub ou sobre o tipo de vaga. Eventos locais, comunidades em Discord e mentoria informal continuam sendo atalhos reais — desde que você chegue preparado, não só pedindo “indicação fácil”.</p>
-    <div class="dica"><strong>Dica:</strong> Aplique para vagas mesmo sem atender 100% dos requisitos. A lista de requisitos é um desejo, não um filtro absoluto.</div>
-    <div class="atencao"><strong>Atenção:</strong> Cuidado com cursos que prometem "emprego garantido em 6 meses". O mercado está saturado na entrada — o diferencial é qualidade de portfólio, não certificado.</div>`,
-  },
-  {
-    id: 'f-trans', cat: 'carreira',
-    q: 'Transição de carreira para TI — por onde começar?',
-    answer: `<p>Primeiro identifique a intersecção entre o que você já sabe e TI. Contador → BI e dados financeiros. Enfermeiro → health tech, UX em saúde. Professor → educação tech, design instrucional. Advogado → legal tech, gestão de produto. Entrar como dev júnior sendo pleno em outra área é um passo atrás desnecessário — use sua experiência como trunfo.</p>
-    <p>Na prática, isso significa narrar no LinkedIn e na entrevista o problema de negócio que você já resolveu antes de TI, e mostrar um projeto que automatiza ou digitaliza algo do seu domínio anterior. Recrutadores entendem muito mais “reduzi tempo de fechamento mensal em X horas” do que “fiz curso de 200 horas”.</p>
-    <div class="dica"><strong>Dica:</strong> Defina uma área-alvo dentro de TI que aproveite seu background. Construa projetos que conectem os dois mundos — isso te diferencia de qualquer iniciante puro.</div>
-    <div class="atencao"><strong>Atenção:</strong> Transição séria leva 12 a 24 meses de dedicação real. Quem promete menos está vendendo ilusão.</div>`,
-  },
-  {
-    id: 'f-ai-job', cat: 'mercado',
-    q: 'A IA vai tirar meu emprego de desenvolvedor?',
-    answer: `<p>Vai substituir quem usa ferramenta sem entender o que faz — e isso já está acontecendo. Não vai substituir quem entende o problema por baixo, sabe depurar, arquitetar sistemas e tomar decisões com contexto de negócio. IA é excelente para tarefas definidas e previsíveis. É péssima para diagnóstico de problemas ambíguos e decisões de arquitetura com contexto real.</p>
-    <p>O mercado tende a premiar quem usa IA para ganhar tempo em tarefas repetitivas, mas continua pagando bem quem assume responsabilidade por sistema em produção: incidentes, segurança, custo de cloud e trade-offs de produto não podem ser “gerados” sem alguém que assine embaixo. Por isso estudo de fundamentos e leitura de código real continuam sendo seguro de carreira.</p>
-    <div class="dica"><strong>Dica:</strong> A habilidade mais à prova de IA: saber fazer a pergunta certa. Isso exige contexto, julgamento e experiência — coisas que IA não tem.</div>
-    <div class="atencao"><strong>Atenção:</strong> Irônico: quem usa IA para aprender a programar está se tornando exatamente o tipo de dev mais facilmente substituível por IA.</div>`,
-  },
-];
-
-const SCREEN_ORDER = ['home', 'quiz', 'result', 'roadmap', 'faq', 'glossario', 'mitos'];
-const GITHUB_REPO = 'nathaliagf/devguia';
-const GOATCOUNTER_CODE = 'SEU-CODIGO';
-const QUIZ_PROGRESS_KEY = 'quiz_progress_v2';
-const EASY_READ_KEY = 'easy_read';
-const CAT_TOOLTIPS = {
-  fundamentos: 'Conceitos base que todo dev precisa dominar',
-  ferramentas: 'Ferramentas do dia a dia de desenvolvimento',
-  linguagens: 'Dúvidas sobre linguagens de programação',
-  carreira: 'Como crescer e se posicionar no mercado',
-  educação: 'Faculdade, cursos e formas de aprender',
-  mercado: 'Vagas, salários e realidade do setor',
-};
-const CAT_COLORS = {
-  geral: 'var(--purple)',
-  'front-end': 'var(--pink)',
-  'back-end': 'var(--blue)',
-  infra: 'var(--amber)',
-  fundamentos: 'var(--teal)',
-  design: 'var(--coral)',
-};
-const AREAS_INFO = {
-  front: { name: 'Front-end', desc: 'Interfaces e experiência visual do usuário' },
-  back: { name: 'Back-end', desc: 'Lógica de sistemas, APIs e dados' },
-  dados: { name: 'Dados', desc: 'Análise, métricas e insights' },
-  ux: { name: 'UX/Design', desc: 'Produto centrado na experiência de uso' },
-  infra: { name: 'Infra/Cloud', desc: 'Confiabilidade, deploy e escala' },
-  qa: { name: 'QA', desc: 'Qualidade e testes de software' },
-  ensino: { name: 'Educação Tech', desc: 'Ensino e mentoria em tecnologia' },
-};
-const RECURSOS = {
-  dev_nato: {
-    livros: [
-      { nome: 'The Pragmatic Programmer', autor: 'Hunt & Thomas', desc: 'O livro de carreira mais recomendado por devs sérios. Atemporal.' },
-      { nome: 'Clean Code', autor: 'Robert C. Martin', desc: 'Como escrever código que outras pessoas conseguem ler e manter.' },
-      { nome: 'Structure and Interpretation of Computer Programs', autor: 'Abelson & Sussman', desc: 'Gratuito online. Base de pensamento computacional.' },
-    ],
-    sites: [
-      { nome: 'roadmap.sh', url: 'https://roadmap.sh', desc: 'Guias visuais de trilhas para especialidades.' },
-      { nome: 'CS50 (Harvard)', url: 'https://cs50.harvard.edu', desc: 'Curso introdutório de ciência da computação gratuito.' },
-      { nome: 'MDN Web Docs', url: 'https://developer.mozilla.org', desc: 'Documentação de referência para web.' },
-    ],
-    comunidades: [
-      { nome: 'Dev.to', url: 'https://dev.to', desc: 'Comunidade de devs para ler e publicar artigos técnicos.' },
-      { nome: 'Lobste.rs', url: 'https://lobste.rs', desc: 'Links técnicos de alta qualidade.' },
-    ],
-  },
-  analitico: {
-    livros: [
-      { nome: 'Storytelling with Data', autor: 'Cole Nussbaumer', desc: 'Visualizações que comunicam decisões.' },
-      { nome: 'Python for Data Analysis', autor: 'Wes McKinney', desc: 'Pandas explicado por seu criador.' },
-      { nome: 'Naked Statistics', autor: 'Charles Wheelan', desc: 'Estatística aplicada sem complicação.' },
-    ],
-    sites: [
-      { nome: 'Kaggle', url: 'https://kaggle.com', desc: 'Datasets e competições para praticar análise.' },
-      { nome: 'Mode Analytics Blog', url: 'https://mode.com/blog', desc: 'Artigos práticos de SQL e análise.' },
-      { nome: 'StatQuest', url: 'https://youtube.com/@statquest', desc: 'Canal didático de estatística e ML.' },
-    ],
-    comunidades: [
-      { nome: 'r/dataengineering', url: 'https://reddit.com/r/dataengineering', desc: 'Comunidade técnica de engenharia de dados.' },
-      { nome: 'dbt Community', url: 'https://community.getdbt.com', desc: 'Fórum da ferramenta dbt.' },
-    ],
-  },
-  ux_design: {
-    livros: [
-      { nome: 'The Design of Everyday Things', autor: 'Don Norman', desc: 'Livro fundacional de design centrado no usuário.' },
-      { nome: "Don't Make Me Think", autor: 'Steve Krug', desc: 'Guia direto de usabilidade web.' },
-      { nome: 'Continuous Discovery Habits', autor: 'Teresa Torres', desc: 'Pesquisa contínua em produto.' },
-    ],
-    sites: [
-      { nome: 'Nielsen Norman Group', url: 'https://nngroup.com', desc: 'Referência em pesquisa de UX.' },
-      { nome: 'Figma Community', url: 'https://figma.com/community', desc: 'Templates e componentes para estudar design.' },
-      { nome: 'Laws of UX', url: 'https://lawsofux.com', desc: 'Leis psicológicas aplicadas a interfaces.' },
-    ],
-    comunidades: [
-      { nome: 'UX Collective', url: 'https://uxdesign.cc', desc: 'Publicação com conteúdo de UX e produto.' },
-      { nome: 'Designer Hangout', url: 'https://www.designerhangout.co', desc: 'Comunidade global de UX.' },
-    ],
-  },
-  educador: {
-    livros: [
-      { nome: 'Make It Stick', autor: 'Brown, Roediger & McDaniel', desc: 'Ciência do aprendizado eficaz.' },
-      { nome: 'Teaching Tech Together', autor: 'Greg Wilson', desc: 'Guia definitivo para ensinar tecnologia.' },
-      { nome: 'The Courage to Teach', autor: 'Parker Palmer', desc: 'Sobre identidade no ato de ensinar.' },
-    ],
-    sites: [
-      { nome: 'Teaching Tech Together', url: 'https://teachtogether.tech', desc: 'Livro e recursos gratuitos de didática tech.' },
-      { nome: 'Carpentries', url: 'https://carpentries.org', desc: 'Metodologia aberta para ensino de programação.' },
-    ],
-    comunidades: [
-      { nome: 'CodeNewbie', url: 'https://codenewbie.org', desc: 'Comunidade para iniciantes em programação.' },
-      { nome: 'Dev.to', url: 'https://dev.to', desc: 'Espaço para ensinar escrevendo conteúdo.' },
-    ],
-  },
-  infra_cloud: {
-    livros: [
-      { nome: 'The Phoenix Project', autor: 'Kim, Behr & Spafford', desc: 'Conceitos de DevOps em narrativa.' },
-      { nome: 'Site Reliability Engineering', autor: 'Google', desc: 'Como operar sistemas em produção.' },
-      { nome: 'Linux Command Line', autor: 'William Shotts', desc: 'Guia completo de linha de comando Linux.' },
-    ],
-    sites: [
-      { nome: 'Linux Journey', url: 'https://linuxjourney.com', desc: 'Linux interativo gratuito.' },
-      { nome: 'Cloud Native Landscape', url: 'https://landscape.cncf.io', desc: 'Mapa do ecossistema cloud native.' },
-      { nome: 'AWS Skill Builder', url: 'https://skillbuilder.aws', desc: 'Cursos oficiais gratuitos da AWS.' },
-    ],
-    comunidades: [
-      { nome: 'DevOps Subreddit', url: 'https://reddit.com/r/devops', desc: 'Discussões de infraestrutura e DevOps.' },
-      { nome: 'Hacker News', url: 'https://news.ycombinator.com', desc: 'Notícias técnicas de sistemas e infra.' },
-    ],
-  },
-  transicao: {
-    livros: [
-      { nome: 'So Good They Cannot Ignore You', autor: 'Cal Newport', desc: 'Carreira por competência, não por paixão.' },
-      { nome: 'The First 90 Days', autor: 'Michael Watkins', desc: 'Como entrar em um novo papel com impacto.' },
-      { nome: 'Designing Your Life', autor: 'Burnett & Evans', desc: 'Metodologia para redesenhar carreira.' },
-    ],
-    sites: [
-      { nome: 'Levels.fyi', url: 'https://levels.fyi', desc: 'Faixas salariais reais em tech.' },
-      { nome: 'Glassdoor', url: 'https://glassdoor.com', desc: 'Avaliações e salários por empresa.' },
-    ],
-    comunidades: [
-      { nome: 'cscareerquestions', url: 'https://reddit.com/r/cscareerquestions', desc: 'Relatos reais de transição para tech.' },
-      { nome: 'Women in Tech Slack', url: 'https://witchat.github.io', desc: 'Rede de apoio para mulheres em tech.' },
-    ],
-  },
-  repensar: {
-    livros: [
-      { nome: 'Thinking, Fast and Slow', autor: 'Daniel Kahneman', desc: 'Como tomamos decisões e vieses.' },
-      { nome: 'Range', autor: 'David Epstein', desc: 'Por que generalistas também triunfam.' },
-    ],
-    sites: [
-      { nome: '80,000 Hours', url: 'https://80000hours.org', desc: 'Escolha de carreira com impacto real.' },
-      { nome: 'CanalTech Carreiras', url: 'https://canaltech.com.br/carreira', desc: 'Contexto brasileiro de mercado tech.' },
-    ],
-    comunidades: [
-      { nome: 'r/brdev', url: 'https://reddit.com/r/brdev', desc: 'Comunidade brasileira com relatos de carreira.' },
-    ],
-  },
-};
-
-const GLOSSARIO = [
-  { id:'api', termo:'API', fonetico:'éi-pi-áj', categoria:'back-end', curta:'É o contrato público pelo qual um sistema expõe dados ou ações para outro programa, sem abrir o código interno. Sem APIs, cada app precisaria duplicar bancos inteiros ou integrações frágeis via telas automatizadas.', longa:'API (Application Programming Interface) descreve URLs, formatos de dados e regras de autenticação que outro time ou outro serviço deve seguir. Ela pode ser REST, GraphQL, fila de mensagens ou gRPC — o ponto comum é padronizar a conversa entre sistemas. Boas APIs versionam mudanças, documentam erros e pensam em segurança desde o primeiro dia, porque qualquer cliente externo vai confiar no comportamento documentado.', exemplo:'No delivery, ao tocar em "pagar com cartão", o app não acessa o mainframe do banco: ele chama a API de pagamentos, recebe um status e mostra o resultado. Se a API mudar sem aviso, vários apps quebram ao mesmo tempo — por isso contrato e testes importam tanto.', relacionados:['backend','deploy','servidor'] },
-  { id:'backend', termo:'Back-end', fonetico:'béki-end', categoria:'geral', curta:'É a camada que roda fora do navegador do usuário: servidores, regras de negócio, integrações e persistência. O usuário não "vê" o back-end, mas sente quando ele está lento, inconsistente ou inseguro.', longa:'Back-end recebe requisições (HTTP, filas, jobs agendados), valida permissões, fala com bancos e serviços externos e devolve respostas confiáveis. Ele também é onde moram preocupações como transações, concorrência, idempotência e auditoria. Times grandes separam camadas (API, domínio, infraestrutura), mas no início o importante é entender o fluxo ponta a ponta: pedido entra, dado é validado, efeito colateral é controlado, resposta sai.', exemplo:'Quando você redefine senha, o front só coleta o formulário; o back-end gera token seguro, envia e-mail, invalida sessões antigas e registra o evento. Se algo falhar no meio, o sistema precisa falhar de forma previsível, não corromper dados.', relacionados:['frontend','api','banco-de-dados','servidor'] },
-  { id:'frontend', termo:'Front-end', fonetico:'frónti-end', categoria:'geral', curta:'É tudo o que roda no dispositivo da pessoa: layout, estados de tela, formulários, animações e acessibilidade. Bom front-end não é só estética — é engenharia de interface que lida com latência, erros de rede e diferentes tamanhos de tela.', longa:'Front-end tradicionalmente combina HTML semântico, CSS e JavaScript, hoje frequentemente com frameworks que gerenciam estado e roteamento. O trabalho inclui performance (menos JavaScript desnecessário, imagens adequadas), compatibilidade entre navegadores e testes de usabilidade. Em produtos reais, front-end conversa com design e produto para traduzir requisitos em componentes reutilizáveis.', exemplo:'No banco pelo celular, o extrato que você vê é front-end; o saldo veio de uma API, mas quem decide como mostrar loading, retry e mensagem de erro é a camada de interface. Uma tela bonita que trava com 500 linhas na lista não passa em revisão séria.', relacionados:['backend','html','css','javascript'] },
-  { id:'deploy', termo:'Deploy', fonetico:'di-plói', categoria:'geral', curta:'É o ato de levar uma versão testada do software para um ambiente onde usuários ou outros sistemas acessam. Deploy manual existe, mas em empresas maduras ele é repetível, rastreável e reversível.', longa:'Deploy envolve empacotar artefatos (binários, assets estáticos, migrações de banco), aplicar configurações por ambiente (dev, homologação, produção) e validar saúde após publicar. Ferramentas modernas usam pipelines: build, testes, análise de segurança, liberação gradual (canary) e rollback automático se métricas piorarem. Sem disciplina de deploy, cada correção vira medo e cada sexta-feira vira apagão.', exemplo:'Você corrigiu um bug no cálculo de frete: após merge na branch principal, o pipeline publica nova versão no servidor, roda smoke tests e só então o tráfego passa a usar o build novo. Se o erro voltar, você reverte para o artefato anterior em minutos.', relacionados:['servidor','ci-cd','versionamento'] },
-  { id:'servidor', termo:'Servidor', fonetico:'ser-vi-dór', categoria:'infra', curta:'É um computador (físico ou virtual) que fica escutando pedidos de rede e responde com processamento ou arquivos. Na nuvem, "servidor" muitas vezes é uma VM, container ou função gerenciada — o conceito permanece.', longa:'Servidores rodam sistemas operacionais enxutos, serviços web (como nginx), runtimes de linguagem e agentes de monitoramento. Eles precisam de endereço IP, DNS, certificados TLS e políticas de firewall. Em escala, você pensa em balanceamento de carga, saúde das instâncias e custo por hora — por isso infra não é só "subir uma máquina", é operação contínua.', exemplo:'Quando mil pessoas abrem o mesmo site ao mesmo tempo, várias instâncias de servidor atrás de um load balancer dividem o tráfego. Se uma instância morre, o balanceador para de enviar requisições para ela e sobe outra.', relacionados:['backend','deploy','cloud','devops'] },
-  { id:'banco-de-dados', termo:'Banco de dados', fonetico:'', categoria:'back-end', curta:'É o sistema onde dados duráveis ficam organizados, indexados e protegidos por regras (tipos, constraints, transações). Sem banco bem modelado, o aplicativo vira planilha compartilhada com concorrência e perda de informação.', longa:'Bancos relacionais (PostgreSQL, MySQL) usam tabelas e SQL; NoSQL (MongoDB, Redis) favorecem documentos, chave-valor ou grafos conforme o caso. A escolha impacta consistência, velocidade de leitura e complexidade de consultas. Migrações de esquema, backups e replicação fazem parte do trabalho real — não só "criar tabela" uma vez.', exemplo:'Em e-commerce, estoque e pedidos precisam ser transacionais: dois clientes não podem comprar o último item ao mesmo tempo sem regra no banco. O back-end escreve em transação; se falhar, nada fica pela metade.', relacionados:['backend','sql','api'] },
-  { id:'framework', termo:'Framework', fonetico:'fréimi-uórki', categoria:'geral', curta:'É um esqueleto opinativo que define como organizar pastas, rotas, injeção de dependências e ciclo de vida da aplicação. Você preenche os vazios; o framework chama seu código nos momentos certos.', longa:'Frameworks aceleram porque já resolvem problemas comuns: roteamento, autenticação, ORM, build e testes. O custo é acoplar decisões ao ecossistema escolhido e acompanhar atualizações. Biblioteca, em contraste, você chama quando precisa; framework costuma inverter o controle. Escolher errado no início não é tragédia, mas trocar depois dói — por isso times documentam critérios de escolha.', exemplo:'Em vez de configurar servidor HTTP do zero, você usa Express ou Fastify em Node, ou Django em Python, e foca nas rotas do seu domínio. O framework já traz middlewares, parsing de JSON e convenções de erro.', relacionados:['frontend','backend','biblioteca'] },
-  { id:'biblioteca', termo:'Biblioteca (lib)', fonetico:'', categoria:'geral', curta:'É código reutilizável que você importa para uma tarefa pontual: datas, validação, gráficos, HTTP client. Você decide quando chamar; a biblioteca não manda na arquitetura inteira.', longa:'Bibliotecas bem mantidas têm semver, changelog e testes; ruins viram dívida técnica silenciosa. Em JavaScript, npm distribui pacotes — sempre verifique licença, tamanho no bundle e última atualização. Combinar dezenas de libs pequenas sem critério explode a superfície de vulnerabilidades e o tempo de build.', exemplo:'Para formatar moeda em real e timezone de Brasília, uma lib como date-fns ou Intl API evita reimplementar calendário. Você importa a função, usa no componente e segue — sem precisar de framework novo.', relacionados:['framework','javascript','frontend'] },
-  { id:'versionamento', termo:'Controle de versão (Git)', fonetico:'', categoria:'geral', curta:'É o sistema que registra cada mudança no código: quem alterou, quando e por quê. Git é o padrão de mercado; hospedar no GitHub/GitLab é só camada colaborativa em cima.', longa:'Com Git você cria branches para features, revisa diffs antes de integrar e volta no tempo quando necessário. Fluxos como trunk-based ou Gitflow organizam como merges acontecem. Integração com CI roda testes a cada push — sem versionamento, isso simplesmente não existe de forma confiável.', exemplo:'Você quebrou produção sexta à noite: o histórico mostre o commit culpado, você abre revert ou hotfix branch, e o time discute em PR o que aprender. Sem Git, você caça cópia "final_v2_really.zip".', relacionados:['deploy','ci-cd','open-source'] },
-  { id:'open-source', termo:'Open source', fonetico:'ópen-sórs', categoria:'geral', curta:'É software cujo código-fonte é público sob licença que permite estudar, modificar e redistribuir — dentro de regras legais claras. Não confundir com "grátis": muitas empresas lucram com suporte e serviços em cima de open source.', longa:'Projetos como Linux, Kubernetes e React movem a indústria porque milhares de olhos acham bugs e porque empresas compartilham custo de manutenção. Contribuir com documentação ou testes já conta como participação legítima. Entender licenças (MIT, Apache, GPL) evita surpresas quando você incorpora código em produto comercial.', exemplo:'Sua empresa usa PostgreSQL sem pagar licença, mas paga consultoria e suporte. O código é aberto; a operação 24x7 com SLA é que tem preço.', relacionados:['versionamento','cloud','devops'] },
-  { id:'cloud', termo:'Cloud (nuvem)', fonetico:'cláudi', categoria:'infra', curta:'É consumir computação, armazenamento e rede como serviço pago pelo uso, em vez de comprar hardware próprio. AWS, GCP e Azure são os grandes provedores; há também opções menores e especializadas.', longa:'Na cloud você provisiona máquinas em minutos, anexa discos, configura VPC e integra serviços gerenciados (banco, fila, CDN). O modelo shifta custo de CAPEX para OPEX e exige disciplina financeira: recursos esquecidos geram conta alta. Boas equipes usam infraestrutura como código (Terraform, Pulumi) para não clicar manualmente em console.', exemplo:'Black Friday: auto scaling adiciona instâncias quando CPU sobe e reduz depois do pico. Em datacenter próprio, você teria capacidade ociosa o ano inteiro ou risco de queda no pico.', relacionados:['servidor','deploy','devops','ci-cd'] },
-  { id:'devops', termo:'DevOps', fonetico:'dévi-ops', categoria:'infra', curta:'É cultura e prática de encurtar o caminho entre ideia e produção, com feedback rápido e responsabilidade compartilhada. Não é um cargo único em todos os lugares — às vezes é time de plataforma, às vezes há SRE separado.', longa:'DevOps incentiva automação de build, testes, deploy, observabilidade (logs, métricas, traces) e postmortem sem culpar indivíduo. Ferramentas são meio: Docker, Kubernetes, GitHub Actions, Prometheus. O fim é reduzir lead time e aumentar confiabilidade percebida pelo usuário.', exemplo:'Antes, deploy era evento mensal com checklist de medo; depois de DevOps maduro, deploys pequenos e frequentes reduzem risco porque mudanças são isoladas e monitoradas.', relacionados:['deploy','cloud','ci-cd','servidor'] },
-  { id:'ci-cd', termo:'CI/CD', fonetico:'si-áj / si-di', categoria:'infra', curta:'CI integra código novo continuamente e roda verificações automáticas; CD estende isso até entrega ou deploy, quando os gates de qualidade passam. Juntos, reduzem surpresas na véspera de release.', longa:'Pipeline típico: lint, testes unitários, build, análise de segurança (SAST), publicação de artefato e promoção entre ambientes. CD pode ser "delivery" (humano aprova) ou "deployment" totalmente automático. Sem CI, bugs regressivos voltam sem ser notados; sem CD, correções urgentes demoram horas por burocracia manual.', exemplo:'Cada pull request roda 200 testes em minutos; merge na main gera imagem Docker versionada e atualiza homologação. Produção só recebe tag aprovada pelo time — com botão ou política automática.', relacionados:['deploy','devops','versionamento'] },
-  { id:'html', termo:'HTML', fonetico:'éitch-ti-émi-éli', categoria:'front-end', curta:'É a camada de marcação que dá estrutura e significado ao conteúdo: títulos, listas, formulários, landmarks para leitores de tela. HTML não é linguagem de lógica — combina com CSS e JS.', longa:'HTML5 trouxe tags semânticas (header, nav, main, article) que melhoram SEO e acessibilidade. Atributos como alt em imagens e labels em inputs não são detalhe cosmético: são requisitos legais e de inclusão em muitos mercados. Validar HTML ajuda a evitar comportamento estranho entre navegadores.', exemplo:'Um botão deve ser <button>, não <div> com onclick, para funcionar com teclado e leitor de tela. Pequenas escolhas de marcação definem se seu produto é profissional ou frágil.', relacionados:['css','javascript','frontend'] },
-  { id:'css', termo:'CSS', fonetico:'si-és-és', categoria:'front-end', curta:'É a folha de estilo que controla aparência e, em parte, layout responsivo: cores, tipografia, grid, flexbox, animações. CSS "simples" esconde anos de pegadinhas entre navegadores e especificidade.', longa:'Design systems modernos usam tokens, variáveis e componentes para manter consistência. Performance importa: seletores pesados, animações que disparam layout thrashing e imagens sem tamanho definido prejudicem Core Web Vitals. Pré-processadores (Sass) e frameworks (Tailwind) são opcionais — o fundamento é o cascade e o box model.', exemplo:'Mesmo conteúdo HTML pode virar layout mobile-first com media queries: menu vira ícone, colunas viram pilha, fonte aumenta para leitura confortável. Isso é trabalho de CSS, não só "deixar bonito no Figma".', relacionados:['html','javascript','frontend'] },
-  { id:'javascript', termo:'JavaScript', fonetico:'djéva-escrípt', categoria:'front-end', curta:'É a linguagem que roda nos navegadores para eventos, estado e comunicação com APIs; com Node.js, também roda em servidores e ferramentas de build. Ecossistema enorme exige curadoria do que você instala.', longa:'JS moderno (ES modules, async/await, fetch) simplifica código assíncrono, mas exige entender promises e fila de eventos. Tipagem opcional com TypeScript reduz bugs em projetos médios e grandes. Bundlers (Vite, Webpack) transformam e otimizam código para produção.', exemplo:'Ao digitar em uma busca, JS debounce evita disparar requisição a cada tecla; ao receber JSON da API, JS atualiza o DOM ou framework reativo re-renderiza só o necessário.', relacionados:['html','css','frontend','api'] },
-  { id:'sql', termo:'SQL', fonetico:'és-quiú-éli', categoria:'back-end', curta:'É a linguagem declarativa para consultar e transformar dados em bancos relacionais. Você descreve o que quer; o otimizador do banco pensa em como buscar.', longa:'SQL cobre SELECT com JOINs, agregações, subconsultas, transações (BEGIN/COMMIT) e DDL (CREATE TABLE). Boas consultas usam índices adequados; más consultas travam produção com full table scan. ORMs ajudam, mas em performance crítica o SQL manual volta.', exemplo:'Relatório de vendas por região no último trimestre: você junta pedidos, clientes e filiais em uma query, filtra por data e agrupa. Errar JOIN duplica linhas e infla números — por isso analistas revisam plano de execução.', relacionados:['banco-de-dados','backend','algoritmo'] },
-  { id:'algoritmo', termo:'Algoritmo', fonetico:'al-go-rít-mo', categoria:'fundamentos', curta:'É uma receita finita e não ambígua que transforma entrada em saída. Em entrevistas, pedem algoritmos não por sadismo, mas para ver se você raciocina sobre custo e casos extremos.', longa:'Analisar complexidade (Big O) responde como tempo e memória crescem quando o input dobra. Estruturas de dados (filas, heaps, árvores) escolhidas certas tornam operações baratas. No trabalho diário, algoritmo aparece em caches, agendadores, deduplicação e roteamento — não só em exercícios de livro.', exemplo:'Encontrar duplicatas em milhões de registros: hash set O(n) bate força bruta O(n²). Escolher errado significa job que rodava em minutos passar a rodar em horas.', relacionados:['sql','debug','javascript'] },
-  { id:'debug', termo:'Debug (depuração)', fonetico:'di-bágui', categoria:'geral', curta:'É o processo sistemático de reproduzir falha, isolar causa e provar a correção. Boa depuração mistura leitura de stack trace, logs, breakpoints e hipóteses testáveis.', longa:'Debug não é "tentar coisas até funcionar" indefinidamente — é reduzir o espaço de busca. Você bissecta commits, minimiza caso de teste e adiciona instrumentação temporária. Em sistemas distribuídos, correlacionar request IDs entre serviços é parte do ofício. Documentar a causa raiz evita que o bug volte disfarçado.', exemplo:'Produção retorna 500 só para alguns usuários: você compara payload, descobre string vazia onde número era esperado, adiciona validação no back-end e teste de regressão. Sem debug disciplinado, alguém coloca if espalhado que mascara o sintoma.', relacionados:['algoritmo','backend','javascript'] },
-  { id:'ux', termo:'UX (User Experience)', fonetico:'iú-éks', categoria:'design', curta:'É o efeito combinado de usabilidade, performance percebida, copy e confiança ao longo da jornada. UX não é só wireframe bonito — é reduzir erro humano e ansiedade em tarefas reais.', longa:'Pesquisa com usuários, testes de usabilidade e métricas (taxa de conclusão, tempo na tarefa) informam decisões. UX trabalha com acessibilidade, design de informação e feedback de sistema (loading, erros recuperáveis). Em squads, UX negocia trade-offs com engenharia: nem todo polimento vale o custo de implementação agora.', exemplo:'Formulário de cadastro longo gera abandono; UX propõe dividir em passos, salvar rascunho e mostrar progresso. Engenharia implementa validação inline e mensagens claras — resultado medido em conversão.', relacionados:['frontend','html','css'] },
-];
-
-const MITOS = [
-  { id:'m1', afirmacao:'Programador ganha 30k por mês logo de cara', veredicto:'mito', curta:'No Brasil, a maioria dos primeiros empregos paga faixas bem menores que os números virais de redes sociais; salários altos existem, mas costumam exigir anos de experiência, inglês ou empresa internacional.', explicacao:'Os 30 mil de influencer quase sempre misturam remuneração total, senioridade ou vaga no exterior. Para júnior local, é mais realista pensar em evolução em etapas: primeiro estágio ou primeira CLT, depois troca com portfólio forte. Comparar-se só com exceções gera ansiedade e decisões financeiras ruins (bootcamp caro sem reserva).', fonte:'State of JS, Stack Overflow Developer Survey e Glassdoor Brasil.' },
-  { id:'m2', afirmacao:'Qualquer um aprende a programar em 3 meses', veredicto:'mito', curta:'Em três meses dá para aprender sintaxe e clonar tutoriais; isso não é o mesmo que sustentar um sistema real com bugs, prazos e código de outras pessoas.', explicacao:'O mercado paga por resolver problemas novos, ler documentação técnica e se comunicar com time — habilidades que levam meses de prática deliberada. Cursos que prometem "mercado em 90 dias" costumam entregar conteúdo, não maturidade. Por isso projetos próprios pequenos, revisão de código alheio e estágio/mentoria ainda são os atalhos mais honestos.', fonte:null },
-  { id:'m3', afirmacao:'Não precisa de matemática para programar', veredicto:'mito', curta:'Você raramente usa integral na web, mas usa lógica, contagem, conjuntos e raciocínio sobre custo de algoritmo o tempo todo — só não chama de "matemática de prova".', explicacao:'Condições, loops aninhados, consultas SQL com JOIN e análise de dados exigem pensamento estruturado. Quem ignora isso fica preso em código que "funciona no exemplo" e quebra em escala. O caminho sensato é fortalecer bases com problemas reais, não decorar fórmulas sem contexto.', fonte:null },
-  { id:'m4', afirmacao:'Faculdade de TI é perda de tempo', veredicto:'depende', curta:'Faculdade forte dá rede, fundamentos e ritmo de entrega que cursinho isolado não replica; faculdade fraca pode ser diploma caro com pouco retorno prático.', explicacao:'O que importa é corpo docente ativo, grade atualizada e alunos construindo projeto — não o nome na parede sozinho. Quem não faz faculdade precisa substituir isso com disciplina feroz, comunidade e portfólio auditável; quem faz faculdade ruim sem se esforçar também sai despreparado. A decisão é financeira e de perfil, não religião de mercado.', fonte:null },
-  { id:'m5', afirmacao:'IA vai substituir programadores em breve', veredicto:'parcial', curta:'IA acelera quem já sabe avaliar resultado; ela não elimina responsabilidade por segurança, arquitetura e consequências de negócio.', explicacao:'Automatizar CRUD ou boilerplate é diferente de manter legado crítico, negociar trade-off com produto ou apagar incêndio em produção com logs incompletos. Profissionais que só aceitam código sem entender ficam mais vulneráveis — com ou sem IA. O antídoto continua sendo fundamentos, leitura de código e prática de depuração.', fonte:'https://survey.stackoverflow.co/' },
-  { id:'m6', afirmacao:'É preciso ter computador caro para aprender a programar', veredicto:'mito', curta:'Para trilhas web e Python iniciais, 8 GB de RAM e SSD já permitem anos de estudo; o gargalo costuma ser consistência, não MHz.', explicacao:'Exceções existem: edição de vídeo pesada, modelos locais grandes ou Android nativo podem exigir mais. Mas a maioria dos iniciantes pode usar ambientes online, WSL ou máquinas modestas até clarificar objetivo. Gastar antes de formar hábito de estudo é má alocação de dinheiro.', fonte:null },
-  { id:'m7', afirmacao:'Inglês fluente é obrigatório para trabalhar em TI', veredicto:'depende', curta:'Ler documentação e issues em inglês é quase inevitável; já falar fluentemente depende se você mira empresa nacional, remota BR ou exterior.', explicacao:'Muitas empresas brasileiras operam em português no dia a dia, mas ainda assim você vai depender de material técnico em inglês. Para dólar/euro, conversação e escrita viram filtro duro. Estratégia comum: fortalecer leitura primeiro e praticar conversação quando o objetivo de carreira internacional ficar claro.', fonte:null },
-  { id:'m8', afirmacao:'Front-end é mais fácil que back-end', veredicto:'mito', curta:'Front tem complexidade visível (layout, acessibilidade, performance); back tem complexidade invisível (consistência, segurança, escala) — nenhum lado é "só mais fácil".', explicacao:'Achar front fácil porque "dá para ver na hora" ignora CSS difícil, estados assíncronos e compatibilidade. Achar back fácil porque "não tem pixel" ignora transações, filas e observabilidade. Escolha pela curiosidade que sustenta anos, não por meme de internet.', fonte:null },
-  { id:'m9', afirmacao:'Certificações valem mais que experiência prática', veredicto:'mito', curta:'Certificado pode abrir triagem de RH, mas time técnico quer ver decisões suas em código, não só selo de curso.', explicacao:'Há certificações respeitadas em cloud e segurança porque o exame é difícil — mesmo assim elas complementam, não substituem portfólio. Para iniciante, três projetos explicáveis costumam vencer dez certificados genéricos. Combine os dois se fizer sentido financeiro, mas não confunda papel com competência demonstrada.', fonte:null },
-  { id:'m10', afirmacao:'Programar é trabalho solitário', veredicto:'mito', curta:'Há foco individual, mas o trabalho profissional inclui alinhamento, revisão de código, pareamento e escrita de especificação — silêncio total é exceção, não regra.', explicacao:'Quem não comunica bem trava promoção porque não consegue negociar escopo nem explicar risco. Por isso soft skills aparecem em toda vaga sênior: não é modinha de RH, é custo real de coordenação em time. Aprender a escrever bem é treinável e tem ROI alto.', fonte:null },
-  { id:'m11', afirmacao:'Você precisa saber tudo antes de aplicar para vagas', veredicto:'mito', curta:'Listas de requisitos descrevem o candidato idealizado; contratações reais aceitam gaps quando há aprendizado rápido e base sólida.', explicacao:'Esperar 100% de aderência é receita para nunca enviar currículo. O equilíbrio é candidatar com honestidade: mostrar o que sabe, o que está estudando e um projeto que prove execução. Feedback de entrevista — mesmo negativo — vale ouro para priorizar estudo.', fonte:null },
-  { id:'m12', afirmacao:'Trabalho remoto em TI é fácil de conseguir logo no início', veredicto:'parcial', curta:'Remoto existe, mas vagas júnior remotas disputam candidatos de vários estados; sem portfólio ou indicação, a fila é longa.', explicacao:'Empresas que pagam bem em remoto esperam autonomia, comunicação escrita e às vezes overlap de fuso. Presencial ou híbrido pode ser porta de entrada mais realista para primeiro emprego. Depois de 1–2 anos com entregas comprovadas, o remoto internacional fica mais plausível.', fonte:null },
-];
-
-// ============================================================
-// NAVIGATION
-// ============================================================
-function navigate(screen) { go(screen, 'fade'); }
-
-function navigateLink(event, screen) {
-  event.preventDefault();
-  go(screen, 'fade');
-}
-
-function syncHashForNav(destino, options = {}) {
-  if (destino === 'result') return;
-  const base = location.pathname + location.search;
-  if (destino === 'home') {
-    if (location.hash && !location.hash.startsWith('#result=')) history.replaceState(null, '', base);
-    return;
-  }
-  const suffix = options.hashSuffix ? '/' + options.hashSuffix : '';
-  const target = '#' + destino + suffix;
-  if (location.hash !== target) history.replaceState(null, '', base + target);
-}
-
-function focusScreenMain(destino) {
-  const section = document.getElementById('screen-' + destino);
-  if (!section) return;
-  const el = section.querySelector('h1') || section.querySelector('.section-header h2');
-  if (!el) return;
-  if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
-  el.focus({ preventScroll: true });
-}
-
-function go(destino, forceDirection = null, options = {}) {
-  document.getElementById('mobileMenu')?.classList.remove('open');
-  document.querySelector('.nav-hamburger')?.setAttribute('aria-expanded', 'false');
-
-  const atual = state.currentScreen;
-  const idxAtual = SCREEN_ORDER.indexOf(atual);
-  const idxDest = SCREEN_ORDER.indexOf(destino);
-  let animClass = 'enter-fade';
-  if (forceDirection === 'forward' || (forceDirection === null && idxDest > idxAtual)) animClass = 'enter-right';
-  if (forceDirection === 'back' || (forceDirection === null && idxDest < idxAtual)) animClass = 'enter-left';
-
-  document.querySelectorAll('.screen').forEach(el => el.classList.remove('active', 'enter-right', 'enter-left', 'enter-fade'));
-  const next = document.getElementById('screen-' + destino);
-  if (!next) return;
-  if (destino === 'faq' && !options.keepListState) state.openFaqId = null;
-  if (destino === 'glossario' && !options.keepListState) state.openGlossarioId = null;
-  if (destino === 'mitos' && !options.keepListState) state.openMitoId = null;
-
-  next.classList.add('active', animClass);
-  state.currentScreen = destino;
-  document.querySelectorAll('.nav-tab[data-screen]').forEach(t => {
-    const isActive = t.dataset.screen === destino;
-    t.classList.toggle('active', isActive);
-    if (isActive) t.setAttribute('aria-current', 'page');
-    else t.removeAttribute('aria-current');
-  });
-  if (destino === 'quiz') renderQuizEntry();
-  if (destino === 'roadmap') renderRoadmap();
-  if (destino === 'faq') renderFaq();
-  if (destino === 'glossario') renderGlossario();
-  if (destino === 'mitos') renderMitos();
-  window.scrollTo(0, 0);
-  if (!options.skipHashSync) syncHashForNav(destino, { hashSuffix: options.hashSuffix || null });
-  if (destino !== 'result') requestAnimationFrame(() => focusScreenMain(destino));
-}
-
-function applyHashRoute(options = {}) {
-  const raw = (location.hash || '').replace(/^#/, '');
-  if (raw.startsWith('result=')) return;
-  if (!raw || raw === 'home') {
-    go('home', 'fade', { skipHashSync: true });
-    return;
-  }
-  const parts = raw.split('/').map(s => s.trim()).filter(Boolean);
-  const base = parts[0];
-  const rest = parts[1] || null;
-  const simpleScreens = ['quiz', 'roadmap', 'faq', 'glossario', 'mitos'];
-  if (!simpleScreens.includes(base)) {
-    go('home', 'fade', { skipHashSync: true });
-    return;
-  }
-  if (!rest) {
-    go(base, 'fade', { skipHashSync: true });
-    return;
-  }
-  if (base === 'faq') {
-    go('faq', 'fade', { skipHashSync: true });
-    setTimeout(() => openFaqItem(rest, { skipNav: true }), 50);
-  } else if (base === 'glossario') {
-    go('glossario', 'fade', { skipHashSync: true });
-    setTimeout(() => {
-      state.openGlossarioId = rest;
-      renderGlossario();
-      document.getElementById('gi-' + rest)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 50);
-  } else if (base === 'mitos') {
-    go('mitos', 'fade', { skipHashSync: true });
-    setTimeout(() => {
-      state.openMitoId = rest;
-      renderMitos();
-      document.getElementById('mito-' + rest)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    }, 50);
-  } else if (base === 'roadmap') {
-    go('roadmap', 'fade', { skipHashSync: true });
-    setTimeout(() => openRoadmapPhase(rest, { skipNav: true }), 50);
-  } else {
-    go(base, 'fade', { skipHashSync: true });
-  }
-}
-
-function openRoadmapPhase(phaseId, options = {}) {
-  if (!options.skipNav) go('roadmap', 'forward');
-  const open = () => {
-    const item = document.getElementById('phase-' + phaseId);
-    if (!item) return;
-    document.querySelectorAll('.phase-item.open').forEach(el => {
-      el.classList.remove('open');
-      const h = el.querySelector('.phase-header');
-      if (h) h.setAttribute('aria-expanded', 'false');
-    });
-    item.classList.add('open');
-    const hdr = item.querySelector('.phase-header');
-    if (hdr) hdr.setAttribute('aria-expanded', 'true');
-    item.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    const base = location.pathname + location.search;
-    history.replaceState(null, '', base + '#roadmap/' + phaseId);
-  };
-  if (options.skipNav) setTimeout(open, 30);
-  else setTimeout(open, 60);
-}
-
-function scrollToMainTop() {
-  window.scrollTo({ top: 0, behavior: 'smooth' });
-  const m = document.getElementById('main-content');
-  if (m) m.focus({ preventScroll: true });
-}
-
-function initBackToTop() {
-  const btn = document.getElementById('backToTop');
-  if (!btn) return;
-  const onScroll = () => btn.classList.toggle('visible', window.scrollY > 360);
-  onScroll();
-  window.addEventListener('scroll', onScroll, { passive: true });
-}
-
-function toggleMobileMenu() {
-  const menu = document.getElementById('mobileMenu');
-  const btn = document.querySelector('.nav-hamburger');
-  const isOpen = menu.classList.toggle('open');
-  btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-}
-
-function getTodayLocalIso() {
-  const now = new Date();
-  const offsetMs = now.getTimezoneOffset() * 60000;
-  return new Date(now.getTime() - offsetMs).toISOString().slice(0, 10);
-}
-
-// ============================================================
-// QUIZ
-// ============================================================
-function salvarProgresso() {
-  localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify({
-    currentQuestion: state.currentQuestion,
-    answers: state.answers,
-    timestamp: Date.now(),
-  }));
-}
-
-function restaurarProgresso() {
-  try {
-    const salvo = localStorage.getItem(QUIZ_PROGRESS_KEY);
-    if (!salvo) return false;
-    const data = JSON.parse(salvo);
-    if (Date.now() - data.timestamp > 2592000000) {
-      localStorage.removeItem(QUIZ_PROGRESS_KEY);
-      return false;
-    }
-    return data;
-  } catch {
-    return false;
-  }
-}
-
-function limparProgresso() { localStorage.removeItem(QUIZ_PROGRESS_KEY); }
-
-function recomputeScoresFromAnswers() {
-  state.scores = {};
-  Object.entries(state.answers).forEach(([qid, idx]) => {
-    const q = QUESTIONS.find(item => item.id === qid);
-    if (!q || q.options[idx] === undefined) return;
-    Object.entries(q.options[idx].scores).forEach(([k, v]) => {
-      state.scores[k] = (state.scores[k] || 0) + v;
-    });
-  });
-}
-
-function renderQuizEntry() {
-  const saved = restaurarProgresso();
-  if (!saved) return initQuiz();
-  const quizCard = document.getElementById('quizCard');
-  document.getElementById('btnBack').style.visibility = 'hidden';
-  document.getElementById('btnNext').style.visibility = 'hidden';
-  document.getElementById('quizCounter').textContent = '';
-  quizCard.innerHTML = `
-    <div class="resume-card">
-      <div class="resume-card-title">Você tem um diagnóstico em andamento</div>
-      <div class="resume-card-copy">Você estava na pergunta ${Math.min((saved.currentQuestion || 0) + 1, QUESTIONS.length)} de ${QUESTIONS.length}. O progresso fica salvo neste navegador por até 30 dias. Quer retomar de onde parou?</div>
-      <div style="display:flex;gap:8px;">
-        <button class="btn btn-primary" onclick="continuarQuiz()">Continuar</button>
-        <button class="btn btn-ghost" onclick="recomecarQuiz()">Começar do zero</button>
-      </div>
-    </div>
-  `;
-}
-
-function continuarQuiz() {
-  const saved = restaurarProgresso();
-  if (!saved) return initQuiz();
-  state.currentQuestion = Math.max(0, Math.min(saved.currentQuestion || 0, QUESTIONS.length - 1));
-  state.answers = saved.answers || {};
-  recomputeScoresFromAnswers();
-  document.getElementById('btnBack').style.visibility = 'visible';
-  document.getElementById('btnNext').style.visibility = 'visible';
-  renderQuestion();
-}
-
-function recomecarQuiz() {
-  limparProgresso();
-  initQuiz();
-}
-
-function initQuiz() {
-  state.currentQuestion = 0;
-  state.answers = {};
-  state.scores = {};
-  state.profileKey = null;
-  document.getElementById('btnBack').style.visibility = 'visible';
-  document.getElementById('btnNext').style.visibility = 'visible';
-  renderQuestion();
-}
-
-function renderQuestion() {
-  const q = QUESTIONS[state.currentQuestion];
-  const block = BLOCKS[q.block];
-  const chipClass = block.chip;
-  const pct = Math.round((state.currentQuestion / QUESTIONS.length) * 100);
-
-  const bar = document.getElementById('progressBar');
-  const wrap = document.getElementById('progressbarWrap');
-  bar.style.width = pct + '%';
-  wrap.setAttribute('aria-valuenow', pct);
-
-  document.getElementById('quizCounter').textContent =
-    (state.currentQuestion + 1) + ' de ' + QUESTIONS.length;
-
-  const selected = state.answers[q.id];
-  const isLast = state.currentQuestion === QUESTIONS.length - 1;
-
-  const btnNext = document.getElementById('btnNext');
-  btnNext.textContent = isLast ? 'Ver resultado →' : 'Próxima →';
-  btnNext.disabled = selected === undefined;
-
-  const btnBack = document.getElementById('btnBack');
-  btnBack.style.visibility = state.currentQuestion === 0 ? 'hidden' : 'visible';
-
-  const optionsHtml = q.options.map((opt, i) =>
-    `<button class="quiz-option${selected === i ? ' selected' : ''}" onclick="selectOption(${i})">${opt.text}</button>`
-  ).join('');
-
-  document.getElementById('quizCard').innerHTML = `
-    <div class="quiz-block-chip">
-      <span class="chip ${chipClass}">${q.block}</span>
-    </div>
-    <div class="quiz-q-text">${q.text}</div>
-    ${q.hint ? `<div class="quiz-q-hint">${q.hint}</div>` : ''}
-    <div class="quiz-options">${optionsHtml}</div>
-  `;
-}
-
-function selectOption(idx) {
-  const q = QUESTIONS[state.currentQuestion];
-  state.answers[q.id] = idx;
-  salvarProgresso();
-  document.getElementById('btnNext').disabled = false;
-  document.querySelectorAll('.quiz-option').forEach((el, i) => {
-    el.classList.toggle('selected', i === idx);
-  });
-}
-
-function quizNext() {
-  const q = QUESTIONS[state.currentQuestion];
-  if (state.answers[q.id] === undefined) return;
-
-  const opt = q.options[state.answers[q.id]];
-  Object.entries(opt.scores).forEach(([k, v]) => {
-    state.scores[k] = (state.scores[k] || 0) + v;
-  });
-
-  if (state.currentQuestion < QUESTIONS.length - 1) {
-    state.currentQuestion++;
-    salvarProgresso();
-    renderQuestion();
-  } else {
-    state.profileKey = calcularPerfil(state.scores);
-    showResult(state.scores, state.profileKey);
-  }
-}
-
-function quizBack() {
-  if (state.currentQuestion === 0) return go('home', 'back');
-  const prevQ = QUESTIONS[state.currentQuestion];
-  const prevOpt = prevQ.options[state.answers[prevQ.id]];
-  if (prevOpt) {
-    Object.entries(prevOpt.scores).forEach(([k, v]) => {
-      state.scores[k] = (state.scores[k] || 0) - v;
-      if (state.scores[k] <= 0) delete state.scores[k];
-    });
-  }
-  delete state.answers[prevQ.id];
-  state.currentQuestion--;
-  salvarProgresso();
-  renderQuestion();
-}
-
-// ============================================================
-// PROFILE ALGORITHM
-// ============================================================
-function calcularPerfil(scores) {
-  const get = k => scores[k] || 0;
-  const bloqueio = get('bloqueio') + get('estresse');
-  const vocacao  = get('vocacao') + get('foco') + get('autodidata');
-
-  if (bloqueio >= 6 && vocacao < 3)              return 'repensar';
-  if (get('ensino') >= 4 && get('social') >= 4)  return 'educador';
-  if (get('transicao') >= 2)                     return 'transicao';
-  if (get('ux') >= 3 && get('criativo') >= 4)    return 'ux_design';
-  if (get('dados') >= 4 && get('analitico') >= 3) return 'analitico';
-  if (get('infra') >= 3 && get('back') >= 2)     return 'infra_cloud';
-  return 'dev_nato';
-}
-
-// ============================================================
-// RESULT
-// ============================================================
-function encodeResult(scores, profileKey) {
-  const payload = JSON.stringify({ s: scores, p: profileKey, v: 1 });
-  return btoa(unescape(encodeURIComponent(payload)));
-}
-
-function decodeResult(hash) {
-  try {
-    const encoded = hash.replace(/^#?result=/, '');
-    const decoded = decodeURIComponent(escape(atob(encoded)));
-    return JSON.parse(decoded);
-  } catch {
-    return null;
-  }
-}
-
-function getAreaScores(scores) {
-  const get = k => scores[k] || 0;
-  return [
-    ['front', get('front') + get('criativo') + get('ux')],
-    ['back', get('back') + get('logica') + get('analitico')],
-    ['dados', get('dados') + get('analitico') + get('logica')],
-    ['ux', get('ux') + get('criativo') + get('social')],
-    ['infra', get('infra') + get('back') + get('logica')],
-    ['qa', get('qa') + get('analitico') + get('pratico')],
-    ['ensino', get('ensino') + get('social') + get('vocacao')],
-  ].sort((a, b) => b[1] - a[1]).slice(0, 4);
-}
-
-function gerarTextoResultado(profileKey, areasSorted, shareUrl) {
-  const prof = PROFILES[profileKey];
-  const emojisFit = ['🥇', '🥈', '🥉', ''];
-  const areasTexto = areasSorted.map(([k], i) => `${emojisFit[i] || '-'} ${AREAS_INFO[k].name} — ${AREAS_INFO[k].desc}`).join('\n- ');
-  const passosTexto = prof.steps.map(s => `- ${s}`).join('\n');
-  return `# Meu resultado no devguia.dev\n\n**Perfil:** ${prof.name} ${prof.icon}\n**${prof.sub}**\n\n${prof.desc}\n\n## Compatibilidade por área\n- ${areasTexto}\n\n## Próximos passos recomendados\n${passosTexto}\n\n---\nFaça o seu diagnóstico gratuito: ${shareUrl}`;
-}
-
-function copyText(text) {
-  if (navigator.clipboard && window.isSecureContext) return navigator.clipboard.writeText(text);
-  return new Promise((resolve, reject) => {
-    try {
-      const ta = document.createElement('textarea');
-      ta.value = text;
-      document.body.appendChild(ta);
-      ta.select();
-      document.execCommand('copy');
-      document.body.removeChild(ta);
-      resolve();
-    } catch (e) { reject(e); }
-  });
-}
-
-function trackDiagnostico(profileKey) {
-  if (sessionStorage.getItem('diagnostico_tracked')) return;
-  if (window.goatcounter && window.goatcounter.count) {
-    window.goatcounter.count({
-      path: 'diagnostico-completo',
-      title: 'Diagnóstico completo — perfil: ' + profileKey,
-      event: true,
-    });
-    sessionStorage.setItem('diagnostico_tracked', '1');
-  }
-}
-
-function buildRecursoCardsHtml(profile, tabKey) {
-  const data = RECURSOS[profile.key] || { livros: [], sites: [], comunidades: [] };
-  return (data[tabKey] || []).map(item => {
-    if (item.url) return `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="recurso-card"><div class="recurso-nome">${item.nome}</div>${item.autor ? `<div class="recurso-autor">${item.autor}</div>` : ''}<div class="recurso-desc">${item.desc}</div></a>`;
-    return `<div class="recurso-card"><div class="recurso-nome">${item.nome}</div>${item.autor ? `<div class="recurso-autor">${item.autor}</div>` : ''}<div class="recurso-desc">${item.desc}</div></div>`;
-  }).join('');
-}
-
-function renderRecursos(profile, activeTab = 'livros') {
-  const tabs = [{ key: 'livros', label: '📚 Livros' }, { key: 'sites', label: '🌐 Sites' }, { key: 'comunidades', label: '👥 Comunidades' }];
-  const tabsHtml = tabs.map(t => {
-    const isActive = activeTab === t.key;
-    return `<button type="button" class="recursos-tab${isActive ? ' active' : ''}" role="tab" id="rec-tab-${t.key}" aria-selected="${isActive ? 'true' : 'false'}" aria-controls="recursos-panel" tabindex="${isActive ? '0' : '-1'}" onclick="setRecursosTab('${t.key}')">${t.label}</button>`;
-  }).join('');
-  const cards = buildRecursoCardsHtml(profile, activeTab);
-  return `<div class="recursos-section"><div class="recursos-header"><span class="recursos-title">Recursos para o seu perfil</span><div class="recursos-tabs" role="tablist" aria-label="Recursos sugeridos">${tabsHtml}</div></div><div class="recursos-body" role="tabpanel" id="recursos-panel" aria-labelledby="rec-tab-${activeTab}">${cards}</div></div>`;
-}
-
-function showResult(scores, profileKey, options = {}) {
-  limparProgresso();
-  go('result', options.fromShare ? 'fade' : 'forward');
-  state.scores = scores;
-  state.profileKey = profileKey;
-  state.recursosTab = state.recursosTab || 'livros';
-  const profile = PROFILES[profileKey];
-  const get = k => scores[k] || 0;
-  const encoded = encodeResult(scores, profileKey);
-  const shareUrl = window.location.origin + window.location.pathname + '#result=' + encoded;
-  history.replaceState(null, '', '#result=' + encoded);
-  state.currentShareUrl = shareUrl;
-  state.areaScores = getAreaScores(scores);
-  const perfilAnterior = options.fromShare ? null : sessionStorage.getItem('ultimo_perfil');
-  if (!options.fromShare) sessionStorage.setItem('ultimo_perfil', profileKey);
-  const isRefazendo = !!perfilAnterior;
-  const mesmoPeril = perfilAnterior === profileKey;
-  trackDiagnostico(profileKey);
-
-  const bars = [
-    { label: 'Raciocínio lógico', val: Math.min(100, Math.round(((get('logica') + get('analitico')) / 14) * 100)), color: 'var(--blue)' },
-    { label: 'Criatividade visual', val: Math.min(100, Math.round(((get('criativo') + get('ux')) / 10) * 100)), color: 'var(--pink)' },
-    { label: 'Perfil social / ensino', val: Math.min(100, Math.round(((get('social') + get('ensino')) / 12) * 100)), color: 'var(--teal)' },
-    { label: 'Orientação prática', val: Math.min(100, Math.round(((get('pratico') + get('autodidata')) / 10) * 100)), color: 'var(--amber)' },
-  ];
-  const fitLabels = ['Melhor fit', 'Bom fit', 'Fit razoável', 'Fit razoável'];
-  const fitClasses = ['fit-best', 'fit-good', 'fit-ok', 'fit-ok'];
-  const barsHtml = bars.map((b, i) => `<div class="compat-bar-item"><div class="compat-bar-label"><span>${b.label}</span><span>${b.val}%</span></div><div class="compat-bar-track"><div class="compat-bar-fill" id="bar${i}" style="background:${b.color}" data-val="${b.val}"></div></div></div>`).join('');
-  const areasHtml = state.areaScores.map(([k], i) => `<div class="area-card${i === 0 ? ' top' : ''}"><h4>${AREAS_INFO[k].name}</h4><p>${AREAS_INFO[k].desc}</p><span class="fit-badge ${fitClasses[i]}">${fitLabels[i]}</span></div>`).join('');
-  const attentionHtml = profile.attention.map(a => `<li>${a}</li>`).join('');
-  const stepsHtml = profile.steps.map(st => `<li>${st}</li>`).join('');
-  const shareBanner = options.fromShare ? `<div style="margin-top:8px;background:var(--amber-bg);border:1px solid var(--amber-dim);border-radius:8px;padding:8px 12px;color:var(--amber);font-size:12px;">👁 Você está vendo o resultado de outra pessoa — <button class="btn-inline" style="color:var(--amber)" onclick="go('quiz', 'forward')">fazer o seu</button></div>` : '';
-  const revisitMsg = isRefazendo ? (mesmoPeril ? `<div style="background: var(--teal-bg); border: 1px solid var(--teal-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--teal); margin-top:8px;">Você respondeu diferente desta vez — mas chegou ao mesmo resultado. Isso é um bom sinal de consistência.</div>` : `<div style="background: var(--amber-bg); border: 1px solid var(--amber-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--amber); margin-top:8px;">Perfil diferente desta vez! Antes você era <strong style="color: var(--amber)">${PROFILES[perfilAnterior]?.name || 'outro perfil'}</strong>. Isso pode indicar que você está pensando diferente — ou que respondeu com mais honestidade.</div>`) : '';
-
-  const phaseId = PROFILE_ROADMAP_PHASE[profileKey] || 'fase1';
-  const phaseMeta = PHASES.find(p => p.id === phaseId);
-  const hint = PROFILE_ROADMAP_HINT[profileKey] || 'Use o roadmap em fases e o FAQ quando um conceito travar — cada habilidade tem o porquê explicado.';
-  const nextStepCard = `
-    <div class="next-step-card">
-      <h3>Seu próximo passo neste site</h3>
-      <p>${hint}</p>
-      <p class="next-step-meta">Sugerimos abrir agora: <strong>${phaseMeta ? phaseMeta.title : 'Fase 1 — Fundamentos'}</strong>. Nos cards do roadmap, use “ver no FAQ →” quando quiser aprofundar.</p>
-      <div class="next-step-actions">
-        <button type="button" class="btn btn-primary" onclick="openRoadmapPhase('${phaseId}')">Abrir esta fase no roadmap</button>
-        <button type="button" class="btn btn-ghost" onclick="navigate('faq')">Ir ao FAQ</button>
-      </div>
-    </div>`;
-
-  document.getElementById('resultContent').innerHTML = `
-    <div class="card" style="margin-bottom:16px">
-      <div class="result-header">
-        <div class="result-icon" aria-hidden="true">${profile.icon}</div>
-        <div>
-          <div class="result-title" style="color:${profile.color}">${profile.name}</div>
-          <div class="result-subtitle">${profile.sub}</div>
-          ${shareBanner}
-          ${revisitMsg}
-        </div>
-      </div>
-      <div class="result-desc">${profile.desc}</div>
-      <h3 style="font-size:14px;margin-bottom:16px;color:var(--text2)">Compatibilidade por dimensão</h3>
-      <div class="compat-bars">${barsHtml}</div>
-      <h3 style="font-size:14px;margin-bottom:12px;color:var(--text2)">Áreas de maior fit</h3>
-      <div class="areas-grid">${areasHtml}</div>
-      ${nextStepCard}
-    </div>
-    <div class="result-attention"><h3>⚠ Pontos de atenção</h3><ul>${attentionHtml}</ul></div>
-    <div class="result-steps"><h3>✓ Próximos passos</h3><ul>${stepsHtml}</ul></div>
-    ${renderRecursos(profile, state.recursosTab)}
-    <div class="result-ctas">
-      <button class="btn btn-primary" onclick="go('roadmap', 'forward')">Ver Roadmap</button>
-      <button class="btn btn-ghost" id="copyLinkBtn" onclick="copiarLink()">⛓ Copiar link</button>
-      <button class="btn btn-ghost" id="copyResultBtn" onclick="copiarResultado()">📋 Copiar resultado</button>
-      <button class="btn btn-ghost" onclick="go('quiz', 'back')">Refazer o diagnóstico</button>
-    </div>
-  `;
-  requestAnimationFrame(() => {
-    const titleEl = document.querySelector('#screen-result .result-title');
-    if (titleEl) {
-      titleEl.setAttribute('tabindex', '-1');
-      titleEl.focus({ preventScroll: true });
-    }
-    requestAnimationFrame(() => {
-      bars.forEach((b, i) => {
-        const el = document.getElementById('bar' + i);
-        if (el) { el.style.transition = `width 0.8s ease ${i * 100}ms`; el.style.width = b.val + '%'; }
-      });
-    });
-  });
-}
-
-function setRecursosTab(tab) {
-  state.recursosTab = tab;
-  const profile = PROFILES[state.profileKey];
-  const section = document.querySelector('#resultContent .recursos-section');
-  if (!profile || !section) return;
-  const panel = document.getElementById('recursos-panel');
-  if (!panel) return;
-  panel.innerHTML = buildRecursoCardsHtml(profile, tab);
-  panel.setAttribute('aria-labelledby', 'rec-tab-' + tab);
-  section.querySelectorAll('.recursos-tab[role="tab"]').forEach(btn => {
-    const isSel = btn.id === 'rec-tab-' + tab;
-    btn.classList.toggle('active', isSel);
-    btn.setAttribute('aria-selected', isSel ? 'true' : 'false');
-    btn.setAttribute('tabindex', isSel ? '0' : '-1');
-  });
-}
-
-function copiarLink() {
-  const btn = document.getElementById('copyLinkBtn');
-  copyText(state.currentShareUrl).then(() => {
-    const prev = btn.textContent;
-    btn.textContent = 'Link copiado!';
-    setTimeout(() => { btn.textContent = prev; }, 2000);
-  });
-}
-
-function copiarResultado() {
-  const btn = document.getElementById('copyResultBtn');
-  const texto = gerarTextoResultado(state.profileKey, state.areaScores, state.currentShareUrl);
-  copyText(texto).then(() => {
-    const prev = btn.textContent;
-    btn.textContent = 'Copiado!';
-    setTimeout(() => { btn.textContent = prev; }, 2000);
-  });
-}
-
-// ============================================================
-// ROADMAP
-// ============================================================
-function renderRoadmap() {
-  const container = document.getElementById('roadmapPhases');
-  if (container.dataset.rendered) return;
-  container.dataset.rendered = '1';
-
-  container.innerHTML = PHASES.map(phase => `
-    <div class="phase-item" id="phase-${phase.id}">
-      <button
-        class="phase-header"
-        onclick="togglePhase('${phase.id}')"
-        aria-expanded="false"
-        aria-controls="phasebody-${phase.id}"
-      >
-        <div class="phase-header-left">
-          <div class="phase-dot" style="background:${phase.color}"></div>
-          <div>
-            <div class="phase-title">${phase.title}</div>
-            <div class="phase-duration">${phase.duration}</div>
-          </div>
-        </div>
-        <span class="phase-chevron" aria-hidden="true">▾</span>
-      </button>
-      <div class="phase-body" id="phasebody-${phase.id}" role="region">
-        <div class="phase-content">
-          ${phase.skills.map(skill => `
-            <div class="phase-skill">
-              <h4>${skill.name}</h4>
-              <p class="phase-skill-why">"${skill.why}"</p>
-              ${skill.faqId ? `<button class="btn-faq-link" onclick="openFaqItem('${skill.faqId}')">ver no FAQ →</button>` : ''}
-            </div>
-          `).join('')}
-        </div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function togglePhase(id) {
-  const item = document.getElementById('phase-' + id);
-  const header = item.querySelector('.phase-header');
-  const isOpen = item.classList.toggle('open');
-  header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  if (state.currentScreen === 'roadmap') {
-    const base = location.pathname + location.search;
-    if (isOpen) history.replaceState(null, '', base + '#roadmap/' + id);
-    else history.replaceState(null, '', base + '#roadmap');
-  }
-}
-
-// ============================================================
-// FAQ
-// ============================================================
-function renderFaq() {
-  filterFaq();
-}
-
-function linkGlossario(texto) {
-  const termos = [
-    ['banco de dados', 'banco-de-dados'],
-    ['open source', 'open-source'],
-    ['CI/CD', 'ci-cd'],
-    ['front-end', 'frontend'],
-    ['back-end', 'backend'],
-    ['Node.js', 'javascript'],
-    ['TypeScript', 'javascript'],
-    ['PostgreSQL', 'banco-de-dados'],
-    ['Kubernetes', 'devops'],
-    ['JavaScript', 'javascript'],
-    ['DevOps', 'devops'],
-    ['HTML', 'html'],
-    ['CSS', 'css'],
-    ['SQL', 'sql'],
-    ['REST', 'api'],
-    ['API', 'api'],
-    ['Git', 'versionamento'],
-    ['Docker', 'devops'],
-    ['UX', 'ux'],
-    ['framework', 'framework'],
-    ['deploy', 'deploy'],
-    ['servidor', 'servidor'],
-    ['cloud', 'cloud'],
-    ['algoritmo', 'algoritmo'],
-    ['debug', 'debug'],
-  ];
-  const chunks = texto.split(/(<button class="glossario-link"[\s\S]*?<\/button>)/gi);
-  return chunks.map(chunk => {
-    if (/^<button class="glossario-link"/i.test(chunk)) return chunk;
-    let resultado = chunk;
-    termos.forEach(([termo, id]) => {
-      const escaped = termo.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-      const regex = new RegExp(`(?<![\\w-])${escaped}(?![\\w-])`, 'gi');
-      resultado = resultado.replace(regex, match => `<button class="glossario-link" onclick="abrirGlossario('${id}')" title="Ver no glossário">${match}</button>`);
-    });
-    return resultado;
-  }).join('');
-}
-
-function filterFaq() {
-  const search = (document.getElementById('faqSearch')?.value || '').toLowerCase();
-  const cat = state.faqFilter.cat;
-  state.faqFilter.search = search;
-
-  const filtered = FAQS.filter(f => {
-    const catMatch = cat === 'all' || f.cat === cat;
-    const searchMatch = !search || f.q.toLowerCase().includes(search) || f.answer.toLowerCase().includes(search);
-    return catMatch && searchMatch;
-  });
-
-  const list = document.getElementById('faqList');
-  if (!list) return;
-
-  if (filtered.length === 0) {
-    list.innerHTML = `<div class="faq-empty">Nenhuma pergunta encontrada para "<strong>${search || cat}</strong>".</div>`;
-    return;
-  }
-
-  list.innerHTML = filtered.map(f => `
-    <div class="faq-item${state.openFaqId === f.id ? ' open' : ''}" id="faqitem-${f.id}">
-      <button
-        type="button"
-        class="faq-q"
-        onclick="toggleFaq('${f.id}')"
-        aria-expanded="${state.openFaqId === f.id ? 'true' : 'false'}"
-        aria-controls="faqbody-${f.id}"
-      >
-        <span class="faq-q-text">${f.q}</span>
-        <span class="faq-q-meta">
-          <span class="faq-cat-badge faq-badge" data-tooltip="${CAT_TOOLTIPS[f.cat] || ''}">${f.cat}</span>
-          <span class="faq-chevron" aria-hidden="true">▾</span>
-        </span>
-      </button>
-      <div class="faq-body" id="faqbody-${f.id}" role="region">
-        <div class="faq-answer">${linkGlossario(f.answer)}</div>
-      </div>
-    </div>
-  `).join('');
-}
-
-function setFaqCat(cat) {
-  state.faqFilter.cat = cat;
-  document.querySelectorAll('[data-cat]').forEach(b => {
-    b.classList.toggle('active', b.dataset.cat === cat);
-  });
-  filterFaq();
-}
-
-function toggleFaq(id) {
-  const prevId = state.openFaqId;
-  state.openFaqId = prevId === id ? null : id;
-
-  if (prevId && prevId !== id) {
-    const prevItem = document.getElementById('faqitem-' + prevId);
-    if (prevItem) {
-      prevItem.classList.remove('open');
-      prevItem.querySelector('.faq-q').setAttribute('aria-expanded', 'false');
-    }
-  }
-
-  const item = document.getElementById('faqitem-' + id);
-  if (item) {
-    const isOpen = state.openFaqId === id;
-    item.classList.toggle('open', isOpen);
-    item.querySelector('.faq-q').setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-  }
-
-  if (state.currentScreen === 'faq') {
-    const base = location.pathname + location.search;
-    if (state.openFaqId) history.replaceState(null, '', base + '#faq/' + state.openFaqId);
-    else history.replaceState(null, '', base + '#faq');
-  }
-}
-
-function openFaqItem(faqId, options = {}) {
-  if (!options.skipNav) go('faq', 'forward', { keepListState: true });
-  state.faqFilter.cat = 'all';
-  state.faqFilter.search = '';
-
-  setTimeout(() => {
-    renderFaq();
-
-    document.querySelectorAll('[data-cat]').forEach(b => {
-      b.classList.toggle('active', b.dataset.cat === 'all');
-    });
-
-    const searchEl = document.getElementById('faqSearch');
-    if (searchEl) searchEl.value = '';
-
-    setTimeout(() => {
-      state.openFaqId = faqId;
-      const item = document.getElementById('faqitem-' + faqId);
-      if (item) {
-        item.classList.add('open', 'highlighted');
-        item.querySelector('.faq-q').setAttribute('aria-expanded', 'true');
-        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      }
-      const base = location.pathname + location.search;
-      history.replaceState(null, '', base + '#faq/' + faqId);
-    }, 100);
-  }, 50);
-}
-
-function getFaqSuggestionContext() {
-  const categoria = state.faqFilter?.cat && state.faqFilter.cat !== 'all' ? state.faqFilter.cat : 'não filtrada';
-  const busca = state.faqFilter?.search ? `"${state.faqFilter.search}"` : 'sem busca ativa';
-  const itemAberto = state.openFaqId ? FAQS.find(f => f.id === state.openFaqId)?.q || state.openFaqId : 'nenhum item aberto';
-  return `FAQ | categoria: ${categoria} | busca: ${busca} | item aberto: ${itemAberto}`;
-}
-
-function syncSugestaoContext() {
-  const categoryEl = document.getElementById('suggestCategory');
-  const contextEl = document.getElementById('suggestContext');
-  if (categoryEl && state.faqFilter?.cat && state.faqFilter.cat !== 'all') {
-    categoryEl.value = state.faqFilter.cat;
-  }
-  if (contextEl) contextEl.value = getFaqSuggestionContext();
-}
-
-function toggleSugestaoForm(forceState) {
-  const form = document.getElementById('suggestForm');
-  if (!form) return;
-  const nextHidden = typeof forceState === 'boolean' ? !forceState : !form.hidden;
-  form.hidden = nextHidden;
-  if (!nextHidden) {
-    syncSugestaoContext();
-    document.getElementById('suggestQuestion')?.focus();
-  }
-}
-
-function enviarSugestaoPergunta(event) {
-  event.preventDefault();
-  const categoria = document.getElementById('suggestCategory')?.value || 'carreira';
-  const contexto = document.getElementById('suggestContext')?.value || getFaqSuggestionContext();
-  const pergunta = document.getElementById('suggestQuestion')?.value.trim();
-  const porque = document.getElementById('suggestWhy')?.value.trim();
-  const resposta = document.getElementById('suggestAnswer')?.value.trim();
-  if (!pergunta || !porque) return;
-  const titulo = encodeURIComponent(`Sugestão de pergunta para o FAQ: ${pergunta}`);
-  const corpo = encodeURIComponent(`## Pergunta sugerida
-
-**Pergunta:** ${pergunta}
-
-**Categoria:** ${categoria}
-
-**Contexto da navegação:** ${contexto}
-
-**Por que essa pergunta é importante?**
-${porque}
-
-**Você tem uma resposta sugerida?**
-${resposta || '(sem resposta sugerida)'}
-
----
-*Aberto via formulário "Sugerir uma pergunta" no devguia.dev*`);
-  const url = `https://github.com/${GITHUB_REPO}/issues/new?title=${titulo}&body=${corpo}&labels=sugestao-faq`;
-  window.open(url, '_blank', 'noopener,noreferrer');
-}
-
-function setGlossarioCat(cat) {
-  state.glossarioFilter = state.glossarioFilter || { cat: 'all', search: '' };
-  state.glossarioFilter.cat = cat;
-  document.querySelectorAll('[data-gcat]').forEach(b => b.classList.toggle('active', b.dataset.gcat === cat));
-  filterGlossario();
-}
-
-function filterGlossario() {
-  state.glossarioFilter = state.glossarioFilter || { cat: 'all', search: '' };
-  const search = (document.getElementById('glossarySearch')?.value || '').toLowerCase();
-  state.glossarioFilter.search = search;
-  const cat = state.glossarioFilter.cat;
-  const list = document.getElementById('glossarioList');
-  if (!list) return;
-  const items = GLOSSARIO.filter(g => (cat === 'all' || g.categoria === cat) && (!search || `${g.termo} ${g.curta} ${g.longa} ${g.categoria}`.toLowerCase().includes(search)));
-  list.innerHTML = items.map(g => {
-    const isOpen = state.openGlossarioId === g.id;
-    const rel = (g.relacionados || []).map(r => {
-      const alvo = GLOSSARIO.find(x => x.id === r || x.termo.toLowerCase() === r.toLowerCase() || x.termo.toLowerCase().includes(r.toLowerCase()));
-      return alvo ? `<button class="glossario-pill" onclick="abrirGlossario('${alvo.id}')">${alvo.termo}</button>` : '';
-    }).join('');
-    return `<div class="glossario-item${isOpen ? ' open' : ''}" id="gi-${g.id}"><button type="button" class="glossario-head" onclick="toggleGlossario('${g.id}')" aria-expanded="${isOpen ? 'true' : 'false'}" aria-controls="glossario-body-${g.id}" id="glossario-head-${g.id}"><span class="glossario-term">${g.termo}</span><span class="glossario-curta">${g.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver definição completa ▾</span></button><div class="glossario-body" id="glossario-body-${g.id}" role="region" aria-labelledby="glossario-head-${g.id}"><div class="glossario-content"><div class="glossario-meta"><span class="faq-cat-badge" style="border:1px solid ${CAT_COLORS[g.categoria] || 'var(--border)'};background:var(--bg3)">${g.categoria}</span>${g.fonetico ? `<span class="glossario-fonetico">${g.fonetico}</span>` : ''}</div><p class="glossario-longa">${g.longa}</p><div class="glossario-exemplo"><strong style="color:var(--text);display:block;margin-bottom:6px">Exemplo</strong>${g.exemplo}</div><div class="glossario-pill-wrap">${rel}</div></div></div></div>`;
-  }).join('');
-}
-
-function renderGlossario() { filterGlossario(); }
-function toggleGlossario(id) {
-  state.openGlossarioId = state.openGlossarioId === id ? null : id;
-  renderGlossario();
-  if (state.currentScreen === 'glossario') {
-    const base = location.pathname + location.search;
-    if (state.openGlossarioId) history.replaceState(null, '', base + '#glossario/' + state.openGlossarioId);
-    else history.replaceState(null, '', base + '#glossario');
-  }
-}
-function abrirGlossario(id) {
-  go('glossario', 'forward', { keepListState: true });
-  setTimeout(() => {
-    state.openGlossarioId = id;
-    renderGlossario();
-    const base = location.pathname + location.search;
-    history.replaceState(null, '', base + '#glossario/' + id);
-    document.getElementById('gi-' + id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
-  }, 80);
-}
-
-function formatMitoFonte(fonte) {
-  const t = (fonte || '').trim();
-  if (!t) return '';
-  if (/^https?:\/\//i.test(t)) {
-    return `<div class="mito-fonte">Fonte: <a href="${t}" class="mito-fonte-link" target="_blank" rel="noopener noreferrer">${t}</a></div>`;
-  }
-  return `<div class="mito-fonte">Fonte: ${t}</div>`;
-}
-
-function mitoBadge(veredicto) {
-  if (veredicto === 'mito') return ['badge-mito', 'Mito'];
-  if (veredicto === 'verdade') return ['badge-verdade', 'Verdade'];
-  if (veredicto === 'depende') return ['badge-depende', 'Depende'];
-  return ['badge-parcial', 'Parcialmente verdade'];
-}
-function setMitosFilter(filter) {
-  state.mitosFilter = filter;
-  document.querySelectorAll('[data-mito]').forEach(b => b.classList.toggle('active', b.dataset.mito === filter));
-  renderMitos();
-}
-function toggleMito(id) {
-  state.openMitoId = state.openMitoId === id ? null : id;
-  renderMitos();
-  if (state.currentScreen === 'mitos') {
-    const base = location.pathname + location.search;
-    if (state.openMitoId) history.replaceState(null, '', base + '#mitos/' + state.openMitoId);
-    else history.replaceState(null, '', base + '#mitos');
-  }
-}
-function renderMitos() {
-  const list = document.getElementById('mitosList');
-  if (!list) return;
-  const filter = state.mitosFilter || 'all';
-  const items = MITOS.filter(m => filter === 'all' || m.veredicto === filter);
-  list.innerHTML = items.map(m => {
-    const [badgeClass, badgeText] = mitoBadge(m.veredicto);
-    const open = state.openMitoId === m.id;
-    return `<div class="mito-card${open ? ' open' : ''}" id="mito-${m.id}"><button type="button" class="mito-head" onclick="toggleMito('${m.id}')" aria-expanded="${open ? 'true' : 'false'}" aria-controls="mito-body-${m.id}" id="mito-head-${m.id}"><span class="${badgeClass}">${badgeText}</span><span class="mito-affirmation">"${m.afirmacao}"</span><span class="mito-curta">${m.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver explicação completa ▾</span></button><div class="mito-body" id="mito-body-${m.id}" role="region" aria-labelledby="mito-head-${m.id}"><div class="mito-content"><p>${m.explicacao}</p>${formatMitoFonte(m.fonte)}</div></div></div>`;
-  }).join('');
-}
-
-function renderStructuredData() {
-  const jsonLdEl = document.getElementById('structured-data');
-  if (!jsonLdEl) return;
-  const faqEntities = FAQS.map(item => ({
-    '@type': 'Question',
-    name: item.q,
-    acceptedAnswer: {
-      '@type': 'Answer',
-      text: item.answer.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
-    },
-  }));
-  const payload = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: 'devguia.dev',
-      url: 'https://nathaliagf.github.io/devguia/',
-      inLanguage: 'pt-BR',
-      description: 'Guia vocacional para TI com diagnóstico, roadmap, FAQ, glossário e mitos.',
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: faqEntities,
-    },
-  ];
-  jsonLdEl.textContent = JSON.stringify(payload);
-}
-
-function atualizarBadgeAnalytics() {
-  const textEl = document.getElementById('counter-text');
-  if (!textEl) return;
-  const hoje = getTodayLocalIso();
-  textEl.textContent = `Analytics anônimos ativos. O contador público diário foi removido em ${hoje} para não expor credenciais no frontend.`;
-}
-
-function toggleEasyRead() {
-  const isActive = document.body.classList.toggle('easy-read');
-  const btn = document.getElementById('easy-read-toggle');
-  btn.textContent = isActive ? 'Aa ✓' : 'Aa';
-  btn.style.borderColor = isActive ? 'var(--purple)' : 'var(--border2)';
-  btn.style.color = isActive ? 'var(--purple)' : 'var(--text2)';
-  sessionStorage.setItem(EASY_READ_KEY, isActive ? '1' : '0');
-}
-
-// ============================================================
-// INIT
-// ============================================================
-renderRoadmap();
-
-window.addEventListener('beforeunload', (e) => {
-  if (state.currentScreen !== 'quiz') return;
-  if (!localStorage.getItem(QUIZ_PROGRESS_KEY)) return;
-  e.preventDefault();
-  e.returnValue = '';
-});
-
-window.addEventListener('hashchange', () => {
-  const raw = (location.hash || '').replace(/^#/, '');
-  if (raw.startsWith('result=')) {
-    const data = decodeResult(raw);
-    if (data && data.p && data.s) showResult(data.s, data.p, { fromShare: true });
-    return;
-  }
-  if (!raw) {
-    go('home', 'fade', { skipHashSync: true });
-    return;
-  }
-  applyHashRoute();
-});
-
-window.addEventListener('load', () => {
-  renderStructuredData();
-  atualizarBadgeAnalytics();
-  if (sessionStorage.getItem(EASY_READ_KEY) === '1') {
-    document.body.classList.add('easy-read');
-    const btn = document.getElementById('easy-read-toggle');
-    if (btn) {
-      btn.textContent = 'Aa ✓';
-      btn.style.borderColor = 'var(--purple)';
-      btn.style.color = 'var(--purple)';
-    }
-  }
-  initBackToTop();
-  const raw = (location.hash || '').replace(/^#/, '');
-  if (raw.startsWith('result=')) {
-    const data = decodeResult(raw);
-    if (data && data.p && data.s) showResult(data.s, data.p, { fromShare: true });
-  } else if (raw) {
-    applyHashRoute();
-  }
-  syncSugestaoContext();
-});
-</script>
+<script src="js/data/questions.js"></script>
+<script src="js/data/profiles.js"></script>
+<script src="js/data/roadmap.js"></script>
+<script src="js/data/faq.js"></script>
+<script src="js/data/catalog.js"></script>
+<script src="js/app.js"></script>
 <script>
   // Substitua 'SEU-CODIGO' pelo código do seu site no GoatCounter
   window.goatcounter = {

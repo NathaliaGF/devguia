@@ -3,22 +3,26 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Glossário tech do devguia.dev com termos de tecnologia explicados de forma direta e prática.">
+  <meta name="description" content="Glossário tech do devguia.dev com termos de tecnologia explicados em linguagem direta.">
   <meta property="og:title" content="Glossário | devguia.dev">
-  <meta property="og:description" content="Entenda API, deploy, front-end, back-end, SQL, UX e outros termos sem enrolação.">
+  <meta property="og:description" content="Glossário tech do devguia.dev com termos de tecnologia explicados em linguagem direta.">
   <meta property="og:url" content="https://nathaliagf.github.io/devguia/glossario/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <link rel="canonical" href="https://nathaliagf.github.io/devguia/glossario/">
   <title>Glossário | devguia.dev</title>
+  
   <style>
     :root {
       --bg: #0f1117;
       --bg2: #161b27;
+      --bg3: #1e2535;
       --border: #2a3347;
+      --purple: #a78bfa;
       --blue: #60a5fa;
-      --blue-bg: #0d1a2e;
-      --blue-dim: #1e3a5f;
+      --teal: #34d399;
+      --amber: #fbbf24;
+      --coral: #f87171;
       --text: #e8edf5;
       --text2: #a1aec4;
       --text3: #6f7d95;
@@ -27,40 +31,44 @@
     body {
       margin: 0;
       font-family: system-ui, -apple-system, sans-serif;
-      background: linear-gradient(180deg, var(--bg) 0%, #111827 100%);
+      background: linear-gradient(180deg, var(--bg) 0%, #141a27 100%);
       color: var(--text);
       line-height: 1.7;
     }
     .wrap {
-      max-width: 860px;
+      max-width: 980px;
       margin: 0 auto;
-      padding: 40px 20px 64px;
+      padding: 40px 20px 72px;
     }
     .chip {
       display: inline-flex;
-      border: 1px solid var(--blue-dim);
-      background: var(--blue-bg);
-      color: var(--blue);
-      border-radius: 999px;
+      align-items: center;
+      gap: 8px;
       padding: 6px 12px;
-      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--text3);
+      font-size: 11px;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
     h1 {
-      font-size: clamp(2rem, 6vw, 3.25rem);
-      line-height: 1.1;
-      margin: 18px 0 14px;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 1.08;
+      margin: 16px 0 14px;
     }
     .lead {
       color: var(--text2);
-      max-width: 64ch;
-      margin-bottom: 22px;
+      max-width: 70ch;
+      margin: 0 0 22px;
     }
     .actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
     .btn {
       display: inline-flex;
@@ -75,6 +83,11 @@
       background: var(--bg2);
       font-weight: 700;
     }
+    .btn.primary {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #fff;
+    }
     .grid {
       display: grid;
       gap: 16px;
@@ -85,48 +98,208 @@
       border-radius: 14px;
       padding: 20px;
     }
-    .term {
-      font-size: 1.1rem;
-      font-weight: 700;
-      margin: 0 0 8px;
+    .card h2, .card h3 {
+      margin: 10px 0;
+      line-height: 1.3;
     }
-    .desc {
-      margin: 0;
+    .card p { margin: 0 0 12px; color: var(--text2); }
+    .card p:last-child { margin-bottom: 0; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 11px;
+      font-weight: 700;
+      border: 1px solid var(--border);
+      background: var(--bg3);
       color: var(--text2);
     }
+    .answer p, .answer div { margin-bottom: 12px; }
+    .answer .dica, .answer .atencao, .example {
+      background: var(--bg3);
+      border-left: 3px solid var(--purple);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 14px;
+      color: var(--text2);
+    }
+    .muted { color: var(--text3); font-size: 13px; }
   </style>
 </head>
 <body>
   <main class="wrap">
+    
     <span class="chip">Glossário indexável</span>
-    <h1>Termos de tecnologia explicados em português claro</h1>
-    <p class="lead">Esta versão estática ajuda buscadores a entenderem o conteúdo do glossário. A versão principal do site oferece busca, filtros por categoria e navegação cruzada com FAQ e roadmap.</p>
+    <h1>Glossário tech em português claro</h1>
+    <p class="lead">Termos de tecnologia explicados de forma direta, usando a mesma base do glossário interativo do devguia.dev.</p>
     <div class="actions">
-      <a class="btn" href="../#glossario">Abrir glossário interativo</a>
+      <a class="btn primary" href="../#glossario">Abrir glossário interativo</a>
       <a class="btn" href="../">Voltar para a home</a>
     </div>
     <div class="grid">
-      <article class="card">
-        <div class="term">API</div>
-        <p class="desc">Um contrato de comunicação entre sistemas. Em vez de o front-end acessar banco diretamente, ele chama uma API que valida regras, monta resposta e protege dados.</p>
-      </article>
-      <article class="card">
-        <div class="term">Front-end</div>
-        <p class="desc">A camada que o usuário vê e com a qual interage. Inclui interface, acessibilidade, estados de carregamento, performance percebida e integração com APIs.</p>
-      </article>
-      <article class="card">
-        <div class="term">Back-end</div>
-        <p class="desc">A parte do sistema que executa regras, autentica usuários, conversa com banco de dados e expõe endpoints para outras camadas.</p>
-      </article>
-      <article class="card">
-        <div class="term">Deploy</div>
-        <p class="desc">O processo de colocar uma aplicação em produção. Não é só subir arquivo; envolve build, ambiente, variáveis, monitoramento e rollback quando algo quebra.</p>
-      </article>
-      <article class="card">
-        <div class="term">SQL</div>
-        <p class="desc">Linguagem usada para consultar e transformar dados em bancos relacionais. Saber o básico evita dependência cega de ORM e ajuda muito em análise e backend.</p>
-      </article>
+      
+        <article class="card" id="algoritmo">
+          <span class="badge">fundamentos</span>
+          <h2>Algoritmo</h2>
+          <p>É uma receita finita e não ambígua que transforma entrada em saída. Em entrevistas, pedem algoritmos não por sadismo, mas para ver se você raciocina sobre custo e casos extremos.</p>
+          <p>Analisar complexidade (Big O) responde como tempo e memória crescem quando o input dobra. Estruturas de dados (filas, heaps, árvores) escolhidas certas tornam operações baratas. No trabalho diário, algoritmo aparece em caches, agendadores, deduplicação e roteamento — não só em exercícios de livro.</p>
+          <div class="example"><strong>Exemplo:</strong> Encontrar duplicatas em milhões de registros: hash set O(n) bate força bruta O(n²). Escolher errado significa job que rodava em minutos passar a rodar em horas.</div>
+        </article>
+      
+        <article class="card" id="api">
+          <span class="badge">back-end</span>
+          <h2>API</h2>
+          <p>É o contrato público pelo qual um sistema expõe dados ou ações para outro programa, sem abrir o código interno. Sem APIs, cada app precisaria duplicar bancos inteiros ou integrações frágeis via telas automatizadas.</p>
+          <p>API (Application Programming Interface) descreve URLs, formatos de dados e regras de autenticação que outro time ou outro serviço deve seguir. Ela pode ser REST, GraphQL, fila de mensagens ou gRPC — o ponto comum é padronizar a conversa entre sistemas. Boas APIs versionam mudanças, documentam erros e pensam em segurança desde o primeiro dia, porque qualquer cliente externo vai confiar no comportamento documentado.</p>
+          <div class="example"><strong>Exemplo:</strong> No delivery, ao tocar em "pagar com cartão", o app não acessa o mainframe do banco: ele chama a API de pagamentos, recebe um status e mostra o resultado. Se a API mudar sem aviso, vários apps quebram ao mesmo tempo — por isso contrato e testes importam tanto.</div>
+        </article>
+      
+        <article class="card" id="backend">
+          <span class="badge">geral</span>
+          <h2>Back-end</h2>
+          <p>É a camada que roda fora do navegador do usuário: servidores, regras de negócio, integrações e persistência. O usuário não "vê" o back-end, mas sente quando ele está lento, inconsistente ou inseguro.</p>
+          <p>Back-end recebe requisições (HTTP, filas, jobs agendados), valida permissões, fala com bancos e serviços externos e devolve respostas confiáveis. Ele também é onde moram preocupações como transações, concorrência, idempotência e auditoria. Times grandes separam camadas (API, domínio, infraestrutura), mas no início o importante é entender o fluxo ponta a ponta: pedido entra, dado é validado, efeito colateral é controlado, resposta sai.</p>
+          <div class="example"><strong>Exemplo:</strong> Quando você redefine senha, o front só coleta o formulário; o back-end gera token seguro, envia e-mail, invalida sessões antigas e registra o evento. Se algo falhar no meio, o sistema precisa falhar de forma previsível, não corromper dados.</div>
+        </article>
+      
+        <article class="card" id="banco-de-dados">
+          <span class="badge">back-end</span>
+          <h2>Banco de dados</h2>
+          <p>É o sistema onde dados duráveis ficam organizados, indexados e protegidos por regras (tipos, constraints, transações). Sem banco bem modelado, o aplicativo vira planilha compartilhada com concorrência e perda de informação.</p>
+          <p>Bancos relacionais (PostgreSQL, MySQL) usam tabelas e SQL; NoSQL (MongoDB, Redis) favorecem documentos, chave-valor ou grafos conforme o caso. A escolha impacta consistência, velocidade de leitura e complexidade de consultas. Migrações de esquema, backups e replicação fazem parte do trabalho real — não só "criar tabela" uma vez.</p>
+          <div class="example"><strong>Exemplo:</strong> Em e-commerce, estoque e pedidos precisam ser transacionais: dois clientes não podem comprar o último item ao mesmo tempo sem regra no banco. O back-end escreve em transação; se falhar, nada fica pela metade.</div>
+        </article>
+      
+        <article class="card" id="biblioteca">
+          <span class="badge">geral</span>
+          <h2>Biblioteca (lib)</h2>
+          <p>É código reutilizável que você importa para uma tarefa pontual: datas, validação, gráficos, HTTP client. Você decide quando chamar; a biblioteca não manda na arquitetura inteira.</p>
+          <p>Bibliotecas bem mantidas têm semver, changelog e testes; ruins viram dívida técnica silenciosa. Em JavaScript, npm distribui pacotes — sempre verifique licença, tamanho no bundle e última atualização. Combinar dezenas de libs pequenas sem critério explode a superfície de vulnerabilidades e o tempo de build.</p>
+          <div class="example"><strong>Exemplo:</strong> Para formatar moeda em real e timezone de Brasília, uma lib como date-fns ou Intl API evita reimplementar calendário. Você importa a função, usa no componente e segue — sem precisar de framework novo.</div>
+        </article>
+      
+        <article class="card" id="ci-cd">
+          <span class="badge">infra</span>
+          <h2>CI/CD</h2>
+          <p>CI integra código novo continuamente e roda verificações automáticas; CD estende isso até entrega ou deploy, quando os gates de qualidade passam. Juntos, reduzem surpresas na véspera de release.</p>
+          <p>Pipeline típico: lint, testes unitários, build, análise de segurança (SAST), publicação de artefato e promoção entre ambientes. CD pode ser "delivery" (humano aprova) ou "deployment" totalmente automático. Sem CI, bugs regressivos voltam sem ser notados; sem CD, correções urgentes demoram horas por burocracia manual.</p>
+          <div class="example"><strong>Exemplo:</strong> Cada pull request roda 200 testes em minutos; merge na main gera imagem Docker versionada e atualiza homologação. Produção só recebe tag aprovada pelo time — com botão ou política automática.</div>
+        </article>
+      
+        <article class="card" id="cloud">
+          <span class="badge">infra</span>
+          <h2>Cloud (nuvem)</h2>
+          <p>É consumir computação, armazenamento e rede como serviço pago pelo uso, em vez de comprar hardware próprio. AWS, GCP e Azure são os grandes provedores; há também opções menores e especializadas.</p>
+          <p>Na cloud você provisiona máquinas em minutos, anexa discos, configura VPC e integra serviços gerenciados (banco, fila, CDN). O modelo shifta custo de CAPEX para OPEX e exige disciplina financeira: recursos esquecidos geram conta alta. Boas equipes usam infraestrutura como código (Terraform, Pulumi) para não clicar manualmente em console.</p>
+          <div class="example"><strong>Exemplo:</strong> Black Friday: auto scaling adiciona instâncias quando CPU sobe e reduz depois do pico. Em datacenter próprio, você teria capacidade ociosa o ano inteiro ou risco de queda no pico.</div>
+        </article>
+      
+        <article class="card" id="versionamento">
+          <span class="badge">geral</span>
+          <h2>Controle de versão (Git)</h2>
+          <p>É o sistema que registra cada mudança no código: quem alterou, quando e por quê. Git é o padrão de mercado; hospedar no GitHub/GitLab é só camada colaborativa em cima.</p>
+          <p>Com Git você cria branches para features, revisa diffs antes de integrar e volta no tempo quando necessário. Fluxos como trunk-based ou Gitflow organizam como merges acontecem. Integração com CI roda testes a cada push — sem versionamento, isso simplesmente não existe de forma confiável.</p>
+          <div class="example"><strong>Exemplo:</strong> Você quebrou produção sexta à noite: o histórico mostre o commit culpado, você abre revert ou hotfix branch, e o time discute em PR o que aprender. Sem Git, você caça cópia "final_v2_really.zip".</div>
+        </article>
+      
+        <article class="card" id="css">
+          <span class="badge">front-end</span>
+          <h2>CSS</h2>
+          <p>É a folha de estilo que controla aparência e, em parte, layout responsivo: cores, tipografia, grid, flexbox, animações. CSS "simples" esconde anos de pegadinhas entre navegadores e especificidade.</p>
+          <p>Design systems modernos usam tokens, variáveis e componentes para manter consistência. Performance importa: seletores pesados, animações que disparam layout thrashing e imagens sem tamanho definido prejudicem Core Web Vitals. Pré-processadores (Sass) e frameworks (Tailwind) são opcionais — o fundamento é o cascade e o box model.</p>
+          <div class="example"><strong>Exemplo:</strong> Mesmo conteúdo HTML pode virar layout mobile-first com media queries: menu vira ícone, colunas viram pilha, fonte aumenta para leitura confortável. Isso é trabalho de CSS, não só "deixar bonito no Figma".</div>
+        </article>
+      
+        <article class="card" id="debug">
+          <span class="badge">geral</span>
+          <h2>Debug (depuração)</h2>
+          <p>É o processo sistemático de reproduzir falha, isolar causa e provar a correção. Boa depuração mistura leitura de stack trace, logs, breakpoints e hipóteses testáveis.</p>
+          <p>Debug não é "tentar coisas até funcionar" indefinidamente — é reduzir o espaço de busca. Você bissecta commits, minimiza caso de teste e adiciona instrumentação temporária. Em sistemas distribuídos, correlacionar request IDs entre serviços é parte do ofício. Documentar a causa raiz evita que o bug volte disfarçado.</p>
+          <div class="example"><strong>Exemplo:</strong> Produção retorna 500 só para alguns usuários: você compara payload, descobre string vazia onde número era esperado, adiciona validação no back-end e teste de regressão. Sem debug disciplinado, alguém coloca if espalhado que mascara o sintoma.</div>
+        </article>
+      
+        <article class="card" id="deploy">
+          <span class="badge">geral</span>
+          <h2>Deploy</h2>
+          <p>É o ato de levar uma versão testada do software para um ambiente onde usuários ou outros sistemas acessam. Deploy manual existe, mas em empresas maduras ele é repetível, rastreável e reversível.</p>
+          <p>Deploy envolve empacotar artefatos (binários, assets estáticos, migrações de banco), aplicar configurações por ambiente (dev, homologação, produção) e validar saúde após publicar. Ferramentas modernas usam pipelines: build, testes, análise de segurança, liberação gradual (canary) e rollback automático se métricas piorarem. Sem disciplina de deploy, cada correção vira medo e cada sexta-feira vira apagão.</p>
+          <div class="example"><strong>Exemplo:</strong> Você corrigiu um bug no cálculo de frete: após merge na branch principal, o pipeline publica nova versão no servidor, roda smoke tests e só então o tráfego passa a usar o build novo. Se o erro voltar, você reverte para o artefato anterior em minutos.</div>
+        </article>
+      
+        <article class="card" id="devops">
+          <span class="badge">infra</span>
+          <h2>DevOps</h2>
+          <p>É cultura e prática de encurtar o caminho entre ideia e produção, com feedback rápido e responsabilidade compartilhada. Não é um cargo único em todos os lugares — às vezes é time de plataforma, às vezes há SRE separado.</p>
+          <p>DevOps incentiva automação de build, testes, deploy, observabilidade (logs, métricas, traces) e postmortem sem culpar indivíduo. Ferramentas são meio: Docker, Kubernetes, GitHub Actions, Prometheus. O fim é reduzir lead time e aumentar confiabilidade percebida pelo usuário.</p>
+          <div class="example"><strong>Exemplo:</strong> Antes, deploy era evento mensal com checklist de medo; depois de DevOps maduro, deploys pequenos e frequentes reduzem risco porque mudanças são isoladas e monitoradas.</div>
+        </article>
+      
+        <article class="card" id="framework">
+          <span class="badge">geral</span>
+          <h2>Framework</h2>
+          <p>É um esqueleto opinativo que define como organizar pastas, rotas, injeção de dependências e ciclo de vida da aplicação. Você preenche os vazios; o framework chama seu código nos momentos certos.</p>
+          <p>Frameworks aceleram porque já resolvem problemas comuns: roteamento, autenticação, ORM, build e testes. O custo é acoplar decisões ao ecossistema escolhido e acompanhar atualizações. Biblioteca, em contraste, você chama quando precisa; framework costuma inverter o controle. Escolher errado no início não é tragédia, mas trocar depois dói — por isso times documentam critérios de escolha.</p>
+          <div class="example"><strong>Exemplo:</strong> Em vez de configurar servidor HTTP do zero, você usa Express ou Fastify em Node, ou Django em Python, e foca nas rotas do seu domínio. O framework já traz middlewares, parsing de JSON e convenções de erro.</div>
+        </article>
+      
+        <article class="card" id="frontend">
+          <span class="badge">geral</span>
+          <h2>Front-end</h2>
+          <p>É tudo o que roda no dispositivo da pessoa: layout, estados de tela, formulários, animações e acessibilidade. Bom front-end não é só estética — é engenharia de interface que lida com latência, erros de rede e diferentes tamanhos de tela.</p>
+          <p>Front-end tradicionalmente combina HTML semântico, CSS e JavaScript, hoje frequentemente com frameworks que gerenciam estado e roteamento. O trabalho inclui performance (menos JavaScript desnecessário, imagens adequadas), compatibilidade entre navegadores e testes de usabilidade. Em produtos reais, front-end conversa com design e produto para traduzir requisitos em componentes reutilizáveis.</p>
+          <div class="example"><strong>Exemplo:</strong> No banco pelo celular, o extrato que você vê é front-end; o saldo veio de uma API, mas quem decide como mostrar loading, retry e mensagem de erro é a camada de interface. Uma tela bonita que trava com 500 linhas na lista não passa em revisão séria.</div>
+        </article>
+      
+        <article class="card" id="html">
+          <span class="badge">front-end</span>
+          <h2>HTML</h2>
+          <p>É a camada de marcação que dá estrutura e significado ao conteúdo: títulos, listas, formulários, landmarks para leitores de tela. HTML não é linguagem de lógica — combina com CSS e JS.</p>
+          <p>HTML5 trouxe tags semânticas (header, nav, main, article) que melhoram SEO e acessibilidade. Atributos como alt em imagens e labels em inputs não são detalhe cosmético: são requisitos legais e de inclusão em muitos mercados. Validar HTML ajuda a evitar comportamento estranho entre navegadores.</p>
+          <div class="example"><strong>Exemplo:</strong> Um botão deve ser <button>, não <div> com onclick, para funcionar com teclado e leitor de tela. Pequenas escolhas de marcação definem se seu produto é profissional ou frágil.</div>
+        </article>
+      
+        <article class="card" id="javascript">
+          <span class="badge">front-end</span>
+          <h2>JavaScript</h2>
+          <p>É a linguagem que roda nos navegadores para eventos, estado e comunicação com APIs; com Node.js, também roda em servidores e ferramentas de build. Ecossistema enorme exige curadoria do que você instala.</p>
+          <p>JS moderno (ES modules, async/await, fetch) simplifica código assíncrono, mas exige entender promises e fila de eventos. Tipagem opcional com TypeScript reduz bugs em projetos médios e grandes. Bundlers (Vite, Webpack) transformam e otimizam código para produção.</p>
+          <div class="example"><strong>Exemplo:</strong> Ao digitar em uma busca, JS debounce evita disparar requisição a cada tecla; ao receber JSON da API, JS atualiza o DOM ou framework reativo re-renderiza só o necessário.</div>
+        </article>
+      
+        <article class="card" id="open-source">
+          <span class="badge">geral</span>
+          <h2>Open source</h2>
+          <p>É software cujo código-fonte é público sob licença que permite estudar, modificar e redistribuir — dentro de regras legais claras. Não confundir com "grátis": muitas empresas lucram com suporte e serviços em cima de open source.</p>
+          <p>Projetos como Linux, Kubernetes e React movem a indústria porque milhares de olhos acham bugs e porque empresas compartilham custo de manutenção. Contribuir com documentação ou testes já conta como participação legítima. Entender licenças (MIT, Apache, GPL) evita surpresas quando você incorpora código em produto comercial.</p>
+          <div class="example"><strong>Exemplo:</strong> Sua empresa usa PostgreSQL sem pagar licença, mas paga consultoria e suporte. O código é aberto; a operação 24x7 com SLA é que tem preço.</div>
+        </article>
+      
+        <article class="card" id="servidor">
+          <span class="badge">infra</span>
+          <h2>Servidor</h2>
+          <p>É um computador (físico ou virtual) que fica escutando pedidos de rede e responde com processamento ou arquivos. Na nuvem, "servidor" muitas vezes é uma VM, container ou função gerenciada — o conceito permanece.</p>
+          <p>Servidores rodam sistemas operacionais enxutos, serviços web (como nginx), runtimes de linguagem e agentes de monitoramento. Eles precisam de endereço IP, DNS, certificados TLS e políticas de firewall. Em escala, você pensa em balanceamento de carga, saúde das instâncias e custo por hora — por isso infra não é só "subir uma máquina", é operação contínua.</p>
+          <div class="example"><strong>Exemplo:</strong> Quando mil pessoas abrem o mesmo site ao mesmo tempo, várias instâncias de servidor atrás de um load balancer dividem o tráfego. Se uma instância morre, o balanceador para de enviar requisições para ela e sobe outra.</div>
+        </article>
+      
+        <article class="card" id="sql">
+          <span class="badge">back-end</span>
+          <h2>SQL</h2>
+          <p>É a linguagem declarativa para consultar e transformar dados em bancos relacionais. Você descreve o que quer; o otimizador do banco pensa em como buscar.</p>
+          <p>SQL cobre SELECT com JOINs, agregações, subconsultas, transações (BEGIN/COMMIT) e DDL (CREATE TABLE). Boas consultas usam índices adequados; más consultas travam produção com full table scan. ORMs ajudam, mas em performance crítica o SQL manual volta.</p>
+          <div class="example"><strong>Exemplo:</strong> Relatório de vendas por região no último trimestre: você junta pedidos, clientes e filiais em uma query, filtra por data e agrupa. Errar JOIN duplica linhas e infla números — por isso analistas revisam plano de execução.</div>
+        </article>
+      
+        <article class="card" id="ux">
+          <span class="badge">design</span>
+          <h2>UX (User Experience)</h2>
+          <p>É o efeito combinado de usabilidade, performance percebida, copy e confiança ao longo da jornada. UX não é só wireframe bonito — é reduzir erro humano e ansiedade em tarefas reais.</p>
+          <p>Pesquisa com usuários, testes de usabilidade e métricas (taxa de conclusão, tempo na tarefa) informam decisões. UX trabalha com acessibilidade, design de informação e feedback de sistema (loading, erros recuperáveis). Em squads, UX negocia trade-offs com engenharia: nem todo polimento vale o custo de implementação agora.</p>
+          <div class="example"><strong>Exemplo:</strong> Formulário de cadastro longo gera abandono; UX propõe dividir em passos, salvar rascunho e mostrar progresso. Engenharia implementa validação inline e mensagens claras — resultado medido em conversão.</div>
+        </article>
+      
     </div>
+  
   </main>
 </body>
 </html>

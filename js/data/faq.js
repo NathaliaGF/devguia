@@ -1,0 +1,131 @@
+(function (root, factory) {
+  const data = factory();
+  if (typeof module !== 'undefined' && module.exports) module.exports = data;
+  root.DEVGUIA_DATA = root.DEVGUIA_DATA || {};
+  root.DEVGUIA_DATA.faq = data;
+})(typeof globalThis !== 'undefined' ? globalThis : this, function () {
+const FAQS = [
+  {
+    id: 'f-logica', cat: 'fundamentos',
+    q: 'Precisa ser bom em matemática para programar?',
+    answer: `<p>Sim — mas não do jeito que a escola ensinou. Programação não exige cálculo diferencial, mas exige raciocínio lógico, pensamento abstrato e a capacidade de modelar problemas em estruturas. Quem diz que "nunca precisou de matemática para programar" geralmente está usando matemática o tempo todo sem perceber — o que falta é consciência do que está fazendo, e isso limita o crescimento.</p>
+    <p>No dia a dia isso aparece quando você precisa cobrir todos os casos de um formulário, entender por que um loop ficou lento ou depurar uma query SQL: são situações em que você manipula conjuntos, ordens e condições — habilidades que a escola chama de matemática, mas o mercado chama de “pensamento de engenheiro”.</p>
+    <div class="dica"><strong>Dica:</strong> Foco real: álgebra booleana, lógica proposicional e entender como algoritmos crescem em complexidade. Khan Academy tem os fundamentos certos e de graça.</div>
+    <div class="atencao"><strong>Atenção:</strong> Se você tem dificuldade séria com raciocínio lógico, isso vai aparecer cedo. Não adie — encare o problema agora antes de investir anos.</div>`,
+  },
+  {
+    id: 'f-terminal', cat: 'ferramentas',
+    q: 'Por que preciso aprender linha de comando se existe interface gráfica?',
+    answer: `<p>Porque ambientes profissionais rodam em servidores Linux sem interface gráfica. Porque deploy, CI/CD, Docker e scripts de automação passam pelo terminal. Porque depender só de interfaces te faz dependente de ferramentas específicas. O terminal parece difícil por duas semanas e depois vira extensão natural do raciocínio.</p>
+    <p>Interfaces gráficas ajudam no começo, mas quando algo quebra em produção às 2h da manhã, quem sabe linha de comando consegue ler logs, reiniciar serviços e aplicar correção sem depender de botão que não existe no servidor — é por isso que empresas tratam terminal como habilidade básica, não opcional.</p>
+    <div class="dica"><strong>Dica:</strong> Comece com o essencial: navegar por diretórios, criar e mover arquivos, redirecionar saídas, pipes. Depois Git pelo terminal. Depois scripts shell simples.</div>`,
+  },
+  {
+    id: 'f-git', cat: 'ferramentas',
+    q: 'Git é realmente necessário ou é frescura?',
+    answer: `<p>Necessário. Ponto. Git é o mínimo absoluto de qualquer trabalho profissional em software. Sem controle de versão você vai perder código, não vai conseguir colaborar e não vai entender como projetos reais são organizados. Não existe "aprender mais tarde" — aprenda Git junto com sua primeira linguagem.</p>
+    <p>Em times reais, revisão de código, integração contínua e deploy partem de branches e histórico confiável; enviar ZIP por e-mail ou “código na pasta Documentos” simplesmente não entra em empresas sérias. Git também é a linguagem comum entre freelancers, open source e vagas remotas.</p>
+    <div class="dica"><strong>Dica:</strong> Os 7 comandos que cobrem 90% do uso: init, add, commit, push, pull, branch, merge. O resto surge naturalmente com a prática.</div>`,
+  },
+  {
+    id: 'f-mat', cat: 'fundamentos',
+    q: 'Qual matemática devo estudar para programação?',
+    answer: `<p>Para a maioria das trilhas: lógica proposicional e booleana (essencial para condicionais e queries), teoria de conjuntos básica (arrays, interseções, diferenças) e complexidade algorítmica básica — entender por que um loop dentro de outro é mais lento. Para dados: estatística descritiva e probabilidade básica. Para front avançado ou jogos: geometria e álgebra linear.</p>
+    <p>Você não precisa virar expert em cálculo para o primeiro emprego, mas precisa perder o medo de símbolos e gráficos: relatórios de produto, métricas de performance e testes A/B são linguagem de negócio falada em números, e quem entende isso conversa melhor com produto e liderança.</p>
+    <div class="dica"><strong>Dica:</strong> Não estude matemática abstrata sem contexto. Estude com um projeto em mente — a abstração faz sentido quando você precisar dela de verdade.</div>`,
+  },
+  {
+    id: 'f-lang', cat: 'linguagens',
+    q: 'Qual a primeira linguagem para iniciantes?',
+    answer: `<p>Para a maioria: Python se você quer dados, automação, back-end ou ainda não sabe. JavaScript se quer ver resultados visuais rápido na web. C se quer entender computação de verdade e não tem pressa para o mercado. Nenhuma das três é errada — o erro é ficar trocando antes de dominar uma.</p>
+    <p>O mercado brasileiro contrata forte quem domina ecossistema web (JavaScript/TypeScript) ou dados com Python; linguagens de nicho podem pagar bem, mas reduzem o número de vagas acessíveis no início. Escolha uma, construa 2–3 projetos que você consiga explicar em entrevista, e só então pense em segunda linguagem.</p>
+    <div class="dica"><strong>Dica:</strong> O critério mais importante não é "qual tem mais vaga" — é qual vai te manter motivado por 12 meses. Vagas existem para Python e JavaScript com abundância.</div>
+    <div class="atencao"><strong>Atenção:</strong> Evite PHP como primeira linguagem, Java sem base sólida, e Rust ou C++ como entrada — a curva vai te desanimar antes de você aprender o essencial.</div>`,
+  },
+  {
+    id: 'f-proj', cat: 'carreira',
+    q: 'Como sei se estou aprendendo ou só copiando código?',
+    answer: `<p>Teste simples: feche tudo e tente construir o mesmo projeto do zero sem consultar nada. Se você travar em 10 minutos, você estava copiando, não aprendendo. Outro sinal: se não consegue explicar em voz alta por que cada linha faz o que faz, ainda não aprendeu. Copiar é uma fase válida, mas precisa virar compreensão antes de avançar.</p>
+    <p>Outro teste honesto é tentar mudar uma regra de negócio pequena: se a alteração te obriga a reescrever tudo porque você não entende a estrutura, o tutorial te deu um “efeito teatro”, não conhecimento. Por isso portfólios com variações próprias pesam mais que lista infinita de cursos.</p>
+    <div class="dica"><strong>Dica:</strong> Após qualquer tutorial, crie uma variação com uma diferença sua — uma funcionalidade diferente, dados diferentes, uma melhoria que você pensou. Esse é o momento real de aprendizado.</div>`,
+  },
+  {
+    id: 'f-port', cat: 'carreira',
+    q: 'Portfólio importa mais que certificado?',
+    answer: `<p>Sim, especialmente para o primeiro emprego. Certificado prova que você fez um curso. Portfólio prova que você sabe construir algo. Para cargos técnicos, empresas sérias querem ver código funcionando. Um projeto bem documentado no GitHub — com README claro, problema definido e código organizado — vale mais que dez certificados.</p>
+    <p>Em processos seletivos, o recrutador técnico costuma abrir o repositório antes de olhar o currículo: ele quer ver commits coerentes, testes ou ao menos organização de pastas, e uma explicação do que você faria diferente com mais tempo. Certificado sem artefato auditável raramente passa dessa etapa.</p>
+    <div class="dica"><strong>Dica:</strong> Três projetos que você entende completamente e consegue explicar valem mais que dez projetos copiados de tutorial.</div>
+    <div class="atencao"><strong>Atenção:</strong> Não coloque "TODO list" e "calculadora" como projetos principais. Crie algo que resolve um problema real — mesmo pequeno e simples.</div>`,
+  },
+  {
+    id: 'f-oss', cat: 'carreira',
+    q: 'Como contribuir em open source sem experiência?',
+    answer: `<p>Comece pelo mínimo: corrija um erro de digitação na documentação. Melhore um README. Reporte um bug com detalhes precisos e passos para reproduzir. Isso é contribuição real e te expõe ao fluxo de trabalho de projetos sérios. A maioria fica esperando ter "nível suficiente" — não existe nível mínimo para documentação.</p>
+    <p>Depois disso, você pode subir para pequenos patches: ajustar mensagem de erro, adicionar teste que faltava ou melhorar acessibilidade de um componente. Cada merge aceito vira prova pública de que você lê código de terceiros, responde feedback e entrega no padrão do projeto — exatamente o que times pedem em júnior.</p>
+    <div class="dica"><strong>Dica:</strong> Procure issues marcadas com "good first issue" ou "beginner friendly" no GitHub. Projetos de ferramentas que você já usa são o melhor ponto de partida.</div>`,
+  },
+  {
+    id: 'f-areas', cat: 'carreira',
+    q: 'Como escolher entre front-end, back-end, dados ou infra?',
+    answer: `<p>Não escolha pela demanda do mercado — escolha pelo que te faz querer continuar estudando às 23h. Front-end: você se importa com a experiência visual do usuário. Back-end: você pensa em sistemas, dados e eficiência. Dados: você quer extrair significado de números. Infra: você quer que tudo funcione de forma confiável e escalável.</p>
+    <p>Um experimento de duas semanas por área costuma ser suficiente: front com uma tela responsiva simples, back com API + banco, dados com um dashboard a partir de CSV público, infra com deploy automatizado em um PaaS gratuito. O objetivo não é virar especialista em tudo — é sentir qual tipo de problema você tolera repetir por anos.</p>
+    <div class="dica"><strong>Dica:</strong> Faça um projeto pequeno em cada área antes de decidir. As diferenças salariais entre especialidades são menores do que influencers sugerem e variam muito mais por empresa do que por área.</div>`,
+  },
+  {
+    id: 'f-ia', cat: 'ferramentas',
+    q: 'Devo usar IA (ChatGPT, Copilot) para aprender?',
+    answer: `<p>Não para aprender — sim para produzir, depois que você já sabe. A diferença é crítica: se você usa IA para gerar código que não entende, está acumulando dívida técnica mental. Quando o código quebrar (e vai), você não vai saber depurar. IA mente de forma convincente e confiante. Sem base para avaliar o que ela gerou, você aprende errado e não percebe.</p>
+    <p>Em equipes, o uso saudável costuma ser: gerar boilerplate, sugerir nomes, resumir documentação ou escrever testes depois que você já definiu o comportamento esperado. O uso perigoso é pedir “faz tudo” sem ler linha por linha — é aí que entram vulnerabilidades, bugs silenciosos e código que ninguém consegue manter.</p>
+    <div class="dica"><strong>Dica:</strong> Regra prática: use IA para acelerar coisas que você já sabe fazer. Para aprender algo novo, faça sem IA até entender — depois use para otimizar e agilizar.</div>
+    <div class="atencao"><strong>Atenção:</strong> IA gera código que funciona para casos simples e quebra nos casos extremos. Isso é invisível para quem está aprendendo e cria uma falsa sensação de domínio.</div>`,
+  },
+  {
+    id: 'f-facul', cat: 'educação',
+    q: 'Faculdade vale a pena ou é perda de tempo?',
+    answer: `<p>Depende do curso e do seu perfil. Faculdade boa — difícil de entrar, professores ativos no mercado, colegas qualificados — oferece algo que nenhum curso online entrega: ambiente de pressão, colaboração e exposição a problemas complexos. Faculdade ruim entrega diploma e pouco mais. EAD de nome desconhecido, na maioria dos casos, não agrega.</p>
+    <p>Sem faculdade, você precisa substituir o que ela dá de estrutura: prazos externos (bootcamps sérios, comunidades, mentoria), projetos públicos e leitura constante de código alheio. Os dois caminhos funcionam, mas o autodidata que não se organiza perde para quem tem rotina clara — independentemente do papel na parede.</p>
+    <div class="dica"><strong>Dica:</strong> Se vai fazer: pesquise a grade curricular, visite o campus, converse com alunos do 3º e 4º ano. O que fazem depois de formados diz tudo sobre a qualidade do curso.</div>
+    <div class="atencao"><strong>Atenção:</strong> Se não vai fazer faculdade, você precisa ser disciplinado o suficiente para estruturar seu próprio aprendizado. A maioria das pessoas superestima essa disciplina.</div>`,
+  },
+  {
+    id: 'f-clt', cat: 'mercado',
+    q: 'CLT ou PJ — qual escolher?',
+    answer: `<p>Faça as contas do seu caso específico. Como referência: PJ geralmente precisa ganhar 40–60% a mais que CLT para equivaler, somando FGTS, 13º, férias, benefícios e os impostos que você paga como PJ. CLT tem mais proteção em demissão. PJ tem mais flexibilidade e pode ser interessante se você planeja ter múltiplos clientes. Não existe resposta universal.</p>
+    <p>No Brasil, muita gente aceita PJ “para começar” sem plano de saúde, reserva ou contador — e descobre na primeira folha de pagamento que o líquido não fecha. Antes de assinar, peça simulação por escrito, confira se há cláusula de exclusividade disfarçada e entenda o que acontece se o contrato terminar em 30 dias.</p>
+    <div class="dica"><strong>Dica:</strong> Use calculadoras online com seus números reais antes de aceitar qualquer proposta. Nunca compare bruto de PJ com bruto de CLT — é uma armadilha comum.</div>`,
+  },
+  {
+    id: 'f-soft', cat: 'carreira',
+    q: 'Soft skills importam realmente em TI?',
+    answer: `<p>Sim — mais do que a maioria dos iniciantes imagina, especialmente a partir do nível pleno. A diferença entre um dev que avança e um que fica estagnado raramente é técnica. É capacidade de comunicar decisões técnicas para não-técnicos, dar e receber feedback, estimar prazos com honestidade e trabalhar em equipe sem criar atritos desnecessários.</p>
+    <p>Promoção para senior costuma envolver liderar incidentes, negociar escopo com produto e mediar divergência entre pares — tudo isso é conversa bem feita, não só código bonito. Por isso empresas valorizam quem documenta, ensina e reduz ruído em reuniões, mesmo quando não tem o título de “líder”.</p>
+    <div class="dica"><strong>Dica:</strong> Comece pela escrita: aprenda a escrever Pull Requests bem descritos, emails técnicos claros e documentação que outras pessoas entendem. É a soft skill mais diretamente treinável.</div>`,
+  },
+  {
+    id: 'f-net', cat: 'mercado',
+    q: 'Como conseguir o primeiro emprego sem experiência?',
+    answer: `<p>Portfólio com projetos reais vale mais que certificados. Contribuição em open source vale mais que diploma. Networking ativo vale mais que envio de currículo em massa. A sequência que funciona: construa algo real e documentado, coloque no GitHub, escreva sobre o que aprendeu, participe de comunidades de devs, peça para alguém revisar seu portfólio. A maioria das primeiras vagas vem de conexão, não de processo frio.</p>
+    <p>Combine volume com qualidade: mandar 200 currículos genéricos raramente supera 20 conversas com pessoas que já trabalham na área, pedindo feedback específico sobre seu GitHub ou sobre o tipo de vaga. Eventos locais, comunidades em Discord e mentoria informal continuam sendo atalhos reais — desde que você chegue preparado, não só pedindo “indicação fácil”.</p>
+    <div class="dica"><strong>Dica:</strong> Aplique para vagas mesmo sem atender 100% dos requisitos. A lista de requisitos é um desejo, não um filtro absoluto.</div>
+    <div class="atencao"><strong>Atenção:</strong> Cuidado com cursos que prometem "emprego garantido em 6 meses". O mercado está saturado na entrada — o diferencial é qualidade de portfólio, não certificado.</div>`,
+  },
+  {
+    id: 'f-trans', cat: 'carreira',
+    q: 'Transição de carreira para TI — por onde começar?',
+    answer: `<p>Primeiro identifique a intersecção entre o que você já sabe e TI. Contador → BI e dados financeiros. Enfermeiro → health tech, UX em saúde. Professor → educação tech, design instrucional. Advogado → legal tech, gestão de produto. Entrar como dev júnior sendo pleno em outra área é um passo atrás desnecessário — use sua experiência como trunfo.</p>
+    <p>Na prática, isso significa narrar no LinkedIn e na entrevista o problema de negócio que você já resolveu antes de TI, e mostrar um projeto que automatiza ou digitaliza algo do seu domínio anterior. Recrutadores entendem muito mais “reduzi tempo de fechamento mensal em X horas” do que “fiz curso de 200 horas”.</p>
+    <div class="dica"><strong>Dica:</strong> Defina uma área-alvo dentro de TI que aproveite seu background. Construa projetos que conectem os dois mundos — isso te diferencia de qualquer iniciante puro.</div>
+    <div class="atencao"><strong>Atenção:</strong> Transição séria leva 12 a 24 meses de dedicação real. Quem promete menos está vendendo ilusão.</div>`,
+  },
+  {
+    id: 'f-ai-job', cat: 'mercado',
+    q: 'A IA vai tirar meu emprego de desenvolvedor?',
+    answer: `<p>Vai substituir quem usa ferramenta sem entender o que faz — e isso já está acontecendo. Não vai substituir quem entende o problema por baixo, sabe depurar, arquitetar sistemas e tomar decisões com contexto de negócio. IA é excelente para tarefas definidas e previsíveis. É péssima para diagnóstico de problemas ambíguos e decisões de arquitetura com contexto real.</p>
+    <p>O mercado tende a premiar quem usa IA para ganhar tempo em tarefas repetitivas, mas continua pagando bem quem assume responsabilidade por sistema em produção: incidentes, segurança, custo de cloud e trade-offs de produto não podem ser “gerados” sem alguém que assine embaixo. Por isso estudo de fundamentos e leitura de código real continuam sendo seguro de carreira.</p>
+    <div class="dica"><strong>Dica:</strong> A habilidade mais à prova de IA: saber fazer a pergunta certa. Isso exige contexto, julgamento e experiência — coisas que IA não tem.</div>
+    <div class="atencao"><strong>Atenção:</strong> Irônico: quem usa IA para aprender a programar está se tornando exatamente o tipo de dev mais facilmente substituível por IA.</div>`,
+  },
+];
+
+  return { FAQS };
+});

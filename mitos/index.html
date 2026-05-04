@@ -3,63 +3,72 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="description" content="Mitos e verdades sobre carreira em tecnologia no devguia.dev.">
+  <meta name="description" content="Mitos e verdades sobre mercado, salário, faculdade, IA e trabalho em tecnologia.">
   <meta property="og:title" content="Mitos e Verdades | devguia.dev">
-  <meta property="og:description" content="Salário, faculdade, mercado júnior, IA e trabalho remoto explicados sem hype.">
+  <meta property="og:description" content="Mitos e verdades sobre mercado, salário, faculdade, IA e trabalho em tecnologia.">
   <meta property="og:url" content="https://nathaliagf.github.io/devguia/mitos/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
   <link rel="canonical" href="https://nathaliagf.github.io/devguia/mitos/">
   <title>Mitos e Verdades | devguia.dev</title>
+  
   <style>
     :root {
       --bg: #0f1117;
       --bg2: #161b27;
+      --bg3: #1e2535;
       --border: #2a3347;
+      --purple: #a78bfa;
+      --blue: #60a5fa;
+      --teal: #34d399;
       --amber: #fbbf24;
-      --amber-bg: #221a0a;
-      --amber-dim: #7a5510;
+      --coral: #f87171;
       --text: #e8edf5;
       --text2: #a1aec4;
+      --text3: #6f7d95;
     }
     * { box-sizing: border-box; }
     body {
       margin: 0;
       font-family: system-ui, -apple-system, sans-serif;
-      background: linear-gradient(180deg, var(--bg) 0%, #17131c 100%);
+      background: linear-gradient(180deg, var(--bg) 0%, #141a27 100%);
       color: var(--text);
       line-height: 1.7;
     }
     .wrap {
-      max-width: 860px;
+      max-width: 980px;
       margin: 0 auto;
-      padding: 40px 20px 64px;
+      padding: 40px 20px 72px;
     }
     .chip {
       display: inline-flex;
-      border: 1px solid var(--amber-dim);
-      background: var(--amber-bg);
-      color: var(--amber);
-      border-radius: 999px;
+      align-items: center;
+      gap: 8px;
       padding: 6px 12px;
-      font-size: 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: var(--bg3);
+      color: var(--text3);
+      font-size: 11px;
       font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
     }
     h1 {
-      font-size: clamp(2rem, 6vw, 3.25rem);
-      line-height: 1.1;
-      margin: 18px 0 14px;
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 1.08;
+      margin: 16px 0 14px;
     }
     .lead {
       color: var(--text2);
-      max-width: 64ch;
-      margin-bottom: 22px;
+      max-width: 70ch;
+      margin: 0 0 22px;
     }
     .actions {
       display: flex;
       gap: 12px;
       flex-wrap: wrap;
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
     .btn {
       display: inline-flex;
@@ -74,6 +83,11 @@
       background: var(--bg2);
       font-weight: 700;
     }
+    .btn.primary {
+      background: var(--purple);
+      border-color: var(--purple);
+      color: #fff;
+    }
     .grid {
       display: grid;
       gap: 16px;
@@ -84,56 +98,144 @@
       border-radius: 14px;
       padding: 20px;
     }
-    .verdict {
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--amber);
-      margin-bottom: 10px;
-      text-transform: uppercase;
-      letter-spacing: 0.08em;
+    .card h2, .card h3 {
+      margin: 10px 0;
+      line-height: 1.3;
     }
-    .title {
-      font-size: 1.1rem;
+    .card p { margin: 0 0 12px; color: var(--text2); }
+    .card p:last-child { margin-bottom: 0; }
+    .badge {
+      display: inline-flex;
+      align-items: center;
+      border-radius: 999px;
+      padding: 5px 10px;
+      font-size: 11px;
       font-weight: 700;
-      margin: 0 0 8px;
-    }
-    .desc {
-      margin: 0;
+      border: 1px solid var(--border);
+      background: var(--bg3);
       color: var(--text2);
     }
+    .answer p, .answer div { margin-bottom: 12px; }
+    .answer .dica, .answer .atencao, .example {
+      background: var(--bg3);
+      border-left: 3px solid var(--purple);
+      border-radius: 0 8px 8px 0;
+      padding: 12px 14px;
+      color: var(--text2);
+    }
+    .muted { color: var(--text3); font-size: 13px; }
   </style>
 </head>
 <body>
   <main class="wrap">
+    
     <span class="chip">Mitos indexáveis</span>
-    <h1>Afirmações populares sobre TI, separadas de realidade</h1>
-    <p class="lead">Esta página dá presença indexável para a seção de mitos e verdades. Na aplicação principal, você continua com filtros e explicações completas.</p>
+    <h1>Mitos e verdades sobre carreira em tecnologia</h1>
+    <p class="lead">Afirmações populares sobre TI separadas de realidade, usando a mesma base de conteúdo da aplicação principal.</p>
     <div class="actions">
-      <a class="btn" href="../#mitos">Abrir seção interativa</a>
+      <a class="btn primary" href="../#mitos">Abrir seção interativa</a>
       <a class="btn" href="../">Voltar para a home</a>
     </div>
     <div class="grid">
-      <article class="card">
-        <div class="verdict">Mito</div>
-        <div class="title">“Programador ganha 30 mil logo de cara”</div>
-        <p class="desc">Salários altos existem, mas normalmente aparecem junto com senioridade, inglês forte, nicho valorizado ou vaga internacional. Para início de carreira, pensar em evolução por etapas é mais realista.</p>
-      </article>
-      <article class="card">
-        <div class="verdict">Mito</div>
-        <div class="title">“Qualquer um aprende a programar em 3 meses”</div>
-        <p class="desc">Em três meses dá para aprender fundamentos e fazer projetos simples. Isso é diferente de atingir nível profissional para trabalhar sob prazo, lidar com bugs e manter código de produção.</p>
-      </article>
-      <article class="card">
-        <div class="verdict">Parcialmente verdade</div>
-        <div class="title">“IA vai acabar com a carreira de quem está começando”</div>
-        <p class="desc">IA reduz trabalho mecânico, mas aumenta a exigência de leitura crítica, revisão, modelagem de problema e contexto. Quem aprende só copiando resposta pronta fica mais vulnerável.</p>
-      </article>
-      <article class="card">
-        <div class="verdict">Mito</div>
-        <div class="title">“Você precisa saber tudo antes de aplicar para vagas”</div>
-        <p class="desc">Descrições de vaga listam o candidato idealizado. Contratações reais aceitam lacunas quando a base é boa e o candidato consegue provar aprendizagem rápida e execução.</p>
-      </article>
+      
+        <article class="card" id="m1">
+          <span class="badge">mito</span>
+          <h2>Programador ganha 30k por mês logo de cara</h2>
+          <p>No Brasil, a maioria dos primeiros empregos paga faixas bem menores que os números virais de redes sociais; salários altos existem, mas costumam exigir anos de experiência, inglês ou empresa internacional.</p>
+          <p>Os 30 mil de influencer quase sempre misturam remuneração total, senioridade ou vaga no exterior. Para júnior local, é mais realista pensar em evolução em etapas: primeiro estágio ou primeira CLT, depois troca com portfólio forte. Comparar-se só com exceções gera ansiedade e decisões financeiras ruins (bootcamp caro sem reserva).</p>
+          <div class="muted">Fonte: State of JS, Stack Overflow Developer Survey e Glassdoor Brasil.</div>
+        </article>
+      
+        <article class="card" id="m2">
+          <span class="badge">mito</span>
+          <h2>Qualquer um aprende a programar em 3 meses</h2>
+          <p>Em três meses dá para aprender sintaxe e clonar tutoriais; isso não é o mesmo que sustentar um sistema real com bugs, prazos e código de outras pessoas.</p>
+          <p>O mercado paga por resolver problemas novos, ler documentação técnica e se comunicar com time — habilidades que levam meses de prática deliberada. Cursos que prometem "mercado em 90 dias" costumam entregar conteúdo, não maturidade. Por isso projetos próprios pequenos, revisão de código alheio e estágio/mentoria ainda são os atalhos mais honestos.</p>
+          
+        </article>
+      
+        <article class="card" id="m3">
+          <span class="badge">mito</span>
+          <h2>Não precisa de matemática para programar</h2>
+          <p>Você raramente usa integral na web, mas usa lógica, contagem, conjuntos e raciocínio sobre custo de algoritmo o tempo todo — só não chama de "matemática de prova".</p>
+          <p>Condições, loops aninhados, consultas SQL com JOIN e análise de dados exigem pensamento estruturado. Quem ignora isso fica preso em código que "funciona no exemplo" e quebra em escala. O caminho sensato é fortalecer bases com problemas reais, não decorar fórmulas sem contexto.</p>
+          
+        </article>
+      
+        <article class="card" id="m4">
+          <span class="badge">depende</span>
+          <h2>Faculdade de TI é perda de tempo</h2>
+          <p>Faculdade forte dá rede, fundamentos e ritmo de entrega que cursinho isolado não replica; faculdade fraca pode ser diploma caro com pouco retorno prático.</p>
+          <p>O que importa é corpo docente ativo, grade atualizada e alunos construindo projeto — não o nome na parede sozinho. Quem não faz faculdade precisa substituir isso com disciplina feroz, comunidade e portfólio auditável; quem faz faculdade ruim sem se esforçar também sai despreparado. A decisão é financeira e de perfil, não religião de mercado.</p>
+          
+        </article>
+      
+        <article class="card" id="m5">
+          <span class="badge">parcial</span>
+          <h2>IA vai substituir programadores em breve</h2>
+          <p>IA acelera quem já sabe avaliar resultado; ela não elimina responsabilidade por segurança, arquitetura e consequências de negócio.</p>
+          <p>Automatizar CRUD ou boilerplate é diferente de manter legado crítico, negociar trade-off com produto ou apagar incêndio em produção com logs incompletos. Profissionais que só aceitam código sem entender ficam mais vulneráveis — com ou sem IA. O antídoto continua sendo fundamentos, leitura de código e prática de depuração.</p>
+          <div class="muted">Fonte: https://survey.stackoverflow.co/</div>
+        </article>
+      
+        <article class="card" id="m6">
+          <span class="badge">mito</span>
+          <h2>É preciso ter computador caro para aprender a programar</h2>
+          <p>Para trilhas web e Python iniciais, 8 GB de RAM e SSD já permitem anos de estudo; o gargalo costuma ser consistência, não MHz.</p>
+          <p>Exceções existem: edição de vídeo pesada, modelos locais grandes ou Android nativo podem exigir mais. Mas a maioria dos iniciantes pode usar ambientes online, WSL ou máquinas modestas até clarificar objetivo. Gastar antes de formar hábito de estudo é má alocação de dinheiro.</p>
+          
+        </article>
+      
+        <article class="card" id="m7">
+          <span class="badge">depende</span>
+          <h2>Inglês fluente é obrigatório para trabalhar em TI</h2>
+          <p>Ler documentação e issues em inglês é quase inevitável; já falar fluentemente depende se você mira empresa nacional, remota BR ou exterior.</p>
+          <p>Muitas empresas brasileiras operam em português no dia a dia, mas ainda assim você vai depender de material técnico em inglês. Para dólar/euro, conversação e escrita viram filtro duro. Estratégia comum: fortalecer leitura primeiro e praticar conversação quando o objetivo de carreira internacional ficar claro.</p>
+          
+        </article>
+      
+        <article class="card" id="m8">
+          <span class="badge">mito</span>
+          <h2>Front-end é mais fácil que back-end</h2>
+          <p>Front tem complexidade visível (layout, acessibilidade, performance); back tem complexidade invisível (consistência, segurança, escala) — nenhum lado é "só mais fácil".</p>
+          <p>Achar front fácil porque "dá para ver na hora" ignora CSS difícil, estados assíncronos e compatibilidade. Achar back fácil porque "não tem pixel" ignora transações, filas e observabilidade. Escolha pela curiosidade que sustenta anos, não por meme de internet.</p>
+          
+        </article>
+      
+        <article class="card" id="m9">
+          <span class="badge">mito</span>
+          <h2>Certificações valem mais que experiência prática</h2>
+          <p>Certificado pode abrir triagem de RH, mas time técnico quer ver decisões suas em código, não só selo de curso.</p>
+          <p>Há certificações respeitadas em cloud e segurança porque o exame é difícil — mesmo assim elas complementam, não substituem portfólio. Para iniciante, três projetos explicáveis costumam vencer dez certificados genéricos. Combine os dois se fizer sentido financeiro, mas não confunda papel com competência demonstrada.</p>
+          
+        </article>
+      
+        <article class="card" id="m10">
+          <span class="badge">mito</span>
+          <h2>Programar é trabalho solitário</h2>
+          <p>Há foco individual, mas o trabalho profissional inclui alinhamento, revisão de código, pareamento e escrita de especificação — silêncio total é exceção, não regra.</p>
+          <p>Quem não comunica bem trava promoção porque não consegue negociar escopo nem explicar risco. Por isso soft skills aparecem em toda vaga sênior: não é modinha de RH, é custo real de coordenação em time. Aprender a escrever bem é treinável e tem ROI alto.</p>
+          
+        </article>
+      
+        <article class="card" id="m11">
+          <span class="badge">mito</span>
+          <h2>Você precisa saber tudo antes de aplicar para vagas</h2>
+          <p>Listas de requisitos descrevem o candidato idealizado; contratações reais aceitam gaps quando há aprendizado rápido e base sólida.</p>
+          <p>Esperar 100% de aderência é receita para nunca enviar currículo. O equilíbrio é candidatar com honestidade: mostrar o que sabe, o que está estudando e um projeto que prove execução. Feedback de entrevista — mesmo negativo — vale ouro para priorizar estudo.</p>
+          
+        </article>
+      
+        <article class="card" id="m12">
+          <span class="badge">parcial</span>
+          <h2>Trabalho remoto em TI é fácil de conseguir logo no início</h2>
+          <p>Remoto existe, mas vagas júnior remotas disputam candidatos de vários estados; sem portfólio ou indicação, a fila é longa.</p>
+          <p>Empresas que pagam bem em remoto esperam autonomia, comunicação escrita e às vezes overlap de fuso. Presencial ou híbrido pode ser porta de entrada mais realista para primeiro emprego. Depois de 1–2 anos com entregas comprovadas, o remoto internacional fica mais plausível.</p>
+          
+        </article>
+      
     </div>
+  
   </main>
 </body>
 </html>
