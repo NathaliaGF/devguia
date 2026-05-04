@@ -26,6 +26,7 @@ O projeto não carrega fontes externas, CSS externo ou bibliotecas de terceiros 
 - Removido o carregamento automático do GoatCounter no HTML; ele agora é carregado sob demanda via JavaScript após consentimento.
 - Removidos os `max-width` que restringiam os parágrafos descritivos das seções e da comparação, para que o texto use toda a largura útil do container.
 - Tags e badges de FAQ/glossário foram rebaixadas visualmente: menos contraste, padding menor e posicionamento no rodapé do conteúdo para não competir com título, descrição e exemplo.
+- Atualizada a copy da home para refletir o estado atual do produto: 25 perguntas, 13 perfis vocacionais, glossário com 118 termos e resultado com caminho principal/secundário.
 
 ### `js/app.js`
 
