@@ -17,6 +17,8 @@ const state = {
   recursosTab: 'livros',
   currentShareUrl: '',
   areaScores: [],
+  pathScores: [],
+  suggestedSubprofiles: [],
 };
 
 const { BLOCKS, QUESTIONS } = window.DEVGUIA_DATA.questions;
@@ -61,6 +63,60 @@ function normalizeText(value) {
 function sortByNormalizedLabel(a, b, key) {
   return normalizeText(a[key]).localeCompare(normalizeText(b[key]), 'pt-BR');
 }
+
+const PATH_INFO = {
+  codigo: { label: 'Código', desc: 'Construção de software, produto digital e APIs' },
+  dados: { label: 'Dados & IA', desc: 'Análise, BI, engenharia de dados e machine learning' },
+  infra: { label: 'Infra & Cloud', desc: 'Operação, automação, plataforma e confiabilidade' },
+  seguranca: { label: 'Segurança', desc: 'Defesa, monitoramento, resposta a incidente e cloud security' },
+};
+
+const SUBPROFILE_LABELS = {
+  sp_frontend: 'Front-end',
+  sp_backend: 'Back-end',
+  sp_fullstack: 'Full Stack',
+  sp_mobile: 'Mobile',
+  sp_jogos: 'Jogos',
+  sp_apis: 'APIs',
+  sp_lowcode: 'Low-code',
+  sp_embarcados: 'Embarcados',
+  sp_web3: 'Web3 / Blockchain',
+  sp_ds: 'Ciência de Dados',
+  sp_de: 'Engenharia de Dados',
+  sp_bi: 'BI',
+  sp_ml: 'ML Engineer',
+  sp_genai: 'IA Generativa',
+  sp_nlp: 'NLP',
+  sp_bigdata: 'Big Data',
+  sp_devops: 'DevOps',
+  sp_sre: 'SRE',
+  sp_cloud: 'Cloud Engineer',
+  sp_sysadmin: 'Sysadmin',
+  sp_containers: 'Containers',
+  sp_platform: 'Plataforma',
+  sp_network: 'Redes',
+  sp_pentest: 'Pentest',
+  sp_soc: 'Analista SOC',
+  sp_blueteam: 'Blue Team',
+  sp_redteam: 'Red Team',
+  sp_forense: 'Forense Digital',
+  sp_incident: 'Resposta a Incidentes',
+  sp_cloudsec: 'Cloud Security',
+  sp_qa_auto: 'QA Automação',
+  sp_qa_perf: 'QA Performance',
+  sp_product_design: 'UX/UI / Product Design',
+  sp_pm: 'Product Manager / Product Owner',
+  sp_techlead: 'Tech Lead',
+  sp_devrel: 'Developer Advocate / Technical Writer',
+  sp_helpdesk: 'Suporte Técnico / Help Desk',
+};
+
+const PATH_TO_SUBPROFILE_PREFIXES = {
+  codigo: ['sp_frontend', 'sp_backend', 'sp_fullstack', 'sp_mobile', 'sp_jogos', 'sp_apis', 'sp_lowcode', 'sp_embarcados', 'sp_web3', 'sp_qa_auto', 'sp_qa_perf', 'sp_product_design', 'sp_pm', 'sp_techlead', 'sp_devrel'],
+  dados: ['sp_ds', 'sp_de', 'sp_bi', 'sp_ml', 'sp_genai', 'sp_nlp', 'sp_bigdata', 'sp_pm'],
+  infra: ['sp_devops', 'sp_sre', 'sp_cloud', 'sp_sysadmin', 'sp_containers', 'sp_platform', 'sp_network', 'sp_helpdesk'],
+  seguranca: ['sp_pentest', 'sp_soc', 'sp_blueteam', 'sp_redteam', 'sp_forense', 'sp_incident', 'sp_cloudsec'],
+};
 
 // ============================================================
 // NAVIGATION
@@ -369,6 +425,54 @@ function recomputeScoresFromAnswers() {
   });
 }
 
+function getScore(scores, key) {
+  return scores[key] || 0;
+}
+
+function getPathScores(scores) {
+  const paths = [
+    ['codigo', getScore(scores, 'path_codigo') + getScore(scores, 'front') + getScore(scores, 'back') + getScore(scores, 'pratico') + getScore(scores, 'criativo')],
+    ['dados', getScore(scores, 'path_dados') + getScore(scores, 'dados') + getScore(scores, 'analitico') + getScore(scores, 'logica')],
+    ['infra', getScore(scores, 'path_infra') + getScore(scores, 'infra') + getScore(scores, 'back') + getScore(scores, 'logica')],
+    ['seguranca', getScore(scores, 'path_seguranca') + getScore(scores, 'analitico') + getScore(scores, 'logica') + getScore(scores, 'qa')],
+  ];
+  return paths.sort((a, b) => b[1] - a[1]);
+}
+
+function getSuggestedSubprofiles(scores, profileKey, primaryPath) {
+  const allowed = PATH_TO_SUBPROFILE_PREFIXES[primaryPath] || [];
+  const top = allowed
+    .map(key => [key, getScore(scores, key)])
+    .filter(([, value]) => value > 0)
+    .sort((a, b) => b[1] - a[1])
+    .slice(0, 3)
+    .map(([key]) => SUBPROFILE_LABELS[key])
+    .filter(Boolean);
+  if (top.length) return top;
+  return PROFILES[profileKey]?.defaultSubprofiles || [];
+}
+
+function getShareUrl(profileKey, scores) {
+  const url = new URL(window.location.origin + window.location.pathname);
+  url.searchParams.set('resultado', profileKey);
+  if (scores && Object.keys(scores).length) url.searchParams.set('dados', encodeResult(scores, profileKey));
+  return url.toString();
+}
+
+function getSharedScoresForProfile(profileKey) {
+  return { ...(PROFILES[profileKey]?.shareScores || {}) };
+}
+
+function getQueryResultParam() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('resultado');
+}
+
+function getQueryResultData() {
+  const params = new URLSearchParams(window.location.search);
+  return params.get('dados');
+}
+
 function renderQuizEntry() {
   const saved = restaurarProgresso();
   if (!saved) return initQuiz();
@@ -377,9 +481,9 @@ function renderQuizEntry() {
   document.getElementById('btnNext').style.visibility = 'hidden';
   document.getElementById('quizCounter').textContent = '';
   quizCard.innerHTML = `
-    <div class="resume-card">
+      <div class="resume-card">
       <div class="resume-card-title">Você tem um diagnóstico em andamento</div>
-      <div class="resume-card-copy">Você estava na pergunta ${Math.min((saved.currentQuestion || 0) + 1, QUESTIONS.length)} de ${QUESTIONS.length}. O progresso fica salvo neste navegador por até 30 dias. Quer retomar de onde parou?</div>
+      <div class="resume-card-copy">Você estava na pergunta ${Math.min((saved.currentQuestion || 0) + 1, QUESTIONS.length)} de ${QUESTIONS.length}. O progresso fica salvo neste navegador por até 7 dias. Quer retomar de onde parou?</div>
       <div style="display:flex;gap:8px;">
         <button class="btn btn-primary" onclick="continuarQuiz()">Continuar</button>
         <button class="btn btn-ghost" onclick="recomecarQuiz()">Começar do zero</button>
@@ -503,16 +607,24 @@ function quizBack() {
 // PROFILE ALGORITHM
 // ============================================================
 function calcularPerfil(scores) {
-  const get = k => scores[k] || 0;
+  const get = k => getScore(scores, k);
   const bloqueio = get('bloqueio') + get('estresse');
-  const vocacao  = get('vocacao') + get('foco') + get('autodidata');
+  const vocacao = get('vocacao') + get('foco') + get('autodidata');
+  const pathScores = getPathScores(scores);
+  const [primaryPath, primaryValue] = pathScores[0];
 
-  if (bloqueio >= 6 && vocacao < 3)              return 'repensar';
-  if (get('ensino') >= 4 && get('social') >= 4)  return 'educador';
-  if (get('transicao') >= 2)                     return 'transicao';
-  if (get('ux') >= 3 && get('criativo') >= 4)    return 'ux_design';
-  if (get('dados') >= 4 && get('analitico') >= 3) return 'analitico';
-  if (get('infra') >= 3 && get('back') >= 2)     return 'infra_cloud';
+  if (bloqueio >= 6 && vocacao < 3 && primaryValue < 8) return 'repensar';
+  if (get('advocacy') >= 6 && get('social') >= 5) return 'developer_advocate';
+  if (get('lideranca') >= 6 && get('gestao') >= 4 && get('especializar') >= 2) return 'tech_lead';
+  if (get('produto') >= 6 && get('social') >= 4) return 'produto';
+  if (get('suporte') >= 6 && get('iniciante') + get('transicao') >= 3) return 'suporte';
+  if (get('qa') >= 5 && get('analitico') >= 4) return 'qa_teste';
+  if (primaryPath === 'seguranca' && primaryValue >= 8) return 'seguranca';
+  if (get('ensino') >= 5 && get('social') >= 5) return 'educador';
+  if (get('transicao') >= 3 && primaryValue < 13) return 'transicao';
+  if (get('ux') >= 4 && get('criativo') >= 4) return 'ux_design';
+  if (primaryPath === 'dados' && primaryValue >= 8) return 'analitico';
+  if (primaryPath === 'infra' && primaryValue >= 8) return 'infra_cloud';
   return 'dev_nato';
 }
 
@@ -542,6 +654,7 @@ function getAreaScores(scores) {
     ['dados', get('dados') + get('analitico') + get('logica')],
     ['ux', get('ux') + get('criativo') + get('social')],
     ['infra', get('infra') + get('back') + get('logica')],
+    ['seguranca', get('path_seguranca') + get('analitico') + get('qa')],
     ['qa', get('qa') + get('analitico') + get('pratico')],
     ['ensino', get('ensino') + get('social') + get('vocacao')],
   ].sort((a, b) => b[1] - a[1]).slice(0, 4);
@@ -551,8 +664,34 @@ function gerarTextoResultado(profileKey, areasSorted, shareUrl) {
   const prof = PROFILES[profileKey];
   const emojisFit = ['🥇', '🥈', '🥉', ''];
   const areasTexto = areasSorted.map(([k], i) => `${emojisFit[i] || '-'} ${AREAS_INFO[k].name} — ${AREAS_INFO[k].desc}`).join('\n- ');
-  const passosTexto = prof.steps.map(s => `- ${s}`).join('\n');
-  return `# Meu resultado no devguia.dev\n\n**Perfil:** ${prof.name} ${prof.icon}\n**${prof.sub}**\n\n${prof.desc}\n\n## Compatibilidade por área\n- ${areasTexto}\n\n## Próximos passos recomendados\n${passosTexto}\n\n---\nFaça o seu diagnóstico gratuito: ${shareUrl}`;
+  const pathScores = getPathScores(state.scores);
+  const primaryPath = pathScores[0]?.[0] || prof.primaryPath || 'codigo';
+  const secondaryPath = pathScores[1]?.[0] || prof.defaultSecondaryPath || 'dados';
+  const subprofiles = getSuggestedSubprofiles(state.scores, profileKey, primaryPath);
+  const phaseId = PROFILE_ROADMAP_PHASE[profileKey] || 'fase1';
+  const phase = PHASES.find(item => item.id === phaseId);
+  const roadmapPassos = (phase?.skills || []).slice(0, 3).map(item => `- ${item.name}`).join('\n');
+  return `# Meu resultado no devguia.dev
+
+Perfil: ${prof.name} ${prof.icon}
+${prof.sub}
+
+${prof.desc}
+
+Caminho principal: ${PATH_INFO[primaryPath]?.label || primaryPath}
+Caminho secundário: ${PATH_INFO[secondaryPath]?.label || secondaryPath}
+Subperfis sugeridos: ${subprofiles.join(', ')}
+
+Compatibilidade por área
+- ${areasTexto}
+
+Próximos passos do roadmap
+${roadmapPassos}
+
+Próximos passos recomendados
+${prof.steps.map(step => `- ${step}`).join('\n')}
+
+Faça o seu diagnóstico gratuito: ${shareUrl}`;
 }
 
 function copyText(text) {
@@ -563,11 +702,22 @@ function copyText(text) {
       ta.value = text;
       document.body.appendChild(ta);
       ta.select();
-      document.execCommand('copy');
+      const copied = document.execCommand('copy');
       document.body.removeChild(ta);
-      resolve();
+      if (copied) resolve();
+      else reject(new Error('Falha ao copiar texto'));
     } catch (e) { reject(e); }
   });
+}
+
+function flashButtonState(buttonId, nextLabel, revertLabel, timeout = 2000) {
+  const btn = document.getElementById(buttonId);
+  if (!btn) return;
+  btn.textContent = nextLabel;
+  window.setTimeout(() => {
+    const liveBtn = document.getElementById(buttonId);
+    if (liveBtn) liveBtn.textContent = revertLabel;
+  }, timeout);
 }
 
 function trackDiagnostico(profileKey) {
@@ -589,7 +739,7 @@ function isResourceFree(item, tabKey) {
 }
 
 function buildRecursoCardsHtml(profile, tabKey) {
-  const data = RECURSOS[profile.key] || { livros: [], sites: [], comunidades: [] };
+  const data = RECURSOS[profile.key] || RECURSOS[profile.resourceBase] || { livros: [], sites: [], comunidades: [] };
   const items = (data[tabKey] || []).filter(item => !state.freeOnly || isResourceFree(item, tabKey));
   return items.map(item => {
     const badge = `<div class="recurso-flag">${isResourceFree(item, tabKey) ? 'Grátis' : 'Pago'}</div>`;
@@ -633,13 +783,18 @@ function showResult(scores, profileKey, options = {}) {
   state.profileKey = profileKey;
   state.recursosTab = state.recursosTab || 'livros';
   const profile = PROFILES[profileKey];
+  if (!profile) return;
   const get = k => scores[k] || 0;
   const encoded = encodeResult(scores, profileKey);
-  const shareUrl = window.location.origin + window.location.pathname + '#result=' + encoded;
-  history.replaceState(null, '', '#result=' + encoded);
+  const shareUrl = getShareUrl(profileKey, scores);
+  if (!options.preserveExternalUrl) history.replaceState(null, '', '#result=' + encoded);
   state.resultHash = '#result=' + encoded;
   state.currentShareUrl = shareUrl;
   state.areaScores = getAreaScores(scores);
+  state.pathScores = getPathScores(scores);
+  const primaryPath = state.pathScores[0]?.[0] || profile.primaryPath || 'codigo';
+  const secondaryPath = state.pathScores[1]?.[0] || profile.defaultSecondaryPath || 'dados';
+  state.suggestedSubprofiles = getSuggestedSubprofiles(scores, profileKey, primaryPath);
   const perfilAnterior = options.fromShare ? null : sessionStorage.getItem('ultimo_perfil');
   if (!options.fromShare) sessionStorage.setItem('ultimo_perfil', profileKey);
   const isRefazendo = !!perfilAnterior;
@@ -656,6 +811,24 @@ function showResult(scores, profileKey, options = {}) {
   const fitClasses = ['fit-best', 'fit-good', 'fit-ok', 'fit-ok'];
   const barsHtml = bars.map((b, i) => `<div class="compat-bar-item"><div class="compat-bar-label"><span>${b.label}</span><span>${b.val}%</span></div><div class="compat-bar-track"><div class="compat-bar-fill" id="bar${i}" style="background:${b.color}" data-val="${b.val}"></div></div></div>`).join('');
   const areasHtml = state.areaScores.map(([k], i) => `<div class="area-card${i === 0 ? ' top' : ''}"><h4>${AREAS_INFO[k].name}</h4><p>${AREAS_INFO[k].desc}</p><span class="fit-badge ${fitClasses[i]}">${fitLabels[i]}</span></div>`).join('');
+  const journeyHtml = `
+    <div class="areas-grid" style="margin-bottom:20px">
+      <div class="area-card top">
+        <h4>Caminho principal</h4>
+        <p>${PATH_INFO[primaryPath]?.label || primaryPath}</p>
+        <span class="fit-badge fit-best">${PATH_INFO[primaryPath]?.desc || ''}</span>
+      </div>
+      <div class="area-card">
+        <h4>Caminho secundário</h4>
+        <p>${PATH_INFO[secondaryPath]?.label || secondaryPath}</p>
+        <span class="fit-badge fit-good">${PATH_INFO[secondaryPath]?.desc || ''}</span>
+      </div>
+    </div>
+    <div class="result-steps" style="margin-bottom:20px">
+      <h3>Subperfis sugeridos</h3>
+      <ul>${state.suggestedSubprofiles.map(item => `<li>${item}</li>`).join('')}</ul>
+    </div>
+  `;
   const attentionHtml = profile.attention.map(a => `<li>${a}</li>`).join('');
   const stepsHtml = profile.steps.map(st => `<li>${st}</li>`).join('');
   const shareBanner = options.fromShare ? `<div style="margin-top:8px;background:var(--amber-bg);border:1px solid var(--amber-dim);border-radius:8px;padding:8px 12px;color:var(--amber);font-size:12px;">👁 Você está vendo o resultado de outra pessoa — <button class="btn-inline" style="color:var(--amber)" onclick="go('quiz', 'forward')">fazer o seu</button></div>` : '';
@@ -687,6 +860,7 @@ function showResult(scores, profileKey, options = {}) {
         </div>
       </div>
       <div class="result-desc">${profile.desc}</div>
+      ${journeyHtml}
       <h3 style="font-size:14px;margin-bottom:16px;color:var(--text2)">Compatibilidade por dimensão</h3>
       <div class="compat-bars">${barsHtml}</div>
       <h3 style="font-size:14px;margin-bottom:12px;color:var(--text2)">Áreas de maior fit</h3>
@@ -699,7 +873,7 @@ function showResult(scores, profileKey, options = {}) {
     <div class="result-ctas">
       <button class="btn btn-primary" onclick="go('roadmap', 'forward')">Ver Roadmap</button>
       <button class="btn btn-ghost" id="copyLinkBtn" onclick="copiarLink()">⛓ Copiar link</button>
-      <button class="btn btn-ghost" id="copyResultBtn" onclick="copiarResultado()">📋 Copiar resultado</button>
+      <button class="btn btn-ghost" id="copyResultBtn" onclick="copiarResultado()">📋 Copiar resultado em TXT</button>
       <button class="btn btn-ghost" onclick="go('quiz', 'back')">Refazer o diagnóstico</button>
     </div>
   `;
@@ -739,22 +913,24 @@ function setRecursosTab(tab) {
 }
 
 function copiarLink() {
-  const btn = document.getElementById('copyLinkBtn');
-  copyText(state.currentShareUrl).then(() => {
-    const prev = btn.textContent;
-    btn.textContent = 'Link copiado!';
-    setTimeout(() => { btn.textContent = prev; }, 2000);
-  });
+  const original = '⛓ Copiar link';
+  copyText(state.currentShareUrl)
+    .then(() => flashButtonState('copyLinkBtn', 'Copiado!', original))
+    .catch(error => {
+      console.warn('[devguia] Falha ao copiar link:', error.message);
+      flashButtonState('copyLinkBtn', 'Falhou', original);
+    });
 }
 
 function copiarResultado() {
-  const btn = document.getElementById('copyResultBtn');
   const texto = gerarTextoResultado(state.profileKey, state.areaScores, state.currentShareUrl);
-  copyText(texto).then(() => {
-    const prev = btn.textContent;
-    btn.textContent = 'Copiado!';
-    setTimeout(() => { btn.textContent = prev; }, 2000);
-  });
+  const original = '📋 Copiar resultado em TXT';
+  copyText(texto)
+    .then(() => flashButtonState('copyResultBtn', 'Copiado!', original))
+    .catch(error => {
+      console.warn('[devguia] Falha ao copiar resultado:', error.message);
+      flashButtonState('copyResultBtn', 'Falhou', original);
+    });
 }
 
 // ============================================================
@@ -1238,6 +1414,15 @@ function toggleEasyRead() {
   sessionStorage.setItem(EASY_READ_KEY, isActive ? '1' : '0');
 }
 
+function showResultFromQueryParam(profileKey) {
+  if (!profileKey || !PROFILES[profileKey]) return false;
+  const encoded = getQueryResultData();
+  const decoded = encoded ? decodeResult('result=' + encoded) : null;
+  const scores = decoded && decoded.p === profileKey && decoded.s ? decoded.s : getSharedScoresForProfile(profileKey);
+  showResult(scores, profileKey, { fromShare: true, skipTrack: true, preserveExternalUrl: true });
+  return true;
+}
+
 // ============================================================
 // INIT
 // ============================================================
@@ -1283,6 +1468,13 @@ window.addEventListener('load', () => {
     }
   }
   initBackToTop();
+  const resultadoParam = getQueryResultParam();
+  if (resultadoParam && showResultFromQueryParam(resultadoParam)) {
+    syncSugestaoContext();
+    syncFreeOnlyUi();
+    saveAppState();
+    return;
+  }
   const raw = (location.hash || '').replace(/^#/, '');
   if (raw.startsWith('result=')) {
     const data = decodeResult(raw);

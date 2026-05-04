@@ -150,6 +150,22 @@
     </div>
     <div class="grid">
       
+        <article class="card" id="ab-test">
+          <span class="badge">produto</span>
+          <h2>A/B Test</h2>
+          <p>Teste que compara duas versões de uma mesma experiência para medir qual funciona melhor.</p>
+          <p>Ele é usado para decidir com dado real em vez de opinião quando duas hipóteses parecem plausíveis.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: testar dois textos de botão de cadastro e ver qual gera mais conclusão.</div>
+        </article>
+      
+        <article class="card" id="agile">
+          <span class="badge">produto</span>
+          <h2>Agile</h2>
+          <p>Forma de organizar trabalho em ciclos curtos, com entrega frequente e feedback constante.</p>
+          <p>No dia a dia aparece em sprint, refinamento, retrospectiva e ajuste de rota conforme aprendizado do time.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: dividir uma funcionalidade grande em entregas menores para validar valor antes de investir meses.</div>
+        </article>
+      
         <article class="card" id="algoritmo">
           <span class="badge">fundamentos</span>
           <h2>Algoritmo</h2>
@@ -166,8 +182,32 @@
           <div class="example"><strong>Exemplo:</strong> No delivery, ao tocar em "pagar com cartão", o app não acessa o mainframe do banco: ele chama a API de pagamentos, recebe um status e mostra o resultado. Se a API mudar sem aviso, vários apps quebram ao mesmo tempo — por isso contrato e testes importam tanto.</div>
         </article>
       
+        <article class="card" id="api-gateway">
+          <span class="badge">cloud</span>
+          <h2>API Gateway</h2>
+          <p>Camada que centraliza entrada de APIs, autenticação, roteamento e políticas comuns.</p>
+          <p>Ela evita repetir controle de acesso, rate limit e observabilidade em cada serviço isolado.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: várias APIs internas ficam atrás de um gateway que valida token antes de repassar a chamada.</div>
+        </article>
+      
+        <article class="card" id="autenticacao">
+          <span class="badge">seguranca</span>
+          <h2>Autenticação</h2>
+          <p>Processo de provar quem você é antes de usar um sistema.</p>
+          <p>Senha, MFA, biometria e login social são meios de autenticação com níveis diferentes de risco.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: usuário informa senha e código do autenticador antes de entrar no painel.</div>
+        </article>
+      
+        <article class="card" id="autorizacao">
+          <span class="badge">seguranca</span>
+          <h2>Autorização</h2>
+          <p>Regra que define o que cada pessoa ou serviço pode fazer depois de autenticado.</p>
+          <p>Autenticar não basta; o sistema ainda precisa limitar ação, escopo e acesso conforme o papel.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: analista vê pedido, mas só gerente pode aprovar reembolso.</div>
+        </article>
+      
         <article class="card" id="backend">
-          <span class="badge">geral</span>
+          <span class="badge">back-end</span>
           <h2>Back-end</h2>
           <p>É a camada que roda fora do navegador do usuário: servidores, regras de negócio, integrações e persistência. O usuário não "vê" o back-end, mas sente quando ele está lento, inconsistente ou inseguro.</p>
           <p>Back-end recebe requisições (HTTP, filas, jobs agendados), valida permissões, fala com bancos e serviços externos e devolve respostas confiáveis. Ele também é onde moram preocupações como transações, concorrência, idempotência e auditoria. Times grandes separam camadas (API, domínio, infraestrutura), mas no início o importante é entender o fluxo ponta a ponta: pedido entra, dado é validado, efeito colateral é controlado, resposta sai.</p>
@@ -190,6 +230,46 @@
           <div class="example"><strong>Exemplo:</strong> Para formatar moeda em real e timezone de Brasília, uma lib como date-fns ou Intl API evita reimplementar calendário. Você importa a função, usa no componente e segue — sem precisar de framework novo.</div>
         </article>
       
+        <article class="card" id="big-data">
+          <span class="badge">dados</span>
+          <h2>Big Data</h2>
+          <p>Conjunto de técnicas e arquitetura para lidar com volume, velocidade ou variedade muito altos.</p>
+          <p>Big Data importa quando ferramenta simples deixa de dar conta com segurança, tempo ou custo aceitável.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: processar bilhões de eventos de navegação por dia para análise e recomendação.</div>
+        </article>
+      
+        <article class="card" id="branch">
+          <span class="badge">geral</span>
+          <h2>Branch (Git)</h2>
+          <p>Linha paralela de trabalho em um repositório para mudar algo sem tocar direto na base principal.</p>
+          <p>Branch permite experimentar, revisar e isolar uma entrega antes de mesclar no fluxo principal.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: criar branch da nova feature para trabalhar sem quebrar a versão estável.</div>
+        </article>
+      
+        <article class="card" id="bug">
+          <span class="badge">qa</span>
+          <h2>Bug</h2>
+          <p>Erro de comportamento entre o que o sistema faz e o que deveria fazer.</p>
+          <p>Bug pode nascer de código, requisito ambíguo, integração ruim ou dado inesperado.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: desconto é aplicado duas vezes quando a página recarrega.</div>
+        </article>
+      
+        <article class="card" id="cache">
+          <span class="badge">infra</span>
+          <h2>Cache</h2>
+          <p>Cópia temporária de dado usado com frequência para reduzir tempo e custo de acesso.</p>
+          <p>Cache acelera leitura, mas também cria desafio de invalidação e consistência entre camadas.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: guardar lista de produtos populares em cache para não consultar o banco a cada visita.</div>
+        </article>
+      
+        <article class="card" id="cdn">
+          <span class="badge">cloud</span>
+          <h2>CDN</h2>
+          <p>Rede distribuída que entrega arquivos mais perto do usuário final.</p>
+          <p>CDN reduz latência, alivia servidor principal e melhora disponibilidade para conteúdo estático.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: imagens do site são servidas por uma CDN em vez de sair sempre do mesmo servidor.</div>
+        </article>
+      
         <article class="card" id="ci-cd">
           <span class="badge">infra</span>
           <h2>CI/CD</h2>
@@ -198,12 +278,52 @@
           <div class="example"><strong>Exemplo:</strong> Cada pull request roda 200 testes em minutos; merge na main gera imagem Docker versionada e atualiza homologação. Produção só recebe tag aprovada pelo time — com botão ou política automática.</div>
         </article>
       
-        <article class="card" id="cloud">
+        <article class="card" id="cli">
           <span class="badge">infra</span>
+          <h2>CLI</h2>
+          <p>Interface de linha de comando usada por texto em vez de interface gráfica.</p>
+          <p>CLI é comum em servidor, automação, cloud e ferramentas que precisam ser scriptáveis.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: usar CLI da AWS para criar recursos em lote sem clicar no console.</div>
+        </article>
+      
+        <article class="card" id="cloud">
+          <span class="badge">cloud</span>
           <h2>Cloud (nuvem)</h2>
           <p>É consumir computação, armazenamento e rede como serviço pago pelo uso, em vez de comprar hardware próprio. AWS, GCP e Azure são os grandes provedores; há também opções menores e especializadas.</p>
           <p>Na cloud você provisiona máquinas em minutos, anexa discos, configura VPC e integra serviços gerenciados (banco, fila, CDN). O modelo shifta custo de CAPEX para OPEX e exige disciplina financeira: recursos esquecidos geram conta alta. Boas equipes usam infraestrutura como código (Terraform, Pulumi) para não clicar manualmente em console.</p>
           <div class="example"><strong>Exemplo:</strong> Black Friday: auto scaling adiciona instâncias quando CPU sobe e reduz depois do pico. Em datacenter próprio, você teria capacidade ociosa o ano inteiro ou risco de queda no pico.</div>
+        </article>
+      
+        <article class="card" id="cloud-computing">
+          <span class="badge">cloud</span>
+          <h2>Cloud Computing</h2>
+          <p>Modelo de computação em que processamento, rede e armazenamento são consumidos como serviço.</p>
+          <p>Ele amplia elasticidade e terceiriza parte da operação física do datacenter.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: aumentar capacidade de processamento em campanha sem comprar hardware novo.</div>
+        </article>
+      
+        <article class="card" id="cluster">
+          <span class="badge">cloud</span>
+          <h2>Cluster</h2>
+          <p>Grupo de máquinas ou instâncias trabalhando juntas como um conjunto coordenado.</p>
+          <p>Cluster aparece em banco, containers e processamento distribuído para ganhar escala e resiliência.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: um cluster de Kubernetes distribui pods entre vários nós.</div>
+        </article>
+      
+        <article class="card" id="commit">
+          <span class="badge">geral</span>
+          <h2>Commit</h2>
+          <p>Registro versionado de um conjunto de mudanças com mensagem descritiva.</p>
+          <p>Commit bom explica intenção e facilita review, bisect e entendimento histórico do projeto.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: separar correção de bug de refatoração em commits diferentes melhora rastreabilidade.</div>
+        </article>
+      
+        <article class="card" id="container">
+          <span class="badge">cloud</span>
+          <h2>Container</h2>
+          <p>Empacotamento leve de aplicação com dependências e configuração de execução.</p>
+          <p>Container ajuda a rodar o mesmo software em ambientes diferentes com menos surpresa.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: app sobe em container igual no notebook, na pipeline e em produção.</div>
         </article>
       
         <article class="card" id="versionamento">
@@ -214,12 +334,68 @@
           <div class="example"><strong>Exemplo:</strong> Você quebrou produção sexta à noite: o histórico mostre o commit culpado, você abre revert ou hotfix branch, e o time discute em PR o que aprender. Sem Git, você caça cópia "final_v2_really.zip".</div>
         </article>
       
+        <article class="card" id="cookie">
+          <span class="badge">front-end</span>
+          <h2>Cookie</h2>
+          <p>Pequeno dado salvo no navegador para sessão, preferência ou rastreamento.</p>
+          <p>Cookie precisa ser tratado com cuidado porque pode carregar informação sensível ou sujeita a consentimento.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: login persiste sessão por cookie HttpOnly definido pelo servidor.</div>
+        </article>
+      
+        <article class="card" id="cors">
+          <span class="badge">back-end</span>
+          <h2>CORS</h2>
+          <p>Regra do navegador que controla quando uma origem pode acessar recurso de outra.</p>
+          <p>CORS existe para limitar acesso cruzado e precisa ser configurado de forma explícita na API.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: front em um domínio faz chamada para API em outro e recebe bloqueio por política de origem.</div>
+        </article>
+      
+        <article class="card" id="crud">
+          <span class="badge">back-end</span>
+          <h2>CRUD</h2>
+          <p>Conjunto básico de operações de criar, ler, atualizar e apagar dados.</p>
+          <p>Muita aplicação começa com CRUD, mas produto real logo adiciona regra, permissão e auditoria em cima.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: painel administrativo cadastra, lista, edita e remove clientes.</div>
+        </article>
+      
         <article class="card" id="css">
           <span class="badge">front-end</span>
           <h2>CSS</h2>
           <p>É a folha de estilo que controla aparência e, em parte, layout responsivo: cores, tipografia, grid, flexbox, animações. CSS "simples" esconde anos de pegadinhas entre navegadores e especificidade.</p>
           <p>Design systems modernos usam tokens, variáveis e componentes para manter consistência. Performance importa: seletores pesados, animações que disparam layout thrashing e imagens sem tamanho definido prejudicem Core Web Vitals. Pré-processadores (Sass) e frameworks (Tailwind) são opcionais — o fundamento é o cascade e o box model.</p>
           <div class="example"><strong>Exemplo:</strong> Mesmo conteúdo HTML pode virar layout mobile-first com media queries: menu vira ícone, colunas viram pilha, fonte aumenta para leitura confortável. Isso é trabalho de CSS, não só "deixar bonito no Figma".</div>
+        </article>
+      
+        <article class="card" id="dashboard">
+          <span class="badge">dados</span>
+          <h2>Dashboard</h2>
+          <p>Tela que resume métricas e sinais importantes para tomada de decisão.</p>
+          <p>Dashboard bom mostra contexto, tendência e ação; dashboard ruim vira painel bonito sem prioridade.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: produto acompanha conversão, retenção e erro em um único painel diário.</div>
+        </article>
+      
+        <article class="card" id="data-lake">
+          <span class="badge">dados</span>
+          <h2>Data Lake</h2>
+          <p>Repositório para armazenar dados brutos em grande volume e formatos variados.</p>
+          <p>Ele é útil quando você ainda não sabe todas as perguntas futuras, mas precisa governança para não virar bagunça.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: guardar logs, eventos e arquivos de várias fontes para análise posterior.</div>
+        </article>
+      
+        <article class="card" id="data-visualization">
+          <span class="badge">dados</span>
+          <h2>Data Visualization</h2>
+          <p>Transformação de dados em gráficos ou visuais que ajudam a entender padrão e exceção.</p>
+          <p>Boa visualização reduz ruído e ajuda a pessoa certa a agir mais rápido.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: trocar tabela gigante por gráfico de tendência semanal para evidenciar queda de conversão.</div>
+        </article>
+      
+        <article class="card" id="data-warehouse">
+          <span class="badge">dados</span>
+          <h2>Data Warehouse</h2>
+          <p>Base organizada para consulta analítica, com modelagem pensada para relatório e BI.</p>
+          <p>Warehouse privilegia leitura confiável e histórica para decisão de negócio.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: financeiro e produto consultam o mesmo repositório consolidado de vendas mensais.</div>
         </article>
       
         <article class="card" id="debug">
@@ -231,7 +407,7 @@
         </article>
       
         <article class="card" id="deploy">
-          <span class="badge">geral</span>
+          <span class="badge">infra</span>
           <h2>Deploy</h2>
           <p>É o ato de levar uma versão testada do software para um ambiente onde usuários ou outros sistemas acessam. Deploy manual existe, mas em empresas maduras ele é repetível, rastreável e reversível.</p>
           <p>Deploy envolve empacotar artefatos (binários, assets estáticos, migrações de banco), aplicar configurações por ambiente (dev, homologação, produção) e validar saúde após publicar. Ferramentas modernas usam pipelines: build, testes, análise de segurança, liberação gradual (canary) e rollback automático se métricas piorarem. Sem disciplina de deploy, cada correção vira medo e cada sexta-feira vira apagão.</p>
@@ -246,6 +422,62 @@
           <div class="example"><strong>Exemplo:</strong> Antes, deploy era evento mensal com checklist de medo; depois de DevOps maduro, deploys pequenos e frequentes reduzem risco porque mudanças são isoladas e monitoradas.</div>
         </article>
       
+        <article class="card" id="dns">
+          <span class="badge">cloud</span>
+          <h2>DNS</h2>
+          <p>Sistema que traduz nome amigável em endereço de rede.</p>
+          <p>Sem DNS, pessoas teriam de decorar IP; com DNS mal configurado, site some mesmo com servidor vivo.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: dominio.com aponta para o balanceador correto por registro DNS.</div>
+        </article>
+      
+        <article class="card" id="docker">
+          <span class="badge">cloud</span>
+          <h2>Docker</h2>
+          <p>Ferramenta popular para construir e rodar containers.</p>
+          <p>Docker empacota aplicação e dependências em imagem reproduzível para vários ambientes.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: pipeline gera imagem Docker do app e publica em um registry antes do deploy.</div>
+        </article>
+      
+        <article class="card" id="endpoint">
+          <span class="badge">back-end</span>
+          <h2>Endpoint</h2>
+          <p>Ponto específico de acesso de uma API, normalmente identificado por rota e método.</p>
+          <p>Cada endpoint representa uma operação exposta e deve ser documentado com entrada, saída e erros.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: POST /pedidos cria um novo pedido no sistema.</div>
+        </article>
+      
+        <article class="card" id="etl">
+          <span class="badge">dados</span>
+          <h2>ETL</h2>
+          <p>Processo de extrair, transformar e carregar dados entre sistemas.</p>
+          <p>ETL aparece quando dado vem sujo ou espalhado e precisa virar fonte confiável de análise.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: juntar vendas de loja, site e marketplace em uma tabela única para BI.</div>
+        </article>
+      
+        <article class="card" id="feature-branch">
+          <span class="badge">geral</span>
+          <h2>Feature Branch</h2>
+          <p>Branch criada para desenvolver uma funcionalidade isolada da base principal.</p>
+          <p>Ela facilita revisão, teste e rollback sem misturar trabalho inacabado com código estável.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: checkout novo vive em feature branch até ficar pronto para PR.</div>
+        </article>
+      
+        <article class="card" id="feature-flag">
+          <span class="badge">produto</span>
+          <h2>Feature Flag</h2>
+          <p>Chave que liga ou desliga uma funcionalidade sem redeploy completo.</p>
+          <p>Ela ajuda rollout gradual, teste controlado e reversão rápida de comportamento.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: liberar novo checkout só para 10 por cento dos usuários antes da abertura total.</div>
+        </article>
+      
+        <article class="card" id="firewall">
+          <span class="badge">seguranca</span>
+          <h2>Firewall</h2>
+          <p>Camada que filtra tráfego de rede conforme regra definida.</p>
+          <p>Firewall reduz superfície de ataque ao bloquear portas, origens ou protocolos indevidos.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: banco aceita conexão só da sub-rede da aplicação, não da internet inteira.</div>
+        </article>
+      
         <article class="card" id="framework">
           <span class="badge">geral</span>
           <h2>Framework</h2>
@@ -255,11 +487,43 @@
         </article>
       
         <article class="card" id="frontend">
-          <span class="badge">geral</span>
+          <span class="badge">front-end</span>
           <h2>Front-end</h2>
           <p>É tudo o que roda no dispositivo da pessoa: layout, estados de tela, formulários, animações e acessibilidade. Bom front-end não é só estética — é engenharia de interface que lida com latência, erros de rede e diferentes tamanhos de tela.</p>
           <p>Front-end tradicionalmente combina HTML semântico, CSS e JavaScript, hoje frequentemente com frameworks que gerenciam estado e roteamento. O trabalho inclui performance (menos JavaScript desnecessário, imagens adequadas), compatibilidade entre navegadores e testes de usabilidade. Em produtos reais, front-end conversa com design e produto para traduzir requisitos em componentes reutilizáveis.</p>
           <div class="example"><strong>Exemplo:</strong> No banco pelo celular, o extrato que você vê é front-end; o saldo veio de uma API, mas quem decide como mostrar loading, retry e mensagem de erro é a camada de interface. Uma tela bonita que trava com 500 linhas na lista não passa em revisão séria.</div>
+        </article>
+      
+        <article class="card" id="git">
+          <span class="badge">geral</span>
+          <h2>Git</h2>
+          <p>Ferramenta de controle de versão usada para histórico, branches, merges e colaboração.</p>
+          <p>Git permite experimentar com segurança e saber exatamente quando e por que algo mudou.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: bug em produção é rastreado até o commit que alterou a regra de desconto.</div>
+        </article>
+      
+        <article class="card" id="graphql">
+          <span class="badge">back-end</span>
+          <h2>GraphQL</h2>
+          <p>Forma de API em que cliente pede exatamente os campos que precisa.</p>
+          <p>GraphQL reduz excesso de dados em algumas integrações, mas exige atenção extra com custo de consulta e cache.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: tela de perfil busca só nome e avatar sem baixar objeto inteiro de usuário.</div>
+        </article>
+      
+        <article class="card" id="hash">
+          <span class="badge">seguranca</span>
+          <h2>Hash</h2>
+          <p>Saída curta e determinística gerada a partir de um dado de entrada.</p>
+          <p>Hash é usado em integridade, senha, cache e identificação; não serve como criptografia reversível.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: sistema guarda hash da senha em vez da senha em texto puro.</div>
+        </article>
+      
+        <article class="card" id="helpdesk">
+          <span class="badge">qa</span>
+          <h2>Help Desk</h2>
+          <p>Ponto de atendimento técnico para incidentes, dúvidas e problemas operacionais.</p>
+          <p>Help desk é porta de entrada comum em tecnologia porque expõe sistema, usuário e processo ao mesmo tempo.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: colaborador abre chamado porque perdeu acesso ao e-mail e o time de suporte investiga.</div>
         </article>
       
         <article class="card" id="html">
@@ -270,12 +534,212 @@
           <div class="example"><strong>Exemplo:</strong> Um botão deve ser <button>, não <div> com onclick, para funcionar com teclado e leitor de tela. Pequenas escolhas de marcação definem se seu produto é profissional ou frágil.</div>
         </article>
       
+        <article class="card" id="http-https">
+          <span class="badge">back-end</span>
+          <h2>HTTP/HTTPS</h2>
+          <p>Protocolo usado na web para troca de requisição e resposta, com ou sem camada segura.</p>
+          <p>HTTPS adiciona TLS para proteger dados em trânsito e evitar interceptação simples.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: navegador envia GET para buscar página e recebe HTML como resposta.</div>
+        </article>
+      
+        <article class="card" id="iac">
+          <span class="badge">cloud</span>
+          <h2>IaC (Infrastructure as Code)</h2>
+          <p>Definição de infraestrutura em arquivo versionado, em vez de clique manual.</p>
+          <p>IaC melhora repetibilidade, revisão e recuperação de ambiente, além de reduzir configuração invisível.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: Terraform cria VPC, banco e balanceador a partir de código revisado em PR.</div>
+        </article>
+      
+        <article class="card" id="ide">
+          <span class="badge">geral</span>
+          <h2>IDE</h2>
+          <p>Ambiente integrado de desenvolvimento com editor, debug, terminal e navegação de código.</p>
+          <p>IDE aumenta produtividade quando usada para entender projeto, testar e refatorar com segurança.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: VS Code ou IntelliJ ajudam a renomear função em vários arquivos sem erro manual.</div>
+        </article>
+      
+        <article class="card" id="idempotencia">
+          <span class="badge">back-end</span>
+          <h2>Idempotência</h2>
+          <p>Propriedade de repetir a mesma operação sem mudar o resultado além da primeira vez.</p>
+          <p>Idempotência evita efeito colateral duplicado em reprocessamento, retry ou timeout de rede.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: reenvio do mesmo pedido de pagamento não pode cobrar duas vezes o cartão.</div>
+        </article>
+      
+        <article class="card" id="index">
+          <span class="badge">dados</span>
+          <h2>Índice</h2>
+          <p>Estrutura auxiliar que acelera busca em banco de dados.</p>
+          <p>Índice melhora leitura, mas custa espaço e escrita; escolher demais ou de menos dá problema.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: indexar e-mail acelera login por usuário sem varrer tabela inteira.</div>
+        </article>
+      
+        <article class="card" id="integracao-continua">
+          <span class="badge">infra</span>
+          <h2>Integração Contínua</h2>
+          <p>Prática de integrar mudanças pequenas com validação automatizada frequente.</p>
+          <p>O objetivo é descobrir erro cedo, antes de ele virar surpresa grande na release.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: cada push roda testes e impede merge de código que quebrou a build.</div>
+        </article>
+      
+        <article class="card" id="ip">
+          <span class="badge">cloud</span>
+          <h2>IP</h2>
+          <p>Endereço numérico usado para identificar dispositivo ou serviço na rede.</p>
+          <p>IP pode ser público ou privado e influencia roteamento, firewall e acesso entre máquinas.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: servidor interno usa IP privado e só o balanceador possui IP público.</div>
+        </article>
+      
         <article class="card" id="javascript">
           <span class="badge">front-end</span>
           <h2>JavaScript</h2>
           <p>É a linguagem que roda nos navegadores para eventos, estado e comunicação com APIs; com Node.js, também roda em servidores e ferramentas de build. Ecossistema enorme exige curadoria do que você instala.</p>
           <p>JS moderno (ES modules, async/await, fetch) simplifica código assíncrono, mas exige entender promises e fila de eventos. Tipagem opcional com TypeScript reduz bugs em projetos médios e grandes. Bundlers (Vite, Webpack) transformam e otimizam código para produção.</p>
           <div class="example"><strong>Exemplo:</strong> Ao digitar em uma busca, JS debounce evita disparar requisição a cada tecla; ao receber JSON da API, JS atualiza o DOM ou framework reativo re-renderiza só o necessário.</div>
+        </article>
+      
+        <article class="card" id="join">
+          <span class="badge">dados</span>
+          <h2>JOIN</h2>
+          <p>Operação SQL que combina linhas de tabelas diferentes por uma relação comum.</p>
+          <p>JOIN é poderoso, mas join mal feito duplica dado, distorce métrica e piora performance.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: juntar pedidos e clientes para saber ticket médio por cidade.</div>
+        </article>
+      
+        <article class="card" id="json">
+          <span class="badge">back-end</span>
+          <h2>JSON</h2>
+          <p>Formato textual simples muito usado para trocar dados entre sistemas.</p>
+          <p>JSON aparece em API, config, fila e armazenamento leve por ser legível e amplamente suportado.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: front envia um objeto JSON com nome, e-mail e telefone para criar cadastro.</div>
+        </article>
+      
+        <article class="card" id="jwt">
+          <span class="badge">seguranca</span>
+          <h2>JWT</h2>
+          <p>Token assinado que carrega claims e pode representar autenticação ou autorização temporária.</p>
+          <p>JWT facilita integrações, mas precisa expiração curta, assinatura válida e cuidado com dado sensível.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: API recebe JWT no header para identificar usuário autenticado.</div>
+        </article>
+      
+        <article class="card" id="kubernetes">
+          <span class="badge">cloud</span>
+          <h2>Kubernetes</h2>
+          <p>Plataforma de orquestração de containers para escalar, distribuir e recuperar aplicações.</p>
+          <p>Kubernetes resolve operação complexa em escala, mas cobra curva de aprendizado e disciplina alta.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: cluster redistribui pods quando um nó cai.</div>
+        </article>
+      
+        <article class="card" id="latencia">
+          <span class="badge">infra</span>
+          <h2>Latência</h2>
+          <p>Tempo que um pedido leva para sair, viajar e voltar com resposta.</p>
+          <p>Latência afeta experiência percebida e pode vir de rede, banco, código ou dependência externa.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: busca demora 800 ms porque consulta bate API externa lenta em cascata.</div>
+        </article>
+      
+        <article class="card" id="load-balancer">
+          <span class="badge">cloud</span>
+          <h2>Load Balancer</h2>
+          <p>Camada que distribui tráfego entre várias instâncias de serviço.</p>
+          <p>Balanceador melhora escala e disponibilidade, além de permitir health check e failover.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: tráfego do site é dividido entre três servidores de aplicação ativos.</div>
+        </article>
+      
+        <article class="card" id="log">
+          <span class="badge">infra</span>
+          <h2>Log</h2>
+          <p>Registro textual ou estruturado de eventos relevantes do sistema.</p>
+          <p>Log bom ajuda debug, auditoria e investigação; log ruim gera barulho sem contexto.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: request id no log permite seguir a mesma chamada por vários serviços.</div>
+        </article>
+      
+        <article class="card" id="machine-learning">
+          <span class="badge">dados</span>
+          <h2>Machine Learning</h2>
+          <p>Uso de modelos que aprendem padrão a partir de dados para prever ou classificar algo.</p>
+          <p>Machine learning depende muito mais de dado, pergunta e validação do que de algoritmo glamouroso.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: classificar e-mail como spam com base em histórico rotulado.</div>
+        </article>
+      
+        <article class="card" id="merge">
+          <span class="badge">geral</span>
+          <h2>Merge</h2>
+          <p>Ato de combinar mudanças de uma branch em outra.</p>
+          <p>Merge exige entender conflito e intenção, não só clicar em aceitar tudo.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: branch de feature entra na main depois de review e testes.</div>
+        </article>
+      
+        <article class="card" id="microsservicos">
+          <span class="badge">back-end</span>
+          <h2>Microsserviços</h2>
+          <p>Arquitetura em que o sistema é dividido em serviços menores e independentes.</p>
+          <p>Microsserviços ajudam autonomia em escala, mas aumentam integração, observabilidade e custo operacional.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: serviço de pagamento evolui separado do serviço de catálogo.</div>
+        </article>
+      
+        <article class="card" id="migration">
+          <span class="badge">back-end</span>
+          <h2>Migration (banco de dados)</h2>
+          <p>Arquivo versionado que altera esquema ou dado de banco de forma rastreável.</p>
+          <p>Migration evita mudança manual esquecida entre ambientes e ajuda rollback planejado.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: adicionar coluna status na tabela de pedidos por migration revisada em PR.</div>
+        </article>
+      
+        <article class="card" id="monolito">
+          <span class="badge">back-end</span>
+          <h2>Monolito</h2>
+          <p>Aplicação concentrada em um único deploy ou base principal de código.</p>
+          <p>Monolito não é sinônimo de ruim; muitas empresas saudáveis preferem monolito bem cuidado a microsserviço prematuro.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: back-end inteiro publica junto em um único artefato e banco principal.</div>
+        </article>
+      
+        <article class="card" id="mvc">
+          <span class="badge">fundamentos</span>
+          <h2>MVC</h2>
+          <p>Padrão que separa modelo, visão e controlador em papéis diferentes.</p>
+          <p>MVC ajuda organização em projetos tradicionais, embora frameworks modernos adaptem a ideia de formas diferentes.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: controller recebe requisição, model busca dado e view monta resposta.</div>
+        </article>
+      
+        <article class="card" id="mvp">
+          <span class="badge">produto</span>
+          <h2>MVP</h2>
+          <p>Versão mínima de um produto que já permite aprender com usuário real.</p>
+          <p>MVP não é produto malfeito; é recorte consciente para testar hipótese com o menor custo útil.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: lançar agenda simples antes de construir suíte inteira de gestão clínica.</div>
+        </article>
+      
+        <article class="card" id="nosql">
+          <span class="badge">back-end</span>
+          <h2>NoSQL</h2>
+          <p>Família de bancos que não segue o modelo relacional tradicional como regra central.</p>
+          <p>NoSQL pode ser ótimo para documento, chave-valor, cache ou grafo, mas não substitui modelagem.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: usar Redis para sessão e MongoDB para documento flexível de catálogo.</div>
+        </article>
+      
+        <article class="card" id="oauth">
+          <span class="badge">seguranca</span>
+          <h2>OAuth</h2>
+          <p>Protocolo de autorização usado para conceder acesso controlado entre aplicações.</p>
+          <p>OAuth é comum em login com terceiros e integrações em que a senha do usuário não deve ser compartilhada.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: aplicativo conecta conta Google sem pedir a senha do Gmail.</div>
+        </article>
+      
+        <article class="card" id="observabilidade">
+          <span class="badge">infra</span>
+          <h2>Observabilidade</h2>
+          <p>Capacidade de entender o estado interno do sistema por sinais externos como log, métrica e trace.</p>
+          <p>Observabilidade boa reduz tempo de diagnóstico quando o sistema falha em produção.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: trace mostra que lentidão veio do serviço de recomendação e não do banco.</div>
+        </article>
+      
+        <article class="card" id="oop">
+          <span class="badge">fundamentos</span>
+          <h2>OOP (Orientação a Objetos)</h2>
+          <p>Estilo de modelagem baseado em objetos com estado e comportamento.</p>
+          <p>OOP ajuda em certos domínios, mas vira problema quando usada por ritual sem clareza do problema.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: classe Pedido concentra regra de fechamento e cálculo de desconto.</div>
         </article>
       
         <article class="card" id="open-source">
@@ -286,12 +750,204 @@
           <div class="example"><strong>Exemplo:</strong> Sua empresa usa PostgreSQL sem pagar licença, mas paga consultoria e suporte. O código é aberto; a operação 24x7 com SLA é que tem preço.</div>
         </article>
       
+        <article class="card" id="orm">
+          <span class="badge">back-end</span>
+          <h2>ORM</h2>
+          <p>Ferramenta que traduz objetos ou estruturas da linguagem para operação no banco.</p>
+          <p>ORM acelera CRUD comum, mas não elimina a necessidade de entender SQL e custo de consulta.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: framework gera query para buscar usuário por e-mail sem escrever SQL manual em todo lugar.</div>
+        </article>
+      
+        <article class="card" id="key-pair">
+          <span class="badge">seguranca</span>
+          <h2>Par de chaves</h2>
+          <p>Conjunto de chave pública e chave privada usado em criptografia assimétrica.</p>
+          <p>Esse modelo permite autenticar ou criptografar sem compartilhar o mesmo segredo em ambos os lados.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: SSH usa chave privada local e chave pública no servidor para liberar acesso.</div>
+        </article>
+      
+        <article class="card" id="payload">
+          <span class="badge">back-end</span>
+          <h2>Payload</h2>
+          <p>Parte útil dos dados transportados em uma requisição, resposta ou mensagem.</p>
+          <p>Payload precisa ser validado e documentado para evitar quebra silenciosa entre sistemas.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: webhook envia payload JSON com id do pedido, status e horário da mudança.</div>
+        </article>
+      
+        <article class="card" id="pipeline">
+          <span class="badge">infra</span>
+          <h2>Pipeline</h2>
+          <p>Sequência automatizada de etapas para validar, empacotar ou publicar software e dados.</p>
+          <p>Pipeline reduz erro manual e garante que cada mudança passe pelo mesmo fluxo mínimo.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: pipeline roda testes, gera imagem e publica deploy após merge.</div>
+        </article>
+      
+        <article class="card" id="pod">
+          <span class="badge">cloud</span>
+          <h2>Pod (Kubernetes)</h2>
+          <p>Menor unidade de execução no Kubernetes, podendo conter um ou mais containers relacionados.</p>
+          <p>Pod encapsula processo, rede e volume em torno da aplicação que o cluster vai agendar.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: API sobe em pods replicados para atender mais tráfego.</div>
+        </article>
+      
+        <article class="card" id="polimorfismo">
+          <span class="badge">fundamentos</span>
+          <h2>Polimorfismo</h2>
+          <p>Capacidade de tratar implementações diferentes sob a mesma interface ou contrato.</p>
+          <p>Polimorfismo ajuda extensão e teste quando o sistema precisa variar comportamento sem copiar tudo.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: meios de pagamento diferentes expõem o mesmo método processar.</div>
+        </article>
+      
+        <article class="card" id="pull-request">
+          <span class="badge">geral</span>
+          <h2>Pull Request</h2>
+          <p>Pedido formal para revisar e integrar mudanças de uma branch em outra.</p>
+          <p>PR é espaço de revisão técnica, contexto e discussão antes de mergear código.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: dev abre PR explicando escopo, risco e prints da funcionalidade nova.</div>
+        </article>
+      
+        <article class="card" id="qa">
+          <span class="badge">qa</span>
+          <h2>QA</h2>
+          <p>Prática e área focadas em qualidade, prevenção de regressão e confiança no software.</p>
+          <p>QA bom combina caso de teste, automação, exploração e análise de risco.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: antes da release, QA valida checkout, login e pagamento em cenários críticos.</div>
+        </article>
+      
+        <article class="card" id="query">
+          <span class="badge">dados</span>
+          <h2>Query</h2>
+          <p>Instrução para buscar, filtrar ou transformar dados em um sistema de armazenamento.</p>
+          <p>Query pode ser SQL, GraphQL ou linguagem própria; o importante é custo e precisão do resultado.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: query busca usuários ativos nos últimos 30 dias por plano.</div>
+        </article>
+      
+        <article class="card" id="queue">
+          <span class="badge">back-end</span>
+          <h2>Queue (Fila de mensagens)</h2>
+          <p>Mecanismo para processar trabalho de forma assíncrona e desacoplada.</p>
+          <p>Fila ajuda a absorver pico, retentar tarefa e tirar peso do fluxo síncrono principal.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: após compra, sistema enfileira envio de e-mail e geração de nota fiscal.</div>
+        </article>
+      
+        <article class="card" id="raid">
+          <span class="badge">infra</span>
+          <h2>RAID</h2>
+          <p>Combinação de discos para melhorar redundância, desempenho ou ambos.</p>
+          <p>RAID protege contra falha de disco individual, mas não substitui backup nem estratégia de recuperação.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: servidor mantém espelhamento entre discos para continuar operando se um falhar.</div>
+        </article>
+      
+        <article class="card" id="rate-limit">
+          <span class="badge">seguranca</span>
+          <h2>Rate Limit</h2>
+          <p>Limite de requisições aceitas em certo período para um cliente ou origem.</p>
+          <p>Rate limit ajuda a controlar abuso, proteger serviço e evitar explosão de custo.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: API pública permite até 100 chamadas por minuto por chave.</div>
+        </article>
+      
+        <article class="card" id="recursao">
+          <span class="badge">fundamentos</span>
+          <h2>Recursão</h2>
+          <p>Técnica em que uma função chama a si mesma até atingir condição de parada.</p>
+          <p>Recursão é elegante em árvore e divisão de problema, mas precisa de base clara para não quebrar.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: percorrer pastas dentro de pastas até listar todos os arquivos.</div>
+        </article>
+      
+        <article class="card" id="redis">
+          <span class="badge">cloud</span>
+          <h2>Redis</h2>
+          <p>Banco em memória muito usado para cache, fila leve, sessão e estrutura rápida.</p>
+          <p>Redis é excelente em velocidade, mas não deve ser tratado como banco relacional genérico.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: salvar sessão de login no Redis para leitura rápida entre várias instâncias.</div>
+        </article>
+      
+        <article class="card" id="refatoracao">
+          <span class="badge">geral</span>
+          <h2>Refatoração</h2>
+          <p>Mudança interna no código para melhorar clareza ou estrutura sem alterar comportamento esperado.</p>
+          <p>Refatorar reduz dívida técnica quando feito com teste e intenção clara.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: extrair função repetida em três arquivos para um módulo comum.</div>
+        </article>
+      
+        <article class="card" id="replica">
+          <span class="badge">cloud</span>
+          <h2>Réplica</h2>
+          <p>Cópia sincronizada de instância ou banco usada para redundância ou leitura distribuída.</p>
+          <p>Réplica ajuda disponibilidade e escala, mas introduz desafio de atraso entre primária e secundária.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: relatório pesado consulta réplica de leitura para não travar banco principal.</div>
+        </article>
+      
+        <article class="card" id="rest">
+          <span class="badge">back-end</span>
+          <h2>REST</h2>
+          <p>Estilo comum de API baseado em recursos, verbos HTTP e representação simples.</p>
+          <p>REST funciona bem para muitos casos, desde que contrato, idempotência e erros sejam pensados de verdade.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: GET lista pedidos, POST cria pedido, PATCH atualiza status.</div>
+        </article>
+      
+        <article class="card" id="rollback">
+          <span class="badge">infra</span>
+          <h2>Rollback</h2>
+          <p>Retorno para uma versão anterior depois de falha ou risco detectado.</p>
+          <p>Rollback rápido reduz impacto de release ruim, desde que artefato e banco tenham estratégia compatível.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: deploy novo aumenta erro e o time volta para a versão estável em minutos.</div>
+        </article>
+      
+        <article class="card" id="runtime">
+          <span class="badge">infra</span>
+          <h2>Runtime</h2>
+          <p>Ambiente que executa uma linguagem ou aplicação em tempo de execução.</p>
+          <p>Runtime inclui processo, memória, bibliotecas e comportamento da aplicação enquanto ela roda.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: Node.js é o runtime que executa JavaScript fora do navegador.</div>
+        </article>
+      
+        <article class="card" id="sdk">
+          <span class="badge">geral</span>
+          <h2>SDK</h2>
+          <p>Kit com bibliotecas, exemplos e documentação para integrar uma plataforma.</p>
+          <p>SDK reduz trabalho repetitivo e oferece contrato oficial para quem vai consumir um serviço.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: provedor de pagamento entrega SDK para criar cobrança sem montar requisição manual toda vez.</div>
+        </article>
+      
+        <article class="card" id="serverless">
+          <span class="badge">cloud</span>
+          <h2>Serverless</h2>
+          <p>Modelo em que você publica função ou serviço sem gerenciar servidor explicitamente.</p>
+          <p>Serverless reduz operação inicial, mas ainda exige cuidado com custo, latência e observabilidade.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: função processa upload quando arquivo chega no bucket sem servidor sempre ligado.</div>
+        </article>
+      
         <article class="card" id="servidor">
           <span class="badge">infra</span>
           <h2>Servidor</h2>
           <p>É um computador (físico ou virtual) que fica escutando pedidos de rede e responde com processamento ou arquivos. Na nuvem, "servidor" muitas vezes é uma VM, container ou função gerenciada — o conceito permanece.</p>
           <p>Servidores rodam sistemas operacionais enxutos, serviços web (como nginx), runtimes de linguagem e agentes de monitoramento. Eles precisam de endereço IP, DNS, certificados TLS e políticas de firewall. Em escala, você pensa em balanceamento de carga, saúde das instâncias e custo por hora — por isso infra não é só "subir uma máquina", é operação contínua.</p>
           <div class="example"><strong>Exemplo:</strong> Quando mil pessoas abrem o mesmo site ao mesmo tempo, várias instâncias de servidor atrás de um load balancer dividem o tráfego. Se uma instância morre, o balanceador para de enviar requisições para ela e sobe outra.</div>
+        </article>
+      
+        <article class="card" id="sla">
+          <span class="badge">produto</span>
+          <h2>SLA</h2>
+          <p>Acordo formal sobre nível de serviço prometido, normalmente visto por cliente ou contrato.</p>
+          <p>SLA define expectativa de disponibilidade, tempo de resposta e penalidade em contexto comercial.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: contrato promete 99,9 por cento de disponibilidade mensal para clientes pagos.</div>
+        </article>
+      
+        <article class="card" id="slo">
+          <span class="badge">infra</span>
+          <h2>SLO</h2>
+          <p>Meta interna de qualidade de serviço usada para orientar engenharia e operação.</p>
+          <p>SLO traduz confiabilidade em número acionável antes de virar quebra contratual de SLA.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: API deve responder em menos de 300 ms para 95 por cento das requisições.</div>
+        </article>
+      
+        <article class="card" id="snapshot">
+          <span class="badge">cloud</span>
+          <h2>Snapshot</h2>
+          <p>Captura do estado de um volume, disco ou sistema em certo momento.</p>
+          <p>Snapshot ajuda recuperação, clonagem e auditoria, mas não substitui plano de restauração testado.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: criar snapshot do banco antes de migração arriscada.</div>
         </article>
       
         <article class="card" id="sql">
@@ -302,12 +958,140 @@
           <div class="example"><strong>Exemplo:</strong> Relatório de vendas por região no último trimestre: você junta pedidos, clientes e filiais em uma query, filtra por data e agrupa. Errar JOIN duplica linhas e infla números — por isso analistas revisam plano de execução.</div>
         </article>
       
+        <article class="card" id="ssh">
+          <span class="badge">seguranca</span>
+          <h2>SSH</h2>
+          <p>Protocolo seguro para acesso remoto e execução de comandos em outra máquina.</p>
+          <p>SSH é base de operação e automação, mas precisa controle de chave, permissão e auditoria.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: administrador acessa servidor Linux por SSH para investigar incidente.</div>
+        </article>
+      
+        <article class="card" id="ssl-tls">
+          <span class="badge">seguranca</span>
+          <h2>SSL/TLS</h2>
+          <p>Camada criptográfica que protege comunicação em trânsito na web e em outros protocolos.</p>
+          <p>Hoje TLS é o termo correto, embora muita gente ainda diga SSL por costume.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: navegador mostra cadeado quando o site usa HTTPS com certificado válido.</div>
+        </article>
+      
+        <article class="card" id="stack">
+          <span class="badge">geral</span>
+          <h2>Stack</h2>
+          <p>Conjunto de tecnologias usadas em uma aplicação ou produto.</p>
+          <p>Falar em stack é resumir linguagem, framework, banco, cloud e ferramentas principais do time.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: stack de um app pode ser React, Node, PostgreSQL e AWS.</div>
+        </article>
+      
+        <article class="card" id="state">
+          <span class="badge">front-end</span>
+          <h2>State (estado)</h2>
+          <p>Informação mutável que a interface usa para decidir o que mostrar e como reagir.</p>
+          <p>Estado mal controlado cria tela inconsistente e bug difícil de reproduzir.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: botão muda para loading enquanto a compra está sendo enviada.</div>
+        </article>
+      
+        <article class="card" id="subdominio">
+          <span class="badge">cloud</span>
+          <h2>Subdomínio</h2>
+          <p>Parte de um domínio usada para separar aplicações ou áreas do mesmo site.</p>
+          <p>Subdomínio ajuda organizar tráfego, certificado e responsabilidade entre serviços distintos.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: api.exemplo.com e app.exemplo.com apontam para componentes diferentes.</div>
+        </article>
+      
+        <article class="card" id="tdd">
+          <span class="badge">qa</span>
+          <h2>TDD</h2>
+          <p>Prática de escrever teste antes do código de produção em ciclos curtos.</p>
+          <p>TDD força clareza de comportamento e design testável, mas não substitui pensamento sobre risco real.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: criar teste de cálculo de frete antes de implementar a função.</div>
+        </article>
+      
+        <article class="card" id="throughput">
+          <span class="badge">infra</span>
+          <h2>Throughput</h2>
+          <p>Quantidade de trabalho concluído por unidade de tempo.</p>
+          <p>Throughput ajuda medir capacidade do sistema, especialmente em fila, rede e processamento em lote.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: worker processa 5 mil mensagens por minuto em horário de pico.</div>
+        </article>
+      
+        <article class="card" id="token">
+          <span class="badge">seguranca</span>
+          <h2>Token</h2>
+          <p>Credencial curta usada para representar acesso, sessão ou autorização temporária.</p>
+          <p>Token precisa expirar, ser validado e nunca ficar exposto onde não deveria.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: app mobile envia token Bearer para chamar API autenticada.</div>
+        </article>
+      
+        <article class="card" id="uptime">
+          <span class="badge">infra</span>
+          <h2>Uptime</h2>
+          <p>Tempo em que um sistema permanece disponível e operacional.</p>
+          <p>Uptime alto importa, mas sem contexto de erro e latência ele pode enganar sobre qualidade real.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: site ficou disponível 99,95 por cento do mês, mesmo com picos de lentidão.</div>
+        </article>
+      
+        <article class="card" id="uuid">
+          <span class="badge">fundamentos</span>
+          <h2>UUID</h2>
+          <p>Identificador único longo gerado para reduzir colisão entre registros.</p>
+          <p>UUID é útil quando você não quer expor sequência previsível ou depende de geração distribuída.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: pedido recebe UUID para ser referenciado por vários serviços sem conflito.</div>
+        </article>
+      
         <article class="card" id="ux">
-          <span class="badge">design</span>
+          <span class="badge">produto</span>
           <h2>UX (User Experience)</h2>
           <p>É o efeito combinado de usabilidade, performance percebida, copy e confiança ao longo da jornada. UX não é só wireframe bonito — é reduzir erro humano e ansiedade em tarefas reais.</p>
           <p>Pesquisa com usuários, testes de usabilidade e métricas (taxa de conclusão, tempo na tarefa) informam decisões. UX trabalha com acessibilidade, design de informação e feedback de sistema (loading, erros recuperáveis). Em squads, UX negocia trade-offs com engenharia: nem todo polimento vale o custo de implementação agora.</p>
           <div class="example"><strong>Exemplo:</strong> Formulário de cadastro longo gera abandono; UX propõe dividir em passos, salvar rascunho e mostrar progresso. Engenharia implementa validação inline e mensagens claras — resultado medido em conversão.</div>
+        </article>
+      
+        <article class="card" id="vpc">
+          <span class="badge">cloud</span>
+          <h2>VPC</h2>
+          <p>Rede virtual isolada dentro de um provedor de cloud.</p>
+          <p>VPC organiza sub-redes, rotas, gateways e políticas de acesso entre recursos internos.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: banco fica em sub-rede privada da VPC e não recebe acesso direto da internet.</div>
+        </article>
+      
+        <article class="card" id="webhook">
+          <span class="badge">back-end</span>
+          <h2>Webhook</h2>
+          <p>Chamada automática enviada por um sistema para avisar outro sobre um evento.</p>
+          <p>Webhook é push de evento: você registra URL e o sistema notifica quando algo acontece.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: plataforma de pagamento chama seu webhook quando o boleto foi quitado.</div>
+        </article>
+      
+        <article class="card" id="websocket">
+          <span class="badge">back-end</span>
+          <h2>WebSocket</h2>
+          <p>Canal de comunicação persistente e bidirecional entre cliente e servidor.</p>
+          <p>WebSocket é útil quando a aplicação precisa de atualização quase em tempo real.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: chat mantém conexão aberta para entregar mensagem sem polling constante.</div>
+        </article>
+      
+        <article class="card" id="xml">
+          <span class="badge">back-end</span>
+          <h2>XML</h2>
+          <p>Formato textual estruturado ainda usado em integrações legadas e documentos formais.</p>
+          <p>XML é mais verboso que JSON, mas segue forte em contextos governamentais e corporativos antigos.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: nota fiscal eletrônica trafega em XML com esquema validado.</div>
+        </article>
+      
+        <article class="card" id="yaml">
+          <span class="badge">cloud</span>
+          <h2>YAML</h2>
+          <p>Formato de configuração legível por humanos, muito usado em DevOps e Kubernetes.</p>
+          <p>YAML é simples de ler, mas sensível a indentação e fácil de quebrar com espaço errado.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: manifesto Kubernetes define imagem, réplicas e variáveis em YAML.</div>
+        </article>
+      
+        <article class="card" id="zero-trust">
+          <span class="badge">seguranca</span>
+          <h2>Zero Trust</h2>
+          <p>Modelo de segurança que parte do princípio de não confiar automaticamente em nada.</p>
+          <p>Zero Trust exige verificar identidade, contexto e permissão continuamente, mesmo dentro da rede.</p>
+          <div class="example"><strong>Exemplo:</strong> Ex.: colaborador autenticado ainda precisa MFA e política específica para acessar dado sensível.</div>
         </article>
       
     </div>

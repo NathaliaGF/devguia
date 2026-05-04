@@ -78,3 +78,66 @@ O projeto não carrega fontes externas, CSS externo ou bibliotecas de terceiros 
 
 - A CSP mantém `'unsafe-inline'` em `script-src` e `style-src` porque o projeto ainda usa scripts e estilos inline.
 - O site continua 100% estático, sem backend e compatível com GitHub Pages.
+
+## Atualizações de quiz e glossário
+
+### `js/app.js`
+
+- Corrigidos os botões de cópia do resultado:
+  - `Copiar resultado em TXT` agora gera texto plano com perfil, caminhos, subperfis, áreas recomendadas e próximos passos.
+  - `Copiar link` agora copia URL pública com `?resultado=` e payload serializado para abrir o resultado direto.
+- Adicionado feedback visual de `Copiado!` por 2 segundos nos dois botões, com fallback para `Falhou` em erro de clipboard.
+- Adicionada leitura do parâmetro `resultado` na carga da página, com restauração direta do resultado compartilhado.
+- Mantida compatibilidade com links antigos em `#result=...` e com quizzes em andamento no `localStorage`.
+- Expandido o resumo do resultado para mostrar caminho principal, caminho secundário e subperfis sugeridos.
+
+### `js/data/questions.js`
+
+- Quiz expandido de 15 para 25 perguntas.
+- Mantidos os 15 IDs antigos para preservar compatibilidade com progresso salvo.
+- Adicionadas 10 novas perguntas cobrindo:
+  - ambiguidade vs processo definido
+  - segurança e ameaças
+  - automação e infraestrutura
+  - dados, métricas e estatística
+  - liderança, produto e advocacy
+  - risco, estabilidade e perfil investigativo
+
+### `js/data/profiles.js`
+
+- Perfis existentes foram enriquecidos com metadados para compartilhamento e recomendação.
+- Novos perfis adicionados:
+  - `seguranca`
+  - `qa_teste`
+  - `produto`
+  - `tech_lead`
+  - `developer_advocate`
+  - `suporte`
+
+### `js/data/roadmap.js`
+
+- Adicionado encaixe de roadmap e hint específico para os novos perfis, evitando fallback genérico no resultado.
+
+### `js/data/catalog.js`
+
+- Glossário expandido para 118 termos, mantendo ordem alfabética no retorno dos dados.
+- Mantidos os IDs antigos usados por FAQ e links internos.
+- Adicionadas categorias novas de glossário:
+  - `seguranca`
+  - `dados`
+  - `cloud`
+  - `qa`
+  - `produto`
+- Ajustados metadados de cor e área para suportar os novos filtros e a área de Segurança no resultado.
+
+### `index.html`
+
+- Filtros do glossário atualizados para incluir `Segurança`, `Dados`, `Cloud`, `QA` e `Produto`.
+
+### `README.md`
+
+- Atualizada a descrição do diagnóstico para refletir 25 perguntas, caminhos principal/secundário e compartilhamento por query string.
+
+### `faq/index.html`, `glossario/index.html`, `mitos/index.html`
+
+- Regeneradas a partir da base atualizada após a expansão do glossário.

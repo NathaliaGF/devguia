@@ -7,6 +7,7 @@ Guia vocacional e educacional para pessoas iniciando em TI, em transição de ca
 Um site estático 100% frontend com três ferramentas:
 
 - **Diagnóstico vocacional** — 15 perguntas divididas em 4 blocos que identificam seu perfil entre 7 categorias
+ - **Diagnóstico vocacional** — 25 perguntas divididas em 4 blocos que identificam seu perfil, caminho principal, caminho secundário e subperfis sugeridos
 - **Roadmap** — 4 fases de aprendizado com o porquê de cada habilidade, não só o quê
 - **FAQ** — 16 respostas diretas para dúvidas que ninguém responde honestamente
 
@@ -26,7 +27,7 @@ Sem backend, a navegação entre telas atualiza o fragmento da URL para facilita
 | Mito aberto | `#mitos/m5` |
 | Fase do roadmap | `#roadmap/fase2` |
 
-O resultado do diagnóstico continua em `#result=…` (payload codificado).
+O resultado do diagnóstico continua em `#result=…` (payload codificado) para restauração interna. O compartilhamento público agora usa `?resultado=perfil&dados=...`.
 
 ## Páginas estáticas indexáveis
 
