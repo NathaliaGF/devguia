@@ -1,4 +1,3 @@
 User-agent: *
 Allow: /
-
 Sitemap: https://nathaliagf.github.io/devguia/sitemap.xml

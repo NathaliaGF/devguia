@@ -46,6 +46,9 @@ const {
 state.freeOnly = localStorage.getItem(FREE_FILTER_KEY) === '1';
 state.checklist = {};
 state.resultHash = '';
+const QUIZ_TTL = 7 * 24 * 60 * 60 * 1000;
+const ANALYTICS_SCRIPT_ID = 'goatcounter-script';
+let analyticsLoaded = false;
 
 function normalizeText(value) {
   return String(value || '')
@@ -214,6 +217,56 @@ function getTodayLocalIso() {
   return new Date(now.getTime() - offsetMs).toISOString().slice(0, 10);
 }
 
+function hasLgpdConsent() {
+  try {
+    return !!localStorage.getItem('lgpd_consent');
+  } catch {
+    return false;
+  }
+}
+
+function ensureAnalyticsLoaded() {
+  if (analyticsLoaded || !hasLgpdConsent() || GOATCOUNTER_CODE === 'SEU-CODIGO') return;
+  analyticsLoaded = true;
+  window.goatcounter = {
+    endpoint: `https://${GOATCOUNTER_CODE}.goatcounter.com/count`,
+    no_onload: true,
+  };
+  if (document.getElementById(ANALYTICS_SCRIPT_ID)) return;
+  const script = document.createElement('script');
+  script.id = ANALYTICS_SCRIPT_ID;
+  script.async = true;
+  script.src = 'https://gc.zgo.at/count.js';
+  script.integrity = 'sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb';
+  script.crossOrigin = 'anonymous';
+  document.body.appendChild(script);
+}
+
+function initLgpdBanner() {
+  const banner = document.getElementById('lgpd-banner');
+  const button = document.getElementById('lgpd-accept');
+  if (!banner || !button) return;
+  if (hasLgpdConsent()) {
+    banner.hidden = true;
+    document.documentElement.setAttribute('data-lgpd-consent', 'accepted');
+    ensureAnalyticsLoaded();
+    return;
+  }
+  button.addEventListener('click', () => {
+    try {
+      localStorage.setItem('lgpd_consent', String(Date.now()));
+    } catch (e) {
+      console.warn('[devguia] Não foi possível salvar consentimento LGPD:', e.message);
+    }
+    document.documentElement.setAttribute('data-lgpd-consent', 'accepted');
+    banner.style.transition = 'opacity 0.3s';
+    banner.style.opacity = '0';
+    setTimeout(() => { banner.hidden = true; }, 320);
+    ensureAnalyticsLoaded();
+    atualizarBadgeAnalytics();
+  });
+}
+
 function loadChecklistState() {
   try {
     return JSON.parse(localStorage.getItem(CHECKLIST_KEY) || '{}');
@@ -271,11 +324,15 @@ function restoreAppState() {
 // QUIZ
 // ============================================================
 function salvarProgresso() {
-  localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify({
-    currentQuestion: state.currentQuestion,
-    answers: state.answers,
-    timestamp: Date.now(),
-  }));
+  try {
+    localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify({
+      currentQuestion: state.currentQuestion,
+      answers: state.answers,
+      savedAt: Date.now(),
+    }));
+  } catch (e) {
+    console.warn('[devguia] Não foi possível salvar progresso:', e.message);
+  }
 }
 
 function restaurarProgresso() {
@@ -283,7 +340,7 @@ function restaurarProgresso() {
     const salvo = localStorage.getItem(QUIZ_PROGRESS_KEY);
     if (!salvo) return false;
     const data = JSON.parse(salvo);
-    if (Date.now() - data.timestamp > 2592000000) {
+    if (Date.now() - (data.savedAt || data.timestamp || 0) > QUIZ_TTL) {
       localStorage.removeItem(QUIZ_PROGRESS_KEY);
       return false;
     }
@@ -293,7 +350,13 @@ function restaurarProgresso() {
   }
 }
 
-function limparProgresso() { localStorage.removeItem(QUIZ_PROGRESS_KEY); }
+function limparProgresso() {
+  try {
+    localStorage.removeItem(QUIZ_PROGRESS_KEY);
+  } catch (e) {
+    console.warn('[devguia] Não foi possível limpar progresso:', e.message);
+  }
+}
 
 function recomputeScoresFromAnswers() {
   state.scores = {};
@@ -371,9 +434,11 @@ function renderQuestion() {
   const btnNext = document.getElementById('btnNext');
   btnNext.textContent = isLast ? 'Ver resultado →' : 'Próxima →';
   btnNext.disabled = selected === undefined;
+  btnNext.setAttribute('aria-label', isLast ? 'Ver resultado do diagnóstico' : 'Ir para a próxima pergunta');
 
   const btnBack = document.getElementById('btnBack');
   btnBack.style.visibility = state.currentQuestion === 0 ? 'hidden' : 'visible';
+  btnBack.setAttribute('aria-label', 'Voltar para a pergunta anterior');
 
   const optionsHtml = q.options.map((opt, i) =>
     `<button class="quiz-option${selected === i ? ' selected' : ''}" onclick="selectOption(${i})">${opt.text}</button>`
@@ -1129,7 +1194,7 @@ function renderMitos() {
 function renderStructuredData() {
   const jsonLdEl = document.getElementById('structured-data');
   if (!jsonLdEl) return;
-  const faqEntities = FAQS.map(item => ({
+  const faqEntities = FAQS.slice(0, 10).map(item => ({
     '@type': 'Question',
     name: item.q,
     acceptedAnswer: {
@@ -1159,7 +1224,9 @@ function atualizarBadgeAnalytics() {
   const textEl = document.getElementById('counter-text');
   if (!textEl) return;
   const hoje = getTodayLocalIso();
-  textEl.textContent = `Analytics anônimos ativos. O contador público diário foi removido em ${hoje} para não expor credenciais no frontend.`;
+  textEl.textContent = hasLgpdConsent()
+    ? `Analytics anônimos ativos com consentimento salvo em ${hoje}. O contador público diário foi removido para não expor credenciais no frontend.`
+    : 'Analytics anônimos desativados até seu consentimento. Nenhum dado é coletado antes do aceite.';
 }
 
 function toggleEasyRead() {
@@ -1200,6 +1267,8 @@ window.addEventListener('hashchange', () => {
 });
 
 window.addEventListener('load', () => {
+  initLgpdBanner();
+  ensureAnalyticsLoaded();
   renderAreaComparisons();
   renderHonestyFilters();
   renderStructuredData();

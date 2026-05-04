@@ -14,18 +14,25 @@ function normalizeText(value) {
   return String(value || '').normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase().trim();
 }
 
+const CSP = "default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.goatcounter.com; connect-src 'self' https://*.goatcounter.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self';";
+
 function shell(title, description, canonical, body, extraHead = '') {
   return `<!DOCTYPE html>
 <html lang="pt-BR">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="${CSP}">
   <meta name="description" content="${description}">
   <meta property="og:title" content="${title}">
   <meta property="og:description" content="${description}">
   <meta property="og:url" content="${canonical}">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="https://nathaliagf.github.io/devguia/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <link rel="canonical" href="${canonical}">
   <title>${title}</title>
   ${extraHead}
@@ -51,6 +58,13 @@ function shell(title, description, canonical, body, extraHead = '') {
       background: linear-gradient(180deg, var(--bg) 0%, #141a27 100%);
       color: var(--text);
       line-height: 1.7;
+    }
+    :focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 3px;
+    }
+    :focus:not(:focus-visible) {
+      outline: none;
     }
     .wrap {
       max-width: 980px;

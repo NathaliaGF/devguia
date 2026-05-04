@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.goatcounter.com; connect-src 'self' https://*.goatcounter.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self';">
+  <meta name="description" content="Política de privacidade do devguia.dev.">
+  <meta property="og:title" content="Privacidade | devguia.dev">
+  <meta property="og:description" content="Entenda como o devguia.dev trata analytics anônimos e seus direitos sob a LGPD.">
+  <meta property="og:url" content="https://nathaliagf.github.io/devguia/privacidade.html">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="https://nathaliagf.github.io/devguia/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <link rel="canonical" href="https://nathaliagf.github.io/devguia/privacidade.html">
+  <title>Privacidade | devguia.dev</title>
+  <style>
+    :root {
+      --bg: #0f1117;
+      --bg2: #161b27;
+      --bg3: #1e2535;
+      --border: #2a3347;
+      --border2: #3a4560;
+      --purple: #a78bfa;
+      --purple-dim: #6d5cb5;
+      --text: #e8edf5;
+      --text2: #a1aec4;
+      --text3: #6f7d95;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, sans-serif;
+      line-height: 1.7;
+    }
+    :focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 3px;
+    }
+    :focus:not(:focus-visible) {
+      outline: none;
+    }
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      min-height: 56px;
+      padding: 0 20px;
+      background: rgba(15, 17, 23, 0.96);
+      border-bottom: 1px solid var(--border);
+    }
+    .brand {
+      color: var(--purple);
+      text-decoration: none;
+      font-weight: 700;
+    }
+    .nav-links {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+    }
+    .nav-links a {
+      text-decoration: none;
+      color: var(--text2);
+      border: 1px solid transparent;
+      border-radius: 8px;
+      padding: 6px 12px;
+      font-size: 13px;
+      font-weight: 600;
+    }
+    .nav-links a:hover {
+      background: var(--bg3);
+      color: var(--text);
+    }
+    main {
+      max-width: 860px;
+      margin: 0 auto;
+      padding: 40px 20px 72px;
+    }
+    .chip {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 6px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--purple-dim);
+      background: rgba(167, 139, 250, 0.08);
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.08em;
+    }
+    h1 {
+      font-size: clamp(2rem, 6vw, 3.2rem);
+      line-height: 1.08;
+      margin: 18px 0 14px;
+    }
+    p, li {
+      color: var(--text2);
+      font-size: 15px;
+    }
+    .lead {
+      max-width: 60ch;
+      margin-bottom: 28px;
+    }
+    .policy-grid {
+      display: grid;
+      gap: 16px;
+    }
+    .policy-card {
+      background: var(--bg2);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 20px;
+    }
+    .policy-card h2 {
+      font-size: 18px;
+      margin-bottom: 10px;
+    }
+    .policy-card p + p,
+    .policy-card ul {
+      margin-top: 10px;
+    }
+    .policy-card ul {
+      padding-left: 18px;
+    }
+    a {
+      color: var(--purple);
+      text-underline-offset: 3px;
+    }
+    footer {
+      margin-top: 28px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      color: var(--text3);
+      font-size: 13px;
+    }
+    @media (max-width: 720px) {
+      nav {
+        padding: 12px 16px;
+        align-items: flex-start;
+        flex-direction: column;
+      }
+      .nav-links {
+        width: 100%;
+        justify-content: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <nav>
+    <a class="brand" href="/devguia/">devguia.dev</a>
+    <div class="nav-links" aria-label="Atalhos principais">
+      <a href="/devguia/#quiz">Diagnóstico</a>
+      <a href="/devguia/#roadmap">Roadmap</a>
+      <a href="/devguia/#faq">FAQ</a>
+      <a href="/devguia/#glossario">Glossário</a>
+      <a href="/devguia/#mitos">Mitos</a>
+    </div>
+  </nav>
+
+  <main>
+    <span class="chip">Privacidade</span>
+    <h1>Como o devguia.dev trata dados de navegação</h1>
+    <p class="lead">Este site foi construído para ser simples e honesto. Isso inclui transparência sobre analytics, limites do que é coletado e os seus direitos como visitante sob a LGPD.</p>
+
+    <section class="policy-grid">
+      <article class="policy-card">
+        <h2>1. O que é coletado</h2>
+        <p>O devguia.dev coleta apenas dados anônimos de navegação, como páginas visitadas e duração aproximada da sessão. O site não coleta nome, e-mail, endereço IP completo nem qualquer identificador pessoal usado para reconhecer você individualmente.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2>2. Finalidade da coleta</h2>
+        <p>Esses dados existem apenas para entender como as pessoas interagem com o conteúdo e quais áreas do site são mais úteis. O objetivo é melhorar FAQ, roadmap, glossário e fluxo do diagnóstico com base em uso agregado.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2>3. Compartilhamento</h2>
+        <p>Nenhum dado é vendido, alugado ou compartilhado com terceiros para fins comerciais. O uso de analytics é restrito a métricas anônimas de navegação relacionadas ao próprio funcionamento do site.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2>4. Como bloquear</h2>
+        <p>Você pode navegar sem consentir com analytics. Também pode bloquear rastreadores no navegador usando recursos nativos de privacidade ou extensões como <a href="https://ublockorigin.com/" target="_blank" rel="noopener noreferrer">uBlock Origin</a>.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2>5. Seus direitos</h2>
+        <p>Nos termos do Art. 18 da LGPD, você tem direito de saber quais dados são coletados e para qual finalidade. Como este site trabalha apenas com dados anônimos de navegação, não há perfil pessoal armazenado nem base de identificação individual do visitante.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2>6. Contato</h2>
+        <p>Responsável pelo site: Nathalia Gomes. Contato público do projeto: <a href="https://github.com/NathaliaGF/devguia/issues" target="_blank" rel="noopener noreferrer">GitHub Issues</a>.</p>
+      </article>
+
+      <article class="policy-card">
+        <h2>7. Última atualização</h2>
+        <p>Última atualização: 4 de maio de 2026.</p>
+      </article>
+    </section>
+
+    <footer>
+      Esta página descreve a política atual de privacidade do projeto estático hospedado em GitHub Pages.
+    </footer>
+  </main>
+</body>
+</html>

@@ -3,20 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://gc.zgo.at; style-src 'self' 'unsafe-inline'; img-src 'self' data: https://*.goatcounter.com; connect-src 'self' https://*.goatcounter.com; font-src 'self'; frame-ancestors 'none'; base-uri 'self';">
   <meta name="description" content="Teste vocacional para TI — diagnóstico honesto, roadmap por fase e FAQ sem rodeios para quem quer entrar ou crescer na área de tecnologia.">
   <meta property="og:title" content="devguia.dev — Guia vocacional para TI">
   <meta property="og:description" content="Descubra se TI combina com você, em qual área se encaixaria e por onde começar.">
   <meta property="og:url" content="https://nathaliagf.github.io/devguia/">
   <meta property="og:type" content="website">
   <meta property="og:locale" content="pt_BR">
-  <meta property="og:image" content="https://nathaliagf.github.io/devguia/og.svg">
+  <meta property="og:image" content="https://nathaliagf.github.io/devguia/og.png">
+  <meta property="og:image:type" content="image/png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="devguia.dev — Guia vocacional para TI">
   <meta name="twitter:description" content="Descubra se TI combina com você, em qual área se encaixaria e por onde começar.">
-  <meta name="twitter:image" content="https://nathaliagf.github.io/devguia/og.svg">
+  <meta name="twitter:image" content="https://nathaliagf.github.io/devguia/og.png">
   <link rel="canonical" href="https://nathaliagf.github.io/devguia/">
   <title>devguia.dev — Guia vocacional para TI</title>
-  <script type="application/ld+json" id="structured-data"></script>
+  <script>try{if(localStorage.getItem('lgpd_consent'))document.documentElement.setAttribute('data-lgpd-consent','accepted');}catch(e){}</script>
+  <script type="application/ld+json" id="structured-data">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Precisa ser bom em matemática para programar?","acceptedAnswer":{"@type":"Answer","text":"Sim, mas não do jeito que a escola ensinou. Programação não exige cálculo diferencial, mas exige raciocínio lógico, pensamento abstrato e capacidade de modelar problemas em estruturas. No dia a dia isso aparece quando você precisa cobrir casos de um formulário, entender por que um loop ficou lento ou depurar uma query SQL."}},{"@type":"Question","name":"Por que preciso aprender linha de comando se existe interface gráfica?","acceptedAnswer":{"@type":"Answer","text":"Porque ambientes profissionais rodam em servidores Linux sem interface gráfica. Deploy, CI/CD, Docker e scripts de automação passam pelo terminal. Quem domina linha de comando consegue ler logs, reiniciar serviços e aplicar correções sem depender de interfaces específicas."}},{"@type":"Question","name":"Git é realmente necessário ou é frescura?","acceptedAnswer":{"@type":"Answer","text":"Necessário. Git é o mínimo absoluto de qualquer trabalho profissional em software. Sem controle de versão você perde código, não colabora com outras pessoas e não entende como projetos reais são organizados."}},{"@type":"Question","name":"Qual matemática devo estudar para programação?","acceptedAnswer":{"@type":"Answer","text":"Para a maioria das trilhas, priorize lógica proposicional e booleana, teoria de conjuntos básica e complexidade algorítmica. Para dados, acrescente estatística descritiva e probabilidade. O objetivo é ganhar raciocínio estruturado, não decorar fórmulas sem contexto."}},{"@type":"Question","name":"Qual a primeira linguagem para iniciantes?","acceptedAnswer":{"@type":"Answer","text":"Para a maioria, Python se você quer dados, automação ou ainda não sabe a área. JavaScript se quer ver resultado visual rápido na web. O erro mais comum é trocar de linguagem antes de dominar uma com profundidade suficiente para construir projetos explicáveis."}},{"@type":"Question","name":"Como sei se estou aprendendo ou só copiando código?","acceptedAnswer":{"@type":"Answer","text":"Feche tudo e tente reconstruir o projeto do zero sem consultar nada. Se você trava logo no começo, estava copiando mais do que entendendo. Outro teste útil é mudar uma regra de negócio pequena e ver se você consegue adaptar o código sem se perder."}},{"@type":"Question","name":"Portfólio importa mais que certificado?","acceptedAnswer":{"@type":"Answer","text":"Sim, especialmente no primeiro emprego. Certificado prova que você fez um curso; portfólio prova que você consegue construir algo. Projetos bem documentados, com problema claro e código explicável, costumam valer mais do que vários certificados genéricos."}},{"@type":"Question","name":"Como contribuir em open source sem experiência?","acceptedAnswer":{"@type":"Answer","text":"Comece por documentação, correção de texto, melhoria de README e relatórios de bug bem escritos. Depois avance para pequenos patches e testes. Isso já te expõe ao fluxo de trabalho de projetos sérios sem exigir que você chegue dominando o código inteiro."}},{"@type":"Question","name":"Como escolher entre front-end, back-end, dados ou infra?","acceptedAnswer":{"@type":"Answer","text":"Não escolha só pela demanda. Compare o tipo de problema que cada área resolve e faça pequenos projetos de teste. Front-end lida com experiência visual, back-end com regras e dados, dados com interpretação e decisão, infra com confiabilidade e escala."}},{"@type":"Question","name":"Devo usar IA (ChatGPT, Copilot) para aprender?","acceptedAnswer":{"@type":"Answer","text":"Use IA para acelerar o que você já sabe fazer, não como substituto do entendimento. Se você copia código gerado sem saber explicar o que ele faz, acumula dívida técnica mental e perde a capacidade de depurar quando algo sai do caminho."}}]}</script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f1117'/><text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%23a78bfa'>%3E_</text></svg>">
   <style>
     :root {
@@ -46,6 +51,15 @@
       font-size: 14px;
       line-height: 1.7;
       min-height: 100vh;
+    }
+
+    :focus-visible {
+      outline: 2px solid currentColor;
+      outline-offset: 3px;
+    }
+
+    :focus:not(:focus-visible) {
+      outline: none;
     }
 
     /* NAV */
@@ -1255,6 +1269,39 @@
       color: var(--teal);
     }
 
+    .lgpd-banner {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 150;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      border: 1px solid var(--border2);
+      background: rgba(22, 27, 39, 0.96);
+      box-shadow: 0 18px 36px rgba(0, 0, 0, 0.35);
+    }
+
+    .lgpd-banner p {
+      margin: 0;
+      color: var(--text2);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    .lgpd-banner a {
+      color: var(--purple);
+      text-underline-offset: 3px;
+    }
+
+    html[data-lgpd-consent='accepted'] .lgpd-banner {
+      display: none;
+    }
+
     .counter-dot {
       width: 7px;
       height: 7px;
@@ -1579,6 +1626,13 @@
 
       .recursos-body { grid-template-columns: 1fr; }
       .phase-resource-grid { grid-template-columns: 1fr; }
+      .lgpd-banner {
+        left: 12px;
+        right: 12px;
+        bottom: 12px;
+        flex-direction: column;
+        align-items: flex-start;
+      }
 
       .suggest-grid { grid-template-columns: 1fr; }
 
@@ -1864,14 +1918,14 @@
         <div class="quiz-progress-bar" id="progressBar"></div>
       </div>
 
-      <div class="quiz-question-card" id="quizCard">
+      <div class="quiz-question-card" id="quizCard" aria-live="polite" aria-atomic="false">
         <!-- rendered by JS -->
       </div>
 
       <div class="quiz-nav">
-        <button class="btn btn-ghost" id="btnBack" onclick="quizBack()">← Voltar</button>
+        <button class="btn btn-ghost" id="btnBack" onclick="quizBack()" aria-label="Voltar para a pergunta anterior">← Voltar</button>
         <span class="quiz-counter" id="quizCounter"></span>
-        <button class="btn btn-primary" id="btnNext" onclick="quizNext()" disabled>Próxima →</button>
+        <button class="btn btn-primary" id="btnNext" onclick="quizNext()" disabled aria-label="Ir para a próxima pergunta">Próxima →</button>
       </div>
     </div>
   </section>
@@ -2032,19 +2086,19 @@
 
 <button type="button" class="back-to-top" id="backToTop" onclick="scrollToMainTop()" aria-label="Voltar ao topo">↑</button>
 
+<div id="lgpd-banner" class="lgpd-banner" role="dialog" aria-labelledby="lgpd-msg">
+  <p id="lgpd-msg">
+    Este site usa analytics anônimos para melhorar o conteúdo. Nenhum dado pessoal é coletado.
+    <a href="/devguia/privacidade.html">Saiba mais</a>
+  </p>
+  <button type="button" class="btn btn-primary" id="lgpd-accept">Entendi</button>
+</div>
+
 <script src="js/data/questions.js"></script>
 <script src="js/data/profiles.js"></script>
 <script src="js/data/roadmap.js"></script>
 <script src="js/data/faq.js"></script>
 <script src="js/data/catalog.js"></script>
 <script src="js/app.js"></script>
-<script>
-  // Substitua 'SEU-CODIGO' pelo código do seu site no GoatCounter
-  window.goatcounter = {
-    endpoint: 'https://SEU-CODIGO.goatcounter.com/count',
-    no_onload: true,
-  };
-</script>
-<script async src="https://gc.zgo.at/count.js"></script>
 </body>
 </html>
