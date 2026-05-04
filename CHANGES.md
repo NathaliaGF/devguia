@@ -24,6 +24,7 @@ O projeto não carrega fontes externas, CSS externo ou bibliotecas de terceiros 
 - Adicionado `aria-live="polite"` ao container dinâmico do quiz.
 - Adicionados `aria-label` descritivos aos botões de navegação do quiz.
 - Removido o carregamento automático do GoatCounter no HTML; ele agora é carregado sob demanda via JavaScript após consentimento.
+- Removidos os `max-width` que restringiam os parágrafos descritivos das seções e da comparação, para que o texto use toda a largura útil do container.
 
 ### `js/app.js`
 
