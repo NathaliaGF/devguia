@@ -2714,15 +2714,22 @@ function trackDiagnostico(profileKey) {
   }
 }
 
-function renderRecursos(profile, activeTab = 'livros') {
+function buildRecursoCardsHtml(profile, tabKey) {
   const data = RECURSOS[profile.key] || { livros: [], sites: [], comunidades: [] };
-  const tabs = [{ key: 'livros', label: '📚 Livros' }, { key: 'sites', label: '🌐 Sites' }, { key: 'comunidades', label: '👥 Comunidades' }];
-  const tabsHtml = tabs.map(t => `<button class="recursos-tab${activeTab === t.key ? ' active' : ''}" onclick="setRecursosTab('${t.key}')">${t.label}</button>`).join('');
-  const cards = (data[activeTab] || []).map(item => {
+  return (data[tabKey] || []).map(item => {
     if (item.url) return `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="recurso-card"><div class="recurso-nome">${item.nome}</div>${item.autor ? `<div class="recurso-autor">${item.autor}</div>` : ''}<div class="recurso-desc">${item.desc}</div></a>`;
     return `<div class="recurso-card"><div class="recurso-nome">${item.nome}</div>${item.autor ? `<div class="recurso-autor">${item.autor}</div>` : ''}<div class="recurso-desc">${item.desc}</div></div>`;
   }).join('');
-  return `<div class="recursos-section"><div class="recursos-header"><span class="recursos-title">Recursos para o seu perfil</span><div class="recursos-tabs">${tabsHtml}</div></div><div class="recursos-body">${cards}</div></div>`;
+}
+
+function renderRecursos(profile, activeTab = 'livros') {
+  const tabs = [{ key: 'livros', label: '📚 Livros' }, { key: 'sites', label: '🌐 Sites' }, { key: 'comunidades', label: '👥 Comunidades' }];
+  const tabsHtml = tabs.map(t => {
+    const isActive = activeTab === t.key;
+    return `<button type="button" class="recursos-tab${isActive ? ' active' : ''}" role="tab" id="rec-tab-${t.key}" aria-selected="${isActive ? 'true' : 'false'}" aria-controls="recursos-panel" tabindex="${isActive ? '0' : '-1'}" onclick="setRecursosTab('${t.key}')">${t.label}</button>`;
+  }).join('');
+  const cards = buildRecursoCardsHtml(profile, activeTab);
+  return `<div class="recursos-section"><div class="recursos-header"><span class="recursos-title">Recursos para o seu perfil</span><div class="recursos-tabs" role="tablist" aria-label="Recursos sugeridos">${tabsHtml}</div></div><div class="recursos-body" role="tabpanel" id="recursos-panel" aria-labelledby="rec-tab-${activeTab}">${cards}</div></div>`;
 }
 
 function showResult(scores, profileKey, options = {}) {
@@ -2818,7 +2825,19 @@ function showResult(scores, profileKey, options = {}) {
 
 function setRecursosTab(tab) {
   state.recursosTab = tab;
-  showResult(state.scores, state.profileKey, { fromShare: window.location.hash.startsWith('#result=') });
+  const profile = PROFILES[state.profileKey];
+  const section = document.querySelector('#resultContent .recursos-section');
+  if (!profile || !section) return;
+  const panel = document.getElementById('recursos-panel');
+  if (!panel) return;
+  panel.innerHTML = buildRecursoCardsHtml(profile, tab);
+  panel.setAttribute('aria-labelledby', 'rec-tab-' + tab);
+  section.querySelectorAll('.recursos-tab[role="tab"]').forEach(btn => {
+    const isSel = btn.id === 'rec-tab-' + tab;
+    btn.classList.toggle('active', isSel);
+    btn.setAttribute('aria-selected', isSel ? 'true' : 'false');
+    btn.setAttribute('tabindex', isSel ? '0' : '-1');
+  });
 }
 
 function copiarLink() {
