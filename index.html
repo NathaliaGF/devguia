@@ -6,6 +6,15 @@
   <meta name="description" content="Teste vocacional para TI — diagnóstico honesto, roadmap por fase e FAQ sem rodeios para quem quer entrar ou crescer na área de tecnologia.">
   <meta property="og:title" content="devguia.dev — Guia vocacional para TI">
   <meta property="og:description" content="Descubra se TI combina com você, em qual área se encaixaria e por onde começar.">
+  <meta property="og:url" content="https://nathaliagf.github.io/devguia/">
+  <meta property="og:type" content="website">
+  <meta property="og:locale" content="pt_BR">
+  <meta property="og:image" content="https://nathaliagf.github.io/devguia/og.svg">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="devguia.dev — Guia vocacional para TI">
+  <meta name="twitter:description" content="Descubra se TI combina com você, em qual área se encaixaria e por onde começar.">
+  <meta name="twitter:image" content="https://nathaliagf.github.io/devguia/og.svg">
+  <link rel="canonical" href="https://nathaliagf.github.io/devguia/">
   <title>devguia.dev — Guia vocacional para TI</title>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f1117'/><text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%23a78bfa'>%3E_</text></svg>">
   <style>
@@ -1255,9 +1264,126 @@
     body.easy-read .glossario-curta,
     body.easy-read .mito-curta { font-size: 15px; line-height: 1.9; }
     body.easy-read nav { padding: 1rem 1.5rem; }
+
+    .skip-link {
+      position: absolute;
+      left: -9999px;
+      top: 0;
+      z-index: 300;
+      padding: 10px 18px;
+      background: var(--purple);
+      color: var(--bg);
+      font-weight: 700;
+      font-size: 14px;
+      border-radius: 0 0 10px 0;
+      text-decoration: none;
+    }
+    .skip-link:focus {
+      left: 0;
+      outline: 3px solid var(--teal);
+      outline-offset: 2px;
+    }
+
+    .back-to-top {
+      position: fixed;
+      right: max(16px, env(safe-area-inset-right));
+      bottom: max(16px, env(safe-area-inset-bottom));
+      z-index: 95;
+      width: 46px;
+      height: 46px;
+      border-radius: 50%;
+      border: 1px solid var(--border2);
+      background: var(--bg3);
+      color: var(--text);
+      cursor: pointer;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      font-size: 20px;
+      line-height: 1;
+      box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
+      transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .back-to-top.visible { display: flex; }
+    .back-to-top:hover {
+      background: var(--bg4);
+      border-color: var(--purple-dim);
+      color: var(--purple);
+    }
+    .back-to-top:focus-visible {
+      outline: 2px solid var(--purple);
+      outline-offset: 3px;
+    }
+    @media (min-width: 900px) {
+      .back-to-top {
+        right: max(24px, env(safe-area-inset-right));
+        bottom: max(28px, env(safe-area-inset-bottom));
+      }
+    }
+
+    .next-step-card {
+      margin: 22px 0 10px;
+      padding: 20px 22px;
+      border-radius: 12px;
+      border: 1px solid var(--purple-dim);
+      background: linear-gradient(145deg, var(--purple-bg) 0%, rgba(22, 27, 39, 0.92) 55%, var(--bg2) 100%);
+    }
+    .next-step-card h3 {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--purple);
+      margin: 0 0 10px;
+      line-height: 1.35;
+    }
+    .next-step-card p {
+      color: var(--text2);
+      font-size: 14px;
+      line-height: 1.65;
+      margin: 0 0 10px;
+    }
+    .next-step-card .next-step-meta {
+      font-size: 13px;
+      color: var(--text3);
+      margin-bottom: 14px;
+    }
+    .next-step-card .next-step-meta strong { color: var(--text); font-weight: 600; }
+    .next-step-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      align-items: center;
+    }
+
+    .quiz-page-title {
+      font-size: clamp(1.2rem, 3vw, 1.45rem);
+      font-weight: 700;
+      color: var(--text);
+      margin: 0 0 18px;
+      line-height: 1.3;
+    }
+
+    .mito-fonte a.mito-fonte-link {
+      color: var(--blue);
+      text-decoration: underline;
+      text-underline-offset: 3px;
+      word-break: break-word;
+    }
+    .mito-fonte a.mito-fonte-link:hover { color: var(--teal); }
+
+    @media (prefers-reduced-motion: reduce) {
+      *,
+      *::before,
+      *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+        scroll-behavior: auto !important;
+      }
+    }
   </style>
 </head>
 <body>
+<a class="skip-link" href="#main-content">Ir para o conteúdo</a>
 
 <!-- NAV -->
 <nav>
@@ -1285,7 +1411,7 @@
   <button class="nav-tab" onclick="navigate('mitos');toggleMobileMenu()" data-screen="mitos">Mitos</button>
 </div>
 
-<main>
+<main id="main-content" tabindex="-1">
 
   <!-- ============================
        HOME
@@ -1298,6 +1424,7 @@
       </div>
       <h1>Perdido em <span>TI?</span> A gente resolve isso.</h1>
       <p>Diagnóstico vocacional honesto, roadmap por fase e respostas diretas para as dúvidas que ninguém responde de verdade.</p>
+      <p class="hero-time-hint" style="font-size:13px;color:var(--text3);margin-top:-8px;">Leva cerca de <strong style="color:var(--text2)">7–10 minutos</strong> — 15 perguntas em 4 blocos. Você pode pausar e continuar depois.</p>
       <div class="hero-btns">
         <button class="btn btn-primary" onclick="navigate('quiz')">Fazer o diagnóstico</button>
         <button class="btn btn-ghost" onclick="navigate('faq')">Ver o FAQ</button>
@@ -1345,6 +1472,7 @@
        ============================ -->
   <section class="screen" id="screen-quiz" aria-label="Diagnóstico vocacional">
     <div class="container">
+      <h1 class="quiz-page-title">Diagnóstico vocacional</h1>
       <div
         class="quiz-progress-bar-wrap"
         role="progressbar"
@@ -1484,6 +1612,8 @@
   </section>
 
 </main>
+
+<button type="button" class="back-to-top" id="backToTop" onclick="scrollToMainTop()" aria-label="Voltar ao topo">↑</button>
 
 <script>
 // ============================================================
@@ -1865,6 +1995,26 @@ const PHASES = [
   },
 ];
 
+const PROFILE_ROADMAP_PHASE = {
+  dev_nato: 'fase1',
+  analitico: 'fase3',
+  ux_design: 'fase2',
+  educador: 'fase1',
+  infra_cloud: 'fase2',
+  transicao: 'fase1',
+  repensar: 'fase1',
+};
+
+const PROFILE_ROADMAP_HINT = {
+  dev_nato: 'Seu perfil combina com estudo profundo: use a Fase 1 como trilha semanal (lógica, terminal, Git) antes de acelerar em framework ou linguagem.',
+  analitico: 'Dados e SQL aparecem com força na Fase 3 — abra essa fase no roadmap e volte à Fase 1 só para tapar lacunas de base.',
+  ux_design: 'A Fase 2 (primeira linguagem + projetos pequenos) é o melhor encaixe para quem pensa em produto e interface; complemente com HTML/CSS do glossário.',
+  educador: 'Antes de ensinar em público, consolide uma base técnica na Fase 1 — alunos percebem quando o professor não pratica o que explica.',
+  infra_cloud: 'Linux, automação e primeira linguagem concentram-se na Fase 2; use a Fase 1 para o que ainda não for hábito (terminal, Git, lógica).',
+  transicao: 'A Fase 1 organiza o básico que sustenta a transição; na Fase 3 você transforma experiência prévia + TI em portfólio narrável.',
+  repensar: 'Trate a Fase 1 como experimento honesto de 30 dias: se lógica e frustração técnica não gerarem curiosidade, revise o plano antes de gastar muito.',
+};
+
 // ============================================================
 // FAQ DATA
 // ============================================================
@@ -2158,7 +2308,7 @@ const MITOS = [
   { id:'m2', afirmacao:'Qualquer um aprende a programar em 3 meses', veredicto:'mito', curta:'Em três meses dá para aprender sintaxe e clonar tutoriais; isso não é o mesmo que sustentar um sistema real com bugs, prazos e código de outras pessoas.', explicacao:'O mercado paga por resolver problemas novos, ler documentação técnica e se comunicar com time — habilidades que levam meses de prática deliberada. Cursos que prometem "mercado em 90 dias" costumam entregar conteúdo, não maturidade. Por isso projetos próprios pequenos, revisão de código alheio e estágio/mentoria ainda são os atalhos mais honestos.', fonte:null },
   { id:'m3', afirmacao:'Não precisa de matemática para programar', veredicto:'mito', curta:'Você raramente usa integral na web, mas usa lógica, contagem, conjuntos e raciocínio sobre custo de algoritmo o tempo todo — só não chama de "matemática de prova".', explicacao:'Condições, loops aninhados, consultas SQL com JOIN e análise de dados exigem pensamento estruturado. Quem ignora isso fica preso em código que "funciona no exemplo" e quebra em escala. O caminho sensato é fortalecer bases com problemas reais, não decorar fórmulas sem contexto.', fonte:null },
   { id:'m4', afirmacao:'Faculdade de TI é perda de tempo', veredicto:'depende', curta:'Faculdade forte dá rede, fundamentos e ritmo de entrega que cursinho isolado não replica; faculdade fraca pode ser diploma caro com pouco retorno prático.', explicacao:'O que importa é corpo docente ativo, grade atualizada e alunos construindo projeto — não o nome na parede sozinho. Quem não faz faculdade precisa substituir isso com disciplina feroz, comunidade e portfólio auditável; quem faz faculdade ruim sem se esforçar também sai despreparado. A decisão é financeira e de perfil, não religião de mercado.', fonte:null },
-  { id:'m5', afirmacao:'IA vai substituir programadores em breve', veredicto:'parcial', curta:'IA acelera quem já sabe avaliar resultado; ela não elimina responsabilidade por segurança, arquitetura e consequências de negócio.', explicacao:'Automatizar CRUD ou boilerplate é diferente de manter legado crítico, negociar trade-off com produto ou apagar incêndio em produção com logs incompletos. Profissionais que só aceitam código sem entender ficam mais vulneráveis — com ou sem IA. O antídoto continua sendo fundamentos, leitura de código e prática de depuração.', fonte:null },
+  { id:'m5', afirmacao:'IA vai substituir programadores em breve', veredicto:'parcial', curta:'IA acelera quem já sabe avaliar resultado; ela não elimina responsabilidade por segurança, arquitetura e consequências de negócio.', explicacao:'Automatizar CRUD ou boilerplate é diferente de manter legado crítico, negociar trade-off com produto ou apagar incêndio em produção com logs incompletos. Profissionais que só aceitam código sem entender ficam mais vulneráveis — com ou sem IA. O antídoto continua sendo fundamentos, leitura de código e prática de depuração.', fonte:'https://survey.stackoverflow.co/' },
   { id:'m6', afirmacao:'É preciso ter computador caro para aprender a programar', veredicto:'mito', curta:'Para trilhas web e Python iniciais, 8 GB de RAM e SSD já permitem anos de estudo; o gargalo costuma ser consistência, não MHz.', explicacao:'Exceções existem: edição de vídeo pesada, modelos locais grandes ou Android nativo podem exigir mais. Mas a maioria dos iniciantes pode usar ambientes online, WSL ou máquinas modestas até clarificar objetivo. Gastar antes de formar hábito de estudo é má alocação de dinheiro.', fonte:null },
   { id:'m7', afirmacao:'Inglês fluente é obrigatório para trabalhar em TI', veredicto:'depende', curta:'Ler documentação e issues em inglês é quase inevitável; já falar fluentemente depende se você mira empresa nacional, remota BR ou exterior.', explicacao:'Muitas empresas brasileiras operam em português no dia a dia, mas ainda assim você vai depender de material técnico em inglês. Para dólar/euro, conversação e escrita viram filtro duro. Estratégia comum: fortalecer leitura primeiro e praticar conversação quando o objetivo de carreira internacional ficar claro.', fonte:null },
   { id:'m8', afirmacao:'Front-end é mais fácil que back-end', veredicto:'mito', curta:'Front tem complexidade visível (layout, acessibilidade, performance); back tem complexidade invisível (consistência, segurança, escala) — nenhum lado é "só mais fácil".', explicacao:'Achar front fácil porque "dá para ver na hora" ignora CSS difícil, estados assíncronos e compatibilidade. Achar back fácil porque "não tem pixel" ignora transações, filas e observabilidade. Escolha pela curiosidade que sustenta anos, não por meme de internet.', fonte:null },
@@ -2172,7 +2322,32 @@ const MITOS = [
 // NAVIGATION
 // ============================================================
 function navigate(screen) { go(screen, 'fade'); }
-function go(destino, forceDirection = null) {
+
+function syncHashForNav(destino, options = {}) {
+  if (destino === 'result') return;
+  const base = location.pathname + location.search;
+  if (destino === 'home') {
+    if (location.hash && !location.hash.startsWith('#result=')) history.replaceState(null, '', base);
+    return;
+  }
+  const suffix = options.hashSuffix ? '/' + options.hashSuffix : '';
+  const target = '#' + destino + suffix;
+  if (location.hash !== target) history.replaceState(null, '', base + target);
+}
+
+function focusScreenMain(destino) {
+  const section = document.getElementById('screen-' + destino);
+  if (!section) return;
+  const el = section.querySelector('h1') || section.querySelector('.section-header h2');
+  if (!el) return;
+  if (!el.hasAttribute('tabindex')) el.setAttribute('tabindex', '-1');
+  el.focus({ preventScroll: true });
+}
+
+function go(destino, forceDirection = null, options = {}) {
+  document.getElementById('mobileMenu')?.classList.remove('open');
+  document.querySelector('.nav-hamburger')?.setAttribute('aria-expanded', 'false');
+
   const atual = state.currentScreen;
   const idxAtual = SCREEN_ORDER.indexOf(atual);
   const idxDest = SCREEN_ORDER.indexOf(destino);
@@ -2183,6 +2358,10 @@ function go(destino, forceDirection = null) {
   document.querySelectorAll('.screen').forEach(el => el.classList.remove('active', 'enter-right', 'enter-left', 'enter-fade'));
   const next = document.getElementById('screen-' + destino);
   if (!next) return;
+  if (destino === 'faq' && !options.keepListState) state.openFaqId = null;
+  if (destino === 'glossario' && !options.keepListState) state.openGlossarioId = null;
+  if (destino === 'mitos' && !options.keepListState) state.openMitoId = null;
+
   next.classList.add('active', animClass);
   state.currentScreen = destino;
   document.querySelectorAll('.nav-tab[data-screen]').forEach(t => {
@@ -2195,6 +2374,87 @@ function go(destino, forceDirection = null) {
   if (destino === 'glossario') renderGlossario();
   if (destino === 'mitos') renderMitos();
   window.scrollTo(0, 0);
+  if (!options.skipHashSync) syncHashForNav(destino, { hashSuffix: options.hashSuffix || null });
+  if (destino !== 'result') requestAnimationFrame(() => focusScreenMain(destino));
+}
+
+function applyHashRoute(options = {}) {
+  const raw = (location.hash || '').replace(/^#/, '');
+  if (raw.startsWith('result=')) return;
+  if (!raw || raw === 'home') {
+    go('home', 'fade', { skipHashSync: true });
+    return;
+  }
+  const parts = raw.split('/').map(s => s.trim()).filter(Boolean);
+  const base = parts[0];
+  const rest = parts[1] || null;
+  const simpleScreens = ['quiz', 'roadmap', 'faq', 'glossario', 'mitos'];
+  if (!simpleScreens.includes(base)) {
+    go('home', 'fade', { skipHashSync: true });
+    return;
+  }
+  if (!rest) {
+    go(base, 'fade', { skipHashSync: true });
+    return;
+  }
+  if (base === 'faq') {
+    go('faq', 'fade', { skipHashSync: true });
+    setTimeout(() => openFaqItem(rest, { skipNav: true }), 50);
+  } else if (base === 'glossario') {
+    go('glossario', 'fade', { skipHashSync: true });
+    setTimeout(() => {
+      state.openGlossarioId = rest;
+      renderGlossario();
+      document.getElementById('gi-' + rest)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
+  } else if (base === 'mitos') {
+    go('mitos', 'fade', { skipHashSync: true });
+    setTimeout(() => {
+      state.openMitoId = rest;
+      renderMitos();
+      document.getElementById('mito-' + rest)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }, 50);
+  } else if (base === 'roadmap') {
+    go('roadmap', 'fade', { skipHashSync: true });
+    setTimeout(() => openRoadmapPhase(rest, { skipNav: true }), 50);
+  } else {
+    go(base, 'fade', { skipHashSync: true });
+  }
+}
+
+function openRoadmapPhase(phaseId, options = {}) {
+  if (!options.skipNav) go('roadmap', 'forward');
+  const open = () => {
+    const item = document.getElementById('phase-' + phaseId);
+    if (!item) return;
+    document.querySelectorAll('.phase-item.open').forEach(el => {
+      el.classList.remove('open');
+      const h = el.querySelector('.phase-header');
+      if (h) h.setAttribute('aria-expanded', 'false');
+    });
+    item.classList.add('open');
+    const hdr = item.querySelector('.phase-header');
+    if (hdr) hdr.setAttribute('aria-expanded', 'true');
+    item.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    const base = location.pathname + location.search;
+    history.replaceState(null, '', base + '#roadmap/' + phaseId);
+  };
+  if (options.skipNav) setTimeout(open, 30);
+  else setTimeout(open, 60);
+}
+
+function scrollToMainTop() {
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  const m = document.getElementById('main-content');
+  if (m) m.focus({ preventScroll: true });
+}
+
+function initBackToTop() {
+  const btn = document.getElementById('backToTop');
+  if (!btn) return;
+  const onScroll = () => btn.classList.toggle('visible', window.scrollY > 360);
+  onScroll();
+  window.addEventListener('scroll', onScroll, { passive: true });
 }
 
 function toggleMobileMenu() {
@@ -2398,7 +2658,7 @@ function encodeResult(scores, profileKey) {
 
 function decodeResult(hash) {
   try {
-    const encoded = hash.replace('#result=', '');
+    const encoded = hash.replace(/^#?result=/, '');
     const decoded = decodeURIComponent(escape(atob(encoded)));
     return JSON.parse(decoded);
   } catch {
@@ -2499,6 +2759,20 @@ function showResult(scores, profileKey, options = {}) {
   const shareBanner = options.fromShare ? `<div style="margin-top:8px;background:var(--amber-bg);border:1px solid var(--amber-dim);border-radius:8px;padding:8px 12px;color:var(--amber);font-size:12px;">👁 Você está vendo o resultado de outra pessoa — <button class="btn-inline" style="color:var(--amber)" onclick="go('quiz', 'forward')">fazer o seu</button></div>` : '';
   const revisitMsg = isRefazendo ? (mesmoPeril ? `<div style="background: var(--teal-bg); border: 1px solid var(--teal-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--teal); margin-top:8px;">Você respondeu diferente desta vez — mas chegou ao mesmo resultado. Isso é um bom sinal de consistência.</div>` : `<div style="background: var(--amber-bg); border: 1px solid var(--amber-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--amber); margin-top:8px;">Perfil diferente desta vez! Antes você era <strong style="color: var(--amber)">${PROFILES[perfilAnterior]?.name || 'outro perfil'}</strong>. Isso pode indicar que você está pensando diferente — ou que respondeu com mais honestidade.</div>`) : '';
 
+  const phaseId = PROFILE_ROADMAP_PHASE[profileKey] || 'fase1';
+  const phaseMeta = PHASES.find(p => p.id === phaseId);
+  const hint = PROFILE_ROADMAP_HINT[profileKey] || 'Use o roadmap em fases e o FAQ quando um conceito travar — cada habilidade tem o porquê explicado.';
+  const nextStepCard = `
+    <div class="next-step-card">
+      <h3>Seu próximo passo neste site</h3>
+      <p>${hint}</p>
+      <p class="next-step-meta">Sugerimos abrir agora: <strong>${phaseMeta ? phaseMeta.title : 'Fase 1 — Fundamentos'}</strong>. Nos cards do roadmap, use “ver no FAQ →” quando quiser aprofundar.</p>
+      <div class="next-step-actions">
+        <button type="button" class="btn btn-primary" onclick="openRoadmapPhase('${phaseId}')">Abrir esta fase no roadmap</button>
+        <button type="button" class="btn btn-ghost" onclick="navigate('faq')">Ir ao FAQ</button>
+      </div>
+    </div>`;
+
   document.getElementById('resultContent').innerHTML = `
     <div class="card" style="margin-bottom:16px">
       <div class="result-header">
@@ -2515,6 +2789,7 @@ function showResult(scores, profileKey, options = {}) {
       <div class="compat-bars">${barsHtml}</div>
       <h3 style="font-size:14px;margin-bottom:12px;color:var(--text2)">Áreas de maior fit</h3>
       <div class="areas-grid">${areasHtml}</div>
+      ${nextStepCard}
     </div>
     <div class="result-attention"><h3>⚠ Pontos de atenção</h3><ul>${attentionHtml}</ul></div>
     <div class="result-steps"><h3>✓ Próximos passos</h3><ul>${stepsHtml}</ul></div>
@@ -2527,6 +2802,11 @@ function showResult(scores, profileKey, options = {}) {
     </div>
   `;
   requestAnimationFrame(() => {
+    const titleEl = document.querySelector('#screen-result .result-title');
+    if (titleEl) {
+      titleEl.setAttribute('tabindex', '-1');
+      titleEl.focus({ preventScroll: true });
+    }
     requestAnimationFrame(() => {
       bars.forEach((b, i) => {
         const el = document.getElementById('bar' + i);
@@ -2605,6 +2885,11 @@ function togglePhase(id) {
   const header = item.querySelector('.phase-header');
   const isOpen = item.classList.toggle('open');
   header.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
+  if (state.currentScreen === 'roadmap') {
+    const base = location.pathname + location.search;
+    if (isOpen) history.replaceState(null, '', base + '#roadmap/' + id);
+    else history.replaceState(null, '', base + '#roadmap');
+  }
 }
 
 // ============================================================
@@ -2615,32 +2900,44 @@ function renderFaq() {
 }
 
 function linkGlossario(texto) {
-  const termos = {
-    API: 'api',
-    'back-end': 'backend',
-    'front-end': 'frontend',
-    deploy: 'deploy',
-    servidor: 'servidor',
-    'banco de dados': 'banco-de-dados',
-    framework: 'framework',
-    'open source': 'open-source',
-    cloud: 'cloud',
-    DevOps: 'devops',
-    'CI/CD': 'ci-cd',
-    HTML: 'html',
-    CSS: 'css',
-    JavaScript: 'javascript',
-    SQL: 'sql',
-    algoritmo: 'algoritmo',
-    debug: 'debug',
-    UX: 'ux',
-  };
-  let resultado = texto;
-  Object.entries(termos).forEach(([termo, id]) => {
-    const regex = new RegExp(`\\b${termo}\\b`, 'g');
-    resultado = resultado.replace(regex, `<button class="glossario-link" onclick="abrirGlossario('${id}')" title="Ver no glossário">${termo}</button>`);
-  });
-  return resultado;
+  const termos = [
+    ['banco de dados', 'banco-de-dados'],
+    ['open source', 'open-source'],
+    ['CI/CD', 'ci-cd'],
+    ['front-end', 'frontend'],
+    ['back-end', 'backend'],
+    ['Node.js', 'javascript'],
+    ['TypeScript', 'javascript'],
+    ['PostgreSQL', 'banco-de-dados'],
+    ['Kubernetes', 'devops'],
+    ['JavaScript', 'javascript'],
+    ['DevOps', 'devops'],
+    ['HTML', 'html'],
+    ['CSS', 'css'],
+    ['SQL', 'sql'],
+    ['REST', 'api'],
+    ['API', 'api'],
+    ['Git', 'versionamento'],
+    ['Docker', 'devops'],
+    ['UX', 'ux'],
+    ['framework', 'framework'],
+    ['deploy', 'deploy'],
+    ['servidor', 'servidor'],
+    ['cloud', 'cloud'],
+    ['algoritmo', 'algoritmo'],
+    ['debug', 'debug'],
+  ];
+  const chunks = texto.split(/(<button class="glossario-link"[\s\S]*?<\/button>)/gi);
+  return chunks.map(chunk => {
+    if (/^<button class="glossario-link"/i.test(chunk)) return chunk;
+    let resultado = chunk;
+    termos.forEach(([termo, id]) => {
+      const escaped = termo.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
+      const regex = new RegExp(`(?<![\\w-])${escaped}(?![\\w-])`, 'gi');
+      resultado = resultado.replace(regex, match => `<button class="glossario-link" onclick="abrirGlossario('${id}')" title="Ver no glossário">${match}</button>`);
+    });
+    return resultado;
+  }).join('');
 }
 
 function filterFaq() {
@@ -2710,10 +3007,16 @@ function toggleFaq(id) {
     item.classList.toggle('open', isOpen);
     item.querySelector('.faq-q').setAttribute('aria-expanded', isOpen ? 'true' : 'false');
   }
+
+  if (state.currentScreen === 'faq') {
+    const base = location.pathname + location.search;
+    if (state.openFaqId) history.replaceState(null, '', base + '#faq/' + state.openFaqId);
+    else history.replaceState(null, '', base + '#faq');
+  }
 }
 
-function openFaqItem(faqId) {
-  go('faq', 'forward');
+function openFaqItem(faqId, options = {}) {
+  if (!options.skipNav) go('faq', 'forward', { keepListState: true });
   state.faqFilter.cat = 'all';
   state.faqFilter.search = '';
 
@@ -2735,6 +3038,8 @@ function openFaqItem(faqId) {
         item.querySelector('.faq-q').setAttribute('aria-expanded', 'true');
         item.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
+      const base = location.pathname + location.search;
+      history.replaceState(null, '', base + '#faq/' + faqId);
     }, 100);
   }, 50);
 }
@@ -2785,14 +3090,33 @@ function filterGlossario() {
 }
 
 function renderGlossario() { filterGlossario(); }
-function toggleGlossario(id) { state.openGlossarioId = state.openGlossarioId === id ? null : id; renderGlossario(); }
+function toggleGlossario(id) {
+  state.openGlossarioId = state.openGlossarioId === id ? null : id;
+  renderGlossario();
+  if (state.currentScreen === 'glossario') {
+    const base = location.pathname + location.search;
+    if (state.openGlossarioId) history.replaceState(null, '', base + '#glossario/' + state.openGlossarioId);
+    else history.replaceState(null, '', base + '#glossario');
+  }
+}
 function abrirGlossario(id) {
-  go('glossario', 'forward');
+  go('glossario', 'forward', { keepListState: true });
   setTimeout(() => {
     state.openGlossarioId = id;
     renderGlossario();
+    const base = location.pathname + location.search;
+    history.replaceState(null, '', base + '#glossario/' + id);
     document.getElementById('gi-' + id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
   }, 80);
+}
+
+function formatMitoFonte(fonte) {
+  const t = (fonte || '').trim();
+  if (!t) return '';
+  if (/^https?:\/\//i.test(t)) {
+    return `<div class="mito-fonte">Fonte: <a href="${t}" class="mito-fonte-link" target="_blank" rel="noopener noreferrer">${t}</a></div>`;
+  }
+  return `<div class="mito-fonte">Fonte: ${t}</div>`;
 }
 
 function mitoBadge(veredicto) {
@@ -2806,7 +3130,15 @@ function setMitosFilter(filter) {
   document.querySelectorAll('[data-mito]').forEach(b => b.classList.toggle('active', b.dataset.mito === filter));
   renderMitos();
 }
-function toggleMito(id) { state.openMitoId = state.openMitoId === id ? null : id; renderMitos(); }
+function toggleMito(id) {
+  state.openMitoId = state.openMitoId === id ? null : id;
+  renderMitos();
+  if (state.currentScreen === 'mitos') {
+    const base = location.pathname + location.search;
+    if (state.openMitoId) history.replaceState(null, '', base + '#mitos/' + state.openMitoId);
+    else history.replaceState(null, '', base + '#mitos');
+  }
+}
 function renderMitos() {
   const list = document.getElementById('mitosList');
   if (!list) return;
@@ -2815,7 +3147,7 @@ function renderMitos() {
   list.innerHTML = items.map(m => {
     const [badgeClass, badgeText] = mitoBadge(m.veredicto);
     const open = state.openMitoId === m.id;
-    return `<div class="mito-card${open ? ' open' : ''}" id="mito-${m.id}"><button type="button" class="mito-head" onclick="toggleMito('${m.id}')"><span class="${badgeClass}">${badgeText}</span><span class="mito-affirmation">"${m.afirmacao}"</span><span class="mito-curta">${m.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver explicação completa ▾</span></button><div class="mito-body"><div class="mito-content"><p>${m.explicacao}</p>${m.fonte ? `<div class="mito-fonte">Fonte: ${m.fonte}</div>` : ''}</div></div></div>`;
+    return `<div class="mito-card${open ? ' open' : ''}" id="mito-${m.id}"><button type="button" class="mito-head" onclick="toggleMito('${m.id}')"><span class="${badgeClass}">${badgeText}</span><span class="mito-affirmation">"${m.afirmacao}"</span><span class="mito-curta">${m.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver explicação completa ▾</span></button><div class="mito-body"><div class="mito-content"><p>${m.explicacao}</p>${formatMitoFonte(m.fonte)}</div></div></div>`;
   }).join('');
 }
 
@@ -2846,6 +3178,28 @@ function toggleEasyRead() {
 // INIT
 // ============================================================
 renderRoadmap();
+
+window.addEventListener('beforeunload', (e) => {
+  if (state.currentScreen !== 'quiz') return;
+  if (!sessionStorage.getItem('quiz_progress')) return;
+  e.preventDefault();
+  e.returnValue = '';
+});
+
+window.addEventListener('hashchange', () => {
+  const raw = (location.hash || '').replace(/^#/, '');
+  if (raw.startsWith('result=')) {
+    const data = decodeResult(raw);
+    if (data && data.p && data.s) showResult(data.s, data.p, { fromShare: true });
+    return;
+  }
+  if (!raw) {
+    go('home', 'fade', { skipHashSync: true });
+    return;
+  }
+  applyHashRoute();
+});
+
 window.addEventListener('load', () => {
   if (sessionStorage.getItem('easy_read') === '1') {
     document.body.classList.add('easy-read');
@@ -2856,14 +3210,15 @@ window.addEventListener('load', () => {
       btn.style.color = 'var(--purple)';
     }
   }
-  fetchContador();
-  const hash = window.location.hash;
-  if (hash.startsWith('#result=')) {
-    const data = decodeResult(hash);
+  initBackToTop();
+  const raw = (location.hash || '').replace(/^#/, '');
+  if (raw.startsWith('result=')) {
+    const data = decodeResult(raw);
     if (data && data.p && data.s) showResult(data.s, data.p, { fromShare: true });
-  } else if (hash === '#mitos') {
-    go('mitos', 'fade');
+  } else if (raw) {
+    applyHashRoute();
   }
+  fetchContador();
 });
 </script>
 <script>

@@ -10,6 +10,24 @@ Um site estático 100% frontend com três ferramentas:
 - **Roadmap** — 4 fases de aprendizado com o porquê de cada habilidade, não só o quê
 - **FAQ** — 16 respostas diretas para dúvidas que ninguém responde honestamente
 
+## URL base (GitHub Pages)
+
+O site público usa normalmente `https://nathaliagf.github.io/devguia/`. Meta tags (`canonical`, Open Graph) e `sitemap.xml` / `robots.txt` apontam para essa URL. Se você usar domínio próprio, atualize esses arquivos para o endereço final.
+
+## Links diretos (hash)
+
+Sem backend, a navegação entre telas atualiza o fragmento da URL para facilitar favoritos e compartilhamento:
+
+| Destino | Exemplo |
+|--------|---------|
+| Telas | `#quiz`, `#roadmap`, `#faq`, `#glossario`, `#mitos` |
+| FAQ aberto | `#faq/f-logica` (use o `id` do item no array `FAQS`) |
+| Glossário aberto | `#glossario/api` (id do verbete em `GLOSSARIO`) |
+| Mito aberto | `#mitos/m5` |
+| Fase do roadmap | `#roadmap/fase2` |
+
+O resultado do diagnóstico continua em `#result=…` (payload codificado).
+
 ## Como usar localmente
 
 Baixe ou clone o repositório e abra `index.html` direto no navegador:
@@ -48,6 +66,9 @@ A forma mais comum de contribuição é adicionar perguntas ao FAQ. As perguntas
 ```
 devguia/
 ├── index.html       ← aplicação inteira (HTML + CSS + JS inline)
+├── og.svg           ← imagem para Open Graph (algumas redes preferem PNG/JPG)
+├── robots.txt
+├── sitemap.xml
 ├── README.md
 └── CONTRIBUTING.md
 ```

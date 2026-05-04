@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-label="devguia.dev">
+  <defs>
+    <linearGradient id="bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#161b27"/>
+      <stop offset="100%" style="stop-color:#0f1117"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#bg)"/>
+  <rect x="80" y="80" width="1040" height="470" rx="24" fill="none" stroke="#6d5cb5" stroke-width="2" opacity="0.6"/>
+  <text x="120" y="280" font-family="ui-monospace, monospace" font-size="72" font-weight="700" fill="#a78bfa">&gt; devguia.dev</text>
+  <text x="120" y="360" font-family="system-ui, sans-serif" font-size="36" fill="#a1aec4">Guia vocacional para TI</text>
+  <text x="120" y="430" font-family="system-ui, sans-serif" font-size="24" fill="#6f7d95">Diagnóstico · Roadmap · FAQ · Glossário</text>
+</svg>
