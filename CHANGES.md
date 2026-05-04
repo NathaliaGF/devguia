@@ -25,6 +25,7 @@ O projeto não carrega fontes externas, CSS externo ou bibliotecas de terceiros 
 - Adicionados `aria-label` descritivos aos botões de navegação do quiz.
 - Removido o carregamento automático do GoatCounter no HTML; ele agora é carregado sob demanda via JavaScript após consentimento.
 - Removidos os `max-width` que restringiam os parágrafos descritivos das seções e da comparação, para que o texto use toda a largura útil do container.
+- Tags e badges de FAQ/glossário foram rebaixadas visualmente: menos contraste, padding menor e posicionamento no rodapé do conteúdo para não competir com título, descrição e exemplo.
 
 ### `js/app.js`
 
@@ -35,6 +36,7 @@ O projeto não carrega fontes externas, CSS externo ou bibliotecas de terceiros 
 - Endurecida a persistência do quiz com `try/catch`, TTL de 7 dias e fallback seguro quando `localStorage` falha.
 - Mantida a experiência de retomar o diagnóstico em andamento sem quebrar a URL nem o fluxo atual.
 - Ajustado o schema dinâmico para limitar o FAQ a 10 itens, alinhado com rich snippets.
+- Movidos os metadados de FAQ e glossário para o final dos cards renderizados, preservando a leitura natural do conteúdo principal.
 
 ### `privacidade.html`
 

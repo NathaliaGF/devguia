@@ -1096,6 +1096,11 @@ function faqTagsHtml(id) {
   return tags.map(tag => `<span class="faq-tag">${tag}</span>`).join('');
 }
 
+function faqMetaFooterHtml(item) {
+  const tags = faqTagsHtml(item.id);
+  return `<div class="faq-card-tags"><span class="faq-cat-badge faq-badge" data-tooltip="${CAT_TOOLTIPS[item.cat] || ''}">${item.cat}</span>${tags ? `<span class="faq-tag-wrap">${tags}</span>` : ''}</div>`;
+}
+
 function filterFaq() {
   const search = document.getElementById('faqSearch')?.value || '';
   const normalizedSearch = normalizeText(search);
@@ -1130,13 +1135,11 @@ function filterFaq() {
       >
         <span class="faq-q-text">${f.q}</span>
         <span class="faq-q-meta">
-          <span class="faq-cat-badge faq-badge" data-tooltip="${CAT_TOOLTIPS[f.cat] || ''}">${f.cat}</span>
-          <span class="faq-tag-wrap">${faqTagsHtml(f.id)}</span>
           <span class="faq-chevron" aria-hidden="true">▾</span>
         </span>
       </button>
       <div class="faq-body" id="faqbody-${f.id}" role="region">
-        <div class="faq-answer">${linkGlossario(f.answer)}</div>
+        <div class="faq-answer">${linkGlossario(f.answer)}${faqMetaFooterHtml(f)}</div>
       </div>
     </div>
   `).join('');
@@ -1296,7 +1299,7 @@ function filterGlossario() {
       const alvo = GLOSSARIO.find(x => x.id === r || x.termo.toLowerCase() === r.toLowerCase() || x.termo.toLowerCase().includes(r.toLowerCase()));
       return alvo ? `<button class="glossario-pill" onclick="abrirGlossario('${alvo.id}')">${alvo.termo}</button>` : '';
     }).join('');
-    return `<div class="glossario-item${isOpen ? ' open' : ''}" id="gi-${g.id}"><button type="button" class="glossario-head" onclick="toggleGlossario('${g.id}')" aria-expanded="${isOpen ? 'true' : 'false'}" aria-controls="glossario-body-${g.id}" id="glossario-head-${g.id}"><span class="glossario-term">${g.termo}</span><span class="glossario-curta">${g.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver definição completa ▾</span></button><div class="glossario-body" id="glossario-body-${g.id}" role="region" aria-labelledby="glossario-head-${g.id}"><div class="glossario-content"><div class="glossario-meta"><span class="faq-cat-badge" style="border:1px solid ${CAT_COLORS[g.categoria] || 'var(--border)'};background:var(--bg3)">${g.categoria}</span>${g.fonetico ? `<span class="glossario-fonetico">${g.fonetico}</span>` : ''}</div><p class="glossario-longa">${g.longa}</p><div class="glossario-exemplo"><strong style="color:var(--text);display:block;margin-bottom:6px">Exemplo</strong>${g.exemplo}</div><div class="glossario-pill-wrap">${rel}</div></div></div></div>`;
+    return `<div class="glossario-item${isOpen ? ' open' : ''}" id="gi-${g.id}"><button type="button" class="glossario-head" onclick="toggleGlossario('${g.id}')" aria-expanded="${isOpen ? 'true' : 'false'}" aria-controls="glossario-body-${g.id}" id="glossario-head-${g.id}"><span class="glossario-term">${g.termo}</span><span class="glossario-curta">${g.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver definição completa ▾</span></button><div class="glossario-body" id="glossario-body-${g.id}" role="region" aria-labelledby="glossario-head-${g.id}"><div class="glossario-content"><p class="glossario-longa">${g.longa}</p><div class="glossario-exemplo"><strong style="color:var(--text);display:block;margin-bottom:6px">Exemplo</strong>${g.exemplo}</div>${rel ? `<div class="glossario-pill-wrap">${rel}</div>` : ''}<div class="glossario-meta"><span class="faq-cat-badge">${g.categoria}</span>${g.fonetico ? `<span class="glossario-fonetico">${g.fonetico}</span>` : ''}</div></div></div></div>`;
   }).join('');
   saveAppState();
 }
