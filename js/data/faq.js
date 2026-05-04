@@ -125,6 +125,132 @@ const FAQS = [
     <div class="dica"><strong>Dica:</strong> A habilidade mais à prova de IA: saber fazer a pergunta certa. Isso exige contexto, julgamento e experiência — coisas que IA não tem.</div>
     <div class="atencao"><strong>Atenção:</strong> Irônico: quem usa IA para aprender a programar está se tornando exatamente o tipo de dev mais facilmente substituível por IA.</div>`,
   },
+  {
+    id: 'f-qa', cat: 'carreira',
+    q: 'QA é carreira séria ou só porta de entrada?',
+    answer: `<p>É carreira séria. QA bom não é “pessoa que clica botão”: é quem reduz risco de release, cria confiança no time e entende comportamento do sistema melhor do que muita gente que programa. Automação, estratégia de teste, risco, regressão, performance e qualidade de API entram aqui.</p>
+    <p>A confusão vem de empresas que tratam QA como triagem manual barata. Quando isso acontece, a função empobrece e vira teto de crescimento. Em times melhores, QA participa cedo da definição, questiona cenário extremo e influencia arquitetura testável.</p>
+    <div class="dica"><strong>Dica:</strong> Se essa área te atrai, comece por lógica, caso de teste, API, leitura de log e automação básica. Isso te coloca muito acima do nível “executor de checklist”.</div>`,
+  },
+  {
+    id: 'f-seg-base', cat: 'fundamentos',
+    q: 'Dá para entrar em segurança sem antes aprender sistemas e redes?',
+    answer: `<p>Quase nunca. Segurança séria depende de entender o que você está protegendo: HTTP, autenticação, Linux, rede, cloud, banco, permissão e fluxo de aplicação. Sem base, o estudo vira coleção de ferramenta e buzzword sem profundidade real.</p>
+    <p>Isso não significa esperar anos para começar. Significa estudar segurança junto com fundamentos, e não no lugar deles. Quem tenta virar “pentester” sem entender API, sessão, DNS ou logs costuma decorar exploração pronta e travar no primeiro contexto fora do tutorial.</p>
+    <div class="dica"><strong>Dica:</strong> Comece por web, autenticação, terminal, logs e modelo cliente-servidor. Depois laboratório controlado. Glamour vem por último.</div>`,
+  },
+  {
+    id: 'f-pentest', cat: 'carreira',
+    q: 'Pentest é só “hackear coisas” o dia inteiro?',
+    answer: `<p>Não. Pentest real mistura escopo, autorização formal, coleta de evidência, relatório e comunicação com cliente ou time interno. A parte “quebrar” existe, mas o valor profissional está em mostrar risco real, reproduzir com método e orientar correção.</p>
+    <p>Muita gente entra na área pela fantasia ofensiva e descobre tarde que a rotina envolve documentação, limite legal e muito trabalho repetitivo. Quem gosta só da imagem de hacker costuma se frustrar; quem gosta de investigação disciplinada tende a durar mais.</p>
+    <div class="dica"><strong>Dica:</strong> Se você se interessa por pentest, treine escrita de relatório e reprodução limpa do achado. Vulnerabilidade sem explicação útil vale pouco para empresa séria.</div>`,
+  },
+  {
+    id: 'f-soc', cat: 'carreira',
+    q: 'O que um analista SOC faz de verdade?',
+    answer: `<p>SOC vive entre alerta, contexto, triagem e resposta inicial. O trabalho real é separar ruído de risco, correlacionar log, entender padrão de ataque e acionar resposta com calma. Parece menos glamouroso que red team, mas é onde muita segurança operacional de verdade acontece.</p>
+    <p>É uma área boa para quem tolera processo, pressão e investigação. Também pode ser cansativa em empresas com ferramenta ruim e alerta mal calibrado. O diferencial está em reduzir falso positivo e transformar incidente em aprendizado de defesa.</p>
+    <div class="dica"><strong>Dica:</strong> Se quiser testar SOC, comece por logs, SIEM, rede básica, autenticação e resposta a incidente. Sem isso, o alerta vira painel piscando sem significado.</div>`,
+  },
+  {
+    id: 'f-produto', cat: 'carreira',
+    q: 'Product Manager precisa saber programar?',
+    answer: `<p>Não precisa programar profissionalmente, mas precisa entender tecnologia o suficiente para não prometer fantasia, não confundir esforço com desejo e não virar backlog ambulante. PM sem repertório técnico suficiente depende demais da interpretação dos outros e perde credibilidade rápido.</p>
+    <p>O objetivo não é competir com engenharia. É fazer pergunta melhor, priorizar com noção de custo e conversar com time sem produzir ruído. Em produtos digitais, isso significa entender API, dado, evento, limitação de sistema e risco de dependência.</p>
+    <div class="dica"><strong>Dica:</strong> PM forte sabe escrever problema, hipótese e métrica antes de sair pedindo feature. Técnica ajuda, mas clareza de pensamento ajuda ainda mais.</div>`,
+  },
+  {
+    id: 'f-po-pm', cat: 'carreira',
+    q: 'Qual a diferença entre PM e PO na prática?',
+    answer: `<p>Depende da empresa, mas em geral PM olha mais para problema, direção, hipótese e resultado; PO costuma ficar mais perto da operação do backlog, refinamento e fluxo do time. Em muitos lugares os nomes se misturam, então o título sozinho diz pouco.</p>
+    <p>O melhor critério é observar responsabilidade real: quem define prioridade? quem conversa com usuário? quem responde por métrica? quem organiza entrega? Essa leitura vale mais do que decorar uma distinção de livro que a empresa pode nem usar.</p>
+    <div class="dica"><strong>Dica:</strong> Em vaga de produto, leia a descrição com lupa. “PM” pode ser quase discovery puro ou quase operação de backlog, e isso muda completamente a rotina.</div>`,
+  },
+  {
+    id: 'f-suporte', cat: 'carreira',
+    q: 'Suporte técnico é começo válido ou armadilha?',
+    answer: `<p>É começo válido quando você usa o trabalho para entender sistema em produção, incidente, usuário, documentação e ambiente real. Vira armadilha quando o papel te prende só em script repetitivo sem aprendizado técnico, sem autonomia e sem evolução de escopo.</p>
+    <p>Muita gente despreza suporte porque quer “começar por cima”, mas a área pode dar repertório de operação e produto que muito iniciante não tem. O ponto crítico é não estacionar: você precisa transformar incidente recorrente em documentação, automação e base para migrar depois.</p>
+    <div class="dica"><strong>Dica:</strong> Se entrar por suporte, desenvolva leitura de log, rede básica, sistemas operacionais e escrita clara. Isso diferencia você de quem só repete procedimento.</div>`,
+  },
+  {
+    id: 'f-helpdesk', cat: 'mercado',
+    q: 'Help desk paga mal para sempre?',
+    answer: `<p>Não necessariamente, mas o teto cresce pouco se você ficar só em atendimento reativo de baixa complexidade. O salto vem quando você acumula contexto técnico, pega ambiente mais complexo e começa a reduzir recorrência com processo melhor, documentação e automação.</p>
+    <p>O erro comum é aceitar qualquer rotina operacional sem pensar em trajetória. Se o trabalho te ensina sistema, rede, cloud, diretório, incidente e comunicação, ele pode ser ótima base. Se só te ensina a copiar resposta pronta, aí sim vira estagnação.</p>
+    <div class="dica"><strong>Dica:</strong> Pergunta importante em entrevista: “o que alguém que entra aqui costuma aprender nos primeiros 12 meses e para onde essa pessoa evolui?”</div>`,
+  },
+  {
+    id: 'f-dados-inicio', cat: 'carreira',
+    q: 'Para começar em dados, preciso ir direto para IA?',
+    answer: `<p>Não. Na maioria dos casos, ir direto para IA é a forma mais rápida de parecer que está estudando muito e construindo pouco. O começo saudável em dados passa por SQL, limpeza, modelagem simples, leitura crítica de métrica, dashboard e estatística aplicada.</p>
+    <p>Machine Learning e IA generativa fazem mais sentido quando você já sabe formular pergunta, tratar dado ruim e validar resultado. Sem isso, o modelo vira caixa preta que impressiona no LinkedIn e falha no primeiro problema de negócio menos óbvio.</p>
+    <div class="dica"><strong>Dica:</strong> Se quiser uma ordem forte: SQL → análise exploratória → visualização → estatística → automação → só depois ML/IA.</div>`,
+  },
+  {
+    id: 'f-bi-ds', cat: 'carreira',
+    q: 'Qual a diferença entre BI, análise e ciência de dados?',
+    answer: `<p>BI normalmente está mais perto de dashboard, camada semântica, indicador e decisão recorrente. Análise de dados tende a investigar pergunta específica com mais contexto e interpretação. Ciência de dados costuma entrar quando há modelagem preditiva, experimento mais complexo ou inferência estatística mais forte.</p>
+    <p>Na prática, as fronteiras variam por empresa. O importante é entender o tipo de problema que você quer repetir: relatório confiável, hipótese de negócio, ou modelo para previsão/classificação. Título sozinho não resolve essa confusão.</p>
+    <div class="dica"><strong>Dica:</strong> Peça exemplos concretos de rotina quando ouvir “vaga de dados”. Pergunte o que ocupa a maior parte da semana e quais ferramentas realmente são usadas.</div>`,
+  },
+  {
+    id: 'f-cloud', cat: 'ferramentas',
+    q: 'Preciso escolher AWS, Azure ou GCP logo no começo?',
+    answer: `<p>Não. Primeiro escolha uma e entenda bem os conceitos que se repetem: rede, compute, storage, IAM, logs, banco gerenciado, balanceador. Trocar de provedor depois é muito mais fácil quando você domina a lógica por baixo do que quando decorou nome de serviço.</p>
+    <p>Iniciante que tenta estudar as três ao mesmo tempo quase sempre termina confundindo produto, painel e nomenclatura. O mercado valoriza mais profundidade útil em uma nuvem do que comparação rasa das três em paralelo.</p>
+    <div class="dica"><strong>Dica:</strong> Se não tiver contexto melhor, AWS tende a ser aposta segura no Brasil por volume de material e mercado. Mas o critério principal é consistência no estudo.</div>`,
+  },
+  {
+    id: 'f-devops-jr', cat: 'mercado',
+    q: 'Existe vaga júnior de DevOps de verdade?',
+    answer: `<p>Existe, mas é bem menos comum do que júnior de desenvolvimento ou suporte. Muitas vagas chamadas de “DevOps júnior” esperam repertório que, na prática, vem de base anterior em infra, back-end, suporte ou QA. O nome engana bastante.</p>
+    <p>Isso não significa desistir da área. Significa entender que a entrada muitas vezes é lateral: suporte técnico mais forte, sysadmin, cloud de entrada, automação de ambiente, CI/CD em time de dev. DevOps maduro cobra contexto de produção e responsabilidade operacional.</p>
+    <div class="dica"><strong>Dica:</strong> Se essa trilha te atrai, invista em Linux, redes, containers, pipeline e uma linguagem de script. Isso te torna empregável em papéis que depois convergem para DevOps.</div>`,
+  },
+  {
+    id: 'f-techlead', cat: 'carreira',
+    q: 'Tech lead é gestor ou desenvolvedor sênior?',
+    answer: `<p>É uma mistura que varia por empresa. Em geral, tech lead continua sendo uma referência técnica forte, mas assume também coordenação, direcionamento arquitetural, revisão de decisão e destrava de time. Não é só “dev mais antigo” nem “gerente com GitHub”.</p>
+    <p>O risco é virar lead sem profundidade suficiente: aí a pessoa fica presa em reunião, perde a mão do código e ainda não tem repertório para orientar decisão difícil. Liderança técnica boa nasce de base real, clareza de comunicação e leitura de contexto.</p>
+    <div class="dica"><strong>Dica:</strong> Antes de mirar o título, treine escrita técnica, review, mentoria e negociação de escopo. O cargo costuma ser consequência dessas habilidades.</div>`,
+  },
+  {
+    id: 'f-devrel', cat: 'carreira',
+    q: 'Developer Advocate é marketing disfarçado?',
+    answer: `<p>Pode virar, se a empresa trata a função como propaganda de ferramenta sem substância. Mas DevRel sério fica entre produto, comunidade, documentação, exemplo executável e feedback técnico do ecossistema. A credibilidade depende de profundidade real.</p>
+    <p>Quem faz bem essa função entende a dor do desenvolvedor, ensina sem enrolar e devolve para a empresa um retrato claro do que está difícil de usar. Quando isso não existe, sobra só evento, hype e post sem densidade — e o mercado percebe rápido.</p>
+    <div class="dica"><strong>Dica:</strong> Se te atrai, treine três frentes ao mesmo tempo: base técnica, escrita clara e apresentação. Falhar em qualquer uma delas enfraquece muito a função.</div>`,
+  },
+  {
+    id: 'f-entrevista-dados', cat: 'carreira',
+    q: 'Como costuma ser entrevista para dados no início da carreira?',
+    answer: `<p>Normalmente ela combina SQL, raciocínio sobre métrica, leitura de caso e alguma explicação de projeto ou análise feita por você. Em empresas mais exigentes, pode haver estatística básica, modelagem de dado e questionamento sobre como você validaria uma hipótese.</p>
+    <p>O erro comum é estudar só ferramenta. Quem sabe usar notebook, mas não consegue explicar por que escolheu aquela métrica ou como limpou a base, parece raso rapidamente. Entrevista de dados costuma premiar clareza de pensamento mais do que volume de buzzword.</p>
+    <div class="dica"><strong>Dica:</strong> Tenha uma análise própria pronta para explicar de ponta a ponta: pergunta, base, limpeza, escolha de métrica, limite da conclusão e próximos passos.</div>`,
+  },
+  {
+    id: 'f-entrevista-seg', cat: 'carreira',
+    q: 'Como costuma ser entrevista para segurança no começo?',
+    answer: `<p>Muito mais fundamento do que “truque de exploração”. Web básica, HTTP, autenticação, rede, logs, sistema operacional, metodologia e ética aparecem cedo. Dependendo da vaga, pode haver laboratório simples, análise de cenário ou conversa sobre incidente.</p>
+    <p>Empresas sérias querem ver se você pensa com método e respeita escopo, não só se consegue repetir técnica famosa. Quem só decorou ferramenta tende a travar quando o entrevistador muda o contexto ou pede justificativa mais profunda.</p>
+    <div class="dica"><strong>Dica:</strong> Treine explicar vulnerabilidade como risco de negócio e caminho de correção. Falar só o nome da falha raramente impressiona quem contrata bem.</div>`,
+  },
+  {
+    id: 'f-salario-dados', cat: 'mercado',
+    q: 'Dados paga melhor do que desenvolvimento?',
+    answer: `<p>Depende mais da empresa, senioridade e contexto do que do rótulo da trilha. Há times de dados pagando muito bem e times pagando mal; o mesmo vale para desenvolvimento. A ilusão de que uma área inteira “ganha mais” costuma vir de recorte enviesado de big tech, fintech ou vaga internacional.</p>
+    <p>O que costuma aumentar remuneração de verdade é resolver problema caro, operar em ambiente mais complexo e conseguir comunicar impacto com clareza. Em dados isso aparece quando você influencia decisão; em desenvolvimento, quando você sustenta sistema importante. O padrão é impacto, não label.</p>
+    <div class="dica"><strong>Dica:</strong> Em vez de perguntar “qual área paga mais?”, pergunte “qual tipo de problema caro eu consigo aprender a resolver com consistência?”</div>`,
+  },
+  {
+    id: 'f-freela', cat: 'mercado',
+    q: 'Freelance é boa porta de entrada para quem está começando?',
+    answer: `<p>Na maioria dos casos, não como primeira aposta principal. Freelance exige vender, negociar escopo, proteger contrato, lidar com cliente confuso e entregar sem suporte de time. Para iniciante, isso soma dificuldade comercial em cima da dificuldade técnica — combinação pesada demais.</p>
+    <p>Isso não impede freelance pequeno e controlado, especialmente se vier de rede de confiança. Mas tratar freelance como atalho mágico para experiência costuma gerar retrabalho, preço ruim e cliente insatisfeito. Primeiro emprego com revisão e contexto ainda é caminho mais seguro para a maioria.</p>
+    <div class="dica"><strong>Dica:</strong> Se pegar freelance cedo, mantenha escopo muito pequeno, proposta por escrito e tecnologia que você realmente consegue sustentar depois.</div>`,
+  },
 ];
 
   return { FAQS };

@@ -83,7 +83,109 @@ const AREA_COMPARISONS = [
     curva: 'Mais íngreme. O começo pode ser seco, mas a vantagem aparece muito quando você ganha base.',
     tipo: 'Operacional, sistêmico, com peso forte em automação, risco e resiliência.',
   },
+  {
+    key: 'seguranca',
+    name: 'Segurança',
+    accent: 'var(--coral)',
+    badge: 'Risco e defesa',
+    rotina: 'Você vai analisar vulnerabilidades, acesso, logs, incidentes, hardening, permissão e comportamento suspeito.',
+    dificuldade: 'Alta. Cobra base técnica de sistema, rede, cloud e muita disciplina de processo.',
+    curva: 'Íngreme. O glamour de internet some rápido e sobra muito estudo de fundamento e investigação.',
+    tipo: 'Investigativo, adversarial e orientado a risco, prevenção, detecção e resposta.',
+  },
+  {
+    key: 'qa',
+    name: 'QA',
+    accent: 'var(--teal)',
+    badge: 'Qualidade e confiança',
+    rotina: 'Você vai desenhar cenários, automatizar testes, investigar regressão, validar release e reduzir risco de produção.',
+    dificuldade: 'Média para alta. Parece simples para quem olha de fora, mas fica técnico rápido quando entra API, automação e performance.',
+    curva: 'Boa para entrada, mas só cresce de verdade quando você aprende sistema, evidência e estratégia de teste.',
+    tipo: 'Analítico, detalhista e orientado a comportamento real do produto sob pressão.',
+  },
+  {
+    key: 'produto',
+    name: 'Produto',
+    accent: 'var(--pink)',
+    badge: 'Prioridade e direção',
+    rotina: 'Você vai transformar problema difuso em hipótese, prioridade, alinhamento com time e decisão de escopo.',
+    dificuldade: 'Média. Menos sobre escrever código, mais sobre decidir bem com contexto incompleto e custo real.',
+    curva: 'Boa para quem já vem de negócio, comunicação ou operação; ruim para quem quer resposta técnica exata o tempo todo.',
+    tipo: 'Colaborativo, ambíguo e orientado a impacto, negociação e clareza de problema.',
+  },
+  {
+    key: 'suporte',
+    name: 'Suporte',
+    accent: 'var(--amber)',
+    badge: 'Entrada prática',
+    rotina: 'Você vai lidar com incidente, acesso, ambiente, documentação, triagem e muita interação com usuário interno ou externo.',
+    dificuldade: 'Média. Menos abstrato que outras trilhas no começo, mas exige calma, organização e leitura boa de contexto.',
+    curva: 'Boa porta de entrada para quem precisa aprender sistema em uso real antes de aprofundar trilha técnica.',
+    tipo: 'Prático, comunicativo e orientado a resolver problema concreto sem romance técnico.',
+  },
 ];
+const QUICK_AREA_TESTS = {
+  dados: {
+    title: 'Teste rápido: Dados combina com você?',
+    intro: 'Microdiagnóstico curto para ver se você gosta mais de pergunta, métrica e interpretação do que de interface ou operação.',
+    questions: [
+      { text: 'Quando aparece um problema no negócio, o que mais te atrai?', options: [{ text: 'Entender padrão nos números', score: 2 }, { text: 'Corrigir a implementação técnica', score: 0 }, { text: 'Melhorar a experiência da tela', score: 0 }] },
+      { text: 'Você lida bem com resposta incompleta e hipótese?', options: [{ text: 'Sim, se eu puder investigar com dado', score: 2 }, { text: 'Prefiro processo fechado e previsível', score: 0 }, { text: 'Só se o usuário final estiver visível na solução', score: 1 }] },
+      { text: 'Qual atividade parece menos cansativa?', options: [{ text: 'Limpar base bagunçada até ela ficar confiável', score: 2 }, { text: 'Configurar ambiente e deploy', score: 0 }, { text: 'Debugar CSS e estado visual', score: 0 }] },
+      { text: 'O que te dá mais sensação de progresso?', options: [{ text: 'Transformar métrica em decisão melhor', score: 2 }, { text: 'Subir sistema sem cair', score: 0 }, { text: 'Entregar tela nova para o usuário', score: 0 }] },
+    ],
+    bands: [
+      { min: 7, label: 'Fit forte com Dados & IA', copy: 'Vale testar SQL, análise exploratória, dashboard e estatística aplicada antes de cair em hype de IA.' },
+      { min: 4, label: 'Sinal misto', copy: 'Dados pode combinar como trilha secundária, especialmente se você também gosta de produto ou back-end.' },
+      { min: 0, label: 'Fit fraco por enquanto', copy: 'Talvez você prefira construir sistema, operar ambiente ou trabalhar mais perto da interface.' },
+    ],
+  },
+  seguranca: {
+    title: 'Teste rápido: Segurança combina com você?',
+    intro: 'Aqui a pergunta real não é se você acha a área “legal”, e sim se você tolera investigação, risco e base técnica chata.',
+    questions: [
+      { text: 'O que mais desperta sua atenção em um sistema?', options: [{ text: 'Brecha, permissão estranha e comportamento suspeito', score: 2 }, { text: 'Performance e escala', score: 1 }, { text: 'Visual e usabilidade', score: 0 }] },
+      { text: 'Como você reage a regra rígida e checklist?', options: [{ text: 'Se reduz risco, faz sentido para mim', score: 2 }, { text: 'Tolero, mas prefiro liberdade total', score: 1 }, { text: 'Detesto processo detalhado', score: 0 }] },
+      { text: 'O que parece mais interessante?', options: [{ text: 'Investigar log e incidente até fechar causa', score: 2 }, { text: 'Criar feature nova', score: 0 }, { text: 'Montar dashboard executivo', score: 0 }] },
+      { text: 'Qual desconforto você tolera melhor?', options: [{ text: 'Ler documentação e protocolo por horas', score: 2 }, { text: 'Conversar com cliente o dia todo', score: 0 }, { text: 'Ajustar pixel e microinteração', score: 0 }] },
+    ],
+    bands: [
+      { min: 7, label: 'Fit forte com Segurança', copy: 'Vale experimentar trilha de autenticação, redes, logs, hardening e laboratório controlado antes de qualquer fantasia de “hacker”.' },
+      { min: 4, label: 'Sinal misto', copy: 'Segurança pode funcionar como especialização futura se você construir base em infra, back-end ou QA primeiro.' },
+      { min: 0, label: 'Fit fraco por enquanto', copy: 'Talvez você prefira trilhas menos adversariais e menos centradas em risco e processo rígido.' },
+    ],
+  },
+  produto: {
+    title: 'Teste rápido: Produto combina com você?',
+    intro: 'Esse teste mede tolerância a ambiguidade, priorização e conversa difícil, não amor por post-it.',
+    questions: [
+      { text: 'Quando um time trava, o que você tende a fazer?', options: [{ text: 'Organizar problema e priorizar caminho', score: 2 }, { text: 'Ir direto para a implementação', score: 0 }, { text: 'Esperar alguém decidir', score: 0 }] },
+      { text: 'Você lida bem com decisão sem resposta perfeita?', options: [{ text: 'Sim, desde que eu tenha contexto suficiente', score: 2 }, { text: 'Mais ou menos', score: 1 }, { text: 'Não, prefiro certo ou errado', score: 0 }] },
+      { text: 'O que te parece mais útil em uma reunião boa?', options: [{ text: 'Sair com hipótese, dono e próximo passo claro', score: 2 }, { text: 'Sair com tarefa técnica definida', score: 1 }, { text: 'Nem gosto de reunião', score: 0 }] },
+      { text: 'Qual atividade parece mais natural?', options: [{ text: 'Traduzir necessidade de negócio para time técnico', score: 2 }, { text: 'Escrever automação de teste', score: 0 }, { text: 'Operar ambiente de produção', score: 0 }] },
+    ],
+    bands: [
+      { min: 7, label: 'Fit forte com Produto', copy: 'Vale testar discovery, priorização, escrita de problema e análise de métrica com um time ou projeto real.' },
+      { min: 4, label: 'Sinal misto', copy: 'Produto pode combinar se você também gosta de UX, dados ou comunicação entre áreas.' },
+      { min: 0, label: 'Fit fraco por enquanto', copy: 'Talvez você prefira uma trilha mais técnica, com menos ambiguidade e menos coordenação entre áreas.' },
+    ],
+  },
+  infra: {
+    title: 'Teste rápido: Infra combina com você?',
+    intro: 'Infra parece invisível para quem está começando, mas o trabalho real mistura automação, incidentes e responsabilidade operacional.',
+    questions: [
+      { text: 'O que parece mais satisfatório?', options: [{ text: 'Eliminar tarefa manual com script ou pipeline', score: 2 }, { text: 'Desenhar interface nova', score: 0 }, { text: 'Escrever texto de documentação pública', score: 0 }] },
+      { text: 'Como você lida com sistema crítico fora do horário ideal?', options: [{ text: 'Se eu tiver contexto e ferramenta, encaro', score: 2 }, { text: 'Tolero pouco', score: 1 }, { text: 'Evito ao máximo esse tipo de responsabilidade', score: 0 }] },
+      { text: 'Qual cenário te atrai mais?', options: [{ text: 'Deploy confiável, observabilidade e rollback', score: 2 }, { text: 'Pesquisa com usuário', score: 0 }, { text: 'Modelagem estatística', score: 0 }] },
+      { text: 'Você tolera curva de aprendizado seca e abstrata?', options: [{ text: 'Sim, se o sistema ficar mais robusto', score: 2 }, { text: 'Depende', score: 1 }, { text: 'Não, preciso de retorno visual rápido', score: 0 }] },
+    ],
+    bands: [
+      { min: 7, label: 'Fit forte com Infra & Cloud', copy: 'Vale testar Linux, containers, pipeline e ambiente real em nuvem com projeto pequeno de ponta a ponta.' },
+      { min: 4, label: 'Sinal misto', copy: 'Infra pode combinar como especialização futura se você já gosta de back-end, QA ou segurança.' },
+      { min: 0, label: 'Fit fraco por enquanto', copy: 'Talvez você prefira trilhas com retorno mais visual ou mais próximas de negócio e produto.' },
+    ],
+  },
+};
 const HONESTY_FILTERS = [
   'Você quer entrar só pelo salário, mas não tolera frustração técnica nem estudo contínuo.',
   'Você odeia problemas abstratos e espera motivação instantânea toda vez que algo trava.',
@@ -107,6 +209,24 @@ const FAQ_TAGS = {
   'f-net': ['mercado', 'entrevista', 'iniciante'],
   'f-trans': ['transição', 'mercado'],
   'f-ai-job': ['mercado', 'transição'],
+  'f-qa': ['iniciante', 'mercado'],
+  'f-seg-base': ['iniciante', 'transição'],
+  'f-pentest': ['mercado', 'entrevista'],
+  'f-soc': ['mercado', 'transição'],
+  'f-produto': ['transição', 'mercado'],
+  'f-po-pm': ['mercado', 'transição'],
+  'f-suporte': ['iniciante', 'transição'],
+  'f-helpdesk': ['mercado', 'transição'],
+  'f-dados-inicio': ['iniciante', 'transição'],
+  'f-bi-ds': ['iniciante', 'mercado'],
+  'f-cloud': ['iniciante', 'entrevista'],
+  'f-devops-jr': ['mercado', 'transição'],
+  'f-techlead': ['mercado', 'entrevista'],
+  'f-devrel': ['mercado', 'transição'],
+  'f-entrevista-dados': ['entrevista', 'mercado'],
+  'f-entrevista-seg': ['entrevista', 'mercado'],
+  'f-salario-dados': ['mercado', 'transição'],
+  'f-freela': ['mercado', 'iniciante'],
 };
 const RECURSOS = {
   dev_nato: {
@@ -186,6 +306,102 @@ const RECURSOS = {
     comunidades: [
       { nome: 'DevOps Subreddit', url: 'https://reddit.com/r/devops', desc: 'Discussões de infraestrutura e DevOps.' },
       { nome: 'Hacker News', url: 'https://news.ycombinator.com', desc: 'Notícias técnicas de sistemas e infra.' },
+    ],
+  },
+  seguranca: {
+    livros: [
+      { nome: 'The Web Application Hacker’s Handbook', autor: 'Stuttard & Pinto', desc: 'Base forte para entender segurança web de verdade.' },
+      { nome: 'Security Engineering', autor: 'Ross Anderson', desc: 'Livro denso sobre sistemas, risco e defesa.' },
+      { nome: 'Blue Team Handbook', autor: 'Don Murdoch', desc: 'Resumo prático para defesa, monitoramento e resposta.' },
+    ],
+    sites: [
+      { nome: 'PortSwigger Web Security Academy', url: 'https://portswigger.net/web-security', desc: 'Laboratórios gratuitos de segurança web.' },
+      { nome: 'OWASP', url: 'https://owasp.org', desc: 'Referência aberta para riscos e boas práticas de segurança.' },
+      { nome: 'TryHackMe', url: 'https://tryhackme.com', desc: 'Trilhas guiadas de laboratório para iniciantes e intermediários.' },
+    ],
+    comunidades: [
+      { nome: 'r/netsec', url: 'https://reddit.com/r/netsec', desc: 'Discussões e notícias da área de segurança.' },
+      { nome: 'OWASP Chapters', url: 'https://owasp.org/chapters/', desc: 'Comunidades locais e eventos ligados à OWASP.' },
+    ],
+  },
+  qa_teste: {
+    livros: [
+      { nome: 'Lessons Learned in Software Testing', autor: 'Kaner, Bach & Pettichord', desc: 'Livro clássico para pensar teste com profundidade.' },
+      { nome: 'Agile Testing', autor: 'Lisa Crispin & Janet Gregory', desc: 'Qualidade integrada ao fluxo do time.' },
+      { nome: 'Foundations of Software Testing', autor: 'Black, Van Veenendaal & Graham', desc: 'Base técnica e de processo para QA sério.' },
+    ],
+    sites: [
+      { nome: 'Ministry of Testing', url: 'https://www.ministryoftesting.com', desc: 'Conteúdo prático, comunidade e eventos para QA.' },
+      { nome: 'Playwright Docs', url: 'https://playwright.dev', desc: 'Documentação forte para automação moderna de testes.' },
+      { nome: 'Cypress Docs', url: 'https://docs.cypress.io', desc: 'Referência útil para automação de interface e fluxo.' },
+    ],
+    comunidades: [
+      { nome: 'r/softwaretesting', url: 'https://reddit.com/r/softwaretesting', desc: 'Comunidade com dúvidas, prática e mercado de QA.' },
+      { nome: 'Test Automation University', url: 'https://testautomationu.applitools.com', desc: 'Cursos gratuitos para automação de testes.' },
+    ],
+  },
+  produto: {
+    livros: [
+      { nome: 'Inspired', autor: 'Marty Cagan', desc: 'Livro-base para produto digital com contexto real de mercado.' },
+      { nome: 'Continuous Discovery Habits', autor: 'Teresa Torres', desc: 'Como descobrir problema certo de forma contínua.' },
+      { nome: 'Escaping the Build Trap', autor: 'Melissa Perri', desc: 'Produto guiado por resultado, não só por backlog.' },
+    ],
+    sites: [
+      { nome: 'SVPG', url: 'https://www.svpg.com', desc: 'Artigos fortes de produto, descoberta e times digitais.' },
+      { nome: 'Lenny’s Newsletter', url: 'https://www.lennysnewsletter.com', desc: 'Conteúdo de produto, growth e carreira.' },
+      { nome: 'Amplitude Blog', url: 'https://amplitude.com/blog', desc: 'Métricas de produto e análise aplicada.' },
+    ],
+    comunidades: [
+      { nome: 'Mind the Product', url: 'https://www.mindtheproduct.com', desc: 'Comunidade global de produto digital.' },
+      { nome: 'r/ProductManagement', url: 'https://reddit.com/r/ProductManagement', desc: 'Discussões práticas sobre carreira e rotina em produto.' },
+    ],
+  },
+  tech_lead: {
+    livros: [
+      { nome: 'Staff Engineer', autor: 'Will Larson', desc: 'Como crescer em influência técnica sem virar gestão clássica.' },
+      { nome: 'The Manager’s Path', autor: 'Camille Fournier', desc: 'Livro útil para quem lidera ou está perto disso.' },
+      { nome: 'Fundamentals of Software Architecture', autor: 'Richards & Ford', desc: 'Arquitetura e decisão técnica com trade-off real.' },
+    ],
+    sites: [
+      { nome: 'LeadDev', url: 'https://leaddev.com', desc: 'Conteúdo sobre liderança técnica, times e decisão de engenharia.' },
+      { nome: 'Will Larson Blog', url: 'https://lethain.com', desc: 'Reflexões fortes sobre staff+, org e influência técnica.' },
+      { nome: 'High Scalability', url: 'http://highscalability.com', desc: 'Casos práticos de arquitetura e sistemas em escala.' },
+    ],
+    comunidades: [
+      { nome: 'r/ExperiencedDevs', url: 'https://reddit.com/r/ExperiencedDevs', desc: 'Discussões mais maduras sobre carreira e liderança técnica.' },
+      { nome: 'LeadDev Community', url: 'https://leaddev.com', desc: 'Eventos e conversas sobre liderança em engenharia.' },
+    ],
+  },
+  developer_advocate: {
+    livros: [
+      { nome: 'Everybody Writes', autor: 'Ann Handley', desc: 'Escrita clara e útil para conteúdo técnico e comunidade.' },
+      { nome: 'The Business Value of Developer Relations', autor: 'Mary Thengvall', desc: 'Visão de DevRel para dentro de empresa e produto.' },
+      { nome: 'Docs for Developers', autor: 'Jared Bhatti, Zachary Sarah Corleissen, et al.', desc: 'Documentação técnica como produto de verdade.' },
+    ],
+    sites: [
+      { nome: 'Write the Docs', url: 'https://www.writethedocs.org', desc: 'Comunidade e referência forte para documentação técnica.' },
+      { nome: 'DevRel Collective', url: 'https://devrelcollective.fun', desc: 'Conteúdo e comunidade para developer advocacy.' },
+      { nome: 'GitHub Docs Style Guide', url: 'https://docs.github.com/en/contributing/style-guide-and-content-model/style-guide', desc: 'Bom material para escrita técnica e clareza.' },
+    ],
+    comunidades: [
+      { nome: 'Write the Docs Slack', url: 'https://www.writethedocs.org/slack/', desc: 'Comunidade internacional de documentação técnica.' },
+      { nome: 'DevRelX', url: 'https://devrelx.com', desc: 'Rede e discussões sobre DevRel e comunidade técnica.' },
+    ],
+  },
+  suporte: {
+    livros: [
+      { nome: 'Time Management for System Administrators', autor: 'Tom Limoncelli', desc: 'Organização e resposta melhor para quem vive interrupção e incidente.' },
+      { nome: 'The Practice of System and Network Administration', autor: 'Limoncelli, Hogan & Chalup', desc: 'Base forte para operação, suporte e ambiente.' },
+      { nome: 'The Phoenix Project', autor: 'Kim, Behr & Spafford', desc: 'Bom para entender fluxo, gargalo e incidente em operação.' },
+    ],
+    sites: [
+      { nome: 'Microsoft Learn', url: 'https://learn.microsoft.com', desc: 'Base útil para suporte, sistemas e troubleshooting.' },
+      { nome: 'Linux Journey', url: 'https://linuxjourney.com', desc: 'Fundamentos de Linux importantes para suporte técnico.' },
+      { nome: 'Google IT Support', url: 'https://grow.google/certificates/it-support/', desc: 'Referência prática de base para suporte e troubleshooting.' },
+    ],
+    comunidades: [
+      { nome: 'r/sysadmin', url: 'https://reddit.com/r/sysadmin', desc: 'Discussões reais sobre rotina de suporte, ambiente e operação.' },
+      { nome: 'Spiceworks Community', url: 'https://community.spiceworks.com', desc: 'Comunidade prática de suporte, redes e infraestrutura.' },
     ],
   },
   transicao: {
@@ -363,6 +579,11 @@ const MITOS = [
   { id:'m10', afirmacao:'Programar é trabalho solitário', veredicto:'mito', curta:'Há foco individual, mas o trabalho profissional inclui alinhamento, revisão de código, pareamento e escrita de especificação — silêncio total é exceção, não regra.', explicacao:'Quem não comunica bem trava promoção porque não consegue negociar escopo nem explicar risco. Por isso soft skills aparecem em toda vaga sênior: não é modinha de RH, é custo real de coordenação em time. Aprender a escrever bem é treinável e tem ROI alto.', fonte:null },
   { id:'m11', afirmacao:'Você precisa saber tudo antes de aplicar para vagas', veredicto:'mito', curta:'Listas de requisitos descrevem o candidato idealizado; contratações reais aceitam gaps quando há aprendizado rápido e base sólida.', explicacao:'Esperar 100% de aderência é receita para nunca enviar currículo. O equilíbrio é candidatar com honestidade: mostrar o que sabe, o que está estudando e um projeto que prove execução. Feedback de entrevista — mesmo negativo — vale ouro para priorizar estudo.', fonte:null },
   { id:'m12', afirmacao:'Trabalho remoto em TI é fácil de conseguir logo no início', veredicto:'parcial', curta:'Remoto existe, mas vagas júnior remotas disputam candidatos de vários estados; sem portfólio ou indicação, a fila é longa.', explicacao:'Empresas que pagam bem em remoto esperam autonomia, comunicação escrita e às vezes overlap de fuso. Presencial ou híbrido pode ser porta de entrada mais realista para primeiro emprego. Depois de 1–2 anos com entregas comprovadas, o remoto internacional fica mais plausível.', fonte:null },
+  { id:'m13', afirmacao:'Segurança é só hackear coisas e usar ferramenta famosa', veredicto:'mito', curta:'Segurança profissional passa mais tempo em fundamento, processo, evidência, correção e risco do que em “ataque cinematográfico”.', explicacao:'Quem entra na área só pela fantasia ofensiva descobre rápido que a rotina envolve autenticação, logs, hardening, política, relatório e conversa difícil com times. Ferramenta ajuda, mas sem base de sistema e rede ela só cospe ruído. Segurança forte é engenharia de prevenção, detecção e resposta — não coleção de comandos soltos.', fonte:null },
+  { id:'m14', afirmacao:'Dados é basicamente Excel com nome bonito', veredicto:'mito', curta:'Planilha pode ser parte do trabalho, mas dados profissionais envolvem SQL, modelagem, qualidade, métrica, contexto e comunicação de decisão.', explicacao:'O problema não é usar Excel; o problema é achar que a área termina ali. Em time sério, dado ruim custa dinheiro, dashboard errado muda prioridade e análise rasa convence gente a tomar decisão ruim. Quem dura em dados aprende a perguntar melhor, limpar melhor e sustentar a conclusão com método.', fonte:null },
+  { id:'m15', afirmacao:'DevOps é cargo de júnior para quem “sabe um pouco de tudo”', veredicto:'mito', curta:'DevOps costuma cobrar contexto operacional, automação e maturidade técnica que raramente aparecem logo no primeiro passo da carreira.', explicacao:'Existem vagas de entrada com esse nome, mas muitas esperam repertório acumulado em suporte, infra, back-end ou cloud. O rótulo virou moda e esconde exigência alta de ambiente real. A porta pode ser júnior, mas a rotina não é rasa: deploy, observabilidade, incidente e pipeline cobram responsabilidade rápido.', fonte:null },
+  { id:'m16', afirmacao:'Product Manager manda no time e não precisa entender tecnologia', veredicto:'mito', curta:'Produto sem repertório técnico mínimo e sem capacidade de influência vira só fila de pedido com nome bonito.', explicacao:'PM não “manda” em time maduro; ele organiza contexto, prioridade e decisão. Para isso funcionar, precisa entender custo, dependência, risco e como engenharia pensa sobre entrega. Sem essa base, o papel gera ruído, backlog inflado e promessa impossível para cliente ou liderança.', fonte:null },
+  { id:'m17', afirmacao:'Suporte técnico é beco sem saída para quem quer crescer em TI', veredicto:'depende', curta:'Suporte vira teto quando o trabalho é repetição cega; vira base forte quando ensina sistema real, incidente, ambiente e comunicação sob pressão.', explicacao:'Muita gente entra por suporte e cresce para infra, segurança, produto técnico e operações porque ganhou repertório de produção cedo. O divisor é se você transforma recorrência em entendimento, documentação e automação — ou só repete procedimento sem aprender sistema. Não é uma trilha glamourosa, mas pode ser uma porta muito honesta.', fonte:null },
 ];
 
   return {
@@ -378,6 +599,7 @@ const MITOS = [
     CAT_COLORS,
     AREAS_INFO,
     AREA_COMPARISONS,
+    QUICK_AREA_TESTS,
     HONESTY_FILTERS,
     FAQ_TAGS,
     RECURSOS,

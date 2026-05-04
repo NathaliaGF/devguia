@@ -19,6 +19,9 @@ const state = {
   areaScores: [],
   pathScores: [],
   suggestedSubprofiles: [],
+  quickTestKey: null,
+  quickTestStep: 0,
+  quickTestScore: 0,
 };
 
 const { BLOCKS, QUESTIONS } = window.DEVGUIA_DATA.questions;
@@ -41,6 +44,7 @@ const {
   GLOSSARIO,
   MITOS,
   AREA_COMPARISONS,
+  QUICK_AREA_TESTS,
   HONESTY_FILTERS,
   FAQ_TAGS,
 } = window.DEVGUIA_DATA.catalog;
@@ -62,6 +66,26 @@ function normalizeText(value) {
 
 function sortByNormalizedLabel(a, b, key) {
   return normalizeText(a[key]).localeCompare(normalizeText(b[key]), 'pt-BR');
+}
+
+function getCompletedChecklistCount() {
+  return Object.keys(state.checklist || {}).length;
+}
+
+function renderGlobalProgress() {
+  const container = document.getElementById('globalProgress');
+  if (!container) return;
+  const quizDone = !!state.profileKey || !!state.resultHash;
+  const openPhase = state.openPhaseId ? PHASES.find(phase => phase.id === state.openPhaseId)?.title || state.openPhaseId : 'nenhuma fase aberta';
+  const completed = getCompletedChecklistCount();
+  container.innerHTML = `
+    <div class="global-progress-card">
+      <span class="global-progress-title">Seu progresso</span>
+      <span class="global-progress-chip">${quizDone ? 'Diagnóstico concluído' : 'Diagnóstico ainda não concluído'}</span>
+      <span class="global-progress-chip">Fase aberta: ${openPhase}</span>
+      <span class="global-progress-chip">${completed} itens marcados no roadmap</span>
+    </div>
+  `;
 }
 
 const PATH_INFO = {
@@ -230,6 +254,7 @@ function openRoadmapPhase(phaseId, options = {}) {
   const open = () => {
     const item = document.getElementById('phase-' + phaseId);
     if (!item) return;
+    state.openPhaseId = phaseId;
     document.querySelectorAll('.phase-item.open').forEach(el => {
       el.classList.remove('open');
       const h = el.querySelector('.phase-header');
@@ -241,6 +266,7 @@ function openRoadmapPhase(phaseId, options = {}) {
     item.scrollIntoView({ behavior: 'smooth', block: 'start' });
     const base = location.pathname + location.search;
     history.replaceState(null, '', base + '#roadmap/' + phaseId);
+    saveAppState();
   };
   if (options.skipNav) setTimeout(open, 30);
   else setTimeout(open, 60);
@@ -358,6 +384,7 @@ function saveAppState() {
     resultHash: state.resultHash || (location.hash.startsWith('#result=') ? location.hash : ''),
   };
   localStorage.setItem(APP_STATE_KEY, JSON.stringify(payload));
+  renderGlobalProgress();
 }
 
 function restoreAppState() {
@@ -501,6 +528,7 @@ function continuarQuiz() {
   document.getElementById('btnBack').style.visibility = 'visible';
   document.getElementById('btnNext').style.visibility = 'visible';
   renderQuestion();
+  saveAppState();
 }
 
 function recomecarQuiz() {
@@ -516,6 +544,7 @@ function initQuiz() {
   document.getElementById('btnBack').style.visibility = 'visible';
   document.getElementById('btnNext').style.visibility = 'visible';
   renderQuestion();
+  saveAppState();
 }
 
 function renderQuestion() {
@@ -874,6 +903,7 @@ function showResult(scores, profileKey, options = {}) {
       <button class="btn btn-primary" onclick="go('roadmap', 'forward')">Ver Roadmap</button>
       <button class="btn btn-ghost" id="copyLinkBtn" onclick="copiarLink()">⛓ Copiar link</button>
       <button class="btn btn-ghost" id="copyResultBtn" onclick="copiarResultado()">📋 Copiar resultado em TXT</button>
+      <button class="btn btn-ghost" onclick="printResult()">🖨 Exportar visual</button>
       <button class="btn btn-ghost" onclick="go('quiz', 'back')">Refazer o diagnóstico</button>
     </div>
   `;
@@ -933,6 +963,11 @@ function copiarResultado() {
     });
 }
 
+function printResult() {
+  if (state.currentScreen !== 'result') go('result', 'fade');
+  window.setTimeout(() => window.print(), 80);
+}
+
 // ============================================================
 // HOME CONTENT
 // ============================================================
@@ -955,6 +990,93 @@ function renderHonestyFilters() {
   const list = document.getElementById('honestyList');
   if (!list) return;
   list.innerHTML = HONESTY_FILTERS.map(item => `<li>${item}</li>`).join('');
+}
+
+function renderQuickTests() {
+  const grid = document.getElementById('quickTestGrid');
+  if (!grid) return;
+  grid.innerHTML = Object.entries(QUICK_AREA_TESTS).map(([key, test]) => `
+    <article class="quick-test-card">
+      <h4>${test.title.replace('Teste rápido: ', '')}</h4>
+      <p>${test.intro}</p>
+      <div class="quick-test-actions">
+        <button type="button" class="btn btn-ghost" onclick="startQuickTest('${key}')">Abrir mini teste</button>
+      </div>
+    </article>
+  `).join('');
+}
+
+function renderQuickTestOutput() {
+  const panel = document.getElementById('quickTestOutput');
+  if (!panel) return;
+  if (!state.quickTestKey || !QUICK_AREA_TESTS[state.quickTestKey]) {
+    panel.innerHTML = `<h4>Escolha uma trilha</h4><p>Abra um dos mini testes para receber um sinal rápido e uma sugestão prática de próximo experimento.</p>`;
+    return;
+  }
+  const test = QUICK_AREA_TESTS[state.quickTestKey];
+  const question = test.questions[state.quickTestStep];
+  if (question) {
+    panel.innerHTML = `
+      <h4>${test.title}</h4>
+      <p>${test.intro}</p>
+      <div class="quick-test-progress">Pergunta ${state.quickTestStep + 1} de ${test.questions.length}</div>
+      <div class="quick-test-result">
+        <div class="quick-test-question">${question.text}</div>
+        <div class="quick-test-options">
+          ${question.options.map((option, index) => `<button type="button" class="btn btn-ghost" onclick="answerQuickTest('${state.quickTestKey}', ${index})">${option.text}</button>`).join('')}
+        </div>
+      </div>
+      <div class="quick-test-actions">
+        <button type="button" class="btn btn-ghost" onclick="resetQuickTest()">Fechar</button>
+      </div>
+    `;
+    return;
+  }
+  const band = test.bands.find(item => state.quickTestScore >= item.min) || test.bands[test.bands.length - 1];
+  panel.innerHTML = `
+    <h4>${test.title}</h4>
+    <p>${test.intro}</p>
+    <div class="quick-test-result">
+      <strong style="display:block;margin-bottom:8px;color:var(--text)">${band.label}</strong>
+      <p>${band.copy}</p>
+      <p style="margin-top:10px;color:var(--text3)">Pontuação: ${state.quickTestScore}/${test.questions.length * 2}</p>
+    </div>
+    <div class="quick-test-actions">
+      <button type="button" class="btn btn-primary" onclick="navigate('quiz')">Abrir diagnóstico completo</button>
+      <button type="button" class="btn btn-ghost" onclick="restartQuickTest()">Refazer mini teste</button>
+      <button type="button" class="btn btn-ghost" onclick="resetQuickTest()">Fechar</button>
+    </div>
+  `;
+}
+
+function startQuickTest(key) {
+  if (!QUICK_AREA_TESTS[key]) return;
+  state.quickTestKey = key;
+  state.quickTestStep = 0;
+  state.quickTestScore = 0;
+  renderQuickTestOutput();
+}
+
+function answerQuickTest(key, optionIndex) {
+  const test = QUICK_AREA_TESTS[key];
+  const question = test?.questions[state.quickTestStep];
+  const option = question?.options?.[optionIndex];
+  if (!option) return;
+  state.quickTestScore += option.score || 0;
+  state.quickTestStep += 1;
+  renderQuickTestOutput();
+}
+
+function restartQuickTest() {
+  if (!state.quickTestKey) return;
+  startQuickTest(state.quickTestKey);
+}
+
+function resetQuickTest() {
+  state.quickTestKey = null;
+  state.quickTestStep = 0;
+  state.quickTestScore = 0;
+  renderQuickTestOutput();
 }
 
 // ============================================================
@@ -1457,8 +1579,11 @@ window.addEventListener('hashchange', () => {
 window.addEventListener('load', () => {
   initLgpdBanner();
   ensureAnalyticsLoaded();
+  renderGlobalProgress();
   renderAreaComparisons();
   renderHonestyFilters();
+  renderQuickTests();
+  renderQuickTestOutput();
   renderStructuredData();
   atualizarBadgeAnalytics();
   if (sessionStorage.getItem(EASY_READ_KEY) === '1') {

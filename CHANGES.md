@@ -27,6 +27,11 @@ O projeto não carrega fontes externas, CSS externo ou bibliotecas de terceiros 
 - Removidos os `max-width` que restringiam os parágrafos descritivos das seções e da comparação, para que o texto use toda a largura útil do container.
 - Tags e badges de FAQ/glossário foram rebaixadas visualmente: menos contraste, padding menor e posicionamento no rodapé do conteúdo para não competir com título, descrição e exemplo.
 - Atualizada a copy da home para refletir o estado atual do produto: 25 perguntas, 13 perfis vocacionais, glossário com 118 termos e resultado com caminho principal/secundário.
+- Adicionados na home:
+  - banner de progresso global
+  - comparador expandido com Segurança, QA, Produto e Suporte
+  - seção de mini testes por área
+- Adicionado CSS de impressão para exportação visual do resultado.
 
 ### `js/app.js`
 
@@ -38,6 +43,13 @@ O projeto não carrega fontes externas, CSS externo ou bibliotecas de terceiros 
 - Mantida a experiência de retomar o diagnóstico em andamento sem quebrar a URL nem o fluxo atual.
 - Ajustado o schema dinâmico para limitar o FAQ a 10 itens, alinhado com rich snippets.
 - Movidos os metadados de FAQ e glossário para o final dos cards renderizados, preservando a leitura natural do conteúdo principal.
+- Adicionado banner de progresso global com:
+  - status do diagnóstico
+  - fase aberta do roadmap
+  - total de itens marcados
+- Adicionados mini testes por área (`dados`, `segurança`, `produto` e `infra`) com resultado imediato na home.
+- Adicionado botão de exportação visual do resultado via impressão/PDF.
+- Ajustado o estado do roadmap aberto para persistir corretamente quando aberto a partir do resultado.
 
 ### `privacidade.html`
 
@@ -132,6 +144,49 @@ O projeto não carrega fontes externas, CSS externo ou bibliotecas de terceiros 
   - `qa`
   - `produto`
 - Ajustados metadados de cor e área para suportar os novos filtros e a área de Segurança no resultado.
+- Comparador de áreas expandido de 4 para 8 trilhas:
+  - front-end
+  - back-end
+  - dados
+  - infra/cloud
+  - segurança
+  - QA
+  - produto
+  - suporte
+- Adicionados 4 mini testes por área para triagem rápida na home.
+- Recursos específicos adicionados para:
+  - `seguranca`
+  - `qa_teste`
+  - `produto`
+  - `tech_lead`
+  - `developer_advocate`
+  - `suporte`
+- Mitos por especialidade adicionados:
+  - segurança
+  - dados
+  - DevOps
+  - produto
+  - suporte
+
+### `js/data/faq.js`
+
+- FAQ expandido de 16 para 34 perguntas.
+- Novos tópicos adicionados:
+  - QA
+  - base para segurança
+  - pentest
+  - SOC
+  - PM/PO
+  - suporte/help desk
+  - dados no início
+  - BI vs ciência de dados
+  - cloud
+  - DevOps júnior
+  - tech lead
+  - developer advocate
+  - entrevistas em dados e segurança
+  - salário em dados
+  - freelance como entrada
 
 ### `index.html`
 
