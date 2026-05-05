@@ -66,6 +66,7 @@ const SECTION_TITLES = {
   result: 'Resultado do Diagnóstico | devguia.dev',
 };
 let sectionTitleObserver = null;
+let roadmapJumpCollapseTimer = null;
 const DEFAULT_FAQ_TAGS_BY_CATEGORY = {
   fundamentos: ['iniciante', 'base'],
   ferramentas: ['iniciante', 'prática'],
@@ -297,6 +298,7 @@ function saveDiagnosticResult(scores, profileKey) {
   };
   localStorage.setItem(DIAGNOSTIC_RESULT_KEY, JSON.stringify(payload));
   renderHomeDiagnosticCta();
+  renderRoadmapJumpPill();
 }
 
 function renderRoadmapJumpPill() {
@@ -304,8 +306,70 @@ function renderRoadmapJumpPill() {
   if (!pill) return;
   const saved = loadStoredDiagnosticResult();
   const shouldShow = !!saved?.profileKey && state.currentScreen !== 'roadmap' && state.currentScreen !== 'quiz';
+  if (!shouldShow) collapseRoadmapJumpPill({ immediate: true });
   pill.hidden = !shouldShow;
   pill.classList.toggle('visible', shouldShow);
+}
+
+function deviceSupportsHover() {
+  return !!window.matchMedia && window.matchMedia('(hover: hover) and (pointer: fine)').matches;
+}
+
+function clearRoadmapJumpCollapseTimer() {
+  if (!roadmapJumpCollapseTimer) return;
+  window.clearTimeout(roadmapJumpCollapseTimer);
+  roadmapJumpCollapseTimer = null;
+}
+
+function expandRoadmapJumpPill() {
+  const pill = document.getElementById('roadmapJumpPill');
+  if (!pill || pill.hidden) return;
+  clearRoadmapJumpCollapseTimer();
+  pill.classList.add('expanded');
+}
+
+function collapseRoadmapJumpPill(options = {}) {
+  const pill = document.getElementById('roadmapJumpPill');
+  if (!pill) return;
+  clearRoadmapJumpCollapseTimer();
+  if (options.immediate) {
+    pill.classList.remove('expanded');
+    return;
+  }
+  roadmapJumpCollapseTimer = window.setTimeout(() => {
+    pill.classList.remove('expanded');
+    roadmapJumpCollapseTimer = null;
+  }, options.delay ?? 0);
+}
+
+function handleRoadmapJumpPillClick(event) {
+  const pill = document.getElementById('roadmapJumpPill');
+  if (!pill || pill.hidden) return;
+  if (!deviceSupportsHover() && !pill.classList.contains('expanded')) {
+    event.preventDefault();
+    expandRoadmapJumpPill();
+    collapseRoadmapJumpPill({ delay: 2500 });
+    return;
+  }
+  collapseRoadmapJumpPill({ immediate: true });
+  jumpToRoadmap();
+}
+
+function initRoadmapJumpPill() {
+  const pill = document.getElementById('roadmapJumpPill');
+  if (!pill || pill.dataset.ready === '1') return;
+  pill.dataset.ready = '1';
+  pill.addEventListener('click', handleRoadmapJumpPillClick);
+  pill.addEventListener('mouseenter', () => {
+    if (!deviceSupportsHover()) return;
+    expandRoadmapJumpPill();
+  });
+  pill.addEventListener('mouseleave', () => {
+    if (!deviceSupportsHover()) return;
+    collapseRoadmapJumpPill();
+  });
+  pill.addEventListener('focus', expandRoadmapJumpPill);
+  pill.addEventListener('blur', () => collapseRoadmapJumpPill());
 }
 
 function focusRoadmapScreen() {
@@ -833,6 +897,8 @@ function quizNext() {
   });
 
   if (state.currentQuestion < QUESTIONS.length - 1) {
+    // The quiz should move straight into the next block without any
+    // intermediate checkpoint card between sections.
     state.currentQuestion += 1;
     salvarProgresso();
     renderQuestion();
@@ -1855,6 +1921,7 @@ window.addEventListener('hashchange', () => {
 
 window.addEventListener('load', () => {
   initSectionTitleObserver();
+  initRoadmapJumpPill();
   renderGlobalProgress();
   renderAreaComparisons();
   renderHonestyFilters();

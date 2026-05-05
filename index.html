@@ -1920,10 +1920,8 @@
       .hero-diagnostic-actions { flex-direction: column; }
 
       .roadmap-jump-pill {
-        left: 16px;
-        right: 16px;
-        bottom: max(78px, calc(env(safe-area-inset-bottom) + 12px));
-        justify-content: center;
+        right: max(16px, env(safe-area-inset-right));
+        bottom: max(72px, calc(env(safe-area-inset-bottom) + 72px));
       }
 
       .recursos-body { grid-template-columns: 1fr; }
@@ -2035,6 +2033,10 @@
         right: max(24px, env(safe-area-inset-right));
         bottom: max(28px, env(safe-area-inset-bottom));
       }
+      .roadmap-jump-pill {
+        right: max(24px, env(safe-area-inset-right));
+        bottom: max(84px, calc(env(safe-area-inset-bottom) + 84px));
+      }
     }
 
     .next-step-card {
@@ -2072,13 +2074,16 @@
     .roadmap-jump-pill {
       position: fixed;
       right: max(16px, env(safe-area-inset-right));
-      bottom: max(74px, calc(env(safe-area-inset-bottom) + 16px));
+      bottom: max(72px, calc(env(safe-area-inset-bottom) + 72px));
       z-index: 94;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
-      min-height: 48px;
-      padding: 12px 16px;
+      justify-content: flex-start;
+      gap: 10px;
+      width: 46px;
+      height: 46px;
+      padding: 0;
+      overflow: hidden;
       border: 1px solid rgba(167, 139, 250, 0.48);
       border-radius: 999px;
       background: rgba(30, 26, 53, 0.96);
@@ -2090,29 +2095,43 @@
       opacity: 0;
       transform: translateY(18px);
       pointer-events: none;
-      transition: opacity 0.24s ease, transform 0.24s ease, background 0.15s ease;
+      transition: width 0.22s ease-out, padding 0.22s ease-out, opacity 0.24s ease, transform 0.24s ease, background 0.15s ease;
+      white-space: nowrap;
     }
     .roadmap-jump-pill.visible {
       opacity: 1;
       transform: translateY(0);
       pointer-events: auto;
     }
+    .roadmap-jump-pill.expanded {
+      width: min(220px, calc(100vw - 32px));
+      padding: 0 18px 0 11px;
+    }
     .roadmap-jump-pill:hover {
       background: rgba(39, 32, 71, 0.98);
-    }
-    .roadmap-jump-pill strong {
-      color: #ffffff;
-      font-weight: 700;
     }
     .roadmap-jump-pill-icon {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 24px;
-      height: 24px;
+      width: 46px;
+      height: 46px;
       border-radius: 50%;
       background: rgba(167, 139, 250, 0.18);
       flex-shrink: 0;
+      font-size: 19px;
+      font-weight: 800;
+    }
+    .roadmap-jump-pill-label {
+      opacity: 0;
+      transform: translateX(6px);
+      transition: opacity 0.18s ease-out, transform 0.22s ease-out;
+      pointer-events: none;
+      color: #ffffff;
+    }
+    .roadmap-jump-pill.expanded .roadmap-jump-pill-label {
+      opacity: 1;
+      transform: translateX(0);
     }
 
     .quiz-page-title {
@@ -2162,7 +2181,8 @@
       .result-ctas,
       .recursos-section,
       .next-step-card,
-      #globalProgress {
+      #globalProgress,
+      .roadmap-jump-pill {
         display: none !important;
       }
       .screen {
@@ -2492,12 +2512,11 @@
   type="button"
   class="roadmap-jump-pill"
   id="roadmapJumpPill"
-  onclick="jumpToRoadmap()"
-  aria-label="Ir para o roadmap"
+  aria-label="Ver meu roadmap"
   hidden
 >
   <span class="roadmap-jump-pill-icon" aria-hidden="true">✓</span>
-  <span><strong>Diagnóstico feito</strong> · Ver roadmap →</span>
+  <span class="roadmap-jump-pill-label">Ver meu roadmap →</span>
 </button>
 
 <script src="js/data/questions.js"></script>
