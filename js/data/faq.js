@@ -142,7 +142,7 @@ const FAQS = [
   {
     id: 'f-pentest', cat: 'carreira',
     q: 'Pentest é só "hackear coisas" o dia inteiro?',
-    answer: `<p>Não. Pentest real mistura escopo, autorização formal, coleta de evidência, relatório e comunicação com cliente ou time interno. A parte "quebrar" existe, mas o valor profissional está em mostrar risco real, reproduzir com método e orientar correção.</p>
+    answer: `<p>Pentest real mistura escopo, autorização formal, coleta de evidência, relatório e comunicação com cliente ou time interno. A parte "quebrar" existe, mas o valor profissional está em mostrar risco real, reproduzir com método e orientar correção.</p>
     <p>Muita gente entra na área pela fantasia ofensiva e descobre tarde que a rotina envolve documentação, limite legal e muito trabalho repetitivo. Quem gosta só da imagem de hacker costuma se frustrar; quem gosta de investigação disciplinada tende a durar mais.</p>
     <div class="dica"><strong>Dica:</strong> Se você se interessa por pentest, treine escrita de relatório e reprodução limpa do achado. Vulnerabilidade sem explicação útil vale pouco para empresa séria.</div>`,
   },
@@ -163,7 +163,7 @@ const FAQS = [
   {
     id: 'f-po-pm', cat: 'carreira',
     q: 'Qual a diferença entre PM e PO na prática?',
-    answer: `<p>Depende da empresa, mas em geral PM olha mais para problema, direção, hipótese e resultado; PO costuma ficar mais perto da operação do backlog, refinamento e fluxo do time. Em muitos lugares os nomes se misturam, então o título sozinho diz pouco.</p>
+    answer: `<p>Na maioria das empresas, PM olha mais para problema, direção, hipótese e resultado; PO costuma ficar mais perto da operação do backlog, refinamento e fluxo do time. Em muitos lugares os nomes se misturam, então o título sozinho diz pouco.</p>
     <p>O melhor critério é observar responsabilidade real: quem define prioridade? quem conversa com usuário? quem responde por métrica? quem organiza entrega? Essa leitura vale mais do que decorar uma distinção de livro que a empresa pode nem usar.</p>
     <div class="dica"><strong>Dica:</strong> Em vaga de produto, leia a descrição com lupa. "PM" pode ser quase discovery puro ou quase operação de backlog, e isso muda completamente a rotina.</div>`,
   },
@@ -184,7 +184,7 @@ const FAQS = [
   {
     id: 'f-dados-inicio', cat: 'carreira',
     q: 'Para começar em dados, preciso ir direto para IA?',
-    answer: `<p>Não. Na maioria dos casos, ir direto para IA é a forma mais rápida de parecer que está estudando muito e construindo pouco. O começo saudável em dados passa por SQL, limpeza, modelagem simples, leitura crítica de métrica, dashboard e estatística aplicada.</p>
+    answer: `<p>Ir direto para IA costuma ser a forma mais rápida de parecer que você está estudando muito e construindo pouco. O começo saudável em dados passa por SQL, limpeza, modelagem simples, leitura crítica de métrica, dashboard e estatística aplicada.</p>
     <p>Machine Learning e IA generativa fazem mais sentido quando você já sabe formular pergunta, tratar dado ruim e validar resultado. Sem isso, o modelo vira caixa preta que impressiona no LinkedIn e falha no primeiro problema de negócio menos óbvio.</p>
     <div class="dica"><strong>Dica:</strong> Se quiser uma ordem forte: SQL → análise exploratória → visualização → estatística → automação → só depois ML/IA.</div>`,
   },
@@ -198,7 +198,7 @@ const FAQS = [
   {
     id: 'f-cloud', cat: 'ferramentas',
     q: 'Preciso escolher AWS, Azure ou GCP logo no começo?',
-    answer: `<p>Não. Primeiro escolha uma e entenda bem os conceitos que se repetem: rede, compute, storage, IAM, logs, banco gerenciado, balanceador. Trocar de provedor depois é muito mais fácil quando você domina a lógica por baixo do que quando decorou nome de serviço.</p>
+    answer: `<p>Primeiro escolha uma e entenda bem os conceitos que se repetem: rede, compute, storage, IAM, logs, banco gerenciado e balanceador. Trocar de provedor depois é muito mais fácil quando você domina a lógica por baixo do que quando decorou nome de serviço.</p>
     <p>Iniciante que tenta estudar as três ao mesmo tempo quase sempre termina confundindo produto, painel e nomenclatura. O mercado valoriza mais profundidade útil em uma nuvem do que comparação rasa das três em paralelo.</p>
     <div class="dica"><strong>Dica:</strong> Se não tiver contexto melhor, AWS tende a ser aposta segura no Brasil por volume de material e mercado. Mas o critério principal é consistência no estudo.</div>`,
   },
@@ -212,7 +212,7 @@ const FAQS = [
   {
     id: 'f-techlead', cat: 'carreira',
     q: 'Tech lead é gestor ou desenvolvedor sênior?',
-    answer: `<p>É uma mistura que varia por empresa. Em geral, tech lead continua sendo uma referência técnica forte, mas assume também coordenação, direcionamento arquitetural, revisão de decisão e destrava de time. Não é só "dev mais antigo" nem "gerente com GitHub".</p>
+    answer: `<p>Tech lead costuma continuar como referência técnica forte, mas também assume coordenação, direcionamento arquitetural, revisão de decisão e destrava de time. Não é só "dev mais antigo" nem "gerente com GitHub".</p>
     <p>O risco é virar lead sem profundidade suficiente: aí a pessoa fica presa em reunião, perde a mão do código e ainda não tem repertório para orientar decisão difícil. Liderança técnica boa nasce de base real, clareza de comunicação e leitura de contexto.</p>
     <div class="dica"><strong>Dica:</strong> Antes de mirar o título, treine escrita técnica, review, mentoria e negociação de escopo. O cargo costuma ser consequência dessas habilidades.</div>`,
   },
