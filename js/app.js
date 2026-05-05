@@ -36,7 +36,6 @@ const {
   EASY_READ_KEY,
   APP_STATE_KEY,
   CHECKLIST_KEY,
-  FREE_FILTER_KEY,
   DIAGNOSTIC_RESULT_KEY,
   CAT_TOOLTIPS,
   CAT_COLORS,
@@ -49,8 +48,6 @@ const {
   HONESTY_FILTERS,
   FAQ_TAGS,
 } = window.DEVGUIA_DATA.catalog;
-
-state.freeOnly = localStorage.getItem(FREE_FILTER_KEY) === '1';
 state.checklist = {};
 state.resultHash = '';
 const QUIZ_TTL = 7 * 24 * 60 * 60 * 1000;
@@ -666,7 +663,6 @@ function saveAppState() {
     mitosFilter: state.mitosFilter,
     openMitoId: state.openMitoId,
     recursosTab: state.recursosTab,
-    freeOnly: state.freeOnly,
     resultHash: state.resultHash || (location.hash.startsWith('#result=') ? location.hash : ''),
   };
   localStorage.setItem(APP_STATE_KEY, JSON.stringify(payload));
@@ -678,7 +674,6 @@ function saveAppState() {
 function restoreAppState() {
   const saved = loadAppState();
   state.checklist = loadChecklistState();
-  if (typeof saved.freeOnly === 'boolean') state.freeOnly = saved.freeOnly;
   if (saved.faqFilter) state.faqFilter = saved.faqFilter;
   if (saved.openFaqId) state.openFaqId = saved.openFaqId;
   if (saved.openPhaseId) state.openPhaseId = saved.openPhaseId;
@@ -1043,17 +1038,11 @@ function flashButtonState(buttonId, nextLabel, revertLabel, timeout = 2000) {
   }, timeout);
 }
 
-function isResourceFree(item, tabKey) {
-  if (typeof item.free === 'boolean') return item.free;
-  if (tabKey !== 'livros') return true;
-  return /gratuit|free|aberto|open|online/i.test(`${item.nome} ${item.desc || ''}`);
-}
-
 function buildRecursoCardsHtml(profile, tabKey) {
   const data = RECURSOS[profile.key] || RECURSOS[profile.resourceBase] || { livros: [], sites: [], comunidades: [] };
-  const items = (data[tabKey] || []).filter(item => !state.freeOnly || isResourceFree(item, tabKey));
+  const items = data[tabKey] || [];
   return items.map(item => {
-    const badge = `<div class="recurso-flag">${isResourceFree(item, tabKey) ? 'Grátis' : 'Pago'}</div>`;
+    const badge = `<div class="recurso-flag">${item.free === false ? 'Pago' : 'Grátis'}</div>`;
     if (item.url) return `<a href="${item.url}" target="_blank" rel="noopener noreferrer" class="recurso-card">${badge}<div class="recurso-nome">${item.nome}</div>${item.autor ? `<div class="recurso-autor">${item.autor}</div>` : ''}<div class="recurso-desc">${item.desc}</div></a>`;
     return `<div class="recurso-card">${badge}<div class="recurso-nome">${item.nome}</div>${item.autor ? `<div class="recurso-autor">${item.autor}</div>` : ''}<div class="recurso-desc">${item.desc}</div></div>`;
   }).join('');
@@ -1065,24 +1054,8 @@ function renderRecursos(profile, activeTab = 'livros') {
     const isActive = activeTab === t.key;
     return `<button type="button" class="recursos-tab${isActive ? ' active' : ''}" role="tab" id="rec-tab-${t.key}" aria-selected="${isActive ? 'true' : 'false'}" aria-controls="recursos-panel" tabindex="${isActive ? '0' : '-1'}" onclick="setRecursosTab('${t.key}')">${t.label}</button>`;
   }).join('');
-  const cards = buildRecursoCardsHtml(profile, activeTab) || '<div class="faq-empty" style="padding:24px">Nenhum recurso visível com o filtro atual.</div>';
-  return `<div class="recursos-section"><div class="recursos-header"><span class="recursos-title">Recursos para o seu perfil</span><div class="recursos-controls"><button type="button" class="budget-toggle${state.freeOnly ? ' active' : ''}" id="freeOnlyToggleResult" onclick="toggleFreeOnly()">${state.freeOnly ? 'Só gratuitos: ligado' : 'Só gratuitos'}</button><div class="recursos-tabs" role="tablist" aria-label="Recursos sugeridos">${tabsHtml}</div></div></div><div class="recursos-body" role="tabpanel" id="recursos-panel" aria-labelledby="rec-tab-${activeTab}">${cards}</div></div>`;
-}
-
-function syncFreeOnlyUi() {
-  document.querySelectorAll('.budget-toggle').forEach(btn => {
-    btn.classList.toggle('active', state.freeOnly);
-    btn.textContent = state.freeOnly ? 'Só gratuitos: ligado' : 'Só gratuitos';
-  });
-}
-
-function toggleFreeOnly() {
-  state.freeOnly = !state.freeOnly;
-  localStorage.setItem(FREE_FILTER_KEY, state.freeOnly ? '1' : '0');
-  if (state.currentScreen === 'roadmap') renderRoadmap();
-  if (state.currentScreen === 'result' && state.profileKey) showResult(state.scores, state.profileKey, { restoreState: true });
-  syncFreeOnlyUi();
-  saveAppState();
+  const cards = buildRecursoCardsHtml(profile, activeTab) || '<div class="faq-empty" style="padding:24px">Nenhum recurso cadastrado para esta aba.</div>';
+  return `<div class="recursos-section"><div class="recursos-header"><span class="recursos-title">Recursos para o seu perfil</span><div class="recursos-controls"><div class="recursos-tabs" role="tablist" aria-label="Recursos sugeridos">${tabsHtml}</div></div></div><div class="recursos-body" role="tabpanel" id="recursos-panel" aria-labelledby="rec-tab-${activeTab}">${cards}</div></div>`;
 }
 
 function showResult(scores, profileKey, options = {}) {
@@ -1243,7 +1216,6 @@ function setRecursosTab(tab) {
     btn.setAttribute('aria-selected', isSel ? 'true' : 'false');
     btn.setAttribute('tabindex', isSel ? '0' : '-1');
   });
-  syncFreeOnlyUi();
   saveAppState();
 }
 
@@ -1402,7 +1374,6 @@ function renderRoadmap() {
     const completed = phase.skills.filter((skill, skillIndex) => state.checklist[getChecklistKey(phase.id, skillIndex)]).length;
     const progress = `${completed}/${phase.skills.length}`;
     const visibleResources = (phase.resources || [])
-      .filter(item => !state.freeOnly || item.free !== false)
       .slice(0, 3);
     const isSpotlight = state.spotlightPhaseId === phase.id || roadmapContext?.phaseId === phase.id;
     return `
@@ -1470,12 +1441,12 @@ function renderRoadmap() {
             </details>
           ` : ''}
           <div class="phase-resource-wrap">
-            <div class="phase-resource-head">Recursos sugeridos${state.freeOnly ? ' · modo sem dinheiro' : ''}</div>
+            <div class="phase-resource-head">Recursos sugeridos</div>
             <div class="phase-resource-grid">
               ${visibleResources.length ? visibleResources.map(item => item.url
                 ? `<a class="phase-resource-card" href="${item.url}" target="_blank" rel="noopener noreferrer"><span class="phase-resource-badge">${item.free === false ? 'Pago' : 'Grátis'}</span>${item.lang === 'pt' ? '<span class="phase-resource-badge">PT-BR</span>' : ''}<p class="phase-resource-curation">Se você aprender só uma coisa sobre ${item.topic || phase.title.toLowerCase()}, começa com <strong>${item.name}</strong>.</p><p>${item.desc}</p></a>`
                 : `<div class="phase-resource-card"><span class="phase-resource-badge">${item.free === false ? 'Pago' : 'Grátis'}</span>${item.lang === 'pt' ? '<span class="phase-resource-badge">PT-BR</span>' : ''}<p class="phase-resource-curation">Se você aprender só uma coisa sobre ${item.topic || phase.title.toLowerCase()}, começa com <strong>${item.name}</strong>.</p><p>${item.desc}</p></div>`
-              ).join('') : `<div class="phase-resource-empty">Nenhum recurso gratuito visível nesta fase com o filtro atual.</div>`}
+              ).join('') : `<div class="phase-resource-empty">Nenhum recurso cadastrado para esta fase.</div>`}
             </div>
           </div>
         </div>
@@ -1483,7 +1454,6 @@ function renderRoadmap() {
     </div>
   `; }).join('');
   document.querySelectorAll('.phase-item').forEach(item => item.classList.toggle('open', item.id === `phase-${state.openPhaseId}`));
-  syncFreeOnlyUi();
 }
 
 function togglePhase(id) {
@@ -1942,7 +1912,6 @@ window.addEventListener('load', () => {
   const resultadoParam = getQueryResultParam();
   if (resultadoParam && showResultFromQueryParam(resultadoParam)) {
     syncSugestaoContext();
-    syncFreeOnlyUi();
     saveAppState();
     return;
   }
@@ -1966,7 +1935,6 @@ window.addEventListener('load', () => {
     }
   }
   syncSugestaoContext();
-  syncFreeOnlyUi();
   setDocumentTitleForScreen(state.currentScreen);
   saveAppState();
 });

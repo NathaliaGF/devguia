@@ -38,6 +38,8 @@
       --text:      #e8edf5;
       --text2:     #a1aec4;
       --text3:     #6f7d95;
+      --circle-button-size: 48px;
+      --circle-icon-size: 20px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -1531,24 +1533,6 @@
       justify-content: flex-end;
     }
 
-    .budget-toggle {
-      background: transparent;
-      border: 1px solid var(--border2);
-      color: var(--text2);
-      font-size: 12px;
-      padding: 7px 12px;
-      border-radius: 999px;
-      cursor: pointer;
-      font-family: inherit;
-      min-height: 36px;
-    }
-
-    .budget-toggle.active {
-      color: var(--teal);
-      border-color: var(--teal-dim);
-      background: var(--teal-bg);
-    }
-
     .recursos-tab {
       background: transparent;
       border: 1px solid transparent;
@@ -2003,8 +1987,8 @@
       right: max(16px, env(safe-area-inset-right));
       bottom: max(16px, env(safe-area-inset-bottom));
       z-index: 95;
-      width: 46px;
-      height: 46px;
+      width: var(--circle-button-size);
+      height: var(--circle-button-size);
       border-radius: 50%;
       border: 1px solid var(--border2);
       background: var(--bg3);
@@ -2013,10 +1997,22 @@
       display: none;
       align-items: center;
       justify-content: center;
-      font-size: 20px;
-      line-height: 1;
       box-shadow: 0 6px 20px rgba(0, 0, 0, 0.35);
       transition: background 0.15s, border-color 0.15s, color 0.15s;
+    }
+    .back-to-top-glyph,
+    .roadmap-jump-pill-glyph {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: var(--circle-icon-size);
+      height: var(--circle-icon-size);
+      font-size: var(--circle-icon-size);
+      line-height: 1;
+      flex-shrink: 0;
+    }
+    .back-to-top-glyph {
+      transform: translateY(-1px);
     }
     .back-to-top.visible { display: flex; }
     .back-to-top:hover {
@@ -2080,8 +2076,8 @@
       align-items: center;
       justify-content: flex-start;
       gap: 10px;
-      width: 46px;
-      height: 46px;
+      width: var(--circle-button-size);
+      height: var(--circle-button-size);
       padding: 0;
       overflow: hidden;
       border: 1px solid rgba(167, 139, 250, 0.48);
@@ -2114,13 +2110,11 @@
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      width: 46px;
-      height: 46px;
+      width: var(--circle-button-size);
+      height: var(--circle-button-size);
       border-radius: 50%;
       background: rgba(167, 139, 250, 0.18);
       flex-shrink: 0;
-      font-size: 19px;
-      font-weight: 800;
     }
     .roadmap-jump-pill-label {
       opacity: 0;
@@ -2367,7 +2361,6 @@
         <h2>Roadmap</h2>
         <p>Um caminho realista em 4 fases, com o porquê de cada habilidade, não só o quê.</p>
       </div>
-      <button type="button" class="budget-toggle" id="freeOnlyToggleRoadmap" onclick="toggleFreeOnly()" style="margin-bottom:16px;">Só gratuitos</button>
       <div class="roadmap-phases" id="roadmapPhases">
         <!-- rendered by JS -->
       </div>
@@ -2507,7 +2500,7 @@
 
 </main>
 
-<button type="button" class="back-to-top" id="backToTop" onclick="scrollToMainTop()" aria-label="Voltar ao topo">↑</button>
+<button type="button" class="back-to-top" id="backToTop" onclick="scrollToMainTop()" aria-label="Voltar ao topo"><span class="back-to-top-glyph" aria-hidden="true">↑</span></button>
 <button
   type="button"
   class="roadmap-jump-pill"
@@ -2515,7 +2508,7 @@
   aria-label="Ver meu roadmap"
   hidden
 >
-  <span class="roadmap-jump-pill-icon" aria-hidden="true">✓</span>
+  <span class="roadmap-jump-pill-icon" aria-hidden="true"><span class="roadmap-jump-pill-glyph">✓</span></span>
   <span class="roadmap-jump-pill-label">Ver meu roadmap →</span>
 </button>
 
