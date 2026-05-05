@@ -19,6 +19,7 @@ const state = {
   areaScores: [],
   pathScores: [],
   suggestedSubprofiles: [],
+  spotlightPhaseId: null,
   quickTestKey: null,
   quickTestStep: 0,
   quickTestScore: 0,
@@ -37,6 +38,7 @@ const {
   APP_STATE_KEY,
   CHECKLIST_KEY,
   FREE_FILTER_KEY,
+  DIAGNOSTIC_RESULT_KEY,
   CAT_TOOLTIPS,
   CAT_COLORS,
   AREAS_INFO,
@@ -54,7 +56,19 @@ state.checklist = {};
 state.resultHash = '';
 const QUIZ_TTL = 7 * 24 * 60 * 60 * 1000;
 const ANALYTICS_SCRIPT_ID = 'goatcounter-script';
+const DEFAULT_TITLE = 'devguia.dev — Guia vocacional para TI';
+const SECTION_TITLES = {
+  home: DEFAULT_TITLE,
+  quiz: 'Diagnóstico Vocacional Tech | devguia.dev',
+  roadmap: 'Roadmap por Fase | devguia.dev',
+  faq: 'FAQ de TI | devguia.dev',
+  glossario: 'Glossário de TI | devguia.dev',
+  mitos: 'Mitos e Verdades sobre TI | devguia.dev',
+  testes: 'Testes por Área | devguia.dev',
+  result: 'Resultado do Diagnóstico | devguia.dev',
+};
 let analyticsLoaded = false;
+let sectionTitleObserver = null;
 
 function normalizeText(value) {
   return String(value || '')
@@ -75,21 +89,93 @@ function getCompletedChecklistCount() {
 function renderGlobalProgress() {
   const container = document.getElementById('globalProgress');
   if (!container) return;
-  const quizDone = !!state.profileKey || !!state.resultHash;
-  const completed = getCompletedChecklistCount();
-  if (!quizDone && !state.openPhaseId && completed === 0) {
-    container.innerHTML = '';
+  container.innerHTML = '';
+}
+
+function stripHtml(html) {
+  const temp = document.createElement('div');
+  temp.innerHTML = html || '';
+  return temp.textContent.replace(/\s+/g, ' ').trim();
+}
+
+function setDocumentTitleForScreen(screen) {
+  document.title = SECTION_TITLES[screen] || DEFAULT_TITLE;
+}
+
+function initSectionTitleObserver() {
+  if (!('IntersectionObserver' in window)) {
+    setDocumentTitleForScreen(state.currentScreen);
     return;
   }
-  const openPhase = state.openPhaseId ? PHASES.find(phase => phase.id === state.openPhaseId)?.title || state.openPhaseId : 'nenhuma fase aberta';
-  container.innerHTML = `
-    <div class="global-progress-card">
-      <span class="global-progress-title">Seu progresso</span>
-      <span class="global-progress-chip">${quizDone ? 'Diagnóstico concluído' : 'Diagnóstico ainda não concluído'}</span>
-      <span class="global-progress-chip">Fase aberta: ${openPhase}</span>
-      <span class="global-progress-chip">${completed} itens marcados no roadmap</span>
-    </div>
-  `;
+  sectionTitleObserver = new IntersectionObserver(entries => {
+    const visible = entries
+      .filter(entry => entry.isIntersecting)
+      .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
+    if (!visible) return;
+    const screen = visible.target.id.replace(/^screen-/, '');
+    setDocumentTitleForScreen(screen);
+  }, {
+    root: null,
+    threshold: [0.45, 0.7],
+  });
+  document.querySelectorAll('.screen').forEach(section => sectionTitleObserver.observe(section));
+}
+
+function loadStoredDiagnosticResult() {
+  try {
+    return JSON.parse(localStorage.getItem(DIAGNOSTIC_RESULT_KEY) || 'null');
+  } catch {
+    return null;
+  }
+}
+
+function getRoadmapProfileContext() {
+  const saved = loadStoredDiagnosticResult();
+  if (saved?.profileKey && PROFILES[saved.profileKey]) {
+    return {
+      profileKey: saved.profileKey,
+      profile: PROFILES[saved.profileKey],
+      phaseId: saved.phaseId || PROFILE_ROADMAP_PHASE[saved.profileKey] || 'fase1',
+    };
+  }
+  if (state.profileKey && PROFILES[state.profileKey]) {
+    return {
+      profileKey: state.profileKey,
+      profile: PROFILES[state.profileKey],
+      phaseId: PROFILE_ROADMAP_PHASE[state.profileKey] || 'fase1',
+    };
+  }
+  return null;
+}
+
+function saveDiagnosticResult(scores, profileKey) {
+  const pathScores = getPathScores(scores);
+  const primaryPath = pathScores[0]?.[0] || PROFILES[profileKey]?.primaryPath || 'codigo';
+  const secondaryPath = pathScores[1]?.[0] || PROFILES[profileKey]?.defaultSecondaryPath || 'dados';
+  const payload = {
+    profileKey,
+    scores,
+    primaryPath,
+    secondaryPath,
+    suggestedSubprofiles: getSuggestedSubprofiles(scores, profileKey, primaryPath),
+    phaseId: PROFILE_ROADMAP_PHASE[profileKey] || 'fase1',
+    savedAt: Date.now(),
+  };
+  localStorage.setItem(DIAGNOSTIC_RESULT_KEY, JSON.stringify(payload));
+}
+
+function renderRoadmapJumpPill() {
+  const pill = document.getElementById('roadmapJumpPill');
+  if (!pill) return;
+  const saved = loadStoredDiagnosticResult();
+  const shouldShow = !!saved?.profileKey && state.currentScreen !== 'roadmap' && state.currentScreen !== 'quiz';
+  pill.hidden = !shouldShow;
+  pill.classList.toggle('visible', shouldShow);
+}
+
+function focusRoadmapScreen() {
+  const section = document.getElementById('screen-roadmap');
+  if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 const PATH_INFO = {
@@ -206,7 +292,9 @@ function go(destino, forceDirection = null, options = {}) {
   if (destino === 'testes') { renderQuickTests(); renderQuickTestOutput(); }
   if (options.forceTop) window.scrollTo(0, 0);
   if (!options.skipHashSync) syncHashForNav(destino, { hashSuffix: options.hashSuffix || null });
+  setDocumentTitleForScreen(destino);
   saveAppState();
+  renderRoadmapJumpPill();
   if (destino !== 'result') requestAnimationFrame(() => focusScreenMain(destino));
 }
 
@@ -275,6 +363,18 @@ function openRoadmapPhase(phaseId, options = {}) {
   };
   if (options.skipNav) setTimeout(open, 30);
   else setTimeout(open, 60);
+}
+
+function jumpToRoadmap(phaseId = null) {
+  const context = getRoadmapProfileContext();
+  const targetPhase = phaseId || context?.phaseId || 'fase1';
+  state.spotlightPhaseId = targetPhase;
+  go('roadmap', 'forward');
+  renderRoadmap();
+  setTimeout(() => {
+    focusRoadmapScreen();
+    openRoadmapPhase(targetPhase, { skipNav: true });
+  }, 70);
 }
 
 function scrollToMainTop() {
@@ -390,6 +490,7 @@ function saveAppState() {
   };
   localStorage.setItem(APP_STATE_KEY, JSON.stringify(payload));
   renderGlobalProgress();
+  renderRoadmapJumpPill();
 }
 
 function restoreAppState() {
@@ -829,11 +930,13 @@ function showResult(scores, profileKey, options = {}) {
   const primaryPath = state.pathScores[0]?.[0] || profile.primaryPath || 'codigo';
   const secondaryPath = state.pathScores[1]?.[0] || profile.defaultSecondaryPath || 'dados';
   state.suggestedSubprofiles = getSuggestedSubprofiles(scores, profileKey, primaryPath);
+  state.spotlightPhaseId = PROFILE_ROADMAP_PHASE[profileKey] || 'fase1';
   const perfilAnterior = options.fromShare ? null : sessionStorage.getItem('ultimo_perfil');
   if (!options.fromShare) sessionStorage.setItem('ultimo_perfil', profileKey);
   const isRefazendo = !!perfilAnterior;
   const mesmoPeril = perfilAnterior === profileKey;
   if (!options.skipTrack) trackDiagnostico(profileKey);
+  if (!options.fromShare) saveDiagnosticResult(scores, profileKey);
 
   const bars = [
     { label: 'Raciocínio lógico', val: Math.min(100, Math.round(((get('logica') + get('analitico')) / 14) * 100)), color: 'var(--blue)' },
@@ -873,11 +976,11 @@ function showResult(scores, profileKey, options = {}) {
   const hint = PROFILE_ROADMAP_HINT[profileKey] || 'Use o roadmap em fases e o FAQ quando um conceito travar. Cada habilidade tem o porquê explicado.';
   const nextStepCard = `
     <div class="next-step-card">
-      <h3>Seu próximo passo neste site</h3>
-      <p>${hint}</p>
-      <p class="next-step-meta">Sugerimos abrir agora: <strong>${phaseMeta ? phaseMeta.title : 'Fase 1: Fundamentos'}</strong>. Nos cards do roadmap, use “ver no FAQ →” quando quiser aprofundar.</p>
+      <h3>Agora que você conhece seu perfil, comece por aqui →</h3>
+      <p>Seu perfil é <strong style="color:${profile.color}">${profile.name}</strong>. ${hint}</p>
+      <p class="next-step-meta">Primeiro movimento recomendado: <strong>${phaseMeta ? phaseMeta.title : 'Fase 1: Fundamentos'}</strong>. Ao abrir o roadmap, essa fase fica destacada para você.</p>
       <div class="next-step-actions">
-        <button type="button" class="btn btn-primary" onclick="openRoadmapPhase('${phaseId}')">Abrir esta fase no roadmap</button>
+        <button type="button" class="btn btn-primary" onclick="jumpToRoadmap('${phaseId}')">Ir para o roadmap</button>
         <button type="button" class="btn btn-ghost" onclick="navigate('faq')">Ir ao FAQ</button>
       </div>
     </div>`;
@@ -905,7 +1008,7 @@ function showResult(scores, profileKey, options = {}) {
     <div class="result-steps"><h3>✓ Próximos passos</h3><ul>${stepsHtml}</ul></div>
     ${renderRecursos(profile, state.recursosTab)}
     <div class="result-ctas">
-      <button class="btn btn-primary" onclick="go('roadmap', 'forward')">Ver Roadmap</button>
+      <button class="btn btn-primary" onclick="jumpToRoadmap('${phaseId}')">Ver Roadmap</button>
       <button class="btn btn-ghost" id="copyLinkBtn" onclick="copiarLink()">⛓ Copiar link</button>
       <button class="btn btn-ghost" id="copyResultBtn" onclick="copiarResultado()">📋 Copiar resultado em TXT</button>
       <button class="btn btn-ghost" onclick="printResult()">🖨 Exportar visual</button>
@@ -1090,12 +1193,16 @@ function resetQuickTest() {
 function renderRoadmap() {
   const container = document.getElementById('roadmapPhases');
   if (!container) return;
+  const roadmapContext = getRoadmapProfileContext();
   container.innerHTML = PHASES.map(phase => {
     const completed = phase.skills.filter((skill, skillIndex) => state.checklist[getChecklistKey(phase.id, skillIndex)]).length;
     const progress = `${completed}/${phase.skills.length}`;
-    const visibleResources = (phase.resources || []).filter(item => !state.freeOnly || item.free !== false);
+    const visibleResources = (phase.resources || [])
+      .filter(item => !state.freeOnly || item.free !== false)
+      .slice(0, 3);
+    const isSpotlight = state.spotlightPhaseId === phase.id || roadmapContext?.phaseId === phase.id;
     return `
-    <div class="phase-item" id="phase-${phase.id}">
+    <div class="phase-item${isSpotlight ? ' phase-spotlight' : ''}" id="phase-${phase.id}">
       <button
         class="phase-header"
         onclick="togglePhase('${phase.id}')"
@@ -1107,6 +1214,10 @@ function renderRoadmap() {
           <div>
             <div class="phase-title">${phase.title}</div>
             <div class="phase-duration">${phase.duration} · progresso ${progress}</div>
+            <div class="phase-meta-row">
+              <span class="phase-time-chip">${phase.timeEstimate}</span>
+              ${isSpotlight ? '<span class="phase-spotlight-chip">Comece por aqui</span>' : ''}
+            </div>
           </div>
         </div>
         <span class="phase-chevron" aria-hidden="true">▾</span>
@@ -1122,16 +1233,31 @@ function renderRoadmap() {
                 </label>
                 <h4>${skill.name}</h4>
               </div>
-              <p class="phase-skill-why">"${skill.why}"</p>
+              <p class="phase-skill-why">${skill.why}</p>
+              ${(roadmapContext && (skill.highlights || []).includes(roadmapContext.profileKey))
+                ? `<div class="phase-skill-tags"><span class="phase-profile-tag">⭐ Essencial para ${roadmapContext.profile.name}</span></div>`
+                : ''}
               ${skill.faqId ? `<button class="btn-faq-link" onclick="openFaqItem('${skill.faqId}')">ver no FAQ →</button>` : ''}
             </div>
           `).join('')}
+          <div class="phase-detail-block">
+            <div class="phase-detail-title">Você está pronto para a próxima fase quando conseguir...</div>
+            <ul class="phase-ready-list">
+              ${(phase.readiness || []).map(item => `<li>${item}</li>`).join('')}
+            </ul>
+          </div>
+          <details class="phase-pitfalls">
+            <summary>⚠️ Armadilhas comuns desta fase</summary>
+            <div class="phase-pitfalls-body">
+              <ul>${(phase.pitfalls || []).map(item => `<li>${item}</li>`).join('')}</ul>
+            </div>
+          </details>
           <div class="phase-resource-wrap">
             <div class="phase-resource-head">Recursos sugeridos${state.freeOnly ? ' · modo sem dinheiro' : ''}</div>
             <div class="phase-resource-grid">
               ${visibleResources.length ? visibleResources.map(item => item.url
-                ? `<a class="phase-resource-card" href="${item.url}" target="_blank" rel="noopener noreferrer"><span class="phase-resource-badge">${item.free === false ? 'Pago' : 'Grátis'}</span><strong>${item.name}</strong><p>${item.desc}</p></a>`
-                : `<div class="phase-resource-card"><span class="phase-resource-badge">${item.free === false ? 'Pago' : 'Grátis'}</span><strong>${item.name}</strong><p>${item.desc}</p></div>`
+                ? `<a class="phase-resource-card" href="${item.url}" target="_blank" rel="noopener noreferrer"><span class="phase-resource-badge">${item.free === false ? 'Pago' : 'Grátis'}</span><p class="phase-resource-curation">Se você aprender só uma coisa sobre ${item.topic || phase.title.toLowerCase()}, começa com <strong>${item.name}</strong>.</p><p>${item.desc}</p></a>`
+                : `<div class="phase-resource-card"><span class="phase-resource-badge">${item.free === false ? 'Pago' : 'Grátis'}</span><p class="phase-resource-curation">Se você aprender só uma coisa sobre ${item.topic || phase.title.toLowerCase()}, começa com <strong>${item.name}</strong>.</p><p>${item.desc}</p></div>`
               ).join('') : `<div class="phase-resource-empty">Nenhum recurso gratuito visível nesta fase com o filtro atual.</div>`}
             </div>
           </div>
@@ -1498,31 +1624,26 @@ function renderMitos() {
 }
 
 function renderStructuredData() {
-  const jsonLdEl = document.getElementById('structured-data');
-  if (!jsonLdEl) return;
-  const faqEntities = FAQS.slice(0, 10).map(item => ({
+  let jsonLdEl = document.getElementById('structured-data');
+  if (!jsonLdEl) {
+    jsonLdEl = document.createElement('script');
+    jsonLdEl.type = 'application/ld+json';
+    jsonLdEl.id = 'structured-data';
+    document.head.appendChild(jsonLdEl);
+  }
+  const faqEntities = FAQS.map(item => ({
     '@type': 'Question',
     name: item.q,
     acceptedAnswer: {
       '@type': 'Answer',
-      text: item.answer.replace(/<[^>]+>/g, ' ').replace(/\s+/g, ' ').trim(),
+      text: stripHtml(item.answer),
     },
   }));
-  const payload = [
-    {
-      '@context': 'https://schema.org',
-      '@type': 'WebSite',
-      name: 'devguia.dev',
-      url: 'https://nathaliagf.github.io/devguia/',
-      inLanguage: 'pt-BR',
-      description: 'Guia vocacional para TI com diagnóstico, roadmap, FAQ, glossário e mitos.',
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'FAQPage',
-      mainEntity: faqEntities,
-    },
-  ];
+  const payload = {
+    '@context': 'https://schema.org',
+    '@type': 'FAQPage',
+    mainEntity: faqEntities,
+  };
   jsonLdEl.textContent = JSON.stringify(payload);
 }
 
@@ -1584,12 +1705,14 @@ window.addEventListener('hashchange', () => {
 window.addEventListener('load', () => {
   initLgpdBanner();
   ensureAnalyticsLoaded();
+  initSectionTitleObserver();
   renderGlobalProgress();
   renderAreaComparisons();
   renderHonestyFilters();
   renderQuickTests();
   renderQuickTestOutput();
   renderStructuredData();
+  renderRoadmapJumpPill();
   atualizarBadgeAnalytics();
   if (sessionStorage.getItem(EASY_READ_KEY) === '1') {
     document.body.classList.add('easy-read');
@@ -1629,5 +1752,6 @@ window.addEventListener('load', () => {
   }
   syncSugestaoContext();
   syncFreeOnlyUi();
+  setDocumentTitleForScreen(state.currentScreen);
   saveAppState();
 });

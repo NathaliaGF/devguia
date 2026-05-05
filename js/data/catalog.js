@@ -12,6 +12,7 @@ const EASY_READ_KEY = 'easy_read';
 const APP_STATE_KEY = 'devguia_state_v1';
 const CHECKLIST_KEY = 'devguia_checklist_v1';
 const FREE_FILTER_KEY = 'devguia_free_only_v1';
+const DIAGNOSTIC_RESULT_KEY = 'devguia_diagnostic_result_v1';
 const CAT_TOOLTIPS = {
   fundamentos: 'Conceitos base que todo dev precisa dominar',
   ferramentas: 'Ferramentas do dia a dia de desenvolvimento',
@@ -595,6 +596,7 @@ const MITOS = [
     APP_STATE_KEY,
     CHECKLIST_KEY,
     FREE_FILTER_KEY,
+    DIAGNOSTIC_RESULT_KEY,
     CAT_TOOLTIPS,
     CAT_COLORS,
     AREAS_INFO,

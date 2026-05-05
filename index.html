@@ -19,9 +19,8 @@
   <meta name="twitter:description" content="Descubra se TI combina com você, em qual área se encaixaria e por onde começar.">
   <meta name="twitter:image" content="https://nathaliagf.github.io/devguia/og.png">
   <link rel="canonical" href="https://nathaliagf.github.io/devguia/">
-  <title>devguia.dev: Guia vocacional para TI</title>
+  <title>devguia.dev — Guia vocacional para TI</title>
   <script>try{if(localStorage.getItem('lgpd_consent'))document.documentElement.setAttribute('data-lgpd-consent','accepted');}catch(e){}</script>
-  <script type="application/ld+json" id="structured-data">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"Precisa ser bom em matemática para programar?","acceptedAnswer":{"@type":"Answer","text":"Sim, mas não do jeito que a escola ensinou. Programação não exige cálculo diferencial, mas exige raciocínio lógico, pensamento abstrato e capacidade de modelar problemas em estruturas. No dia a dia isso aparece quando você precisa cobrir casos de um formulário, entender por que um loop ficou lento ou depurar uma query SQL."}},{"@type":"Question","name":"Por que preciso aprender linha de comando se existe interface gráfica?","acceptedAnswer":{"@type":"Answer","text":"Porque ambientes profissionais rodam em servidores Linux sem interface gráfica. Deploy, CI/CD, Docker e scripts de automação passam pelo terminal. Quem domina linha de comando consegue ler logs, reiniciar serviços e aplicar correções sem depender de interfaces específicas."}},{"@type":"Question","name":"Git é realmente necessário ou é frescura?","acceptedAnswer":{"@type":"Answer","text":"Necessário. Git é o mínimo absoluto de qualquer trabalho profissional em software. Sem controle de versão você perde código, não colabora com outras pessoas e não entende como projetos reais são organizados."}},{"@type":"Question","name":"Qual matemática devo estudar para programação?","acceptedAnswer":{"@type":"Answer","text":"Para a maioria das trilhas, priorize lógica proposicional e booleana, teoria de conjuntos básica e complexidade algorítmica. Para dados, acrescente estatística descritiva e probabilidade. O objetivo é ganhar raciocínio estruturado, não decorar fórmulas sem contexto."}},{"@type":"Question","name":"Qual a primeira linguagem para iniciantes?","acceptedAnswer":{"@type":"Answer","text":"Para a maioria, Python se você quer dados, automação ou ainda não sabe a área. JavaScript se quer ver resultado visual rápido na web. O erro mais comum é trocar de linguagem antes de dominar uma com profundidade suficiente para construir projetos explicáveis."}},{"@type":"Question","name":"Como sei se estou aprendendo ou só copiando código?","acceptedAnswer":{"@type":"Answer","text":"Feche tudo e tente reconstruir o projeto do zero sem consultar nada. Se você trava logo no começo, estava copiando mais do que entendendo. Outro teste útil é mudar uma regra de negócio pequena e ver se você consegue adaptar o código sem se perder."}},{"@type":"Question","name":"Portfólio importa mais que certificado?","acceptedAnswer":{"@type":"Answer","text":"Sim, especialmente no primeiro emprego. Certificado prova que você fez um curso; portfólio prova que você consegue construir algo. Projetos bem documentados, com problema claro e código explicável, costumam valer mais do que vários certificados genéricos."}},{"@type":"Question","name":"Como contribuir em open source sem experiência?","acceptedAnswer":{"@type":"Answer","text":"Comece por documentação, correção de texto, melhoria de README e relatórios de bug bem escritos. Depois avance para pequenos patches e testes. Isso já te expõe ao fluxo de trabalho de projetos sérios sem exigir que você chegue dominando o código inteiro."}},{"@type":"Question","name":"Como escolher entre front-end, back-end, dados ou infra?","acceptedAnswer":{"@type":"Answer","text":"Não escolha só pela demanda. Compare o tipo de problema que cada área resolve e faça pequenos projetos de teste. Front-end lida com experiência visual, back-end com regras e dados, dados com interpretação e decisão, infra com confiabilidade e escala."}},{"@type":"Question","name":"Devo usar IA (ChatGPT, Copilot) para aprender?","acceptedAnswer":{"@type":"Answer","text":"Use IA para acelerar o que você já sabe fazer, não como substituto do entendimento. Se você copia código gerado sem saber explicar o que ele faz, acumula dívida técnica mental e perde a capacidade de depurar quando algo sai do caminho."}}]}</script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f1117'/><text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%23a78bfa'>%3E_</text></svg>">
   <style>
     :root {
@@ -342,44 +341,7 @@
 
     .home-stats span { color: var(--text2); font-weight: 600; }
 
-    .global-progress {
-      max-width: 960px;
-      margin: 18px auto 0;
-      padding: 0 24px;
-    }
-
-    .global-progress-card {
-      display: flex;
-      flex-wrap: wrap;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 14px;
-      border-radius: 14px;
-      border: 1px solid var(--border);
-      background: linear-gradient(160deg, rgba(22, 27, 39, 0.96), rgba(30, 37, 53, 0.92));
-    }
-
-    .global-progress-title {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.04em;
-      text-transform: uppercase;
-      color: var(--text3);
-      margin-right: 4px;
-    }
-
-    .global-progress-chip {
-      display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      padding: 5px 10px;
-      border-radius: 999px;
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      color: var(--text2);
-      font-size: 12px;
-      line-height: 1.3;
-    }
+    .global-progress { display: none; }
 
     .home-deep-dive {
       max-width: 960px;
@@ -844,6 +806,33 @@
 
     .phase-title { font-size: 15px; font-weight: 700; }
     .phase-duration { font-size: 12px; color: var(--text3); }
+    .phase-meta-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 8px;
+    }
+    .phase-time-chip,
+    .phase-spotlight-chip {
+      display: inline-flex;
+      align-items: center;
+      min-height: 28px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      font-size: 11px;
+      line-height: 1.35;
+      border: 1px solid var(--border);
+    }
+    .phase-time-chip {
+      background: var(--bg3);
+      color: var(--text2);
+    }
+    .phase-spotlight-chip {
+      background: var(--purple-bg);
+      border-color: var(--purple-dim);
+      color: var(--purple);
+      font-weight: 700;
+    }
 
     .phase-chevron {
       color: var(--text3);
@@ -861,6 +850,10 @@
     }
 
     .phase-item.open .phase-body { max-height: 8000px; }
+    .phase-item.phase-spotlight {
+      border-color: var(--purple-dim);
+      box-shadow: 0 0 0 1px rgba(167, 139, 250, 0.18), 0 14px 34px rgba(0, 0, 0, 0.22);
+    }
 
     .phase-content { padding: 0 24px 24px; }
 
@@ -921,7 +914,75 @@
     .phase-skill-why {
       font-size: 12px;
       color: var(--text3);
-      font-style: italic;
+      line-height: 1.6;
+    }
+    .phase-skill-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin: 8px 0 0;
+    }
+    .phase-profile-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 26px;
+      padding: 4px 10px;
+      border-radius: 999px;
+      background: var(--purple-bg);
+      border: 1px solid var(--purple-dim);
+      color: var(--purple);
+      font-size: 11px;
+      font-weight: 700;
+    }
+    .phase-detail-block {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+    }
+    .phase-detail-title {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.06em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 10px;
+    }
+    .phase-ready-list {
+      padding-left: 18px;
+      color: var(--text2);
+      font-size: 13px;
+      line-height: 1.7;
+    }
+    .phase-ready-list li + li {
+      margin-top: 6px;
+    }
+    .phase-pitfalls {
+      margin-top: 18px;
+      border: 1px solid var(--amber-dim);
+      border-radius: 12px;
+      background: linear-gradient(145deg, rgba(34, 26, 10, 0.95), rgba(22, 27, 39, 0.96));
+      overflow: hidden;
+    }
+    .phase-pitfalls summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 14px 16px;
+      color: var(--amber);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .phase-pitfalls summary::-webkit-details-marker { display: none; }
+    .phase-pitfalls-body {
+      padding: 0 16px 16px;
+      color: var(--text2);
+      font-size: 13px;
+    }
+    .phase-pitfalls-body ul {
+      padding-left: 18px;
+      line-height: 1.7;
+    }
+    .phase-pitfalls-body li + li {
+      margin-top: 8px;
     }
 
     .phase-resource-wrap {
@@ -964,6 +1025,10 @@
       color: var(--text2);
       line-height: 1.6;
       margin: 0;
+    }
+    .phase-resource-card .phase-resource-curation {
+      color: var(--text3);
+      margin-bottom: 8px;
     }
 
     .phase-resource-badge {
@@ -1751,6 +1816,13 @@
 
       .hero-btns { flex-direction: column; align-items: center; }
 
+      .roadmap-jump-pill {
+        left: 16px;
+        right: 16px;
+        bottom: max(78px, calc(env(safe-area-inset-bottom) + 12px));
+        justify-content: center;
+      }
+
       .recursos-body { grid-template-columns: 1fr; }
       .phase-resource-grid { grid-template-columns: 1fr; }
       .lgpd-banner {
@@ -1901,6 +1973,51 @@
       gap: 10px;
       align-items: center;
     }
+    .roadmap-jump-pill {
+      position: fixed;
+      right: max(16px, env(safe-area-inset-right));
+      bottom: max(74px, calc(env(safe-area-inset-bottom) + 16px));
+      z-index: 94;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      min-height: 48px;
+      padding: 12px 16px;
+      border: 1px solid rgba(167, 139, 250, 0.48);
+      border-radius: 999px;
+      background: rgba(30, 26, 53, 0.96);
+      color: #f4f1ff;
+      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.26);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      opacity: 0;
+      transform: translateY(18px);
+      pointer-events: none;
+      transition: opacity 0.24s ease, transform 0.24s ease, background 0.15s ease;
+    }
+    .roadmap-jump-pill.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+    .roadmap-jump-pill:hover {
+      background: rgba(39, 32, 71, 0.98);
+    }
+    .roadmap-jump-pill strong {
+      color: #ffffff;
+      font-weight: 700;
+    }
+    .roadmap-jump-pill-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: rgba(167, 139, 250, 0.18);
+      flex-shrink: 0;
+    }
 
     .quiz-page-title {
       font-size: clamp(1.2rem, 3vw, 1.45rem);
@@ -2015,7 +2132,7 @@
       <p>Diagnóstico vocacional honesto, resultado com caminho principal e secundário, roadmap por fase e respostas diretas para as dúvidas que ninguém responde de verdade.</p>
       <p class="hero-time-hint" style="font-size:13px;color:var(--text3);margin-top:-8px;">Leva cerca de <strong style="color:var(--text2)">10–15 minutos</strong>. São 25 perguntas em 4 blocos. Você pode pausar e continuar depois.</p>
       <div class="hero-btns">
-        <button class="btn btn-primary" onclick="navigate('quiz')">Fazer o diagnóstico</button>
+        <button class="btn btn-primary" onclick="navigate('quiz')">Descobrir meu perfil</button>
         <button class="btn btn-ghost" onclick="navigate('faq')">Ver o FAQ</button>
       </div>
     </div>
@@ -2279,6 +2396,17 @@
 </main>
 
 <button type="button" class="back-to-top" id="backToTop" onclick="scrollToMainTop()" aria-label="Voltar ao topo">↑</button>
+<button
+  type="button"
+  class="roadmap-jump-pill"
+  id="roadmapJumpPill"
+  onclick="jumpToRoadmap()"
+  aria-label="Ir para o roadmap"
+  hidden
+>
+  <span class="roadmap-jump-pill-icon" aria-hidden="true">✓</span>
+  <span><strong>Diagnóstico feito</strong> · Ver roadmap →</span>
+</button>
 
 <div id="lgpd-banner" class="lgpd-banner" role="dialog" aria-labelledby="lgpd-msg">
   <p id="lgpd-msg">
