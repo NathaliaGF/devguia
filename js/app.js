@@ -20,6 +20,7 @@ const state = {
   pathScores: [],
   suggestedSubprofiles: [],
   spotlightPhaseId: null,
+  pendingCheckpoint: null,
   quickTestKey: null,
   quickTestStep: 0,
   quickTestScore: 0,
@@ -69,6 +70,14 @@ const SECTION_TITLES = {
 };
 let analyticsLoaded = false;
 let sectionTitleObserver = null;
+const DEFAULT_FAQ_TAGS_BY_CATEGORY = {
+  fundamentos: ['iniciante', 'base'],
+  ferramentas: ['iniciante', 'prática'],
+  linguagens: ['iniciante', 'estudo'],
+  carreira: ['mercado', 'decisão'],
+  educação: ['estudo', 'formação'],
+  mercado: ['mercado', 'carreira'],
+};
 
 function normalizeText(value) {
   return String(value || '')
@@ -82,8 +91,24 @@ function sortByNormalizedLabel(a, b, key) {
   return normalizeText(a[key]).localeCompare(normalizeText(b[key]), 'pt-BR');
 }
 
+function getQuestionById(questionId) {
+  return QUESTIONS.find(item => item.id === questionId) || null;
+}
+
+function getSelectedOptionText(questionId) {
+  const question = getQuestionById(questionId);
+  const optionIndex = state.answers?.[questionId];
+  return question?.options?.[optionIndex]?.text || '';
+}
+
 function getCompletedChecklistCount() {
   return Object.keys(state.checklist || {}).length;
+}
+
+function getFaqTagsForId(id, category = '') {
+  const explicit = FAQ_TAGS[id];
+  if (explicit?.length) return explicit;
+  return DEFAULT_FAQ_TAGS_BY_CATEGORY[category] || [];
 }
 
 function renderGlobalProgress() {
@@ -136,6 +161,7 @@ function getRoadmapProfileContext() {
       profileKey: saved.profileKey,
       profile: PROFILES[saved.profileKey],
       phaseId: saved.phaseId || PROFILE_ROADMAP_PHASE[saved.profileKey] || 'fase1',
+      situationAnswer: saved.situationAnswer || '',
     };
   }
   if (state.profileKey && PROFILES[state.profileKey]) {
@@ -143,6 +169,7 @@ function getRoadmapProfileContext() {
       profileKey: state.profileKey,
       profile: PROFILES[state.profileKey],
       phaseId: PROFILE_ROADMAP_PHASE[state.profileKey] || 'fase1',
+      situationAnswer: getSelectedOptionText('situacao'),
     };
   }
   return null;
@@ -159,6 +186,7 @@ function saveDiagnosticResult(scores, profileKey) {
     secondaryPath,
     suggestedSubprofiles: getSuggestedSubprofiles(scores, profileKey, primaryPath),
     phaseId: PROFILE_ROADMAP_PHASE[profileKey] || 'fase1',
+    situationAnswer: getSelectedOptionText('situacao'),
     savedAt: Date.now(),
   };
   localStorage.setItem(DIAGNOSTIC_RESULT_KEY, JSON.stringify(payload));
@@ -176,6 +204,44 @@ function renderRoadmapJumpPill() {
 function focusRoadmapScreen() {
   const section = document.getElementById('screen-roadmap');
   if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+function getRoadmapSituationCopy(context) {
+  const situation = normalizeText(context?.situationAnswer || '');
+  if (situation.includes('iniciante total')) {
+    return 'Seu melhor uso desta fase é construir rotina. Não tente otimizar stack nem carreira ainda; prove para si mesmo que consegue estudar com consistência e terminar exercícios pequenos.';
+  }
+  if (situation.includes('estudando ha algum tempo')) {
+    return 'Aqui o foco é sair do consumo passivo. Use esta fase para fechar lacunas concretas e transformar estudo acumulado em evidência prática.';
+  }
+  if (situation.includes('trabalho em outra area')) {
+    return 'Conecte cada fase ao seu repertório anterior. A vantagem da transição não está em recomeçar do zero, e sim em combinar bagagem de domínio com disciplina técnica.';
+  }
+  if (situation.includes('ja trabalho com tecnologia')) {
+    return 'Use esta fase como auditoria de base. Não precisa reaprender tudo do zero; identifique o que já é sólido e onde faltam fundamentos para mudar de trilha com segurança.';
+  }
+  return 'Use esta fase como guia de prioridade. O objetivo não é estudar tudo ao mesmo tempo, e sim saber o que sustenta a próxima decisão com menos ruído.';
+}
+
+function getRelatedProfiles(scores, currentProfileKey) {
+  const entries = Object.values(PROFILES)
+    .filter(profile => profile.key !== currentProfileKey)
+    .map(profile => {
+      const keys = new Set([
+        ...Object.keys(scores || {}),
+        ...Object.keys(profile.shareScores || {}),
+      ]);
+      let total = 0;
+      keys.forEach(key => {
+        const userValue = scores[key] || 0;
+        const profileValue = profile.shareScores?.[key] || 0;
+        total += Math.min(userValue, profileValue);
+      });
+      return { profile, score: total };
+    })
+    .sort((a, b) => b.score - a.score)
+    .slice(0, 3);
+  return entries;
 }
 
 const PATH_INFO = {
@@ -517,6 +583,7 @@ function salvarProgresso() {
     localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify({
       currentQuestion: state.currentQuestion,
       answers: state.answers,
+      pendingCheckpoint: state.pendingCheckpoint,
       savedAt: Date.now(),
     }));
   } catch (e) {
@@ -630,10 +697,12 @@ function continuarQuiz() {
   if (!saved) return initQuiz();
   state.currentQuestion = Math.max(0, Math.min(saved.currentQuestion || 0, QUESTIONS.length - 1));
   state.answers = saved.answers || {};
+  state.pendingCheckpoint = saved.pendingCheckpoint || null;
   recomputeScoresFromAnswers();
   document.getElementById('btnBack').style.visibility = 'visible';
   document.getElementById('btnNext').style.visibility = 'visible';
-  renderQuestion();
+  if (state.pendingCheckpoint) renderCheckpointCard();
+  else renderQuestion();
   saveAppState();
 }
 
@@ -647,10 +716,76 @@ function initQuiz() {
   state.answers = {};
   state.scores = {};
   state.profileKey = null;
+  state.pendingCheckpoint = null;
   document.getElementById('btnBack').style.visibility = 'visible';
   document.getElementById('btnNext').style.visibility = 'visible';
   renderQuestion();
   saveAppState();
+}
+
+function isLastQuestionOfBlock(questionIndex) {
+  const block = QUESTIONS[questionIndex]?.block;
+  if (!block) return false;
+  for (let index = questionIndex + 1; index < QUESTIONS.length; index += 1) {
+    if (QUESTIONS[index].block === block) return false;
+  }
+  return true;
+}
+
+function getCheckpointCopy(blockName) {
+  const copy = {
+    'Sobre você': {
+      title: 'Bloco concluído: Sobre você',
+      text: 'Você acabou de responder sobre motivação, foco, frustração e forma de aprender. Agora o diagnóstico entra mais fundo em padrão técnico e tolerância à rotina da área.',
+    },
+    'Perfil técnico': {
+      title: 'Bloco concluído: Perfil técnico',
+      text: 'Até aqui o diagnóstico mediu raciocínio, abstração, detalhe e relação com números. A próxima parte aproxima isso de áreas concretas de trabalho.',
+    },
+    'Preferências de área': {
+      title: 'Bloco concluído: Preferências de área',
+      text: 'Agora já existe sinal melhor sobre o tipo de problema que mais te prende. O próximo trecho fecha contexto de momento de vida e maturidade de entrada.',
+    },
+    'Sua situação atual': {
+      title: 'Bloco concluído: Sua situação atual',
+      text: 'Este bloco ajuda a separar curiosidade, timing e bagagem anterior. Isso pesa bastante na leitura final do roadmap e na honestidade do resultado.',
+    },
+  };
+  return copy[blockName] || {
+    title: `Bloco concluído: ${blockName}`,
+    text: 'Você terminou uma etapa do diagnóstico. Continue para consolidar o resultado final.',
+  };
+}
+
+function renderCheckpointCard() {
+  const checkpoint = state.pendingCheckpoint;
+  if (!checkpoint) return renderQuestion();
+  const quizCard = document.getElementById('quizCard');
+  if (!quizCard) return;
+  document.getElementById('btnBack').style.visibility = 'hidden';
+  document.getElementById('btnNext').style.visibility = 'hidden';
+  document.getElementById('quizCounter').textContent = `${checkpoint.completed} de ${QUESTIONS.length}`;
+  const copy = getCheckpointCopy(checkpoint.block);
+  quizCard.innerHTML = `
+    <div class="resume-card">
+      <div class="resume-card-title">${copy.title}</div>
+      <div class="resume-card-copy">${copy.text}</div>
+      <div class="resume-card-copy">Próximo bloco: <strong style="color:var(--text)">${checkpoint.nextBlock}</strong>.</div>
+      <div style="display:flex;gap:8px;flex-wrap:wrap;">
+        <button class="btn btn-primary" onclick="continueAfterCheckpoint()">Continuar</button>
+      </div>
+    </div>
+  `;
+}
+
+function continueAfterCheckpoint() {
+  if (!state.pendingCheckpoint) return renderQuestion();
+  state.currentQuestion = state.pendingCheckpoint.nextQuestionIndex;
+  state.pendingCheckpoint = null;
+  document.getElementById('btnBack').style.visibility = 'visible';
+  document.getElementById('btnNext').style.visibility = 'visible';
+  salvarProgresso();
+  renderQuestion();
 }
 
 function renderQuestion() {
@@ -713,7 +848,21 @@ function quizNext() {
   });
 
   if (state.currentQuestion < QUESTIONS.length - 1) {
-    state.currentQuestion++;
+    const nextQuestionIndex = state.currentQuestion + 1;
+    const nextBlock = QUESTIONS[nextQuestionIndex]?.block || '';
+    if (isLastQuestionOfBlock(state.currentQuestion)) {
+      state.pendingCheckpoint = {
+        block: q.block,
+        completed: nextQuestionIndex,
+        nextBlock,
+        nextQuestionIndex,
+      };
+      salvarProgresso();
+      renderCheckpointCard();
+      return;
+    }
+    state.currentQuestion = nextQuestionIndex;
+    state.pendingCheckpoint = null;
     salvarProgresso();
     renderQuestion();
   } else {
@@ -724,6 +873,7 @@ function quizNext() {
 
 function quizBack() {
   if (state.currentQuestion === 0) return go('home', 'back');
+  state.pendingCheckpoint = null;
   const prevQ = QUESTIONS[state.currentQuestion];
   const prevOpt = prevQ.options[state.answers[prevQ.id]];
   if (prevOpt) {
@@ -747,6 +897,7 @@ function calcularPerfil(scores) {
   const vocacao = get('vocacao') + get('foco') + get('autodidata');
   const pathScores = getPathScores(scores);
   const [primaryPath, primaryValue] = pathScores[0];
+  const secondaryValue = pathScores[1]?.[1] || 0;
 
   if (bloqueio >= 6 && vocacao < 3 && primaryValue < 8) return 'repensar';
   if (get('advocacy') >= 6 && get('social') >= 5) return 'developer_advocate';
@@ -760,7 +911,8 @@ function calcularPerfil(scores) {
   if (get('ux') >= 4 && get('criativo') >= 4) return 'ux_design';
   if (primaryPath === 'dados' && primaryValue >= 8) return 'analitico';
   if (primaryPath === 'infra' && primaryValue >= 8) return 'infra_cloud';
-  return 'dev_nato';
+  if (primaryPath === 'codigo' && primaryValue >= 11 && primaryValue - secondaryValue >= 2 && vocacao >= 3) return 'dev_nato';
+  return 'generalista';
 }
 
 // ============================================================
@@ -974,6 +1126,27 @@ function showResult(scores, profileKey, options = {}) {
   const phaseId = PROFILE_ROADMAP_PHASE[profileKey] || 'fase1';
   const phaseMeta = PHASES.find(p => p.id === phaseId);
   const hint = PROFILE_ROADMAP_HINT[profileKey] || 'Use o roadmap em fases e o FAQ quando um conceito travar. Cada habilidade tem o porquê explicado.';
+  const relatedProfiles = getRelatedProfiles(scores, profileKey);
+  const relatedProfilesHtml = relatedProfiles.length ? `
+    <div class="result-related">
+      <h3>Perfis próximos do seu resultado</h3>
+      <div class="result-related-grid">
+        ${relatedProfiles.map(({ profile, score }) => `
+          <div class="result-related-card">
+            <div class="result-related-head">
+              <span class="result-related-icon" aria-hidden="true">${profile.icon}</span>
+              <div>
+                <strong>${profile.name}</strong>
+                <p>Compatibilidade relativa: ${score}</p>
+              </div>
+            </div>
+            <div class="result-related-desc">${profile.desc}</div>
+            <button type="button" class="btn btn-ghost" onclick="showResult(getSharedScoresForProfile('${profile.key}'), '${profile.key}', { fromShare: true, skipTrack: true })">Ver exemplo deste perfil</button>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  ` : '';
   const nextStepCard = `
     <div class="next-step-card">
       <h3>Agora que você conhece seu perfil, comece por aqui →</h3>
@@ -1002,6 +1175,7 @@ function showResult(scores, profileKey, options = {}) {
       <div class="compat-bars">${barsHtml}</div>
       <h3 style="font-size:14px;margin-bottom:12px;color:var(--text2)">Áreas de maior fit</h3>
       <div class="areas-grid">${areasHtml}</div>
+      ${relatedProfilesHtml}
       ${nextStepCard}
     </div>
     <div class="result-attention"><h3>⚠ Pontos de atenção</h3><ul>${attentionHtml}</ul></div>
@@ -1194,7 +1368,14 @@ function renderRoadmap() {
   const container = document.getElementById('roadmapPhases');
   if (!container) return;
   const roadmapContext = getRoadmapProfileContext();
-  container.innerHTML = PHASES.map(phase => {
+  const introHtml = roadmapContext ? `
+    <div class="roadmap-context-card">
+      <div class="roadmap-context-title">Roadmap contextualizado pelo seu diagnóstico</div>
+      <p>Perfil atual: <strong>${roadmapContext.profile.name}</strong>${roadmapContext.situationAnswer ? ` · Situação: ${roadmapContext.situationAnswer}` : ''}</p>
+      <p>${getRoadmapSituationCopy(roadmapContext)}</p>
+    </div>
+  ` : '';
+  container.innerHTML = introHtml + PHASES.map(phase => {
     const completed = phase.skills.filter((skill, skillIndex) => state.checklist[getChecklistKey(phase.id, skillIndex)]).length;
     const progress = `${completed}/${phase.skills.length}`;
     const visibleResources = (phase.resources || [])
@@ -1252,12 +1433,25 @@ function renderRoadmap() {
               <ul>${(phase.pitfalls || []).map(item => `<li>${item}</li>`).join('')}</ul>
             </div>
           </details>
+          ${(phase.projetos || []).length ? `
+            <details class="phase-projects">
+              <summary>Ideias de projeto para esta fase</summary>
+              <div class="phase-projects-body">
+                ${(phase.projetos || []).map(item => `
+                  <div class="phase-project-card">
+                    <strong>${item.nome}</strong>
+                    <p>${item.desc}</p>
+                  </div>
+                `).join('')}
+              </div>
+            </details>
+          ` : ''}
           <div class="phase-resource-wrap">
             <div class="phase-resource-head">Recursos sugeridos${state.freeOnly ? ' · modo sem dinheiro' : ''}</div>
             <div class="phase-resource-grid">
               ${visibleResources.length ? visibleResources.map(item => item.url
-                ? `<a class="phase-resource-card" href="${item.url}" target="_blank" rel="noopener noreferrer"><span class="phase-resource-badge">${item.free === false ? 'Pago' : 'Grátis'}</span><p class="phase-resource-curation">Se você aprender só uma coisa sobre ${item.topic || phase.title.toLowerCase()}, começa com <strong>${item.name}</strong>.</p><p>${item.desc}</p></a>`
-                : `<div class="phase-resource-card"><span class="phase-resource-badge">${item.free === false ? 'Pago' : 'Grátis'}</span><p class="phase-resource-curation">Se você aprender só uma coisa sobre ${item.topic || phase.title.toLowerCase()}, começa com <strong>${item.name}</strong>.</p><p>${item.desc}</p></div>`
+                ? `<a class="phase-resource-card" href="${item.url}" target="_blank" rel="noopener noreferrer"><span class="phase-resource-badge">${item.free === false ? 'Pago' : 'Grátis'}</span>${item.lang === 'pt' ? '<span class="phase-resource-badge">PT-BR</span>' : ''}<p class="phase-resource-curation">Se você aprender só uma coisa sobre ${item.topic || phase.title.toLowerCase()}, começa com <strong>${item.name}</strong>.</p><p>${item.desc}</p></a>`
+                : `<div class="phase-resource-card"><span class="phase-resource-badge">${item.free === false ? 'Pago' : 'Grátis'}</span>${item.lang === 'pt' ? '<span class="phase-resource-badge">PT-BR</span>' : ''}<p class="phase-resource-curation">Se você aprender só uma coisa sobre ${item.topic || phase.title.toLowerCase()}, começa com <strong>${item.name}</strong>.</p><p>${item.desc}</p></div>`
               ).join('') : `<div class="phase-resource-empty">Nenhum recurso gratuito visível nesta fase com o filtro atual.</div>`}
             </div>
           </div>
@@ -1345,7 +1539,8 @@ function linkGlossario(texto) {
 }
 
 function faqTagsHtml(id) {
-  const tags = FAQ_TAGS[id] || [];
+  const item = FAQS.find(entry => entry.id === id);
+  const tags = getFaqTagsForId(id, item?.cat);
   return tags.map(tag => `<span class="faq-tag">${tag}</span>`).join('');
 }
 
@@ -1363,7 +1558,7 @@ function filterFaq() {
 
   const filtered = FAQS.filter(f => {
     const catMatch = cat === 'all' || f.cat === cat;
-    const haystack = normalizeText(`${f.q} ${f.answer.replace(/<[^>]+>/g, ' ')} ${(FAQ_TAGS[f.id] || []).join(' ')} ${f.cat}`);
+    const haystack = normalizeText(`${f.q} ${f.answer.replace(/<[^>]+>/g, ' ')} ${getFaqTagsForId(f.id, f.cat).join(' ')} ${f.cat}`);
     const searchMatch = !terms.length || terms.every(term => haystack.includes(term));
     return catMatch && searchMatch;
   });
@@ -1611,6 +1806,14 @@ function toggleMito(id) {
   }
   saveAppState();
 }
+
+function copiarLinkMito(id) {
+  const url = `${window.location.origin}${window.location.pathname}#mitos/${id}`;
+  copyText(url).catch(error => {
+    console.warn('[devguia] Falha ao copiar link do mito:', error.message);
+  });
+}
+
 function renderMitos() {
   const list = document.getElementById('mitosList');
   if (!list) return;
@@ -1619,7 +1822,7 @@ function renderMitos() {
   list.innerHTML = items.map(m => {
     const [badgeClass, badgeText] = mitoBadge(m.veredicto);
     const open = state.openMitoId === m.id;
-    return `<div class="mito-card${open ? ' open' : ''}" id="mito-${m.id}"><button type="button" class="mito-head" onclick="toggleMito('${m.id}')" aria-expanded="${open ? 'true' : 'false'}" aria-controls="mito-body-${m.id}" id="mito-head-${m.id}"><span class="${badgeClass}">${badgeText}</span><span class="mito-affirmation">"${m.afirmacao}"</span><span class="mito-curta">${m.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver explicação completa ▾</span></button><div class="mito-body" id="mito-body-${m.id}" role="region" aria-labelledby="mito-head-${m.id}"><div class="mito-content"><p>${m.explicacao}</p>${formatMitoFonte(m.fonte)}</div></div></div>`;
+    return `<div class="mito-card${open ? ' open' : ''}" id="mito-${m.id}"><button type="button" class="mito-head" onclick="toggleMito('${m.id}')" aria-expanded="${open ? 'true' : 'false'}" aria-controls="mito-body-${m.id}" id="mito-head-${m.id}"><span class="${badgeClass}">${badgeText}</span><span class="mito-affirmation">"${m.afirmacao}"</span><span class="mito-curta">${m.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver explicação completa ▾</span></button><div class="mito-body" id="mito-body-${m.id}" role="region" aria-labelledby="mito-head-${m.id}"><div class="mito-content"><p>${m.explicacao}</p>${formatMitoFonte(m.fonte)}<div class="mito-actions"><button type="button" class="btn btn-ghost" onclick="copiarLinkMito('${m.id}')">Copiar link deste mito</button></div></div></div></div>`;
   }).join('');
 }
 
