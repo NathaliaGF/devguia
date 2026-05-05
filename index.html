@@ -23,209 +23,111 @@
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='6' fill='%230f1117'/><text x='4' y='23' font-family='monospace' font-size='16' font-weight='bold' fill='%23a78bfa'>%3E_</text></svg>">
   <style>
     :root {
-      /* ── Superfícies ── */
-      --bg:           #0b0d14;
-      --bg2:          #111520;
-      --bg3:          #171c2b;
-      --bg4:          #1e2436;
-      --bg-glass:     rgba(17, 21, 32, 0.7);
-
-      /* ── Bordas ── */
-      --border:       rgba(255,255,255,0.07);
-      --border2:      rgba(255,255,255,0.12);
-      --border-focus: rgba(167,139,250,0.5);
-
-      /* ── Roxo ── */
-      --purple:       #a78bfa;
-      --purple-dim:   #6d5cb5;
-      --purple-bg:    #1a1530;
-      --purple-glow:  rgba(167,139,250,0.15);
-
-      /* ── Cores de acento ── */
-      --teal:         #34d399;
-      --teal-dim:     #1a7a56;
-      --teal-bg:      #0a1f18;
-
-      --amber:        #fbbf24;
-      --amber-dim:    #7a5510;
-      --amber-bg:     #1a1408;
-
-      --blue:         #60a5fa;
-      --blue-dim:     #1e3a5f;
-      --blue-bg:      #0a1420;
-
-      --coral:        #f87171;
-      --coral-dim:    #7a2020;
-      --coral-bg:     #1f0d0d;
-
-      --pink:         #f472b6;
-      --pink-dim:     #7a1a50;
-      --pink-bg:      #1f0a18;
-
-      /* ── Texto ── */
-      --text:         #e8eaf0;
-      --text2:        #8892a4;
-      --text3:        #4e5a6e;
-      --text-inverse: #0b0d14;
-
-      /* ── Tipografia ── */
-      --font:         system-ui, -apple-system, 'Segoe UI', sans-serif;
-      --font-mono:    'JetBrains Mono', 'Fira Code', 'Cascadia Code', ui-monospace, monospace;
-
-      --text-xs:      11px;
-      --text-sm:      13px;
-      --text-base:    14px;
-      --text-md:      16px;
-      --text-lg:      18px;
-      --text-xl:      22px;
-      --text-2xl:     28px;
-      --text-3xl:     36px;
-      --text-4xl:     48px;
-
-      --weight-normal: 400;
-      --weight-medium: 500;
-      --weight-semi:   600;
-      --weight-bold:   700;
-
-      /* ── Espaçamentos ── */
-      --space-1:   4px;
-      --space-2:   8px;
-      --space-3:  12px;
-      --space-4:  16px;
-      --space-5:  20px;
-      --space-6:  24px;
-      --space-8:  32px;
-      --space-10: 40px;
-      --space-12: 48px;
-      --space-16: 64px;
-      --space-20: 80px;
-
-      /* ── Border radius ── */
-      --radius-sm:   6px;
-      --radius-md:   10px;
-      --radius-lg:   14px;
-      --radius-xl:   20px;
-      --radius-full: 9999px;
-
-      /* ── Sombras ── */
-      --shadow-sm:  0 1px 3px rgba(0,0,0,0.4);
-      --shadow-md:  0 4px 16px rgba(0,0,0,0.35);
-      --shadow-lg:  0 8px 32px rgba(0,0,0,0.5);
-      --shadow-glow: 0 0 40px rgba(167,139,250,0.12);
-
-      /* ── Transições ── */
-      --ease:          cubic-bezier(0.4, 0, 0.2, 1);
-      --duration:      180ms;
-      --duration-slow: 320ms;
-
-      /* ── Legacy (compatibilidade com JS) ── */
+      --bg:        #0f1117;
+      --bg2:       #161b27;
+      --bg3:       #1e2535;
+      --bg4:       #252d3e;
+      --border:    #2a3347;
+      --border2:   #3a4560;
+      --purple:    #a78bfa; --purple-dim: #6d5cb5; --purple-bg: #1e1a35;
+      --teal:      #34d399; --teal-dim:   #1a7a56; --teal-bg:   #0d2520;
+      --amber:     #fbbf24; --amber-dim:  #7a5510; --amber-bg:  #221a0a;
+      --blue:      #60a5fa; --blue-dim:   #1e3a5f; --blue-bg:   #0d1a2e;
+      --coral:     #f87171; --coral-dim:  #7a2020; --coral-bg:  #2a1010;
+      --pink:      #f472b6; --pink-dim:   #7a1a50; --pink-bg:   #2a1020;
+      --text:      #e8edf5;
+      --text2:     #a1aec4;
+      --text3:     #6f7d95;
       --circle-button-size: 48px;
       --circle-icon-size: 20px;
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
-    html {
-      scroll-behavior: smooth;
-      -webkit-text-size-adjust: 100%;
-    }
-
     body {
-      font-family: var(--font);
-      font-size: var(--text-base);
-      line-height: 1.65;
       background: var(--bg);
       color: var(--text);
-      -webkit-font-smoothing: antialiased;
+      font-family: system-ui, -apple-system, sans-serif;
+      font-size: 14px;
+      line-height: 1.7;
       min-height: 100vh;
-      overflow-x: hidden;
     }
-
-    body::before {
-      content: '';
-      position: fixed;
-      inset: 0;
-      background: radial-gradient(ellipse 80% 50% at 50% -10%, rgba(167,139,250,0.08) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    #main-content { position: relative; z-index: 1; }
-
-    img, svg { display: block; max-width: 100%; }
-    button { cursor: pointer; font-family: inherit; }
-    a { color: var(--purple); text-decoration: none; }
-    a:hover { text-decoration: underline; }
-
-    ::selection { background: var(--purple-bg); color: var(--purple); }
 
     :focus-visible {
-      outline: 2px solid var(--purple);
+      outline: 2px solid currentColor;
       outline-offset: 3px;
-      border-radius: var(--radius-sm);
     }
-    :focus:not(:focus-visible) { outline: none; }
 
-    /* ── NAV ── */
+    :focus:not(:focus-visible) {
+      outline: none;
+    }
+
+    /* NAV */
     nav {
-      position: sticky;
-      top: 0;
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
       z-index: 100;
+      padding: 0 20px;
+      min-height: 56px;
       display: flex;
       align-items: center;
       justify-content: space-between;
-      padding: 0 var(--space-6);
-      height: 52px;
-      background: rgba(11, 13, 20, 0.88);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
       gap: 10px;
     }
 
     .nav-logo {
       background: none;
       border: none;
-      font-size: var(--text-sm);
-      font-weight: var(--weight-bold);
+      font-size: 16px;
+      font-weight: 700;
       color: var(--purple);
       cursor: pointer;
       flex-shrink: 0;
-      font-family: var(--font-mono);
-      letter-spacing: 0.01em;
-      text-decoration: none;
+      font-family: inherit;
     }
 
     .nav-tabs {
       display: flex;
-      gap: var(--space-1);
+      gap: 4px;
+      flex: 1;
+      justify-content: flex-end;
+      min-width: 0;
       overflow-x: auto;
-      scrollbar-width: none;
       -webkit-overflow-scrolling: touch;
+      scrollbar-width: thin;
       padding: 4px 0;
     }
-    .nav-tabs::-webkit-scrollbar { display: none; }
+
+    .nav-tabs::-webkit-scrollbar { height: 4px; }
+    .nav-tabs::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 4px; }
 
     .nav-tab {
       display: inline-flex;
       align-items: center;
       justify-content: center;
-      padding: 5px var(--space-3);
-      border-radius: var(--radius-sm);
+      padding: 6px 14px;
+      border-radius: 8px;
       border: 1px solid transparent;
       background: transparent;
-      color: var(--text3);
-      font-size: var(--text-xs);
-      font-weight: var(--weight-medium);
+      color: var(--text2);
+      font-size: 13px;
+      font-weight: 600;
       cursor: pointer;
-      transition: color var(--duration) var(--ease), background var(--duration) var(--ease), border-color var(--duration) var(--ease);
+      transition: all 0.15s;
       font-family: inherit;
       text-decoration: none;
       white-space: nowrap;
     }
 
-    .nav-tab:hover { background: var(--bg3); color: var(--text); border-color: var(--border); }
-    .nav-tab.active { background: var(--purple-bg); border-color: var(--purple-dim); color: var(--purple); }
+    .nav-tab:hover { background: var(--bg3); color: var(--text); }
+
+    .nav-tab.active {
+      background: var(--purple-bg);
+      border-color: var(--purple-dim);
+      color: var(--purple);
+    }
 
     .nav-tab:focus-visible,
     .nav-logo:focus-visible {
@@ -255,7 +157,7 @@
     .mobile-menu {
       display: none;
       position: fixed;
-      top: 52px; left: 0; right: 0;
+      top: 56px; left: 0; right: 0;
       background: var(--bg2);
       border-bottom: 1px solid var(--border);
       z-index: 99;
@@ -263,42 +165,27 @@
       flex-direction: column;
       gap: 4px;
     }
+
     .mobile-menu.open { display: flex; }
     .mobile-menu .nav-tab { width: 100%; text-align: left; }
 
-    #easy-read-toggle {
-      font-size: var(--text-xs);
-      font-weight: var(--weight-medium);
-      padding: 4px 10px;
-      border-radius: var(--radius-sm);
-      border: 1px solid var(--border2);
-      color: var(--text3);
-      background: none;
-      margin-left: var(--space-3);
-      transition: all var(--duration) var(--ease);
-      flex-shrink: 0;
+    /* MAIN */
+    main {
+      margin-top: 56px;
+      min-height: calc(100vh - 56px);
     }
-    #easy-read-toggle:hover { color: var(--text); }
-    #easy-read-toggle.active { color: var(--purple); border-color: var(--purple-dim); }
 
-    /* ── MAIN ── */
-    main { min-height: calc(100vh - 52px); }
+    /* SCREENS */
+    .screen {
+      display: none;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
 
-    /* ── SCREENS ── */
-    .screen { display: none; }
     .screen.active {
       display: block;
-      animation: screenEnter var(--duration) var(--ease);
+      opacity: 1;
     }
-
-    @keyframes screenEnter {
-      from { opacity: 0; transform: translateY(6px); }
-      to   { opacity: 1; transform: translateY(0); }
-    }
-
-    .screen.enter-right { animation: slideInRight 0.22s var(--ease); }
-    .screen.enter-left  { animation: slideInLeft 0.22s var(--ease); }
-    .screen.enter-fade  { animation: fadeIn 0.18s var(--ease); }
 
     /* CONTAINERS */
     .container {
@@ -2260,1081 +2147,6 @@
       margin-top: 14px;
     }
 
-    /* ================================
-       REDESIGN OVERRIDES
-       ================================ */
-    .container,
-    .content-max {
-      width: 100%;
-      max-width: 720px;
-      margin: 0 auto;
-      padding: var(--space-8) var(--space-6);
-    }
-    .content-max { padding-left: 0; padding-right: 0; }
-    .section-wrap {
-      max-width: 720px;
-      margin: 0 auto;
-      width: 100%;
-    }
-    .section-header {
-      margin-bottom: var(--space-6);
-    }
-    .section-header h2 {
-      font-size: var(--text-2xl);
-      font-weight: var(--weight-bold);
-      margin-bottom: var(--space-2);
-      letter-spacing: -0.02em;
-    }
-    .section-header p {
-      font-size: var(--text-sm);
-      color: var(--text2);
-      line-height: 1.65;
-    }
-
-    .btn,
-    .btn-primary,
-    .btn-ghost,
-    .btn-danger {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: var(--space-2);
-      font-family: var(--font);
-      font-size: var(--text-sm);
-      font-weight: var(--weight-semi);
-      border-radius: var(--radius-md);
-      border: 1px solid transparent;
-      padding: 9px var(--space-4);
-      transition: background var(--duration) var(--ease), color var(--duration) var(--ease), border-color var(--duration) var(--ease), transform var(--duration) var(--ease), box-shadow var(--duration) var(--ease), opacity var(--duration) var(--ease);
-      min-height: 44px;
-      white-space: nowrap;
-      text-decoration: none;
-    }
-    .btn-primary {
-      background: var(--purple);
-      color: #fff;
-      border-color: var(--purple);
-    }
-    .btn-primary:hover {
-      background: #b8a3fc;
-      border-color: #b8a3fc;
-      box-shadow: 0 0 20px rgba(167,139,250,0.3);
-      transform: translateY(-1px);
-    }
-    .btn-primary:active { transform: translateY(0); box-shadow: none; }
-    .btn-primary:disabled,
-    .btn:disabled { opacity: 0.35; pointer-events: none; }
-    .btn-ghost {
-      background: transparent;
-      color: var(--text2);
-      border-color: var(--border2);
-    }
-    .btn-ghost:hover {
-      background: var(--bg3);
-      color: var(--text);
-      border-color: var(--border2);
-      transform: translateY(-1px);
-    }
-    .btn-lg {
-      font-size: var(--text-base);
-      padding: 11px var(--space-6);
-      border-radius: var(--radius-lg);
-    }
-    .btn-sm {
-      font-size: var(--text-xs);
-      padding: 5px var(--space-3);
-      border-radius: var(--radius-sm);
-      min-height: 32px;
-    }
-    .btn-arrow {
-      display: inline-block;
-      transition: transform var(--duration) var(--ease);
-    }
-    .btn-primary:hover .btn-arrow { transform: translateX(3px); }
-
-    .badge,
-    .chip,
-    .faq-cat-badge,
-    .faq-tag,
-    .phase-profile-tag,
-    .phase-time-chip,
-    .phase-spotlight-chip,
-    .recurso-flag,
-    .phase-resource-badge {
-      display: inline-flex;
-      align-items: center;
-      font-size: var(--text-xs);
-      font-weight: var(--weight-semi);
-      padding: 3px 10px;
-      border-radius: var(--radius-full);
-      border: 1px solid transparent;
-      white-space: nowrap;
-      line-height: 1.4;
-    }
-
-    .hero {
-      min-height: calc(100vh - 52px);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      padding: var(--space-16) var(--space-6);
-      position: relative;
-      overflow: hidden;
-      max-width: none;
-      margin: 0;
-      text-align: center;
-    }
-    .hero::after {
-      content: '';
-      position: absolute;
-      top: 20%;
-      left: 50%;
-      transform: translateX(-50%);
-      width: 600px;
-      height: 300px;
-      background: radial-gradient(ellipse, rgba(167,139,250,0.07) 0%, transparent 70%);
-      pointer-events: none;
-      z-index: 0;
-    }
-    .hero-inner {
-      max-width: 680px;
-      width: 100%;
-      text-align: center;
-      position: relative;
-      z-index: 1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: var(--space-6);
-    }
-    .hero-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: var(--space-2);
-      font-size: var(--text-xs);
-      font-weight: var(--weight-semi);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--purple);
-      background: var(--purple-bg);
-      border: 1px solid var(--purple-dim);
-      padding: 5px 14px;
-      border-radius: var(--radius-full);
-      margin: 0;
-    }
-    .hero-chip-dot {
-      width: 6px;
-      height: 6px;
-      border-radius: 50%;
-      background: var(--purple);
-      animation: pulse-dot 2.5s ease-in-out infinite;
-    }
-    @keyframes pulse-dot {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.8); }
-    }
-    .hero-title {
-      font-size: clamp(var(--text-2xl), 6vw, var(--text-4xl));
-      font-weight: var(--weight-bold);
-      line-height: 1.15;
-      letter-spacing: -0.02em;
-      color: var(--text);
-      margin: 0;
-    }
-    .hero-title em {
-      font-style: normal;
-      color: var(--purple);
-      background: linear-gradient(135deg, var(--purple) 0%, #c4b5fd 100%);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .hero-sub {
-      font-size: var(--text-md);
-      color: var(--text2);
-      line-height: 1.7;
-      max-width: 520px;
-      margin: 0;
-    }
-    .hero-cta-slot {
-      width: 100%;
-      min-height: 96px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-    }
-    .hero-ctas,
-    .hero-btns {
-      display: flex;
-      gap: var(--space-3);
-      flex-wrap: wrap;
-      justify-content: center;
-      width: 100%;
-    }
-    .hero-meta {
-      font-size: var(--text-sm);
-      color: var(--text3);
-      margin: 0;
-    }
-    .hero-meta strong { color: var(--text2); font-weight: var(--weight-medium); }
-    .hero-cards {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: var(--space-3);
-      width: 100%;
-      margin-top: var(--space-2);
-    }
-    .hero-card,
-    .feature-card {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-3);
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-4);
-      text-align: left;
-      transition: border-color var(--duration) var(--ease), transform var(--duration) var(--ease);
-    }
-    .hero-card:hover,
-    .feature-card:hover {
-      border-color: var(--border2);
-      transform: translateY(-1px);
-    }
-    .hero-card-icon,
-    .feature-icon {
-      font-size: 20px;
-      flex-shrink: 0;
-      line-height: 1;
-      margin-top: 1px;
-      margin-bottom: 0;
-    }
-    .hero-card-title,
-    .feature-card h3 {
-      font-size: var(--text-sm);
-      font-weight: var(--weight-semi);
-      color: var(--text);
-      margin-bottom: var(--space-1);
-    }
-    .hero-card-desc,
-    .feature-card p {
-      font-size: var(--text-xs);
-      color: var(--text3);
-      line-height: 1.5;
-      margin: 0;
-    }
-    .hero-stats {
-      display: flex;
-      align-items: center;
-      gap: var(--space-4);
-      flex-wrap: wrap;
-      justify-content: center;
-      padding-top: var(--space-4);
-      border-top: 1px solid var(--border);
-      width: 100%;
-    }
-    .hero-stat {
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 2px;
-    }
-    .hero-stat-n {
-      font-size: var(--text-lg);
-      font-weight: var(--weight-bold);
-      color: var(--purple);
-      line-height: 1;
-    }
-    .hero-stat-l {
-      font-size: var(--text-xs);
-      color: var(--text3);
-    }
-    .hero-stat-sep {
-      color: var(--border2);
-      font-size: var(--text-lg);
-    }
-    .hero-diagnostic-state {
-      width: 100%;
-      max-width: 580px;
-      margin: 0 auto;
-      padding: var(--space-5);
-      border-radius: var(--radius-lg);
-      border: 1px solid var(--border);
-      background: var(--bg-glass);
-      backdrop-filter: blur(12px);
-      -webkit-backdrop-filter: blur(12px);
-      text-align: left;
-      box-shadow: var(--shadow-md);
-    }
-    .hero-diagnostic-state-done {
-      border-color: var(--purple-dim);
-      box-shadow: var(--shadow-glow);
-    }
-    .hero-diagnostic-state-head {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-3);
-      margin-bottom: var(--space-3);
-    }
-    .hero-diagnostic-icon {
-      font-size: 26px;
-      flex-shrink: 0;
-      line-height: 1;
-    }
-    .hero-diagnostic-kicker {
-      font-size: var(--text-xs);
-      font-weight: var(--weight-semi);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      color: var(--text3);
-      margin-bottom: 4px;
-    }
-    .hero-diagnostic-title {
-      font-size: var(--text-md);
-      color: var(--text2);
-      line-height: 1.6;
-      margin: 0;
-    }
-    .hero-diagnostic-actions {
-      display: flex;
-      gap: var(--space-3);
-      flex-wrap: wrap;
-    }
-
-    .search-wrap {
-      position: relative;
-      margin-bottom: var(--space-5);
-    }
-    .search-wrap input {
-      width: 100%;
-      padding: 10px var(--space-4) 10px 38px;
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      color: var(--text);
-      font-family: var(--font);
-      font-size: var(--text-sm);
-      line-height: 1.5;
-      transition: border-color var(--duration) var(--ease), box-shadow var(--duration) var(--ease);
-      outline: none;
-    }
-    .search-wrap input::placeholder { color: var(--text3); }
-    .search-wrap input:focus {
-      border-color: var(--border-focus);
-      box-shadow: 0 0 0 3px rgba(167,139,250,0.1);
-    }
-    .search-icon {
-      position: absolute;
-      left: 12px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--text3);
-      font-size: 15px;
-      pointer-events: none;
-      user-select: none;
-    }
-    .tabs-wrap,
-    .faq-filters {
-      display: flex;
-      gap: var(--space-1);
-      flex-wrap: wrap;
-      margin-bottom: var(--space-5);
-    }
-    .tab-btn,
-    .faq-filter,
-    .recursos-tab {
-      font-size: var(--text-xs);
-      font-weight: var(--weight-medium);
-      padding: 5px 13px;
-      border-radius: var(--radius-full);
-      border: 1px solid var(--border);
-      color: var(--text3);
-      background: none;
-      transition: color var(--duration) var(--ease), background var(--duration) var(--ease), border-color var(--duration) var(--ease);
-    }
-    .tab-btn:hover,
-    .faq-filter:hover,
-    .recursos-tab:hover {
-      color: var(--text);
-      border-color: var(--border2);
-      background: var(--bg3);
-    }
-    .tab-btn.active,
-    .faq-filter.active,
-    .recursos-tab.active {
-      background: var(--purple-bg);
-      border-color: var(--purple-dim);
-      color: var(--purple);
-    }
-
-    .quiz-page-title {
-      font-size: var(--text-2xl);
-      font-weight: var(--weight-bold);
-      margin: 0 0 var(--space-5);
-      letter-spacing: -0.02em;
-    }
-    .progress-wrap { margin-bottom: var(--space-6); }
-    .progress-meta {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: var(--space-2);
-    }
-    .progress-label,
-    .progress-pct {
-      font-size: var(--text-xs);
-      color: var(--text3);
-      font-weight: var(--weight-medium);
-    }
-    .progress-bar,
-    .quiz-progress-bar-wrap {
-      height: 3px;
-      background: var(--bg4);
-      border-radius: var(--radius-full);
-      overflow: hidden;
-      margin-bottom: 0;
-    }
-    .progress-fill,
-    .quiz-progress-bar {
-      height: 100%;
-      background: linear-gradient(90deg, var(--purple-dim), var(--purple));
-      border-radius: var(--radius-full);
-      transition: width 0.4s var(--ease);
-    }
-    .quiz-question-card {
-      background: transparent;
-      border: none;
-      border-radius: 0;
-      padding: 0;
-    }
-    .quiz-question-block {
-      max-width: 580px;
-      margin: 0 auto;
-    }
-    .quiz-section-chip {
-      display: inline-block;
-      font-size: var(--text-xs);
-      font-weight: var(--weight-semi);
-      letter-spacing: 0.06em;
-      text-transform: uppercase;
-      padding: 3px 10px;
-      border-radius: var(--radius-full);
-      margin-bottom: var(--space-3);
-      border: 1px solid transparent;
-    }
-    .quiz-q-text {
-      font-size: var(--text-lg);
-      font-weight: var(--weight-bold);
-      color: var(--text);
-      line-height: 1.4;
-      margin-bottom: var(--space-1);
-    }
-    .quiz-q-hint {
-      font-size: var(--text-sm);
-      color: var(--text3);
-      margin-bottom: var(--space-5);
-      font-style: italic;
-    }
-    .quiz-options {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-2);
-      margin-bottom: var(--space-6);
-    }
-    .quiz-opt,
-    .quiz-option {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-3);
-      padding: var(--space-4);
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      text-align: left;
-      transition: border-color var(--duration) var(--ease), background var(--duration) var(--ease), transform var(--duration) var(--ease);
-      min-height: 52px;
-      width: 100%;
-    }
-    .quiz-opt:hover,
-    .quiz-option:hover {
-      border-color: var(--purple-dim);
-      background: var(--purple-bg);
-      transform: translateX(2px);
-    }
-    .quiz-opt.selected,
-    .quiz-option.selected {
-      border-color: var(--purple);
-      background: var(--purple-bg);
-    }
-    .quiz-opt-radio {
-      width: 16px;
-      height: 16px;
-      border-radius: 50%;
-      border: 1.5px solid var(--text3);
-      flex-shrink: 0;
-      margin-top: 2px;
-      transition: border-color var(--duration) var(--ease), background var(--duration) var(--ease);
-    }
-    .quiz-opt.selected .quiz-opt-radio,
-    .quiz-option.selected .quiz-opt-radio {
-      background: var(--purple);
-      border-color: var(--purple);
-    }
-    .quiz-opt:hover .quiz-opt-radio,
-    .quiz-option:hover .quiz-opt-radio { border-color: var(--purple-dim); }
-    .quiz-opt-text {
-      font-size: var(--text-sm);
-      color: var(--text2);
-      line-height: 1.55;
-      flex: 1;
-    }
-    .quiz-opt.selected .quiz-opt-text,
-    .quiz-option.selected .quiz-opt-text { color: var(--text); }
-    .quiz-counter {
-      font-size: var(--text-xs);
-      color: var(--text3);
-    }
-    .quiz-nav {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      gap: var(--space-3);
-    }
-
-    .result-wrap { max-width: 640px; }
-    .result-profile-card,
-    .card.card-highlight {
-      background: var(--bg2);
-      border: 1px solid var(--purple-dim);
-      border-radius: var(--radius-xl);
-      padding: var(--space-8);
-      margin-bottom: var(--space-5);
-      box-shadow: var(--shadow-glow);
-      position: relative;
-      overflow: hidden;
-    }
-    .result-profile-card::before {
-      content: '';
-      position: absolute;
-      top: -60px;
-      right: -60px;
-      width: 200px;
-      height: 200px;
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(167,139,250,0.08), transparent 70%);
-      pointer-events: none;
-    }
-    .result-profile-top {
-      display: flex;
-      align-items: center;
-      gap: var(--space-4);
-      margin-bottom: var(--space-5);
-      position: relative;
-      z-index: 1;
-    }
-    .result-profile-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: var(--radius-lg);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: 24px;
-      flex-shrink: 0;
-      background: var(--bg4);
-    }
-    .result-profile-name {
-      font-size: var(--text-xl);
-      font-weight: var(--weight-bold);
-      line-height: 1.2;
-    }
-    .result-profile-sub {
-      font-size: var(--text-sm);
-      color: var(--text3);
-      margin-top: 3px;
-    }
-    .result-desc { font-size: var(--text-sm); color: var(--text2); line-height: 1.8; margin-bottom: var(--space-6); }
-    .result-scores {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-3);
-      margin-bottom: var(--space-6);
-    }
-    .score-item {
-      background: var(--bg4);
-      border-radius: var(--radius-md);
-      padding: var(--space-3) var(--space-4);
-    }
-    .score-label {
-      font-size: var(--text-xs);
-      color: var(--text3);
-      margin-bottom: var(--space-2);
-      font-weight: var(--weight-medium);
-    }
-    .score-bar-track {
-      height: 4px;
-      background: var(--bg);
-      border-radius: var(--radius-full);
-      overflow: hidden;
-      margin-bottom: var(--space-1);
-    }
-    .score-bar-fill {
-      height: 100%;
-      border-radius: var(--radius-full);
-      transition: width 0.8s var(--ease);
-      width: 0;
-    }
-    .score-pct {
-      font-size: var(--text-xs);
-      font-weight: var(--weight-semi);
-      color: var(--text2);
-    }
-    .result-areas-title,
-    .result-section-title {
-      font-size: var(--text-xs);
-      color: var(--text3);
-      font-weight: var(--weight-semi);
-      text-transform: uppercase;
-      letter-spacing: 0.07em;
-      margin-bottom: var(--space-3);
-    }
-    .result-areas-grid,
-    .areas-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: var(--space-2);
-      margin-bottom: var(--space-6);
-    }
-    .result-area-card,
-    .area-card {
-      background: var(--bg4);
-      border-radius: var(--radius-md);
-      padding: var(--space-3) var(--space-4);
-      border: 1px solid transparent;
-      transition: border-color var(--duration) var(--ease);
-    }
-    .result-area-card.top,
-    .area-card.top { border-color: var(--purple-dim); }
-    .result-area-name { font-size: var(--text-sm); font-weight: var(--weight-semi); margin-bottom: 2px; }
-    .result-area-tech { font-size: var(--text-xs); color: var(--text3); }
-    .result-area-fit { font-size: var(--text-xs); font-weight: var(--weight-semi); margin-top: var(--space-2); color: var(--purple); }
-    .result-list {
-      list-style: none;
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-2);
-      padding-left: 0;
-    }
-    .result-list li {
-      display: flex;
-      gap: var(--space-3);
-      font-size: var(--text-sm);
-      color: var(--text2);
-      line-height: 1.6;
-    }
-    .result-list-dot {
-      flex-shrink: 0;
-      margin-top: 4px;
-      font-weight: var(--weight-bold);
-    }
-    .result-shared-banner {
-      background: var(--amber-bg);
-      border: 1px solid var(--amber-dim);
-      border-radius: var(--radius-md);
-      padding: var(--space-3) var(--space-4);
-      font-size: var(--text-xs);
-      color: var(--text2);
-      margin-bottom: var(--space-4);
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--space-4);
-    }
-    .result-attention,
-    .card-warn {
-      background: var(--amber-bg);
-      border: 1px solid var(--amber-dim);
-      border-radius: var(--radius-md);
-      padding: var(--space-4);
-      margin-bottom: var(--space-4);
-    }
-    .result-steps,
-    .card-success {
-      background: var(--teal-bg);
-      border: 1px solid var(--teal-dim);
-      border-radius: var(--radius-md);
-      padding: var(--space-4);
-      margin-bottom: var(--space-4);
-    }
-    .result-ctas {
-      display: flex;
-      gap: var(--space-3);
-      flex-wrap: wrap;
-      margin-top: var(--space-6);
-    }
-    .result-related-grid {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: var(--space-3);
-    }
-    .result-related-card {
-      background: var(--bg3);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      padding: var(--space-4);
-    }
-
-    .roadmap-wrap { max-width: 680px; }
-    .roadmap-phases {
-      position: relative;
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-3);
-    }
-    .roadmap-phases::before {
-      content: '';
-      position: absolute;
-      left: 13px;
-      top: 28px;
-      bottom: 28px;
-      width: 1px;
-      background: linear-gradient(to bottom, var(--purple-dim), var(--teal-dim), var(--amber-dim), var(--blue-dim));
-      opacity: 0.4;
-      pointer-events: none;
-    }
-    .phase-item,
-    .phase-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-lg);
-      overflow: hidden;
-      transition: border-color var(--duration) var(--ease);
-    }
-    .phase-item.open,
-    .phase-card.open { border-color: var(--border2); }
-    .phase-header,
-    .phase-head {
-      display: flex;
-      align-items: center;
-      gap: var(--space-4);
-      padding: var(--space-4) var(--space-5);
-      cursor: pointer;
-      transition: background var(--duration) var(--ease);
-    }
-    .phase-header:hover,
-    .phase-head:hover,
-    .phase-item.open .phase-header { background: var(--bg3); }
-    .phase-dot,
-    .phase-num {
-      width: 28px;
-      height: 28px;
-      border-radius: 50%;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      font-size: var(--text-xs);
-      font-weight: var(--weight-bold);
-      flex-shrink: 0;
-      position: relative;
-      z-index: 1;
-      color: var(--text-inverse);
-    }
-    .phase-info,
-    .phase-header-left > div { flex: 1; }
-    .phase-title {
-      font-size: var(--text-sm);
-      font-weight: var(--weight-semi);
-      color: var(--text);
-    }
-    .phase-duration {
-      font-size: var(--text-xs);
-      color: var(--text3);
-      margin-top: 1px;
-    }
-    .phase-meta-row {
-      display: flex;
-      flex-wrap: wrap;
-      gap: var(--space-2);
-      margin-top: var(--space-2);
-    }
-    .phase-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height var(--duration-slow) var(--ease);
-    }
-    .phase-item.open .phase-body,
-    .phase-card.open .phase-body { max-height: 1800px; }
-    .phase-content,
-    .phase-skills {
-      padding: 0 var(--space-5) var(--space-5);
-      border-top: 1px solid var(--border);
-      padding-top: var(--space-4);
-    }
-    .phase-skill,
-    .skill-row {
-      padding: var(--space-3) 0;
-      border-bottom: 1px solid var(--border);
-    }
-    .phase-skill:last-child,
-    .skill-row:last-child { border-bottom: none; }
-    .phase-skill-row {
-      display: flex;
-      align-items: flex-start;
-      gap: var(--space-3);
-    }
-    .phase-skill h4,
-    .skill-name {
-      font-size: var(--text-sm);
-      color: var(--text);
-      font-weight: var(--weight-medium);
-      margin: 0;
-    }
-    .phase-skill-why,
-    .skill-why {
-      font-size: var(--text-xs);
-      color: var(--text3);
-      line-height: 1.5;
-      margin-top: 2px;
-    }
-    .btn-faq-link,
-    .skill-faq-btn {
-      font-size: var(--text-xs);
-      color: var(--purple);
-      padding: 2px 8px;
-      background: var(--purple-bg);
-      border-radius: var(--radius-sm);
-      border: none;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: opacity var(--duration) var(--ease);
-      text-decoration: none;
-    }
-    .btn-faq-link:hover,
-    .skill-faq-btn:hover { opacity: 0.75; color: var(--purple); }
-    .phase-checkmark {
-      width: 22px;
-      height: 22px;
-      border-radius: 7px;
-      border: 1px solid var(--border2);
-      background: var(--bg3);
-    }
-
-    .accordion-list,
-    .faq-list,
-    .glossary-list,
-    .mitos-list {
-      display: flex;
-      flex-direction: column;
-      gap: var(--space-2);
-    }
-    .accordion-item,
-    .faq-item,
-    .glossario-item,
-    .mito-card {
-      background: var(--bg2);
-      border: 1px solid var(--border);
-      border-radius: var(--radius-md);
-      overflow: hidden;
-      transition: border-color var(--duration) var(--ease);
-    }
-    .accordion-item:hover,
-    .faq-item:hover,
-    .glossario-item:hover,
-    .mito-card:hover { border-color: var(--border2); }
-    .accordion-item.open,
-    .faq-item.open,
-    .glossario-item.open,
-    .mito-card.open { border-color: var(--purple-dim); }
-    .accordion-head,
-    .faq-q,
-    .glossario-head,
-    .mito-head {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: var(--space-3);
-      padding: var(--space-4) var(--space-5);
-      cursor: pointer;
-      transition: background var(--duration) var(--ease);
-      width: 100%;
-      background: transparent;
-      border: none;
-      color: var(--text);
-      text-align: left;
-      font-family: inherit;
-    }
-    .accordion-head:hover,
-    .faq-q:hover,
-    .glossario-head:hover,
-    .mito-head:hover,
-    .faq-item.open .faq-q,
-    .glossario-item.open .glossario-head,
-    .mito-card.open .mito-head { background: var(--bg3); }
-    .accordion-title,
-    .faq-q-text,
-    .mito-afirmacao,
-    .glossario-term {
-      font-size: var(--text-sm);
-      font-weight: var(--weight-medium);
-      color: var(--text);
-      flex: 1;
-      line-height: 1.5;
-    }
-    .accordion-chevron,
-    .faq-chevron {
-      font-size: 14px;
-      color: var(--text3);
-      transition: transform var(--duration-slow) var(--ease);
-      flex-shrink: 0;
-    }
-    .faq-item.open .faq-chevron { transform: rotate(90deg); }
-    .accordion-body,
-    .faq-body,
-    .glossario-body,
-    .mito-body {
-      max-height: 0;
-      overflow: hidden;
-      transition: max-height var(--duration-slow) var(--ease);
-    }
-    .accordion-content,
-    .faq-answer,
-    .glossario-content,
-    .mito-content {
-      padding: 0 var(--space-5) var(--space-5);
-      border-top: 1px solid var(--border);
-      padding-top: var(--space-4);
-    }
-    .accordion-content p,
-    .faq-answer p,
-    .glossario-content p,
-    .mito-content p {
-      font-size: var(--text-sm);
-      color: var(--text2);
-      line-height: 1.75;
-      margin: 0 0 var(--space-3);
-      padding-top: 0;
-    }
-    .faq-answer .dica,
-    .faq-dica {
-      background: var(--teal-bg);
-      border-left: 2px solid var(--teal-dim);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      padding: var(--space-3) var(--space-4);
-      margin-top: var(--space-4);
-      font-size: var(--text-xs);
-      color: var(--text2);
-      line-height: 1.6;
-    }
-    .faq-answer .atencao,
-    .faq-atencao {
-      background: var(--amber-bg);
-      border-left: 2px solid var(--amber-dim);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      padding: var(--space-3) var(--space-4);
-      margin-top: var(--space-3);
-      font-size: var(--text-xs);
-      color: var(--text2);
-      line-height: 1.6;
-    }
-    .glossario-exemplo {
-      background: var(--bg4);
-      border-left: 2px solid var(--purple-dim);
-      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
-      padding: var(--space-3) var(--space-4);
-      font-size: var(--text-xs);
-      color: var(--text2);
-      line-height: 1.6;
-      margin-bottom: var(--space-3);
-    }
-
-    body.easy-read {
-      --text-sm: 15px;
-      --text-base: 16px;
-      --text-md: 18px;
-      line-height: 1.9;
-      letter-spacing: 0.015em;
-    }
-    body.easy-read .quiz-opt,
-    body.easy-read .quiz-option { min-height: 58px; padding: var(--space-5); }
-    body.easy-read .accordion-content p,
-    body.easy-read .result-desc,
-    body.easy-read .phase-skill-why,
-    body.easy-read .glossario-longa,
-    body.easy-read .mito-content p { line-height: 2; }
-
-    .back-to-top {
-      bottom: var(--space-6);
-      right: var(--space-6);
-      width: 36px;
-      height: 36px;
-      border-radius: var(--radius-full);
-      background: var(--bg3);
-      border: 1px solid var(--border2);
-      color: var(--text3);
-      font-size: 14px;
-      opacity: 0;
-      transform: translateY(8px);
-      pointer-events: none;
-      transition: opacity var(--duration) var(--ease), transform var(--duration) var(--ease), background var(--duration) var(--ease);
-      display: flex;
-    }
-    .back-to-top.visible {
-      opacity: 1;
-      transform: translateY(0);
-      pointer-events: auto;
-    }
-    .back-to-top:hover {
-      background: var(--bg4);
-      color: var(--text);
-      border-color: var(--border2);
-    }
-
-    @media (max-width: 768px) {
-      .container,
-      .section-wrap { padding: var(--space-6) var(--space-4); }
-      .content-max { padding: 0; }
-      .hero {
-        min-height: auto;
-        padding: var(--space-12) var(--space-4);
-      }
-      .hero-inner { gap: var(--space-5); }
-      .hero-cards { grid-template-columns: 1fr; }
-      .hero-card { padding: var(--space-3) var(--space-4); }
-      .hero-stats { gap: var(--space-3); }
-      .hero-stat-sep { display: none; }
-      .result-related-grid,
-      .result-scores,
-      .result-areas-grid,
-      .areas-grid,
-      .phase-resource-grid,
-      .recursos-body { grid-template-columns: 1fr; }
-      .result-profile-card { padding: var(--space-5); }
-      .result-ctas { flex-direction: column; }
-      .result-ctas button { width: 100%; }
-      .roadmap-phases::before { left: 14px; }
-    }
-
-    @media (max-width: 600px) {
-      nav { padding: 0 var(--space-4); }
-      .nav-logo { font-size: 12px; }
-      #easy-read-toggle { display: none; }
-      .hero-ctas,
-      .hero-btns,
-      .hero-diagnostic-actions { flex-direction: column; }
-      .hero-ctas button,
-      .hero-btns button,
-      .hero-diagnostic-actions button { width: 100%; justify-content: center; }
-      .phase-header,
-      .faq-q,
-      .glossario-head,
-      .mito-head { padding: var(--space-3) var(--space-4); }
-      .phase-content,
-      .faq-answer,
-      .glossario-content,
-      .mito-content { padding: 0 var(--space-4) var(--space-4); padding-top: var(--space-3); }
-      .back-to-top { bottom: var(--space-4); right: var(--space-4); }
-    }
-
     @media (prefers-reduced-motion: reduce) {
       *,
       *::before,
@@ -3422,99 +2234,61 @@
        HOME
        ============================ -->
   <section class="screen active" id="screen-home" aria-label="Página inicial">
-    <section class="hero">
-      <div class="hero-inner">
-        <div class="hero-chip">
-          <span class="hero-chip-dot"></span>
-          teste vocacional tech · gratuito
-        </div>
 
-        <h1 class="hero-title">
-          Você tem futuro<br>
-          <em>em tecnologia?</em>
-        </h1>
-
-        <p class="hero-sub">
-          Descubra seu perfil com clareza, entenda onde você se encaixa e veja o caminho prático para começar sem se perder.
-        </p>
-
-        <div class="hero-cta-slot" id="heroDiagnosticCta">
-          <div class="hero-ctas">
-            <button class="btn btn-primary btn-lg" type="button" onclick="go('quiz', 'forward')">
-              Fazer o diagnóstico
-              <span class="btn-arrow">→</span>
-            </button>
-            <button class="btn btn-ghost btn-lg" type="button" onclick="go('roadmap', 'forward')">
-              Ver o roadmap
-            </button>
-          </div>
-        </div>
-
-        <p class="hero-meta">
-          Leva cerca de <strong>7–10 minutos</strong>. Você pode pausar agora e continuar depois, sem perder seu progresso.
-        </p>
-
-        <div class="hero-cards">
-          <div class="hero-card">
-            <span class="hero-card-icon" aria-hidden="true">🧭</span>
-            <div>
-              <div class="hero-card-title">Diagnóstico vocacional</div>
-              <div class="hero-card-desc">Descubra se TI combina com você e qual trilha merece um teste real.</div>
-            </div>
-          </div>
-          <div class="hero-card">
-            <span class="hero-card-icon" aria-hidden="true">🗺</span>
-            <div>
-              <div class="hero-card-title">Roadmap por fase</div>
-              <div class="hero-card-desc">Receba uma sequência realista do que estudar e por que cada passo importa.</div>
-            </div>
-          </div>
-          <div class="hero-card">
-            <span class="hero-card-icon" aria-hidden="true">📋</span>
-            <div>
-              <div class="hero-card-title">FAQ sem rodeios</div>
-              <div class="hero-card-desc">Leia respostas diretas para as dúvidas que travam quem quer entrar na área.</div>
-            </div>
-          </div>
-        </div>
-
-        <div class="hero-stats">
-          <div class="hero-stat">
-            <span class="hero-stat-n">25</span>
-            <span class="hero-stat-l">perguntas no diagnóstico</span>
-          </div>
-          <div class="hero-stat-sep">·</div>
-          <div class="hero-stat">
-            <span class="hero-stat-n">4</span>
-            <span class="hero-stat-l">fases no roadmap</span>
-          </div>
-          <div class="hero-stat-sep">·</div>
-          <div class="hero-stat">
-            <span class="hero-stat-n">13</span>
-            <span class="hero-stat-l">perfis vocacionais</span>
-          </div>
-          <div class="hero-stat-sep">·</div>
-          <div class="hero-stat">
-            <span class="hero-stat-n">100%</span>
-            <span class="hero-stat-l">gratuito</span>
-          </div>
+    <div class="hero">
+      <div class="hero-chip">
+        <span class="chip chip-purple">✦ Teste Vocacional Tech</span>
+      </div>
+      <h1>Perdido em <span>TI?</span> A gente resolve isso.</h1>
+      <p>Diagnóstico vocacional honesto, resultado com caminho principal e secundário, roadmap por fase e respostas diretas para as dúvidas que ninguém responde de verdade.</p>
+      <p class="hero-time-hint" style="font-size:13px;color:var(--text3);margin-top:-8px;">Leva cerca de <strong style="color:var(--text2)">10–15 minutos</strong>. São 25 perguntas em 4 blocos. Você pode pausar e continuar depois.</p>
+      <div class="hero-cta-slot" id="heroDiagnosticCta">
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="navigate('quiz')">Descobrir meu perfil</button>
+          <button class="btn btn-ghost" onclick="navigate('faq')">Ver o FAQ</button>
         </div>
       </div>
-    </section>
+    </div>
 
-    <div class="home-deep-dive section-wrap">
-      <div class="content-max">
-        <span class="home-section-kicker">Comparação direta</span>
-        <h2>Front-end, back-end, dados, infra, segurança, QA, produto ou suporte?</h2>
-        <p class="home-deep-dive-intro">Essas áreas parecem parecidas para quem está começando, mas o tipo de problema, a rotina e o peso de cada decisão mudam bastante. Antes de escolher por hype, compare o trabalho real.</p>
-        <div class="area-compare-grid" id="areaCompareGrid"></div>
-
-        <div class="honesty-panel" id="honestyPanel">
-          <h3>Isso não é para você se...</h3>
-          <p>O objetivo aqui não é te expulsar de TI. É evitar que você entre por ilusão, invista meses ou dinheiro e descubra tarde demais que odeia a rotina.</p>
-          <ul id="honestyList"></ul>
-        </div>
+    <div class="features-grid">
+      <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">🧭</span>
+        <h3>Diagnóstico vocacional</h3>
+        <p>Descubra se TI combina com você, qual caminho faz mais sentido e quais subáreas merecem teste real</p>
       </div>
+      <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">🗺</span>
+        <h3>Roadmap personalizado</h3>
+        <p>Um caminho realista por fase, com o porquê de cada habilidade</p>
+      </div>
+      <div class="feature-card">
+        <span class="feature-icon" aria-hidden="true">📋</span>
+        <h3>FAQ sem rodeios</h3>
+        <p>Respostas diretas, glossário ampliado e contexto real para dúvidas que costumam vir com hype e ruído</p>
+      </div>
+    </div>
+
+    <div class="home-stats">
+      <div>25 perguntas no diagnóstico</div>
+      <div>·</div>
+      <div>4 fases no roadmap</div>
+      <div>·</div>
+      <div>13 perfis vocacionais</div>
+      <div>·</div>
+      <div>118 termos no glossário</div>
+    </div>
+    <div class="home-deep-dive">
+      <span class="home-section-kicker">Comparação direta</span>
+      <h2>Front-end, back-end, dados, infra, segurança, QA, produto ou suporte?</h2>
+      <p class="home-deep-dive-intro">Essas áreas parecem parecidas para quem está começando, mas o tipo de problema, a rotina e o peso de cada decisão mudam bastante. Antes de escolher por hype, compare o trabalho real.</p>
+      <div class="area-compare-grid" id="areaCompareGrid"></div>
+
+      <div class="honesty-panel" id="honestyPanel">
+        <h3>Isso não é para você se...</h3>
+        <p>O objetivo aqui não é te expulsar de TI. É evitar que você entre por ilusão, invista meses ou dinheiro e descubra tarde demais que odeia a rotina.</p>
+        <ul id="honestyList"></ul>
+      </div>
+
     </div>
 
   </section>
@@ -3523,7 +2297,7 @@
        TESTES POR ÁREA
        ============================ -->
   <section class="screen" id="screen-testes" aria-label="Testes rápidos por área">
-    <div class="container section-wrap">
+    <div class="container">
       <div class="section-header">
         <h2>Testes rápidos por área</h2>
         <p class="section-desc">Se sua dúvida é mais localizada, use um microquiz de 4 perguntas. Ele não substitui o diagnóstico principal, mas ajuda a separar curiosidade real de hype momentâneo.</p>
@@ -3544,23 +2318,17 @@
        QUIZ
        ============================ -->
   <section class="screen" id="screen-quiz" aria-label="Diagnóstico vocacional">
-    <div class="container section-wrap" id="s-quiz">
+    <div class="container">
       <h1 class="quiz-page-title">Diagnóstico vocacional</h1>
-      <div class="progress-wrap">
-        <div class="progress-meta">
-          <span class="progress-label" id="progressLabel">Diagnóstico</span>
-          <span class="progress-pct" id="progressPct">0%</span>
-        </div>
-        <div
-        class="quiz-progress-bar-wrap progress-bar"
+      <div
+        class="quiz-progress-bar-wrap"
         role="progressbar"
         aria-valuemin="0"
         aria-valuemax="100"
         aria-valuenow="0"
         id="progressbarWrap"
       >
-        <div class="quiz-progress-bar progress-fill" id="progressBar"></div>
-        </div>
+        <div class="quiz-progress-bar" id="progressBar"></div>
       </div>
 
       <div class="quiz-question-card" id="quizCard" aria-live="polite" aria-atomic="false">
@@ -3579,10 +2347,8 @@
        RESULT
        ============================ -->
   <section class="screen" id="screen-result" aria-label="Resultado do diagnóstico">
-    <div class="container result-wrap section-wrap" id="s-result">
-      <div id="resultContent">
+    <div class="container" id="resultContent">
       <!-- rendered by JS -->
-      </div>
     </div>
   </section>
 
@@ -3590,8 +2356,8 @@
        ROADMAP
        ============================ -->
   <section class="screen" id="screen-roadmap" aria-label="Roadmap de aprendizado">
-    <div class="container roadmap-wrap section-wrap" id="s-roadmap">
-      <div class="section-header roadmap-header">
+    <div class="container">
+      <div class="section-header">
         <h2>Roadmap</h2>
         <p>Um caminho realista em 4 fases, com o porquê de cada habilidade, não só o quê.</p>
       </div>
@@ -3605,14 +2371,13 @@
        FAQ
        ============================ -->
   <section class="screen" id="screen-faq" aria-label="Perguntas frequentes">
-    <div class="container section-wrap" id="s-faq">
+    <div class="container">
       <div class="section-header">
         <h2>FAQ</h2>
         <p>Respostas diretas para as dúvidas que ninguém responde de verdade.</p>
       </div>
 
-      <div class="faq-search-wrap search-wrap">
-        <span class="search-icon" aria-hidden="true">⌕</span>
+      <div class="faq-search-wrap">
         <input
           type="search"
           class="faq-search"
@@ -3623,14 +2388,14 @@
         >
       </div>
 
-      <div class="faq-filters tabs-wrap" role="group" aria-label="Filtrar por categoria">
-        <button class="faq-filter tab-btn active" type="button" onclick="setFaqCat('all')" data-cat="all">Todas</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setFaqCat('fundamentos')" data-cat="fundamentos">Fundamentos</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setFaqCat('ferramentas')" data-cat="ferramentas">Ferramentas</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setFaqCat('linguagens')" data-cat="linguagens">Linguagens</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setFaqCat('carreira')" data-cat="carreira">Carreira</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setFaqCat('educação')" data-cat="educação">Educação</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setFaqCat('mercado')" data-cat="mercado">Mercado</button>
+      <div class="faq-filters" role="group" aria-label="Filtrar por categoria">
+        <button class="faq-filter active" onclick="setFaqCat('all')" data-cat="all">Todas</button>
+        <button class="faq-filter" onclick="setFaqCat('fundamentos')" data-cat="fundamentos">Fundamentos</button>
+        <button class="faq-filter" onclick="setFaqCat('ferramentas')" data-cat="ferramentas">Ferramentas</button>
+        <button class="faq-filter" onclick="setFaqCat('linguagens')" data-cat="linguagens">Linguagens</button>
+        <button class="faq-filter" onclick="setFaqCat('carreira')" data-cat="carreira">Carreira</button>
+        <button class="faq-filter" onclick="setFaqCat('educação')" data-cat="educação">Educação</button>
+        <button class="faq-filter" onclick="setFaqCat('mercado')" data-cat="mercado">Mercado</button>
       </div>
 
       <div class="faq-list" id="faqList">
@@ -3684,13 +2449,12 @@
   </section>
 
   <section class="screen" id="screen-glossario" aria-label="Glossário tech">
-    <div class="container section-wrap" id="s-glossario">
+    <div class="container">
       <div class="section-header">
         <h2>Glossário</h2>
         <p>Termos de tecnologia explicados de forma direta, com exemplos do mundo real.</p>
       </div>
-      <div class="faq-search-wrap search-wrap">
-        <span class="search-icon" aria-hidden="true">⌕</span>
+      <div class="faq-search-wrap">
         <input
           type="search"
           class="faq-search"
@@ -3700,35 +2464,35 @@
           aria-label="Buscar termos do glossário"
         >
       </div>
-      <div class="faq-filters tabs-wrap" role="group" aria-label="Filtrar glossário por categoria">
-        <button class="faq-filter tab-btn active" type="button" onclick="setGlossarioCat('all')" data-gcat="all">Todos</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setGlossarioCat('geral')" data-gcat="geral">Geral</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setGlossarioCat('front-end')" data-gcat="front-end">Front-end</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setGlossarioCat('back-end')" data-gcat="back-end">Back-end</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setGlossarioCat('infra')" data-gcat="infra">Infra</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setGlossarioCat('fundamentos')" data-gcat="fundamentos">Fundamentos</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setGlossarioCat('seguranca')" data-gcat="seguranca">Segurança</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setGlossarioCat('dados')" data-gcat="dados">Dados</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setGlossarioCat('cloud')" data-gcat="cloud">Cloud</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setGlossarioCat('qa')" data-gcat="qa">QA</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setGlossarioCat('produto')" data-gcat="produto">Produto</button>
+      <div class="faq-filters" role="group" aria-label="Filtrar glossário por categoria">
+        <button class="faq-filter active" onclick="setGlossarioCat('all')" data-gcat="all">Todos</button>
+        <button class="faq-filter" onclick="setGlossarioCat('geral')" data-gcat="geral">Geral</button>
+        <button class="faq-filter" onclick="setGlossarioCat('front-end')" data-gcat="front-end">Front-end</button>
+        <button class="faq-filter" onclick="setGlossarioCat('back-end')" data-gcat="back-end">Back-end</button>
+        <button class="faq-filter" onclick="setGlossarioCat('infra')" data-gcat="infra">Infra</button>
+        <button class="faq-filter" onclick="setGlossarioCat('fundamentos')" data-gcat="fundamentos">Fundamentos</button>
+        <button class="faq-filter" onclick="setGlossarioCat('seguranca')" data-gcat="seguranca">Segurança</button>
+        <button class="faq-filter" onclick="setGlossarioCat('dados')" data-gcat="dados">Dados</button>
+        <button class="faq-filter" onclick="setGlossarioCat('cloud')" data-gcat="cloud">Cloud</button>
+        <button class="faq-filter" onclick="setGlossarioCat('qa')" data-gcat="qa">QA</button>
+        <button class="faq-filter" onclick="setGlossarioCat('produto')" data-gcat="produto">Produto</button>
       </div>
       <div class="glossary-list" id="glossarioList"></div>
     </div>
   </section>
 
   <section class="screen" id="screen-mitos" aria-label="Mitos e verdades">
-    <div class="container section-wrap" id="s-mitos">
+    <div class="container">
       <div class="section-header">
         <h2>Mitos e Verdades</h2>
         <p>Afirmações populares sobre TI, com veredicto honesto e explicação direta.</p>
       </div>
-      <div class="faq-filters tabs-wrap" role="group" aria-label="Filtrar mitos">
-        <button class="faq-filter tab-btn active" type="button" onclick="setMitosFilter('all')" data-mito="all">Todos</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setMitosFilter('mito')" data-mito="mito">Mito</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setMitosFilter('verdade')" data-mito="verdade">Verdade</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setMitosFilter('depende')" data-mito="depende">Depende</button>
-        <button class="faq-filter tab-btn" type="button" onclick="setMitosFilter('parcial')" data-mito="parcial">Parcial</button>
+      <div class="faq-filters" role="group" aria-label="Filtrar mitos">
+        <button class="faq-filter active" onclick="setMitosFilter('all')" data-mito="all">Todos</button>
+        <button class="faq-filter" onclick="setMitosFilter('mito')" data-mito="mito">Mito</button>
+        <button class="faq-filter" onclick="setMitosFilter('verdade')" data-mito="verdade">Verdade</button>
+        <button class="faq-filter" onclick="setMitosFilter('depende')" data-mito="depende">Depende</button>
+        <button class="faq-filter" onclick="setMitosFilter('parcial')" data-mito="parcial">Parcial</button>
       </div>
       <div class="mitos-list" id="mitosList"></div>
     </div>

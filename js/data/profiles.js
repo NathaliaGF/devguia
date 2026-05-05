@@ -18,8 +18,8 @@ const PROFILES = {
     resourceBase: 'dev_nato',
     desc: `Você tem os traços que mais sustentam uma carreira de construção de software: lógica, curiosidade técnica, tolerância à frustração e vontade de transformar problema em sistema funcionando. Seu lugar mais natural está no caminho de código. Isso ainda deixa espaço para escolher entre interface, lógica de negócio, mobile, APIs ou algo mais específico.`,
     attention: [
-      'Não pule fundamentos e vire só operador de framework.',
-      'Escrita e comunicação técnica precisam crescer junto com o código.',
+      'O risco do seu perfil não é “não conseguir”: é pular fundamento e virar apenas operador de framework.',
+      'Código bom sem comunicação ainda trava carreira. Revisão, escrita e clareza técnica precisam andar junto.',
     ],
     steps: [
       'Escolha uma stack base e aprofunde de verdade antes de diversificar.',
@@ -40,8 +40,8 @@ const PROFILES = {
     resourceBase: 'analitico',
     desc: `Você pensa em padrão, hipótese, evidência e tomada de decisão. Isso te coloca com força no eixo de dados e IA: análise, BI, ciência de dados, engenharia de dados ou machine learning. Programação continua importante, mas como ferramenta para descobrir, medir e explicar melhor o que está acontecendo.`,
     attention: [
-      'Dados sem contexto de negócio viram gráfico bonito sem impacto.',
-      'Domine SQL, limpeza e estatística antes de correr para IA.',
+      'Dados sem contexto de negócio viram gráfico bonito sem utilidade.',
+      'Não pule para IA generativa ou machine learning antes de dominar SQL, limpeza de dados e estatística básica.',
     ],
     steps: [
       'Fortaleça SQL, modelagem simples e leitura crítica de métrica.',
@@ -62,8 +62,8 @@ const PROFILES = {
     resourceBase: 'ux_design',
     desc: `Você enxerga produto pela lente da experiência: clareza, atrito, linguagem, fluxo e confiança. Isso aponta para UX/UI e Product Design, com espaço para se aproximar de front-end ou pesquisa de produto. Seu diferencial está em traduzir problema humano em interface e decisão prática.`,
     attention: [
-      'UX não é só estética. Pesquisa, acessibilidade e teste fazem parte do trabalho.',
-      'HTML, CSS e implementação aumentam muito sua força em time técnico.',
+      'UX não é só deixar bonito. Pesquisa, acessibilidade, priorização e teste fazem parte do trabalho real.',
+      'Ter noção de HTML, CSS e implementação te deixa muito mais forte em time técnico.',
     ],
     steps: [
       'Aprofunde heurísticas, entrevistas com usuário e avaliação de usabilidade.',
@@ -84,8 +84,8 @@ const PROFILES = {
     resourceBase: 'educador',
     desc: `Você tem tendência real a explicar, organizar conhecimento e fazer outras pessoas entenderem melhor algo difícil. Isso é valioso em treinamento, mentoria, onboarding técnico e educação. Para esse perfil funcionar no mercado, o ensino precisa continuar conectado a prática.`,
     attention: [
-      'Ensinar sem manter repertório técnico reduz sua densidade rápido.',
-      'Didática, estrutura e escuta são habilidades separadas do conteúdo.',
+      'Quem ensina sem manter repertório técnico perde densidade rápido.',
+      'Gostar de explicar não basta: didática, estrutura e escuta são habilidades próprias.',
     ],
     steps: [
       'Consolide uma base técnica que você consegue demonstrar em projeto e código.',
@@ -106,8 +106,8 @@ const PROFILES = {
     resourceBase: 'infra_cloud',
     desc: `Você pensa em confiabilidade, ambiente, automação e operação de verdade. Isso te aproxima de DevOps, SRE, cloud engineering, plataforma e sistemas distribuídos. Seu foco natural está menos em “feature visível” e mais em fazer tudo rodar com previsibilidade.`,
     attention: [
-      'Infra moderna exige código, logs e troubleshooting constante.',
-      'Sem método, a pressão operacional vira desgaste muito rápido.',
+      'Infra moderna exige código, leitura de logs, troubleshooting e disciplina operacional.',
+      'É uma área que cobra maturidade sob pressão. Curiosidade sem método vira desgaste rápido.',
     ],
     steps: [
       'Ganhe base real em Linux, rede, terminal e automação.',
@@ -128,8 +128,8 @@ const PROFILES = {
     resourceBase: 'infra_cloud',
     desc: `Você parece confortável com risco, investigação, controles e pensamento adversarial. Isso é o centro de segurança: pentest, blue team, SOC, resposta a incidente, cloud security e defesa em profundidade. O trabalho real nessa área mistura método, paranoia saudável e responsabilidade alta.`,
     attention: [
-      'Segurança sem base de sistemas vira teatro técnico.',
-      'A rotina real tem disciplina, repetição e pouca glamourização.',
+      'Segurança sem base de sistemas vira teatro. É preciso entender rede, cloud, autenticação e software de verdade.',
+      'A área tem muito glamour na internet e muito trabalho repetitivo e disciplinado na prática.',
     ],
     steps: [
       'Fortaleça sistema operacional, rede, web, autenticação e logs.',
@@ -150,8 +150,8 @@ const PROFILES = {
     resourceBase: 'dev_nato',
     desc: `Você parece ter apetite por consistência, cobertura, detalhe e comportamento de sistema sob pressão. Isso é material de QA forte: automação, testes exploratórios, qualidade de API e performance. Bons QAs não “clicam botão”: eles desenham estratégia para impedir regressão e dar confiança ao time.`,
     attention: [
-      'QA forte escreve evidência boa e automatiza o que importa.',
-      'Converse bem com dev. Não vire polícia de processo.',
+      'QA respeitado escreve evidência boa, automatiza o que importa e entende produto, não só ferramenta de teste.',
+      'Se você quiser crescer aqui, precisa aprender a conversar com dev sem virar polícia de processo.',
     ],
     steps: [
       'Aprenda caso de teste, risco, automação básica e leitura de logs.',
@@ -172,8 +172,8 @@ const PROFILES = {
     resourceBase: 'ux_design',
     desc: `Você parece confortável em transformar problema difuso em prioridade, alinhamento e decisão de produto. Isso aponta para PM/PO ou funções próximas. Seu trabalho natural está menos em implementar tudo sozinho e mais em organizar contexto, risco, impacto e direção do time.`,
     attention: [
-      'Sem base técnica mínima, produto vira backlog de fantasia.',
-      'A área cobra priorização dura e capacidade de dizer não.',
+      'Produto sem noção técnica suficiente vira backlog de fantasia.',
+      'A área cobra comunicação, priorização dura e capacidade de dizer “não” com argumento.',
     ],
     steps: [
       'Aprenda discovery, métrica, hipótese e recorte de escopo.',
@@ -194,8 +194,8 @@ const PROFILES = {
     resourceBase: 'dev_nato',
     desc: `Você demonstra sinais de alguém que pode crescer para coordenação técnica: destravar problema difícil, orientar pessoas, fazer review com contexto e equilibrar entrega com qualidade. Liderança técnica boa não é cargo decorativo; é responsabilidade por decisões e por evolução do time.`,
     attention: [
-      'Virar lead cedo demais gera ansiedade e pouca autoridade real.',
-      'Liderar é reduzir ambiguidade e elevar o nível técnico do time.',
+      'Virar lead cedo sem base técnica sólida costuma virar ansiedade com calendário e pouca autoridade real.',
+      'Liderar não é mandar: é reduzir ambiguidade e elevar o nível técnico de quem está com você.',
     ],
     steps: [
       'Fortaleça profundidade técnica antes de buscar controle sobre os outros.',
@@ -216,8 +216,8 @@ const PROFILES = {
     resourceBase: 'educador',
     desc: `Você parece combinar repertório técnico com vontade de explicar, representar tecnologia e reduzir atrito para outros desenvolvedores. Isso é perfil de DevRel, technical writer ou enablement técnico. É uma área de ponte: produto, comunidade, conteúdo, demo, documentação e feedback.`,
     attention: [
-      'Advocacy sem profundidade vira marketing técnico vazio.',
-      'Escrita, fala pública e escuta de comunidade são centrais aqui.',
+      'Advocacy sem profundidade vira marketing técnico vazio e perde credibilidade rápido.',
+      'O trabalho cobra escrita excelente, fala pública e muita escuta de comunidade e cliente.',
     ],
     steps: [
       'Construa base técnica demonstrável e aprenda a explicar sem empobrecer demais.',
@@ -238,8 +238,8 @@ const PROFILES = {
     resourceBase: 'transicao',
     desc: `Seu perfil sugere um ponto de entrada honesto em suporte técnico, help desk ou operações. Isso não é “plano B menor”: é um caminho real para entrar em tecnologia resolvendo incidente, entendendo ambiente e construindo repertório de sistema e atendimento.`,
     attention: [
-      'Evite ficar preso só em script e atendimento superficial.',
-      'Suporte bom aprende com incidente e automatiza recorrência.',
+      'Se você quiser crescer daqui, precisa evitar ficar preso só em script e atendimento superficial.',
+      'Suporte bom aprende com incidente, documenta padrão e automatiza o que se repete.',
     ],
     steps: [
       'Fortaleça sistema operacional, rede, atendimento e documentação clara.',
@@ -260,8 +260,8 @@ const PROFILES = {
     resourceBase: 'transicao',
     desc: `Você tem algo que iniciante puro não tem: repertório de contexto, mercado e problema real. Isso pode te colocar melhor em dados, produto, QA, UX, suporte ou gestão técnica do que em um recomeço cego como dev júnior. Seu ativo central é usar bagagem anterior como vantagem competitiva.`,
     attention: [
-      'Não apague sua carreira antiga. Conecte-a com tecnologia.',
-      'Transição séria exige meses de estudo e projeto com consistência.',
+      'O erro mais comum é tentar apagar a carreira antiga em vez de conectá-la com tech.',
+      'Transição séria exige ritmo de estudo e projeto por muitos meses. Pressa demais costuma custar caro.',
     ],
     steps: [
       'Mapeie onde seu domínio anterior encontra tecnologia com dor real.',
@@ -269,32 +269,10 @@ const PROFILES = {
       'Escolha uma trilha técnica que complemente sua experiência em vez de competir com ela.',
     ],
   },
-  generalista: {
-    key: 'generalista',
-    icon: '🔭',
-    name: 'Generalista em Formação',
-    sub: 'Seu perfil vocacional atual',
-    color: 'var(--teal)',
-    primaryPath: 'codigo',
-    defaultSecondaryPath: 'dados',
-    defaultSubprofiles: ['Front-end', 'Back-end', 'Dados', 'QA'],
-    shareScores: { front: 3, back: 3, dados: 3, logica: 4, pratico: 3, path_codigo: 5 },
-    resourceBase: 'dev_nato',
-    desc: `Seus sinais ainda estão se formando. Isso não é problema; é o estado natural de quem está explorando com honestidade. Você tem curiosidade suficiente para seguir, mas ainda sem direção técnica definida. O próximo passo não é escolher uma área de uma vez: é construir base sólida e experimentar projetos pequenos para descobrir onde o interesse é genuíno.`,
-    attention: [
-      'O risco é explorar demais e construir de menos.',
-      'Escolha uma linguagem e um projeto. Profundidade revela preferência.',
-    ],
-    steps: [
-      'Consolide Fase 1 (lógica, terminal, Git, inglês técnico) antes de qualquer especialização.',
-      'Faça os testes rápidos por área para identificar onde o interesse é mais genuíno.',
-      'Construa um projeto pequeno em duas áreas diferentes e observe onde você se sente mais em casa.',
-    ],
-  },
   repensar: {
     key: 'repensar',
-    icon: '⏸',
-    name: 'Pausa Estratégica',
+    icon: '🤔',
+    name: 'Vale Repensar',
     sub: 'Seu perfil vocacional atual',
     color: 'var(--text3)',
     primaryPath: 'codigo',
@@ -302,15 +280,15 @@ const PROFILES = {
     defaultSubprofiles: ['Suporte técnico', 'Operações', 'Gestão de projetos'],
     shareScores: { bloqueio: 8, estresse: 6, suporte: 2, path_codigo: 1 },
     resourceBase: 'repensar',
-    desc: `Seu resultado indica atrito alto com frustração técnica, abstração ou estudo autônomo. Isso não é sobre capacidade; é sobre timing e motivação. Investir pesado em trilha técnica agora, com os sinais que você apresentou, tende a gerar abandono. Uma pausa para rever método, expectativa e motivação real costuma render mais do que insistir no ritmo atual.`,
+    desc: `Seus sinais atuais sugerem atrito alto com frustração técnica, abstração ou estudo autônomo. Isso não é sentença definitiva; é um alerta honesto para investigar melhor antes de investir pesado em uma trilha altamente técnica. Talvez seu encaixe venha por um caminho adjacente, ou talvez você precise ajustar método e expectativa antes de seguir.`,
     attention: [
-      'Pausa não é desistência. É evitar gasto em direção errada.',
-      'Se continuar, comece por áreas menos abstratas e observe a reação.',
+      'Entrar só pelo salário, sem curiosidade e sem tolerância a travamento técnico, costuma gerar abandono rápido.',
+      'Repensar agora é mais barato do que insistir anos em uma motivação que não se sustenta.',
     ],
     steps: [
-      'Faça um experimento curto e honesto antes de qualquer investimento maior: 30 dias de lógica e terminal.',
-      'Observe se a frustração técnica gera curiosidade ou só cansaço. Essa distinção importa.',
-      'Se continuar, fortaleça método de estudo, foco e disciplina antes de aumentar a complexidade do conteúdo.',
+      'Faça um experimento curto, prático e honesto antes de decidir investimento maior.',
+      'Teste áreas de entrada menos abstratas, como suporte ou operações, se ainda quiser ficar perto de tecnologia.',
+      'Se continuar, fortaleça disciplina, foco e forma de estudar antes de aumentar a complexidade.',
     ],
   },
 };

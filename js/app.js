@@ -182,13 +182,13 @@ function renderHomeDiagnosticCta() {
         <div class="hero-diagnostic-state-head">
           <span class="hero-diagnostic-icon" aria-hidden="true">${profile.icon}</span>
           <div>
-            <div class="hero-diagnostic-kicker">Diagnóstico concluído</div>
+            <div class="hero-diagnostic-kicker">Seu diagnóstico já está pronto</div>
             <div class="hero-diagnostic-title">Seu perfil: <strong style="color:${profile.color}">${profile.name}</strong></div>
           </div>
         </div>
         <div class="hero-diagnostic-actions">
-          <button class="btn btn-primary btn-lg" type="button" onclick="openStoredDiagnosticResult()">Ver meu resultado</button>
-          <button class="btn btn-ghost btn-lg" type="button" onclick="restartDiagnosticFromHome()">Refazer o diagnóstico</button>
+          <button class="btn btn-primary" type="button" onclick="openStoredDiagnosticResult()">Ver meu resultado</button>
+          <button class="btn btn-ghost" type="button" onclick="restartDiagnosticFromHome()">Refazer o diagnóstico</button>
         </div>
       </div>
     `;
@@ -202,8 +202,8 @@ function renderHomeDiagnosticCta() {
         <div class="hero-diagnostic-kicker">Você tem um diagnóstico em andamento</div>
         <div class="hero-diagnostic-title">Parou na pergunta ${currentQuestion} de ${QUESTIONS.length}</div>
         <div class="hero-diagnostic-actions">
-          <button class="btn btn-primary btn-lg" type="button" onclick="continueDiagnosticFromHome()">Continuar de onde parei</button>
-          <button class="btn btn-ghost btn-lg" type="button" onclick="restartDiagnosticFromHome()">Recomeçar do zero</button>
+          <button class="btn btn-primary" type="button" onclick="continueDiagnosticFromHome()">Continuar de onde parei</button>
+          <button class="btn btn-ghost" type="button" onclick="restartDiagnosticFromHome()">Recomeçar do zero</button>
         </div>
       </div>
     `;
@@ -211,9 +211,9 @@ function renderHomeDiagnosticCta() {
   }
 
   container.innerHTML = `
-    <div class="hero-ctas">
-      <button class="btn btn-primary btn-lg" type="button" onclick="go('quiz', 'forward')">Fazer o diagnóstico <span class="btn-arrow">→</span></button>
-      <button class="btn btn-ghost btn-lg" type="button" onclick="go('roadmap', 'forward')">Ver o roadmap</button>
+    <div class="hero-btns">
+      <button class="btn btn-primary" type="button" onclick="navigate('quiz')">Descobrir meu perfil</button>
+      <button class="btn btn-ghost" type="button" onclick="navigate('faq')">Ver o FAQ</button>
     </div>
   `;
 }
@@ -371,7 +371,7 @@ function initRoadmapJumpPill() {
 
 function focusRoadmapScreen() {
   const section = document.getElementById('screen-roadmap');
-  scrollItemIntoViewIfNeeded(section, { block: 'start' });
+  if (section) section.scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function getRoadmapSituationCopy(context) {
@@ -492,19 +492,6 @@ function focusScreenMain(destino) {
   el.focus({ preventScroll: true });
 }
 
-function isElementOutsideViewport(el, paddingTop = 72, paddingBottom = 24) {
-  if (!el) return false;
-  const rect = el.getBoundingClientRect();
-  return rect.bottom < paddingTop || rect.top > (window.innerHeight - paddingBottom);
-}
-
-function scrollItemIntoViewIfNeeded(el, options = {}) {
-  if (!el) return;
-  if (options.force || isElementOutsideViewport(el)) {
-    el.scrollIntoView({ behavior: 'smooth', block: options.block || 'center' });
-  }
-}
-
 function go(destino, forceDirection = null, options = {}) {
   document.getElementById('mobileMenu')?.classList.remove('open');
   document.querySelector('.nav-hamburger')?.setAttribute('aria-expanded', 'false');
@@ -523,8 +510,7 @@ function go(destino, forceDirection = null, options = {}) {
   if (destino === 'glossario' && !options.keepListState) state.openGlossarioId = null;
   if (destino === 'mitos' && !options.keepListState) state.openMitoId = null;
 
-  next.classList.add(animClass);
-  requestAnimationFrame(() => next.classList.add('active'));
+  next.classList.add('active', animClass);
   state.currentScreen = destino;
   document.querySelectorAll('.nav-tab[data-screen]').forEach(t => {
     const isActive = t.dataset.screen === destino;
@@ -573,18 +559,18 @@ function applyHashRoute(options = {}) {
     setTimeout(() => {
       state.openGlossarioId = rest;
       renderGlossario();
-      scrollItemIntoViewIfNeeded(document.getElementById('gi-' + rest), { force: true, block: 'center' });
+      document.getElementById('gi-' + rest)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 50);
   } else if (base === 'mitos') {
     go('mitos', 'fade', { skipHashSync: true });
     setTimeout(() => {
       state.openMitoId = rest;
       renderMitos();
-      scrollItemIntoViewIfNeeded(document.getElementById('mito-' + rest), { force: true, block: 'center' });
+      document.getElementById('mito-' + rest)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }, 50);
   } else if (base === 'roadmap') {
     go('roadmap', 'fade', { skipHashSync: true });
-    setTimeout(() => openRoadmapPhase(rest, { skipNav: true, forceScroll: true }), 50);
+    setTimeout(() => openRoadmapPhase(rest, { skipNav: true }), 50);
   } else {
     go(base, 'fade', { skipHashSync: true });
   }
@@ -604,7 +590,7 @@ function openRoadmapPhase(phaseId, options = {}) {
     item.classList.add('open');
     const hdr = item.querySelector('.phase-header');
     if (hdr) hdr.setAttribute('aria-expanded', 'true');
-    scrollItemIntoViewIfNeeded(item, { force: !!options.forceScroll, block: 'start' });
+    item.scrollIntoView({ behavior: 'smooth', block: 'start' });
     const base = location.pathname + location.search;
     history.replaceState(null, '', base + '#roadmap/' + phaseId);
     saveAppState();
@@ -621,7 +607,7 @@ function jumpToRoadmap(phaseId = null) {
   renderRoadmap();
   setTimeout(() => {
     focusRoadmapScreen();
-    openRoadmapPhase(targetPhase, { skipNav: true, forceScroll: true });
+    openRoadmapPhase(targetPhase, { skipNav: true });
   }, 70);
 }
 
@@ -634,7 +620,7 @@ function scrollToMainTop() {
 function initBackToTop() {
   const btn = document.getElementById('backToTop');
   if (!btn) return;
-  const onScroll = () => btn.classList.toggle('visible', window.scrollY > 300);
+  const onScroll = () => btn.classList.toggle('visible', window.scrollY > 360);
   onScroll();
   window.addEventListener('scroll', onScroll, { passive: true });
 }
@@ -850,16 +836,12 @@ function renderQuestion() {
   const q = QUESTIONS[state.currentQuestion];
   const block = BLOCKS[q.block];
   const chipClass = block.chip;
-  const pct = Math.round(((state.currentQuestion + 1) / QUESTIONS.length) * 100);
+  const pct = Math.round((state.currentQuestion / QUESTIONS.length) * 100);
 
   const bar = document.getElementById('progressBar');
   const wrap = document.getElementById('progressbarWrap');
   bar.style.width = pct + '%';
   wrap.setAttribute('aria-valuenow', pct);
-  const progressLabel = document.getElementById('progressLabel');
-  const progressPct = document.getElementById('progressPct');
-  if (progressLabel) progressLabel.textContent = q.block;
-  if (progressPct) progressPct.textContent = pct + '%';
 
   document.getElementById('quizCounter').textContent =
     (state.currentQuestion + 1) + ' de ' + QUESTIONS.length;
@@ -877,18 +859,16 @@ function renderQuestion() {
   btnBack.setAttribute('aria-label', 'Voltar para a pergunta anterior');
 
   const optionsHtml = q.options.map((opt, i) =>
-    `<button class="quiz-option quiz-opt${selected === i ? ' selected' : ''}" type="button" onclick="selectOption(${i})"><span class="quiz-opt-radio" aria-hidden="true"></span><span class="quiz-opt-text">${opt.text}</span></button>`
+    `<button class="quiz-option${selected === i ? ' selected' : ''}" onclick="selectOption(${i})">${opt.text}</button>`
   ).join('');
 
   document.getElementById('quizCard').innerHTML = `
-    <div class="quiz-question-block">
-      <div class="quiz-block-chip">
-        <span class="chip quiz-section-chip ${chipClass}">${q.block}</span>
-      </div>
-      <div class="quiz-q-text">${q.text}</div>
-      ${q.hint ? `<div class="quiz-q-hint">${q.hint}</div>` : ''}
-      <div class="quiz-options">${optionsHtml}</div>
+    <div class="quiz-block-chip">
+      <span class="chip ${chipClass}">${q.block}</span>
     </div>
+    <div class="quiz-q-text">${q.text}</div>
+    ${q.hint ? `<div class="quiz-q-hint">${q.hint}</div>` : ''}
+    <div class="quiz-options">${optionsHtml}</div>
   `;
 }
 
@@ -1113,31 +1093,31 @@ function showResult(scores, profileKey, options = {}) {
     { label: 'Orientação prática', val: Math.min(100, Math.round(((get('pratico') + get('autodidata')) / 10) * 100)), color: 'var(--amber)' },
   ];
   const fitLabels = ['Melhor fit', 'Bom fit', 'Fit razoável', 'Fit razoável'];
-  const barsHtml = bars.map((b, i) => `<div class="score-item"><div class="score-label">${b.label}</div><div class="score-bar-track"><div class="score-bar-fill" id="bar${i}" style="background:${b.color}" data-val="${b.val}"></div></div><div class="score-pct">${b.val}%</div></div>`).join('');
-  const areasHtml = state.areaScores.map(([k], i) => `<div class="result-area-card${i === 0 ? ' top' : ''}"><div class="result-area-name">${AREAS_INFO[k].name}</div><div class="result-area-tech">${AREAS_INFO[k].desc}</div><div class="result-area-fit">${fitLabels[i]}</div></div>`).join('');
+  const fitClasses = ['fit-best', 'fit-good', 'fit-ok', 'fit-ok'];
+  const barsHtml = bars.map((b, i) => `<div class="compat-bar-item"><div class="compat-bar-label"><span>${b.label}</span><span>${b.val}%</span></div><div class="compat-bar-track"><div class="compat-bar-fill" id="bar${i}" style="background:${b.color}" data-val="${b.val}"></div></div></div>`).join('');
+  const areasHtml = state.areaScores.map(([k], i) => `<div class="area-card${i === 0 ? ' top' : ''}"><h4>${AREAS_INFO[k].name}</h4><p>${AREAS_INFO[k].desc}</p><span class="fit-badge ${fitClasses[i]}">${fitLabels[i]}</span></div>`).join('');
   const journeyHtml = `
-    <div class="result-areas-title">Seus caminhos mais fortes</div>
-    <div class="result-areas-grid">
-      <div class="result-area-card top">
-        <div class="result-area-name">Caminho principal</div>
-        <div class="result-area-tech">${PATH_INFO[primaryPath]?.label || primaryPath}</div>
-        <div class="result-area-fit">${PATH_INFO[primaryPath]?.desc || ''}</div>
+    <div class="areas-grid" style="margin-bottom:20px">
+      <div class="area-card top">
+        <h4>Caminho principal</h4>
+        <p>${PATH_INFO[primaryPath]?.label || primaryPath}</p>
+        <span class="fit-badge fit-best">${PATH_INFO[primaryPath]?.desc || ''}</span>
       </div>
-      <div class="result-area-card">
-        <div class="result-area-name">Caminho secundário</div>
-        <div class="result-area-tech">${PATH_INFO[secondaryPath]?.label || secondaryPath}</div>
-        <div class="result-area-fit">${PATH_INFO[secondaryPath]?.desc || ''}</div>
+      <div class="area-card">
+        <h4>Caminho secundário</h4>
+        <p>${PATH_INFO[secondaryPath]?.label || secondaryPath}</p>
+        <span class="fit-badge fit-good">${PATH_INFO[secondaryPath]?.desc || ''}</span>
       </div>
     </div>
-    <div class="result-steps">
-      <div class="result-section-title">Subperfis sugeridos</div>
-      <ul class="result-list">${state.suggestedSubprofiles.map(item => `<li><span class="result-list-dot">•</span><span>${item}</span></li>`).join('')}</ul>
+    <div class="result-steps" style="margin-bottom:20px">
+      <h3>Subperfis sugeridos</h3>
+      <ul>${state.suggestedSubprofiles.map(item => `<li>${item}</li>`).join('')}</ul>
     </div>
   `;
-  const attentionHtml = profile.attention.map(a => `<li><span class="result-list-dot">•</span><span>${a}</span></li>`).join('');
-  const stepsHtml = profile.steps.map(st => `<li><span class="result-list-dot">•</span><span>${st}</span></li>`).join('');
-  const shareBanner = options.fromShare ? `<div class="result-shared-banner">👁 <span>Você está vendo o resultado de outra pessoa.</span><button class="btn-inline" style="color:var(--amber)" onclick="go('quiz', 'forward')">fazer o seu</button></div>` : '';
-  const revisitMsg = isRefazendo ? (mesmoPeril ? `<div class="card-success" style="margin-top:8px;">Você respondeu diferente desta vez, mas chegou ao mesmo resultado. Isso é um bom sinal de consistência.</div>` : `<div class="card-warn" style="margin-top:8px;">Perfil diferente desta vez. Antes você era <strong>${PROFILES[perfilAnterior]?.name || 'outro perfil'}</strong>. Isso pode indicar que você está pensando diferente, ou que respondeu com mais clareza.</div>`) : '';
+  const attentionHtml = profile.attention.map(a => `<li>${a}</li>`).join('');
+  const stepsHtml = profile.steps.map(st => `<li>${st}</li>`).join('');
+  const shareBanner = options.fromShare ? `<div style="margin-top:8px;background:var(--amber-bg);border:1px solid var(--amber-dim);border-radius:8px;padding:8px 12px;color:var(--amber);font-size:12px;">👁 Você está vendo o resultado de outra pessoa. <button class="btn-inline" style="color:var(--amber)" onclick="go('quiz', 'forward')">fazer o seu</button></div>` : '';
+  const revisitMsg = isRefazendo ? (mesmoPeril ? `<div style="background: var(--teal-bg); border: 1px solid var(--teal-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--teal); margin-top:8px;">Você respondeu diferente desta vez, mas chegou ao mesmo resultado. Isso é um bom sinal de consistência.</div>` : `<div style="background: var(--amber-bg); border: 1px solid var(--amber-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--amber); margin-top:8px;">Perfil diferente desta vez! Antes você era <strong style="color: var(--amber)">${PROFILES[perfilAnterior]?.name || 'outro perfil'}</strong>. Isso pode indicar que você está pensando diferente, ou que respondeu com mais honestidade.</div>`) : '';
 
   const phaseId = PROFILE_ROADMAP_PHASE[profileKey] || 'fase1';
   const phaseMeta = PHASES.find(p => p.id === phaseId);
@@ -1145,7 +1125,7 @@ function showResult(scores, profileKey, options = {}) {
   const relatedProfiles = getRelatedProfiles(scores, profileKey);
   const relatedProfilesHtml = relatedProfiles.length ? `
     <div class="result-related">
-      <div class="result-section-title">Perfis próximos do seu resultado</div>
+      <h3>Perfis próximos do seu resultado</h3>
       <div class="result-related-grid">
         ${relatedProfiles.map(({ profile, score }) => `
           <div class="result-related-card">
@@ -1164,7 +1144,7 @@ function showResult(scores, profileKey, options = {}) {
     </div>
   ` : '';
   const nextStepCard = `
-    <div class="next-step-card card card-highlight">
+    <div class="next-step-card">
       <h3>Agora que você conhece seu perfil, comece por aqui →</h3>
       <p>Seu perfil é <strong style="color:${profile.color}">${profile.name}</strong>. ${hint}</p>
       <p class="next-step-meta">Primeiro movimento recomendado: <strong>${phaseMeta ? phaseMeta.title : 'Fase 1: Fundamentos'}</strong>. Ao abrir o roadmap, essa fase fica destacada para você.</p>
@@ -1175,27 +1155,27 @@ function showResult(scores, profileKey, options = {}) {
     </div>`;
 
   document.getElementById('resultContent').innerHTML = `
-    <div class="result-profile-card">
-      <div class="result-profile-top">
-        <div class="result-profile-icon" aria-hidden="true">${profile.icon}</div>
+    <div class="card" style="margin-bottom:16px">
+      <div class="result-header">
+        <div class="result-icon" aria-hidden="true">${profile.icon}</div>
         <div>
-          <div class="result-profile-name" style="color:${profile.color}">${profile.name}</div>
-          <div class="result-profile-sub">${profile.sub}</div>
+          <div class="result-title" style="color:${profile.color}">${profile.name}</div>
+          <div class="result-subtitle">${profile.sub}</div>
           ${shareBanner}
           ${revisitMsg}
         </div>
       </div>
       <div class="result-desc">${profile.desc}</div>
       ${journeyHtml}
-      <div class="result-section-title">Compatibilidade por dimensão</div>
-      <div class="result-scores">${barsHtml}</div>
-      <div class="result-areas-title">Áreas de maior fit</div>
-      <div class="result-areas-grid">${areasHtml}</div>
+      <h3 style="font-size:14px;margin-bottom:16px;color:var(--text2)">Compatibilidade por dimensão</h3>
+      <div class="compat-bars">${barsHtml}</div>
+      <h3 style="font-size:14px;margin-bottom:12px;color:var(--text2)">Áreas de maior fit</h3>
+      <div class="areas-grid">${areasHtml}</div>
       ${relatedProfilesHtml}
       ${nextStepCard}
     </div>
-    <div class="result-attention"><div class="result-section-title">Pontos de atenção</div><ul class="result-list">${attentionHtml}</ul></div>
-    <div class="result-steps"><div class="result-section-title">Próximos passos</div><ul class="result-list">${stepsHtml}</ul></div>
+    <div class="result-attention"><h3>⚠ Pontos de atenção</h3><ul>${attentionHtml}</ul></div>
+    <div class="result-steps"><h3>✓ Próximos passos</h3><ul>${stepsHtml}</ul></div>
     ${renderRecursos(profile, state.recursosTab)}
     <div class="result-ctas">
       <button class="btn btn-primary" onclick="jumpToRoadmap('${phaseId}')">Ver Roadmap</button>
@@ -1206,7 +1186,7 @@ function showResult(scores, profileKey, options = {}) {
     </div>
   `;
   requestAnimationFrame(() => {
-    const titleEl = document.querySelector('#screen-result .result-profile-name');
+    const titleEl = document.querySelector('#screen-result .result-title');
     if (titleEl) {
       titleEl.setAttribute('tabindex', '-1');
       titleEl.focus({ preventScroll: true });
@@ -1390,24 +1370,23 @@ function renderRoadmap() {
       <p>${getRoadmapSituationCopy(roadmapContext)}</p>
     </div>
   ` : '';
-  container.innerHTML = introHtml + PHASES.map((phase, phaseIndex) => {
+  container.innerHTML = introHtml + PHASES.map(phase => {
     const completed = phase.skills.filter((skill, skillIndex) => state.checklist[getChecklistKey(phase.id, skillIndex)]).length;
     const progress = `${completed}/${phase.skills.length}`;
     const visibleResources = (phase.resources || [])
       .slice(0, 3);
     const isSpotlight = state.spotlightPhaseId === phase.id || roadmapContext?.phaseId === phase.id;
     return `
-    <div class="phase-item phase-card${isSpotlight ? ' phase-spotlight' : ''}" id="phase-${phase.id}">
+    <div class="phase-item${isSpotlight ? ' phase-spotlight' : ''}" id="phase-${phase.id}">
       <button
-        class="phase-header phase-head"
+        class="phase-header"
         onclick="togglePhase('${phase.id}')"
         aria-expanded="${state.openPhaseId === phase.id ? 'true' : 'false'}"
         aria-controls="phasebody-${phase.id}"
-        type="button"
       >
         <div class="phase-header-left">
-          <div class="phase-dot phase-num" style="background:${phase.color}">${phaseIndex + 1}</div>
-          <div class="phase-info">
+          <div class="phase-dot" style="background:${phase.color}"></div>
+          <div>
             <div class="phase-title">${phase.title}</div>
             <div class="phase-duration">${phase.duration} · progresso ${progress}</div>
             <div class="phase-meta-row">
@@ -1416,12 +1395,12 @@ function renderRoadmap() {
             </div>
           </div>
         </div>
-        <span class="phase-chevron accordion-chevron" aria-hidden="true">›</span>
+        <span class="phase-chevron" aria-hidden="true">▾</span>
       </button>
-      <div class="phase-body accordion-body" id="phasebody-${phase.id}" role="region">
-        <div class="phase-content phase-skills">
+      <div class="phase-body" id="phasebody-${phase.id}" role="region">
+        <div class="phase-content">
           ${phase.skills.map((skill, skillIndex) => `
-            <div class="phase-skill skill-row">
+            <div class="phase-skill">
               <div class="phase-skill-row">
                 <label class="phase-check">
                   <input type="checkbox" ${state.checklist[getChecklistKey(phase.id, skillIndex)] ? 'checked' : ''} onchange="toggleChecklistItem('${phase.id}', '${skillIndex}')">
@@ -1587,21 +1566,21 @@ function filterFaq() {
   }
 
   list.innerHTML = filtered.map(f => `
-    <div class="faq-item accordion-item${state.openFaqId === f.id ? ' open' : ''}" id="faqitem-${f.id}">
+    <div class="faq-item${state.openFaqId === f.id ? ' open' : ''}" id="faqitem-${f.id}">
       <button
         type="button"
-        class="faq-q accordion-head"
+        class="faq-q"
         onclick="toggleFaq('${f.id}')"
         aria-expanded="${state.openFaqId === f.id ? 'true' : 'false'}"
         aria-controls="faqbody-${f.id}"
       >
-        <span class="faq-q-text accordion-title">${f.q}</span>
+        <span class="faq-q-text">${f.q}</span>
         <span class="faq-q-meta">
-          <span class="faq-chevron accordion-chevron" aria-hidden="true">›</span>
+          <span class="faq-chevron" aria-hidden="true">▾</span>
         </span>
       </button>
-      <div class="faq-body accordion-body" id="faqbody-${f.id}" role="region">
-        <div class="faq-answer accordion-content">${linkGlossario(f.answer)}${faqMetaFooterHtml(f)}</div>
+      <div class="faq-body" id="faqbody-${f.id}" role="region">
+        <div class="faq-answer">${linkGlossario(f.answer)}${faqMetaFooterHtml(f)}</div>
       </div>
     </div>
   `).join('');
@@ -1666,7 +1645,7 @@ function openFaqItem(faqId, options = {}) {
       if (item) {
         item.classList.add('open', 'highlighted');
         item.querySelector('.faq-q').setAttribute('aria-expanded', 'true');
-        scrollItemIntoViewIfNeeded(item, { force: true, block: 'center' });
+        item.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
       const base = location.pathname + location.search;
       history.replaceState(null, '', base + '#faq/' + faqId);
@@ -1761,7 +1740,7 @@ function filterGlossario() {
       const alvo = GLOSSARIO.find(x => x.id === r || x.termo.toLowerCase() === r.toLowerCase() || x.termo.toLowerCase().includes(r.toLowerCase()));
       return alvo ? `<button class="glossario-pill" onclick="abrirGlossario('${alvo.id}')">${alvo.termo}</button>` : '';
     }).join('');
-    return `<div class="glossario-item accordion-item${isOpen ? ' open' : ''}" id="gi-${g.id}"><button type="button" class="glossario-head accordion-head" onclick="toggleGlossario('${g.id}')" aria-expanded="${isOpen ? 'true' : 'false'}" aria-controls="glossario-body-${g.id}" id="glossario-head-${g.id}"><span class="glossario-term accordion-title">${g.termo}</span><span class="glossario-curta">${g.curta}</span><span class="faq-chevron accordion-chevron" aria-hidden="true">›</span></button><div class="glossario-body accordion-body" id="glossario-body-${g.id}" role="region" aria-labelledby="glossario-head-${g.id}"><div class="glossario-content accordion-content"><p class="glossario-longa">${g.longa}</p><div class="glossario-exemplo"><strong style="color:var(--text);display:block;margin-bottom:6px">Exemplo</strong>${g.exemplo}</div>${rel ? `<div class="glossario-pill-wrap glossario-relacionados"><span class="glossario-relacionados-label">Relacionados</span>${rel}</div>` : ''}<div class="glossario-meta"><span class="faq-cat-badge">${g.categoria}</span>${g.fonetico ? `<span class="glossario-fonetico">${g.fonetico}</span>` : ''}</div></div></div></div>`;
+    return `<div class="glossario-item${isOpen ? ' open' : ''}" id="gi-${g.id}"><button type="button" class="glossario-head" onclick="toggleGlossario('${g.id}')" aria-expanded="${isOpen ? 'true' : 'false'}" aria-controls="glossario-body-${g.id}" id="glossario-head-${g.id}"><span class="glossario-term">${g.termo}</span><span class="glossario-curta">${g.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver definição completa ▾</span></button><div class="glossario-body" id="glossario-body-${g.id}" role="region" aria-labelledby="glossario-head-${g.id}"><div class="glossario-content"><p class="glossario-longa">${g.longa}</p><div class="glossario-exemplo"><strong style="color:var(--text);display:block;margin-bottom:6px">Exemplo</strong>${g.exemplo}</div>${rel ? `<div class="glossario-pill-wrap">${rel}</div>` : ''}<div class="glossario-meta"><span class="faq-cat-badge">${g.categoria}</span>${g.fonetico ? `<span class="glossario-fonetico">${g.fonetico}</span>` : ''}</div></div></div></div>`;
   }).join('');
   saveAppState();
 }
@@ -1784,7 +1763,7 @@ function abrirGlossario(id) {
     renderGlossario();
     const base = location.pathname + location.search;
     history.replaceState(null, '', base + '#glossario/' + id);
-    scrollItemIntoViewIfNeeded(document.getElementById('gi-' + id), { force: true, block: 'center' });
+    document.getElementById('gi-' + id)?.scrollIntoView({ behavior: 'smooth', block: 'center' });
     saveAppState();
   }, 80);
 }
@@ -1836,7 +1815,7 @@ function renderMitos() {
   list.innerHTML = items.map(m => {
     const [badgeClass, badgeText] = mitoBadge(m.veredicto);
     const open = state.openMitoId === m.id;
-    return `<div class="mito-card accordion-item${open ? ' open' : ''}" id="mito-${m.id}"><button type="button" class="mito-head accordion-head" onclick="toggleMito('${m.id}')" aria-expanded="${open ? 'true' : 'false'}" aria-controls="mito-body-${m.id}" id="mito-head-${m.id}"><span class="${badgeClass}">${badgeText}</span><span class="mito-affirmation accordion-title">"${m.afirmacao}"</span><span class="faq-chevron accordion-chevron" aria-hidden="true">›</span></button><div class="mito-body accordion-body" id="mito-body-${m.id}" role="region" aria-labelledby="mito-head-${m.id}"><div class="mito-content accordion-content"><div class="mito-curta">${m.curta}</div><p class="mito-explicacao">${m.explicacao}</p>${formatMitoFonte(m.fonte)}<div class="mito-actions"><button type="button" class="btn btn-ghost btn-sm" onclick="copiarLinkMito('${m.id}')">Copiar link deste mito</button></div></div></div></div>`;
+    return `<div class="mito-card${open ? ' open' : ''}" id="mito-${m.id}"><button type="button" class="mito-head" onclick="toggleMito('${m.id}')" aria-expanded="${open ? 'true' : 'false'}" aria-controls="mito-body-${m.id}" id="mito-head-${m.id}"><span class="${badgeClass}">${badgeText}</span><span class="mito-affirmation">"${m.afirmacao}"</span><span class="mito-curta">${m.curta}</span><span class="mito-toggle-hint" aria-hidden="true">Ver explicação completa ▾</span></button><div class="mito-body" id="mito-body-${m.id}" role="region" aria-labelledby="mito-head-${m.id}"><div class="mito-content"><p>${m.explicacao}</p>${formatMitoFonte(m.fonte)}<div class="mito-actions"><button type="button" class="btn btn-ghost" onclick="copiarLinkMito('${m.id}')">Copiar link deste mito</button></div></div></div></div>`;
   }).join('');
 }
 
@@ -1868,7 +1847,8 @@ function toggleEasyRead() {
   const isActive = document.body.classList.toggle('easy-read');
   const btn = document.getElementById('easy-read-toggle');
   btn.textContent = isActive ? 'Aa ✓' : 'Aa';
-  btn.classList.toggle('active', isActive);
+  btn.style.borderColor = isActive ? 'var(--purple)' : 'var(--border2)';
+  btn.style.color = isActive ? 'var(--purple)' : 'var(--text2)';
   sessionStorage.setItem(EASY_READ_KEY, isActive ? '1' : '0');
 }
 
@@ -1924,7 +1904,8 @@ window.addEventListener('load', () => {
     const btn = document.getElementById('easy-read-toggle');
     if (btn) {
       btn.textContent = 'Aa ✓';
-      btn.classList.add('active');
+      btn.style.borderColor = 'var(--purple)';
+      btn.style.color = 'var(--purple)';
     }
   }
   initBackToTop();
