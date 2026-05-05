@@ -143,15 +143,3 @@ O fluxo mais comum é editar os datasets em `js/data/`. Exemplo de item do FAQ:
   `,
 }
 ```
-
-## Analytics
-
-O projeto suporta GoatCounter de forma opcional.
-
-Para ativar, troque `SEU-CODIGO` no `index.html` pelo subdomínio correto do GoatCounter.
-
-Notas:
-
-- O contador público foi removido do frontend por segurança
-- Nenhum evento deve ser enviado antes do consentimento LGPD
-- Se o placeholder continuar como `SEU-CODIGO`, nenhum tracking será disparado

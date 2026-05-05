@@ -33,7 +33,6 @@ const { FAQS } = window.DEVGUIA_DATA.faq;
 const {
   SCREEN_ORDER,
   GITHUB_REPO,
-  GOATCOUNTER_CODE,
   QUIZ_PROGRESS_KEY,
   EASY_READ_KEY,
   APP_STATE_KEY,
@@ -56,7 +55,6 @@ state.freeOnly = localStorage.getItem(FREE_FILTER_KEY) === '1';
 state.checklist = {};
 state.resultHash = '';
 const QUIZ_TTL = 7 * 24 * 60 * 60 * 1000;
-const ANALYTICS_SCRIPT_ID = 'goatcounter-script';
 const DEFAULT_TITLE = 'devguia.dev — Guia vocacional para TI';
 const SECTION_TITLES = {
   home: DEFAULT_TITLE,
@@ -68,7 +66,6 @@ const SECTION_TITLES = {
   testes: 'Testes por Área | devguia.dev',
   result: 'Resultado do Diagnóstico | devguia.dev',
 };
-let analyticsLoaded = false;
 let sectionTitleObserver = null;
 const DEFAULT_FAQ_TAGS_BY_CATEGORY = {
   fundamentos: ['iniciante', 'base'],
@@ -462,62 +459,6 @@ function toggleMobileMenu() {
   const btn = document.querySelector('.nav-hamburger');
   const isOpen = menu.classList.toggle('open');
   btn.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-}
-
-function getTodayLocalIso() {
-  const now = new Date();
-  const offsetMs = now.getTimezoneOffset() * 60000;
-  return new Date(now.getTime() - offsetMs).toISOString().slice(0, 10);
-}
-
-function hasLgpdConsent() {
-  try {
-    return !!localStorage.getItem('lgpd_consent');
-  } catch {
-    return false;
-  }
-}
-
-function ensureAnalyticsLoaded() {
-  if (analyticsLoaded || !hasLgpdConsent() || GOATCOUNTER_CODE === 'SEU-CODIGO') return;
-  analyticsLoaded = true;
-  window.goatcounter = {
-    endpoint: `https://${GOATCOUNTER_CODE}.goatcounter.com/count`,
-    no_onload: true,
-  };
-  if (document.getElementById(ANALYTICS_SCRIPT_ID)) return;
-  const script = document.createElement('script');
-  script.id = ANALYTICS_SCRIPT_ID;
-  script.async = true;
-  script.src = 'https://gc.zgo.at/count.js';
-  script.integrity = 'sha384-OLBgp1GsljhM2TJ+sbHjaiH9txEUvgdDTAzHv2P24donTt6/529l+9Ua0vFImLlb';
-  script.crossOrigin = 'anonymous';
-  document.body.appendChild(script);
-}
-
-function initLgpdBanner() {
-  const banner = document.getElementById('lgpd-banner');
-  const button = document.getElementById('lgpd-accept');
-  if (!banner || !button) return;
-  if (hasLgpdConsent()) {
-    banner.hidden = true;
-    document.documentElement.setAttribute('data-lgpd-consent', 'accepted');
-    ensureAnalyticsLoaded();
-    return;
-  }
-  button.addEventListener('click', () => {
-    try {
-      localStorage.setItem('lgpd_consent', String(Date.now()));
-    } catch (e) {
-      console.warn('[devguia] Não foi possível salvar consentimento LGPD:', e.message);
-    }
-    document.documentElement.setAttribute('data-lgpd-consent', 'accepted');
-    banner.style.transition = 'opacity 0.3s';
-    banner.style.opacity = '0';
-    setTimeout(() => { banner.hidden = true; }, 320);
-    ensureAnalyticsLoaded();
-    atualizarBadgeAnalytics();
-  });
 }
 
 function loadChecklistState() {
@@ -1007,18 +948,6 @@ function flashButtonState(buttonId, nextLabel, revertLabel, timeout = 2000) {
   }, timeout);
 }
 
-function trackDiagnostico(profileKey) {
-  if (sessionStorage.getItem('diagnostico_tracked')) return;
-  if (window.goatcounter && window.goatcounter.count) {
-    window.goatcounter.count({
-      path: 'diagnostico-completo',
-      title: 'Diagnóstico completo — perfil: ' + profileKey,
-      event: true,
-    });
-    sessionStorage.setItem('diagnostico_tracked', '1');
-  }
-}
-
 function isResourceFree(item, tabKey) {
   if (typeof item.free === 'boolean') return item.free;
   if (tabKey !== 'livros') return true;
@@ -1087,7 +1016,6 @@ function showResult(scores, profileKey, options = {}) {
   if (!options.fromShare) sessionStorage.setItem('ultimo_perfil', profileKey);
   const isRefazendo = !!perfilAnterior;
   const mesmoPeril = perfilAnterior === profileKey;
-  if (!options.skipTrack) trackDiagnostico(profileKey);
   if (!options.fromShare) saveDiagnosticResult(scores, profileKey);
 
   const bars = [
@@ -1850,15 +1778,6 @@ function renderStructuredData() {
   jsonLdEl.textContent = JSON.stringify(payload);
 }
 
-function atualizarBadgeAnalytics() {
-  const textEl = document.getElementById('counter-text');
-  if (!textEl) return;
-  const hoje = getTodayLocalIso();
-  textEl.textContent = hasLgpdConsent()
-    ? `Analytics anônimos ativos com consentimento salvo em ${hoje}. O contador público diário foi removido para não expor credenciais no frontend.`
-    : 'Analytics anônimos desativados até seu consentimento. Nenhum dado é coletado antes do aceite.';
-}
-
 function toggleEasyRead() {
   const isActive = document.body.classList.toggle('easy-read');
   const btn = document.getElementById('easy-read-toggle');
@@ -1906,8 +1825,6 @@ window.addEventListener('hashchange', () => {
 });
 
 window.addEventListener('load', () => {
-  initLgpdBanner();
-  ensureAnalyticsLoaded();
   initSectionTitleObserver();
   renderGlobalProgress();
   renderAreaComparisons();
@@ -1916,7 +1833,6 @@ window.addEventListener('load', () => {
   renderQuickTestOutput();
   renderStructuredData();
   renderRoadmapJumpPill();
-  atualizarBadgeAnalytics();
   if (sessionStorage.getItem(EASY_READ_KEY) === '1') {
     document.body.classList.add('easy-read');
     const btn = document.getElementById('easy-read-toggle');

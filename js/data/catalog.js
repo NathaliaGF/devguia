@@ -6,7 +6,6 @@
 })(typeof globalThis !== 'undefined' ? globalThis : this, function () {
 const SCREEN_ORDER = ['home', 'testes', 'quiz', 'result', 'roadmap', 'faq', 'glossario', 'mitos'];
 const GITHUB_REPO = 'nathaliagf/devguia';
-const GOATCOUNTER_CODE = 'SEU-CODIGO';
 const QUIZ_PROGRESS_KEY = 'quiz_progress_v2';
 const EASY_READ_KEY = 'easy_read';
 const APP_STATE_KEY = 'devguia_state_v1';
@@ -590,7 +589,6 @@ const MITOS = [
   return {
     SCREEN_ORDER,
     GITHUB_REPO,
-    GOATCOUNTER_CODE,
     QUIZ_PROGRESS_KEY,
     EASY_READ_KEY,
     APP_STATE_KEY,
