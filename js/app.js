@@ -20,7 +20,6 @@ const state = {
   pathScores: [],
   suggestedSubprofiles: [],
   spotlightPhaseId: null,
-  pendingCheckpoint: null,
   quickTestKey: null,
   quickTestStep: 0,
   quickTestScore: 0,
@@ -151,6 +150,116 @@ function loadStoredDiagnosticResult() {
   }
 }
 
+function clearStoredDiagnosticResult() {
+  try {
+    localStorage.removeItem(DIAGNOSTIC_RESULT_KEY);
+  } catch {}
+}
+
+function getValidQuizProgress() {
+  return restaurarProgresso() || null;
+}
+
+function getHomeDiagnosticState() {
+  const savedResult = loadStoredDiagnosticResult();
+  if (savedResult?.profileKey && PROFILES[savedResult.profileKey]) {
+    return { type: 'done', result: savedResult };
+  }
+  const savedProgress = getValidQuizProgress();
+  if (savedProgress) {
+    return { type: 'in_progress', progress: savedProgress };
+  }
+  return { type: 'new' };
+}
+
+function renderHomeDiagnosticCta() {
+  const container = document.getElementById('heroDiagnosticCta');
+  if (!container) return;
+  const diagnosticState = getHomeDiagnosticState();
+
+  if (diagnosticState.type === 'done') {
+    const profile = PROFILES[diagnosticState.result.profileKey];
+    container.innerHTML = `
+      <div class="hero-diagnostic-state hero-diagnostic-state-done">
+        <div class="hero-diagnostic-state-head">
+          <span class="hero-diagnostic-icon" aria-hidden="true">${profile.icon}</span>
+          <div>
+            <div class="hero-diagnostic-kicker">Seu diagnóstico já está pronto</div>
+            <div class="hero-diagnostic-title">Seu perfil: <strong style="color:${profile.color}">${profile.name}</strong></div>
+          </div>
+        </div>
+        <div class="hero-diagnostic-actions">
+          <button class="btn btn-primary" type="button" onclick="openStoredDiagnosticResult()">Ver meu resultado</button>
+          <button class="btn btn-ghost" type="button" onclick="restartDiagnosticFromHome()">Refazer o diagnóstico</button>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  if (diagnosticState.type === 'in_progress') {
+    const currentQuestion = Math.min((diagnosticState.progress.currentQuestion || 0) + 1, QUESTIONS.length);
+    container.innerHTML = `
+      <div class="hero-diagnostic-state">
+        <div class="hero-diagnostic-kicker">Você tem um diagnóstico em andamento</div>
+        <div class="hero-diagnostic-title">Parou na pergunta ${currentQuestion} de ${QUESTIONS.length}</div>
+        <div class="hero-diagnostic-actions">
+          <button class="btn btn-primary" type="button" onclick="continueDiagnosticFromHome()">Continuar de onde parei</button>
+          <button class="btn btn-ghost" type="button" onclick="restartDiagnosticFromHome()">Recomeçar do zero</button>
+        </div>
+      </div>
+    `;
+    return;
+  }
+
+  container.innerHTML = `
+    <div class="hero-btns">
+      <button class="btn btn-primary" type="button" onclick="navigate('quiz')">Descobrir meu perfil</button>
+      <button class="btn btn-ghost" type="button" onclick="navigate('faq')">Ver o FAQ</button>
+    </div>
+  `;
+}
+
+function openStoredDiagnosticResult() {
+  const savedResult = loadStoredDiagnosticResult();
+  if (!savedResult?.profileKey || !PROFILES[savedResult.profileKey]) {
+    clearStoredDiagnosticResult();
+    renderHomeDiagnosticCta();
+    return;
+  }
+  const scores = savedResult.scores || getSharedScoresForProfile(savedResult.profileKey);
+  showResult(scores, savedResult.profileKey, { restoreState: true });
+}
+
+function clearDiagnosticStateAndProgress() {
+  clearStoredDiagnosticResult();
+  limparProgresso();
+  try {
+    sessionStorage.removeItem('ultimo_perfil');
+  } catch {}
+  state.profileKey = null;
+  state.resultHash = '';
+  state.scores = {};
+  state.answers = {};
+  state.currentShareUrl = '';
+  state.areaScores = [];
+  state.pathScores = [];
+  state.suggestedSubprofiles = [];
+}
+
+function restartDiagnosticFromHome() {
+  clearDiagnosticStateAndProgress();
+  go('quiz', 'forward');
+  initQuiz();
+  renderHomeDiagnosticCta();
+}
+
+function continueDiagnosticFromHome() {
+  if (!getValidQuizProgress()) return restartDiagnosticFromHome();
+  go('quiz', 'forward');
+  continuarQuiz();
+}
+
 function getRoadmapProfileContext() {
   const saved = loadStoredDiagnosticResult();
   if (saved?.profileKey && PROFILES[saved.profileKey]) {
@@ -187,6 +296,7 @@ function saveDiagnosticResult(scores, profileKey) {
     savedAt: Date.now(),
   };
   localStorage.setItem(DIAGNOSTIC_RESULT_KEY, JSON.stringify(payload));
+  renderHomeDiagnosticCta();
 }
 
 function renderRoadmapJumpPill() {
@@ -498,6 +608,7 @@ function saveAppState() {
   localStorage.setItem(APP_STATE_KEY, JSON.stringify(payload));
   renderGlobalProgress();
   renderRoadmapJumpPill();
+  renderHomeDiagnosticCta();
 }
 
 function restoreAppState() {
@@ -524,9 +635,9 @@ function salvarProgresso() {
     localStorage.setItem(QUIZ_PROGRESS_KEY, JSON.stringify({
       currentQuestion: state.currentQuestion,
       answers: state.answers,
-      pendingCheckpoint: state.pendingCheckpoint,
       savedAt: Date.now(),
     }));
+    renderHomeDiagnosticCta();
   } catch (e) {
     console.warn('[devguia] Não foi possível salvar progresso:', e.message);
   }
@@ -550,6 +661,7 @@ function restaurarProgresso() {
 function limparProgresso() {
   try {
     localStorage.removeItem(QUIZ_PROGRESS_KEY);
+    renderHomeDiagnosticCta();
   } catch (e) {
     console.warn('[devguia] Não foi possível limpar progresso:', e.message);
   }
@@ -638,12 +750,10 @@ function continuarQuiz() {
   if (!saved) return initQuiz();
   state.currentQuestion = Math.max(0, Math.min(saved.currentQuestion || 0, QUESTIONS.length - 1));
   state.answers = saved.answers || {};
-  state.pendingCheckpoint = saved.pendingCheckpoint || null;
   recomputeScoresFromAnswers();
   document.getElementById('btnBack').style.visibility = 'visible';
   document.getElementById('btnNext').style.visibility = 'visible';
-  if (state.pendingCheckpoint) renderCheckpointCard();
-  else renderQuestion();
+  renderQuestion();
   saveAppState();
 }
 
@@ -657,76 +767,10 @@ function initQuiz() {
   state.answers = {};
   state.scores = {};
   state.profileKey = null;
-  state.pendingCheckpoint = null;
   document.getElementById('btnBack').style.visibility = 'visible';
   document.getElementById('btnNext').style.visibility = 'visible';
   renderQuestion();
   saveAppState();
-}
-
-function isLastQuestionOfBlock(questionIndex) {
-  const block = QUESTIONS[questionIndex]?.block;
-  if (!block) return false;
-  for (let index = questionIndex + 1; index < QUESTIONS.length; index += 1) {
-    if (QUESTIONS[index].block === block) return false;
-  }
-  return true;
-}
-
-function getCheckpointCopy(blockName) {
-  const copy = {
-    'Sobre você': {
-      title: 'Bloco concluído: Sobre você',
-      text: 'Você acabou de responder sobre motivação, foco, frustração e forma de aprender. Agora o diagnóstico entra mais fundo em padrão técnico e tolerância à rotina da área.',
-    },
-    'Perfil técnico': {
-      title: 'Bloco concluído: Perfil técnico',
-      text: 'Até aqui o diagnóstico mediu raciocínio, abstração, detalhe e relação com números. A próxima parte aproxima isso de áreas concretas de trabalho.',
-    },
-    'Preferências de área': {
-      title: 'Bloco concluído: Preferências de área',
-      text: 'Agora já existe sinal melhor sobre o tipo de problema que mais te prende. O próximo trecho fecha contexto de momento de vida e maturidade de entrada.',
-    },
-    'Sua situação atual': {
-      title: 'Bloco concluído: Sua situação atual',
-      text: 'Este bloco ajuda a separar curiosidade, timing e bagagem anterior. Isso pesa bastante na leitura final do roadmap e na honestidade do resultado.',
-    },
-  };
-  return copy[blockName] || {
-    title: `Bloco concluído: ${blockName}`,
-    text: 'Você terminou uma etapa do diagnóstico. Continue para consolidar o resultado final.',
-  };
-}
-
-function renderCheckpointCard() {
-  const checkpoint = state.pendingCheckpoint;
-  if (!checkpoint) return renderQuestion();
-  const quizCard = document.getElementById('quizCard');
-  if (!quizCard) return;
-  document.getElementById('btnBack').style.visibility = 'hidden';
-  document.getElementById('btnNext').style.visibility = 'hidden';
-  document.getElementById('quizCounter').textContent = `${checkpoint.completed} de ${QUESTIONS.length}`;
-  const copy = getCheckpointCopy(checkpoint.block);
-  quizCard.innerHTML = `
-    <div class="resume-card">
-      <div class="resume-card-title">${copy.title}</div>
-      <div class="resume-card-copy">${copy.text}</div>
-      <div class="resume-card-copy">Próximo bloco: <strong style="color:var(--text)">${checkpoint.nextBlock}</strong>.</div>
-      <div style="display:flex;gap:8px;flex-wrap:wrap;">
-        <button class="btn btn-primary" onclick="continueAfterCheckpoint()">Continuar</button>
-      </div>
-    </div>
-  `;
-}
-
-function continueAfterCheckpoint() {
-  if (!state.pendingCheckpoint) return renderQuestion();
-  state.currentQuestion = state.pendingCheckpoint.nextQuestionIndex;
-  state.pendingCheckpoint = null;
-  document.getElementById('btnBack').style.visibility = 'visible';
-  document.getElementById('btnNext').style.visibility = 'visible';
-  salvarProgresso();
-  renderQuestion();
 }
 
 function renderQuestion() {
@@ -789,21 +833,7 @@ function quizNext() {
   });
 
   if (state.currentQuestion < QUESTIONS.length - 1) {
-    const nextQuestionIndex = state.currentQuestion + 1;
-    const nextBlock = QUESTIONS[nextQuestionIndex]?.block || '';
-    if (isLastQuestionOfBlock(state.currentQuestion)) {
-      state.pendingCheckpoint = {
-        block: q.block,
-        completed: nextQuestionIndex,
-        nextBlock,
-        nextQuestionIndex,
-      };
-      salvarProgresso();
-      renderCheckpointCard();
-      return;
-    }
-    state.currentQuestion = nextQuestionIndex;
-    state.pendingCheckpoint = null;
+    state.currentQuestion += 1;
     salvarProgresso();
     renderQuestion();
   } else {
@@ -814,7 +844,6 @@ function quizNext() {
 
 function quizBack() {
   if (state.currentQuestion === 0) return go('home', 'back');
-  state.pendingCheckpoint = null;
   const prevQ = QUESTIONS[state.currentQuestion];
   const prevOpt = prevQ.options[state.answers[prevQ.id]];
   if (prevOpt) {

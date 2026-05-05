@@ -290,6 +290,63 @@
       flex-wrap: wrap;
     }
 
+    .hero-cta-slot {
+      min-height: 96px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .hero-diagnostic-state {
+      width: 100%;
+      max-width: 560px;
+      margin: 0 auto;
+      padding: 18px 20px;
+      border-radius: 14px;
+      border: 1px solid var(--border);
+      background: linear-gradient(160deg, rgba(22, 27, 39, 0.98), rgba(30, 37, 53, 0.92));
+      text-align: left;
+    }
+
+    .hero-diagnostic-state-done {
+      border-color: var(--purple-dim);
+      background: linear-gradient(145deg, rgba(30, 26, 53, 0.92), rgba(22, 27, 39, 0.96));
+    }
+
+    .hero-diagnostic-state-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .hero-diagnostic-icon {
+      font-size: 26px;
+      line-height: 1;
+      flex-shrink: 0;
+    }
+
+    .hero-diagnostic-kicker {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      color: var(--text3);
+      margin-bottom: 4px;
+    }
+
+    .hero-diagnostic-title {
+      font-size: 15px;
+      color: var(--text2);
+      line-height: 1.5;
+    }
+
+    .hero-diagnostic-actions {
+      display: flex;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
     .features-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
@@ -1860,6 +1917,7 @@
       .result-ctas { flex-direction: column; }
 
       .hero-btns { flex-direction: column; align-items: center; }
+      .hero-diagnostic-actions { flex-direction: column; }
 
       .roadmap-jump-pill {
         left: 16px;
@@ -2170,9 +2228,11 @@
       <h1>Perdido em <span>TI?</span> A gente resolve isso.</h1>
       <p>Diagnóstico vocacional honesto, resultado com caminho principal e secundário, roadmap por fase e respostas diretas para as dúvidas que ninguém responde de verdade.</p>
       <p class="hero-time-hint" style="font-size:13px;color:var(--text3);margin-top:-8px;">Leva cerca de <strong style="color:var(--text2)">10–15 minutos</strong>. São 25 perguntas em 4 blocos. Você pode pausar e continuar depois.</p>
-      <div class="hero-btns">
-        <button class="btn btn-primary" onclick="navigate('quiz')">Descobrir meu perfil</button>
-        <button class="btn btn-ghost" onclick="navigate('faq')">Ver o FAQ</button>
+      <div class="hero-cta-slot" id="heroDiagnosticCta">
+        <div class="hero-btns">
+          <button class="btn btn-primary" onclick="navigate('quiz')">Descobrir meu perfil</button>
+          <button class="btn btn-ghost" onclick="navigate('faq')">Ver o FAQ</button>
+        </div>
       </div>
     </div>
 
