@@ -16,7 +16,7 @@ const PROFILES = {
     defaultSubprofiles: ['Front-end', 'Back-end', 'Full Stack'],
     shareScores: { front: 6, back: 8, infra: 4, dados: 3, logica: 8, analitico: 6, criativo: 4, pratico: 5, path_codigo: 12, sp_frontend: 3, sp_backend: 4, sp_fullstack: 5, sp_apis: 3 },
     resourceBase: 'dev_nato',
-    desc: `Você tem os traços que mais sustentam uma carreira de construção de software: lógica, curiosidade técnica, tolerância à frustração e vontade de transformar problema em sistema funcionando. Seu lugar mais natural está no caminho de código — mas isso ainda deixa espaço para escolher entre interface, lógica de negócio, mobile, APIs ou algo mais específico.`,
+    desc: `Você tem os traços que mais sustentam uma carreira de construção de software: lógica, curiosidade técnica, tolerância à frustração e vontade de transformar problema em sistema funcionando. Seu lugar mais natural está no caminho de código. Isso ainda deixa espaço para escolher entre interface, lógica de negócio, mobile, APIs ou algo mais específico.`,
     attention: [
       'O risco do seu perfil não é “não conseguir”: é pular fundamento e virar apenas operador de framework.',
       'Código bom sem comunicação ainda trava carreira. Revisão, escrita e clareza técnica precisam andar junto.',
@@ -68,7 +68,7 @@ const PROFILES = {
     steps: [
       'Aprofunde heurísticas, entrevistas com usuário e avaliação de usabilidade.',
       'Aprenda Figma com foco em sistema e fluxo, não só em tela isolada.',
-      'Monte portfólio com caso, contexto, restrição e decisão — não só mockup.',
+      'Monte portfólio com caso, contexto, restrição e decisão, não só mockup.',
     ],
   },
   educador: {

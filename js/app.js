@@ -76,8 +76,12 @@ function renderGlobalProgress() {
   const container = document.getElementById('globalProgress');
   if (!container) return;
   const quizDone = !!state.profileKey || !!state.resultHash;
-  const openPhase = state.openPhaseId ? PHASES.find(phase => phase.id === state.openPhaseId)?.title || state.openPhaseId : 'nenhuma fase aberta';
   const completed = getCompletedChecklistCount();
+  if (!quizDone && !state.openPhaseId && completed === 0) {
+    container.innerHTML = '';
+    return;
+  }
+  const openPhase = state.openPhaseId ? PHASES.find(phase => phase.id === state.openPhaseId)?.title || state.openPhaseId : 'nenhuma fase aberta';
   container.innerHTML = `
     <div class="global-progress-card">
       <span class="global-progress-title">Seu progresso</span>
@@ -199,6 +203,7 @@ function go(destino, forceDirection = null, options = {}) {
   if (destino === 'faq') renderFaq();
   if (destino === 'glossario') renderGlossario();
   if (destino === 'mitos') renderMitos();
+  if (destino === 'testes') { renderQuickTests(); renderQuickTestOutput(); }
   if (options.forceTop) window.scrollTo(0, 0);
   if (!options.skipHashSync) syncHashForNav(destino, { hashSuffix: options.hashSuffix || null });
   saveAppState();
@@ -215,7 +220,7 @@ function applyHashRoute(options = {}) {
   const parts = raw.split('/').map(s => s.trim()).filter(Boolean);
   const base = parts[0];
   const rest = parts[1] || null;
-  const simpleScreens = ['quiz', 'roadmap', 'faq', 'glossario', 'mitos'];
+  const simpleScreens = ['quiz', 'roadmap', 'faq', 'glossario', 'mitos', 'testes'];
   if (!simpleScreens.includes(base)) {
     go('home', 'fade', { skipHashSync: true });
     return;
@@ -692,7 +697,7 @@ function getAreaScores(scores) {
 function gerarTextoResultado(profileKey, areasSorted, shareUrl) {
   const prof = PROFILES[profileKey];
   const emojisFit = ['🥇', '🥈', '🥉', ''];
-  const areasTexto = areasSorted.map(([k], i) => `${emojisFit[i] || '-'} ${AREAS_INFO[k].name} — ${AREAS_INFO[k].desc}`).join('\n- ');
+  const areasTexto = areasSorted.map(([k], i) => `${emojisFit[i] || '-'} ${AREAS_INFO[k].name}: ${AREAS_INFO[k].desc}`).join('\n- ');
   const pathScores = getPathScores(state.scores);
   const primaryPath = pathScores[0]?.[0] || prof.primaryPath || 'codigo';
   const secondaryPath = pathScores[1]?.[0] || prof.defaultSecondaryPath || 'dados';
@@ -860,17 +865,17 @@ function showResult(scores, profileKey, options = {}) {
   `;
   const attentionHtml = profile.attention.map(a => `<li>${a}</li>`).join('');
   const stepsHtml = profile.steps.map(st => `<li>${st}</li>`).join('');
-  const shareBanner = options.fromShare ? `<div style="margin-top:8px;background:var(--amber-bg);border:1px solid var(--amber-dim);border-radius:8px;padding:8px 12px;color:var(--amber);font-size:12px;">👁 Você está vendo o resultado de outra pessoa — <button class="btn-inline" style="color:var(--amber)" onclick="go('quiz', 'forward')">fazer o seu</button></div>` : '';
-  const revisitMsg = isRefazendo ? (mesmoPeril ? `<div style="background: var(--teal-bg); border: 1px solid var(--teal-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--teal); margin-top:8px;">Você respondeu diferente desta vez — mas chegou ao mesmo resultado. Isso é um bom sinal de consistência.</div>` : `<div style="background: var(--amber-bg); border: 1px solid var(--amber-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--amber); margin-top:8px;">Perfil diferente desta vez! Antes você era <strong style="color: var(--amber)">${PROFILES[perfilAnterior]?.name || 'outro perfil'}</strong>. Isso pode indicar que você está pensando diferente — ou que respondeu com mais honestidade.</div>`) : '';
+  const shareBanner = options.fromShare ? `<div style="margin-top:8px;background:var(--amber-bg);border:1px solid var(--amber-dim);border-radius:8px;padding:8px 12px;color:var(--amber);font-size:12px;">👁 Você está vendo o resultado de outra pessoa. <button class="btn-inline" style="color:var(--amber)" onclick="go('quiz', 'forward')">fazer o seu</button></div>` : '';
+  const revisitMsg = isRefazendo ? (mesmoPeril ? `<div style="background: var(--teal-bg); border: 1px solid var(--teal-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--teal); margin-top:8px;">Você respondeu diferente desta vez, mas chegou ao mesmo resultado. Isso é um bom sinal de consistência.</div>` : `<div style="background: var(--amber-bg); border: 1px solid var(--amber-dim); border-radius: 8px; padding: 8px 14px; font-size: 12px; color: var(--amber); margin-top:8px;">Perfil diferente desta vez! Antes você era <strong style="color: var(--amber)">${PROFILES[perfilAnterior]?.name || 'outro perfil'}</strong>. Isso pode indicar que você está pensando diferente, ou que respondeu com mais honestidade.</div>`) : '';
 
   const phaseId = PROFILE_ROADMAP_PHASE[profileKey] || 'fase1';
   const phaseMeta = PHASES.find(p => p.id === phaseId);
-  const hint = PROFILE_ROADMAP_HINT[profileKey] || 'Use o roadmap em fases e o FAQ quando um conceito travar — cada habilidade tem o porquê explicado.';
+  const hint = PROFILE_ROADMAP_HINT[profileKey] || 'Use o roadmap em fases e o FAQ quando um conceito travar. Cada habilidade tem o porquê explicado.';
   const nextStepCard = `
     <div class="next-step-card">
       <h3>Seu próximo passo neste site</h3>
       <p>${hint}</p>
-      <p class="next-step-meta">Sugerimos abrir agora: <strong>${phaseMeta ? phaseMeta.title : 'Fase 1 — Fundamentos'}</strong>. Nos cards do roadmap, use “ver no FAQ →” quando quiser aprofundar.</p>
+      <p class="next-step-meta">Sugerimos abrir agora: <strong>${phaseMeta ? phaseMeta.title : 'Fase 1: Fundamentos'}</strong>. Nos cards do roadmap, use “ver no FAQ →” quando quiser aprofundar.</p>
       <div class="next-step-actions">
         <button type="button" class="btn btn-primary" onclick="openRoadmapPhase('${phaseId}')">Abrir esta fase no roadmap</button>
         <button type="button" class="btn btn-ghost" onclick="navigate('faq')">Ir ao FAQ</button>
